@@ -1,0 +1,11 @@
+# Xcode
+.DS_Store
+build/
+*.pbxuser
+*.xcworkspace
+xcuserdata
+profile
+.idea/
+Tests/Pods
+Tests/Podfile.lock
+
