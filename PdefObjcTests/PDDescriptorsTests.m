@@ -56,6 +56,30 @@
 @end
 
 
+@interface PDEnumDescriptorTests : XCTestCase
+@end
+
+@implementation PDEnumDescriptorTests
+- (void)testValues {
+    PDEnumDescriptor *descriptor = [[PDEnumDescriptor alloc] initWithNumbersToNames:@{
+            @1 : @"one",
+            @2 : @"two",
+            @3 : @"three"
+    }];
+
+    XCTAssertEqual([descriptor numberForName:@"one"], @1);
+    XCTAssertEqual([descriptor numberForName:@"two"], @2);
+    XCTAssertEqual([descriptor numberForName:@"three"], @3);
+    XCTAssertNil([descriptor numberForName:@"four"]);
+
+    XCTAssertEqual([descriptor nameForNumber:@1], @"one");
+    XCTAssertEqual([descriptor nameForNumber:@2], @"two");
+    XCTAssertEqual([descriptor nameForNumber:@3], @"three");
+    XCTAssertNil([descriptor nameForNumber:@4]);
+}
+@end
+
+
 @interface PDFieldDescriptorTests : XCTestCase
 @end
 

@@ -64,6 +64,31 @@
 @end
 
 
+@implementation PDEnumDescriptor
+- (id)initWithNumbersToNames:(NSDictionary *)numbersToNames {
+    if (self = [super init]) {
+        _numbersToNames = [[NSDictionary alloc] initWithDictionary:numbersToNames];
+
+        NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
+        for (NSNumber *number in numbersToNames) {
+            NSString *name = [numbersToNames objectForKey:number];
+            [temp setObject:number forKey:name];
+        }
+        _namesToNumbers = [[NSDictionary alloc] initWithDictionary:temp];
+    }
+    return self;
+}
+
+- (NSNumber *)numberForName:(NSString *)name {
+    return [_namesToNumbers objectForKey:name];
+}
+
+- (NSString *)nameForNumber:(NSNumber *)number {
+    return [_numbersToNames objectForKey:number];
+}
+@end
+
+
 @implementation PDMessageDescriptor {
     NSArray *_subtypeSuppliers;
     NSArray *_subtypes;
@@ -89,6 +114,7 @@ discriminatorValue:(NSInteger)discriminatorValue
         _discriminator = [PDMessageDescriptor findDiscriminatorInFields:_fields];
         _subtypeSuppliers = (subtypeSuppliers) ? subtypeSuppliers : @[];
     }
+
     return self;
 }
 

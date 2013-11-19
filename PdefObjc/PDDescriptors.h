@@ -59,6 +59,18 @@ typedef NS_ENUM(NSInteger, PDType) {
 @end
 
 
+@interface PDEnumDescriptor : PDDataTypeDescriptor
+@property(readonly, nonatomic) NSDictionary *numbersToNames;
+@property(readonly, nonatomic) NSDictionary *namesToNumbers;
+
+- (id)initWithNumbersToNames:(NSDictionary *)numbersToNames;
+
+- (NSNumber *) numberForName:(NSString *)name;
+
+- (NSString *) nameForNumber:(NSNumber *)number;
+@end
+
+
 @interface PDMessageDescriptor : PDDataTypeDescriptor
 @property(readonly, nonatomic) Class cls;
 @property(readonly, nonatomic) PDMessageDescriptor *base;
@@ -71,9 +83,9 @@ typedef NS_ENUM(NSInteger, PDType) {
 
 - (id)initWithClass:(Class)cls
                base:(PDMessageDescriptor *)base
-discriminatorValue:(NSInteger)discriminatorValue
-  subtypeSuppliers:(NSArray *)subtypeSuppliers
-            fields:(NSArray *)fields;
+ discriminatorValue:(NSInteger)discriminatorValue
+   subtypeSuppliers:(NSArray *)subtypeSuppliers
+             fields:(NSArray *)fields;
 
 - (PDMessageDescriptor *)findSubtypeByDiscriminatorValue:(NSInteger)discriminatorValue;
 @end
