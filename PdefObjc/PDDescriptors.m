@@ -66,7 +66,7 @@
 
 @implementation PDEnumDescriptor
 - (id)initWithNumbersToNames:(NSDictionary *)numbersToNames {
-    if (self = [super init]) {
+    if (self = [super initWithType:PDTypeEnum]) {
         _numbersToNames = [[NSDictionary alloc] initWithDictionary:numbersToNames];
 
         NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];

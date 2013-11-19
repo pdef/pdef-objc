@@ -16,9 +16,11 @@
 		2C260127183A53E400198BFF /* PDDescriptors.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C260125183A53E400198BFF /* PDDescriptors.h */; };
 		2C260128183A53E400198BFF /* PDDescriptors.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C260126183A53E400198BFF /* PDDescriptors.m */; };
 		2CEAEBCC183A67A500271CAA /* PDDescriptorsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEAEBCB183A67A500271CAA /* PDDescriptorsTests.m */; };
+		3182184D7611CCE805830220 /* Generated.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821AE54D513849DB139B2C /* Generated.m */; };
 		3182184EF5B9F248362B8A53 /* PDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 31821DE02C1067510CA7C5C0 /* PDef.h */; };
-		31821D1C6EC373B95848619A /* PDMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821A999F0F543201E45CCC /* PDMessage.m */; };
-		31821DDBE78ACC5D6886D19F /* PDMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 31821DB8BF9E84D48AFE3799 /* PDMessage.h */; };
+		31821D1C6EC373B95848619A /* PDTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821A999F0F543201E45CCC /* PDTypes.m */; };
+		31821DDBE78ACC5D6886D19F /* PDTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 31821DB8BF9E84D48AFE3799 /* PDTypes.h */; };
+		31821FE346C88D259FDCA685 /* Generated.h in Headers */ = {isa = PBXBuildFile; fileRef = 31821313F9BE199F898428E8 /* Generated.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,8 +49,10 @@
 		2C260125183A53E400198BFF /* PDDescriptors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDDescriptors.h; sourceTree = "<group>"; };
 		2C260126183A53E400198BFF /* PDDescriptors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDDescriptors.m; sourceTree = "<group>"; };
 		2CEAEBCB183A67A500271CAA /* PDDescriptorsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDDescriptorsTests.m; sourceTree = "<group>"; };
-		31821A999F0F543201E45CCC /* PDMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDMessage.m; sourceTree = "<group>"; };
-		31821DB8BF9E84D48AFE3799 /* PDMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDMessage.h; sourceTree = "<group>"; };
+		31821313F9BE199F898428E8 /* Generated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Generated.h; sourceTree = "<group>"; };
+		31821A999F0F543201E45CCC /* PDTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDTypes.m; sourceTree = "<group>"; };
+		31821AE54D513849DB139B2C /* Generated.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Generated.m; sourceTree = "<group>"; };
+		31821DB8BF9E84D48AFE3799 /* PDTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDTypes.h; sourceTree = "<group>"; };
 		31821DE02C1067510CA7C5C0 /* PDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDef.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,9 +123,11 @@
 				2C2600F8183A503100198BFF /* Supporting Files */,
 				2C260125183A53E400198BFF /* PDDescriptors.h */,
 				2C260126183A53E400198BFF /* PDDescriptors.m */,
-				31821A999F0F543201E45CCC /* PDMessage.m */,
-				31821DB8BF9E84D48AFE3799 /* PDMessage.h */,
+				31821A999F0F543201E45CCC /* PDTypes.m */,
+				31821DB8BF9E84D48AFE3799 /* PDTypes.h */,
 				31821DE02C1067510CA7C5C0 /* PDef.h */,
+				31821AE54D513849DB139B2C /* Generated.m */,
+				31821313F9BE199F898428E8 /* Generated.h */,
 			);
 			path = PdefObjc;
 			sourceTree = "<group>";
@@ -162,8 +168,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C260127183A53E400198BFF /* PDDescriptors.h in Headers */,
-				31821DDBE78ACC5D6886D19F /* PDMessage.h in Headers */,
+				31821DDBE78ACC5D6886D19F /* PDTypes.h in Headers */,
 				3182184EF5B9F248362B8A53 /* PDef.h in Headers */,
+				31821FE346C88D259FDCA685 /* Generated.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,7 +270,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C260128183A53E400198BFF /* PDDescriptors.m in Sources */,
-				31821D1C6EC373B95848619A /* PDMessage.m in Sources */,
+				31821D1C6EC373B95848619A /* PDTypes.m in Sources */,
+				3182184D7611CCE805830220 /* Generated.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

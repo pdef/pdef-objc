@@ -7,8 +7,9 @@
 #import <Foundation/Foundation.h>
 
 @class PDMessageDescriptor;
+@class PDEnumDescriptor;
 
-@protocol PDMessage <NSObject>
+@protocol PDTypes <NSObject>
 + (PDMessageDescriptor *)descriptor;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
@@ -20,5 +21,5 @@
 - (NSString *)toJson;
 @end
 
-@interface PDGeneratedMessage : NSObject <PDMessage>
+@interface PDGeneratedMessage : NSObject <PDTypes>
 @end
