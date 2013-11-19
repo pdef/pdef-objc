@@ -1,4 +1,3 @@
-# Xcode
 .DS_Store
 build/
 *.pbxuser
@@ -9,3 +8,10 @@ profile
 Tests/Pods
 Tests/Podfile.lock
 
+*.pyc
+*.iml
+.idea
+
+generator/build/
+generator/dist/
+generator/*.egg-info

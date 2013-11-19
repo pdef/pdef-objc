@@ -1,0 +1,34 @@
+{
+    "type": "message",
+    "name": "{{ message.name }}",
+    "module": "{{ message.module|example_module }}",
+    "is_exception": {{ message.is_exception|example_bool }},
+{% if message.base %}
+    "base": "{{ message.base|example_ref }}",
+{% else %}
+    "base": null,
+{% endif %}
+{% if discriminator_value %}
+    "discriminator_value": "{{ discriminator_value }}",
+{% else %}
+    "discriminator_value": null,
+{% endif %}
+
+    "subtypes": [
+    {% for subtype in message.subtypes %}
+        "{{ subtype|example_ref }}"{% if not loop.last %},{% endif %}
+
+    {% endfor %}
+    ],
+
+    "fields": [
+{% for field in message.declared_fields %}
+        {
+            "name": "{{ field.name }}",
+            "type": "{{ field.type|example_ref }}",
+            "is_discriminator": {{ field.is_discriminator|example_bool }}
+        }{% if not loop.last %},{% endif %}
+
+{% endfor %}
+    ]
+}
