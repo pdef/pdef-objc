@@ -3,11 +3,12 @@ import io
 import logging
 import os
 from pdefc.lang import TypeEnum
-from pdefc.generators import Generator, Templates, mkdir_p
+from pdefc.generators import Generator, Templates, upper_first
 
 
 ENCODING = 'utf8'
 HEADER_TEMPLATE = 'header.jinja2'
+DESCRIPTORS_TEMPLATE = 'descriptors.jinja2'
 IMPL_TEMPLATE = 'impl.jinja2'
 
 
@@ -26,65 +27,72 @@ class ObjectiveCGenerator(Generator):
     def generate(self, package):
         '''Generate a package source code.'''
         for module in package.modules:
+            self._generate_descriptors(module)
             self._generate_header(module)
+            self._generate_impl(module)
+
+    def _generate_descriptors(self, module):
+        '''Generate a module descriptors file.'''
+        code = self.templates.render(DESCRIPTORS_TEMPLATE, module=module)
+        filename = '%sDescriptors.h' % self._filename(module)
+        self.write_file(filename, code)
 
     def _generate_header(self, module):
         '''Generate a module header file.'''
         code = self.templates.render(HEADER_TEMPLATE, module=module)
-        filename = self._module_filename(module)
-        self._write_file(filename, code)
+        filename = '%s.h' % self._filename(module)
+        self.write_file(filename, code)
 
-    def _module_directory(self, module):
+    def _generate_impl(self, module):
+        '''Generate a module implementation file.'''
+        code = self.templates.render(IMPL_TEMPLATE, module=module)
+        filename = '%s.m' % self._filename(module)
+        self.write_file(filename, code)
+
+    def _filename(self, module):
         '''Return a module directory name from a module.name.'''
-        name = self.namespace.map(module.name)
-        return name.replace('.', '/')
-
-    def _module_filename(self, module):
-        '''Return a module filename.'''
-        dirname = self._module_directory(module)
-        return '%s.h' % dirname
-
-    def _write_file(self, filename, code):
-        # Join the filename with the destination directory.
-        filepath = os.path.join(self.out, filename)
-
-        # Create a directory with its children for a file.
-        dirpath = os.path.dirname(filepath)
-        mkdir_p(dirpath)
-
-        # Write the file contents.
-        with io.open(filepath, 'wt', encoding=ENCODING) as f:
-            f.write(code)
-        logging.info('Created %s', filename)
+        return self.filters.objc_filename(module)
 
 
 class ObjectiveCFilters(object):
     '''Objective-C jinja filters.'''
+    def objc_bool(self, expression):
+        return 'YES' if expression else 'NO'
+
+    def objc_filename(self, module):
+        name = module.relative_name.replace('_', '.')
+        return ''.join(upper_first(part) for part in name.split('.'))
+
     def objc_base(self, message):
-        return self.objc_type(message.base) if message.base else 'NSObject'
+        return message.base.name if message.base else 'NSObject'
 
     def objc_type(self, type0):
         t = type0.type
         if t in NATIVE_TYPES:
             return NATIVE_TYPES[t]
         elif t == TypeEnum.ENUM_VALUE:
-            return '%s_%s' % (self.objc_type(type0.enum), type0.name)
+            return '%s_%s ' % (type0.enum.name, type0.name)
         elif t == TypeEnum.ENUM:
-            return type0.name
+            return '%s ' % type0.name
         elif t == TypeEnum.INTERFACE:
-            return 'id<%s>' % type0.name
+            return 'id<%s> ' % type0.name
         elif t == TypeEnum.MESSAGE:
             return '%s *' % type0.name
         raise ValueError('Unsupported type %r' % type0)
 
-    def _enum_value(self, enum_value):
-        return '%s_%s' % (self.objc_type(enum_value.enum), enum_value.name)
-
-    def _interface(self):
-        pass
-
-    def _definition(self, definition):
-        return definition.name + ' *'
+    def objc_descriptor(self, type0):
+        t = type0.type
+        if t in NATIVE_DESCRIPTORS:
+            return NATIVE_DESCRIPTORS[t]
+        elif t == TypeEnum.LIST:
+            return '[PDDescriptors listWithElement:%s]' % self.objc_descriptor(type0.element)
+        elif t == TypeEnum.SET:
+            return '[PDDescriptors setWithElement:%s]' % self.objc_descriptor(type0.element)
+        elif t == TypeEnum.MAP:
+            return '[PDDescriptors mapWithKey:%s value:%s]' % (
+                self.objc_descriptor(type0.key),
+                self.objc_descriptor(type0.value))
+        return '%sDescriptor()' % type0.name
 
 
 NATIVE_TYPES = {
@@ -102,5 +110,20 @@ NATIVE_TYPES = {
 
     TypeEnum.LIST: 'NSArray *',
     TypeEnum.SET: 'NSSet *',
-    TypeEnum.MAP: 'NSMap *'
+    TypeEnum.MAP: 'NSDictionary *'
+}
+
+
+NATIVE_DESCRIPTORS = {
+    TypeEnum.BOOL: '[PDDescriptors bool0]',
+    TypeEnum.INT16: '[PDDescriptors int16]',
+    TypeEnum.INT32: '[PDDescriptors int32]',
+    TypeEnum.INT64: '[PDDescriptors int64]',
+    TypeEnum.FLOAT: '[PDDescriptors float0]',
+    TypeEnum.DOUBLE: '[PDDescriptors double0]',
+
+    TypeEnum.STRING: '[PDDescriptors string]',
+    TypeEnum.DATETIME: '[PDDescriptors datetime]',
+
+    TypeEnum.VOID: '[PDDescriptors void0]',
 }

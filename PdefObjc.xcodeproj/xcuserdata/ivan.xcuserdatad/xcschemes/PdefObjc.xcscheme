@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2C2600ED183A503100198BFF"
-               BuildableName = "PdefObjc.framework"
+               BuildableName = "PdefObjc"
                BlueprintName = "PdefObjc"
                ReferencedContainer = "container:PdefObjc.xcodeproj">
             </BuildableReference>
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2C260104183A503100198BFF"
+               BlueprintIdentifier = "2CDC327A183D1A6700C7CEBE"
                BuildableName = "PdefObjcTests.xctest"
                BlueprintName = "PdefObjcTests"
                ReferencedContainer = "container:PdefObjc.xcodeproj">

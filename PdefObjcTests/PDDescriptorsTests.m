@@ -9,10 +9,10 @@
 #import <XCTest/XCTest.h>
 #import "PDDescriptors.h"
 
-@interface TestMessage : NSObject
+@interface PDDescriptorsTestMessage : NSObject
 @end
 
-@implementation TestMessage
+@implementation PDDescriptorsTestMessage
 @end
 
 
@@ -111,7 +111,7 @@
 
 @implementation PDMessageDescriptorTests
 - (void)testFields {
-    PDMessageDescriptor *message = [[PDMessageDescriptor alloc] initWithClass:[TestMessage class] fields:@[
+    PDMessageDescriptor *message = [[PDMessageDescriptor alloc] initWithClass:[PDDescriptorsTestMessage class] fields:@[
             [[PDFieldDescriptor alloc] initWithName:@"int32" type:[PDDescriptors int32] isDiscriminator:NO],
             [[PDFieldDescriptor alloc] initWithName:@"string" type:[PDDescriptors string] isDiscriminator:NO]
     ]];
@@ -134,7 +134,7 @@
     PDFieldDescriptor *field1 = [[PDFieldDescriptor alloc] initWithName:@"type" type:[PDDescriptors int32]
                                                         isDiscriminator:YES];
 
-    PDMessageDescriptor *message = [[PDMessageDescriptor alloc] initWithClass:[TestMessage class]
+    PDMessageDescriptor *message = [[PDMessageDescriptor alloc] initWithClass:[PDDescriptorsTestMessage class]
                                                                        fields:@[field0, field1]];
     XCTAssert(message.discriminator == field1);
 }
@@ -143,7 +143,7 @@
     PDMessageDescriptor __block *subtype0;
     PDMessageDescriptor __block *subtype1;
     PDMessageDescriptor *base = [[PDMessageDescriptor alloc]
-            initWithClass:[TestMessage class]
+            initWithClass:[PDDescriptorsTestMessage class]
                      base:nil
        discriminatorValue:0
          subtypeSuppliers:@[
@@ -154,12 +154,12 @@
                      return subtype1;
                  }]
                    fields:nil];
-    subtype0 = [[PDMessageDescriptor alloc] initWithClass:[TestMessage class]
+    subtype0 = [[PDMessageDescriptor alloc] initWithClass:[PDDescriptorsTestMessage class]
                                                      base:nil
                                        discriminatorValue:1
                                          subtypeSuppliers:nil
                                                    fields:nil];
-    subtype1 = [[PDMessageDescriptor alloc] initWithClass:[TestMessage class]
+    subtype1 = [[PDMessageDescriptor alloc] initWithClass:[PDDescriptorsTestMessage class]
                                                      base:nil
                                        discriminatorValue:2
                                          subtypeSuppliers:nil

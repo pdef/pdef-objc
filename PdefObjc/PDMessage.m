@@ -4,14 +4,14 @@
 //
 
 
-#import "PDTypes.h"
+#import "PDMessage.h"
 #import "PDDescriptors.h"
 
 
 @implementation PDGeneratedMessage
 
 /** Override this method in a subclass, and return a custom description. */
-+ (PDMessageDescriptor *)descriptor {
+- (PDMessageDescriptor *)descriptor {
     return nil;
 }
 

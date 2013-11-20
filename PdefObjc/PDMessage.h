@@ -9,8 +9,9 @@
 @class PDMessageDescriptor;
 @class PDEnumDescriptor;
 
-@protocol PDTypes <NSObject>
-+ (PDMessageDescriptor *)descriptor;
+
+@protocol PDMessage <NSObject>
+- (PDMessageDescriptor *)descriptor;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
@@ -21,5 +22,6 @@
 - (NSString *)toJson;
 @end
 
-@interface PDGeneratedMessage : NSObject <PDTypes>
+
+@interface PDGeneratedMessage : NSObject <PDMessage>
 @end
