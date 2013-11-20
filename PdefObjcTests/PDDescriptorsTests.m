@@ -142,27 +142,28 @@
 - (void)testSubtypes {
     PDMessageDescriptor __block *subtype0;
     PDMessageDescriptor __block *subtype1;
-    PDMessageDescriptor *base = [[PDMessageDescriptor alloc] initWithClass:[TestMessage class]
-                                                                      base:nil
-                                                       discriminatorValue:0
-                                                         subtypeSuppliers:@[
-                                                                 ^PDMessageDescriptor *() {
-                                                                     return subtype0;
-                                                                 },
-                                                                 ^PDMessageDescriptor *() {
-                                                                     return subtype1;
-                                                                 }]
-                                                                   fields:nil];
+    PDMessageDescriptor *base = [[PDMessageDescriptor alloc]
+            initWithClass:[TestMessage class]
+                     base:nil
+       discriminatorValue:0
+         subtypeSuppliers:@[
+                 ^PDMessageDescriptor *() {
+                     return subtype0;
+                 },
+                 ^PDMessageDescriptor *() {
+                     return subtype1;
+                 }]
+                   fields:nil];
     subtype0 = [[PDMessageDescriptor alloc] initWithClass:[TestMessage class]
                                                      base:nil
-                                      discriminatorValue:1
-                                        subtypeSuppliers:nil
-                                                  fields:nil];
+                                       discriminatorValue:1
+                                         subtypeSuppliers:nil
+                                                   fields:nil];
     subtype1 = [[PDMessageDescriptor alloc] initWithClass:[TestMessage class]
-                                                    base:nil
-                                      discriminatorValue:2
-                                        subtypeSuppliers:nil
-                                                  fields:nil];
+                                                     base:nil
+                                       discriminatorValue:2
+                                         subtypeSuppliers:nil
+                                                   fields:nil];
 
     XCTAssert([base findSubtypeByDiscriminatorValue:1] == subtype0);
     XCTAssert([base findSubtypeByDiscriminatorValue:2] == subtype1);
