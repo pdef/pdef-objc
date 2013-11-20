@@ -8,18 +8,17 @@ except ImportError:
     from setuptools import setup
 
 
-# TODO: Replace example placeholders.
 setup(
-    name='pdef-example',
+    name='pdef-objc',
     version='1.0',
     license='Apache License 2.0',
-    description='Pdef example generator',
+    description='Pdef Objective-C generator',
     url='',
 
-    author='Example author',
-    author_email='example@example.com',
+    author='Ivan Korobkov',
+    author_email='ivan.korobkov@gmail.com',
 
-    packages=['pdef_example'],
+    packages=['pdef_objc'],
     package_data={
         '': ['*.jinja2']
     },
@@ -29,12 +28,12 @@ setup(
     ],
     entry_points={
         'pdefc.generators': [
-            'example = pdef_example:ExampleGenerator',
+            'objc = pdef_objc:ObjectiveCGenerator',
         ]
     },
 
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Alpha',
         'Environment :: Console',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Apache Software License',
