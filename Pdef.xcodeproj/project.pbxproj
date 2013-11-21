@@ -26,7 +26,7 @@
 		2CDC32A6183D1BD100C7CEBE /* PDDescriptorsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC32A4183D1BD100C7CEBE /* PDDescriptorsTests.m */; };
 		2CDC32A8183D1D0600C7CEBE /* PDDescriptors.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C260126183A53E400198BFF /* PDDescriptors.m */; };
 		2CDC32A9183D1D0E00C7CEBE /* PDMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821A999F0F543201E45CCC /* PDMessage.m */; };
-		2CDC32AB183D1D5800C7CEBE /* PDGeneratedDescriptorsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC32AA183D1D5800C7CEBE /* PDGeneratedDescriptorsTests.m */; };
+		2CDC32AB183D1D5800C7CEBE /* PDGeneratedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC32AA183D1D5800C7CEBE /* PDGeneratedTests.m */; };
 		3182184EF5B9F248362B8A53 /* PDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 31821DE02C1067510CA7C5C0 /* PDef.h */; };
 		31821D1C6EC373B95848619A /* PDMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821A999F0F543201E45CCC /* PDMessage.m */; };
 		31821DDBE78ACC5D6886D19F /* PDMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 31821DB8BF9E84D48AFE3799 /* PDMessage.h */; };
@@ -78,7 +78,7 @@
 		2CDC329A183D1BC000C7CEBE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2CDC329E183D1BC000C7CEBE /* PdefObjcTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PdefObjcTests-Prefix.pch"; sourceTree = "<group>"; };
 		2CDC32A4183D1BD100C7CEBE /* PDDescriptorsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDDescriptorsTests.m; sourceTree = "<group>"; };
-		2CDC32AA183D1D5800C7CEBE /* PDGeneratedDescriptorsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDGeneratedDescriptorsTests.m; sourceTree = "<group>"; };
+		2CDC32AA183D1D5800C7CEBE /* PDGeneratedTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDGeneratedTests.m; sourceTree = "<group>"; };
 		31821A999F0F543201E45CCC /* PDMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDMessage.m; sourceTree = "<group>"; };
 		31821DB8BF9E84D48AFE3799 /* PDMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDMessage.h; sourceTree = "<group>"; };
 		31821DE02C1067510CA7C5C0 /* PDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDef.h; sourceTree = "<group>"; };
@@ -196,7 +196,7 @@
 		2CDC3296183D1BC000C7CEBE /* PdefTests */ = {
 			isa = PBXGroup;
 			children = (
-				2CDC32AA183D1D5800C7CEBE /* PDGeneratedDescriptorsTests.m */,
+				2CDC32AA183D1D5800C7CEBE /* PDGeneratedTests.m */,
 				2CDC32A4183D1BD100C7CEBE /* PDDescriptorsTests.m */,
 				2CDC3297183D1BC000C7CEBE /* Supporting Files */,
 			);
@@ -274,7 +274,7 @@
 				ORGANIZATIONNAME = pdef;
 				TargetAttributes = {
 					2CDC3293183D1BC000C7CEBE = {
-						TestTargetID = 2C2600ED183A503100198BFF;
+						TestTargetID = 2C2600ED183A503100198BFF /* Pdef */;
 					};
 				};
 			};
@@ -333,7 +333,7 @@
 				2C0B1C9D183DF3E300FE8990 /* Subtype2.m in Sources */,
 				2C0B1C99183DF3E300FE8990 /* Base.m in Sources */,
 				2C0B1C9F183DF3E300FE8990 /* TestEnum.m in Sources */,
-				2CDC32AB183D1D5800C7CEBE /* PDGeneratedDescriptorsTests.m in Sources */,
+				2CDC32AB183D1D5800C7CEBE /* PDGeneratedTests.m in Sources */,
 				2C0B1C9E183DF3E300FE8990 /* TestComplexMessage.m in Sources */,
 				2C0B1CA1183DF3E300FE8990 /* TestInterface.m in Sources */,
 				2CDC32A6183D1BD100C7CEBE /* PDDescriptorsTests.m in Sources */,

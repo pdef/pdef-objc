@@ -30,8 +30,10 @@ static PDMessageDescriptor *_SubtypeDescriptor;
                           ]
                    fields:@[
                            [[PDFieldDescriptor alloc] initWithName:@"subfield"
-                                   typeSupplier:^PDDataTypeDescriptor *() { return [PDDescriptors string]; }
-                                isDiscriminator:NO],
+                                                      typeSupplier:^PDDataTypeDescriptor *() {
+                                                          return [PDDescriptors string];
+                                                      }
+                                                     discriminator:NO],
                            ]];
 }
 @end

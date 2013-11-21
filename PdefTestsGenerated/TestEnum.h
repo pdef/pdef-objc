@@ -8,9 +8,9 @@
 Multi-line comment.
  */
 typedef NS_ENUM(NSInteger, TestEnum) {
-    TestEnum_ONE,
-    TestEnum_TWO,
-    TestEnum_THREE,
+    TestEnum_ONE = 1,
+    TestEnum_TWO = 2,
+    TestEnum_THREE = 3,
 };
 
 PDEnumDescriptor *TestEnumDescriptor();

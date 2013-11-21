@@ -27,8 +27,10 @@ static PDMessageDescriptor *_MultiLevelSubtypeDescriptor;
          subtypeSuppliers:@[]
                    fields:@[
                            [[PDFieldDescriptor alloc] initWithName:@"mfield"
-                                   typeSupplier:^PDDataTypeDescriptor *() { return [PDDescriptors string]; }
-                                isDiscriminator:NO],
+                                                      typeSupplier:^PDDataTypeDescriptor *() {
+                                                          return [PDDescriptors string];
+                                                      }
+                                                     discriminator:NO],
                            ]];
 }
 @end

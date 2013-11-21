@@ -77,7 +77,7 @@ typedef NS_ENUM(NSInteger, PDType) {
 @property(readonly, nonatomic) NSArray *fields;
 @property(readonly, nonatomic) PDFieldDescriptor *discriminator;
 @property(readonly, nonatomic) NSInteger discriminatorValue;
-@property(readonly, nonatomic) NSArray *subtypes;
+@property(readonly, nonatomic) NSSet *subtypes;
 
 - (id)initWithClass:(Class)cls fields:(NSArray *)fields;
 
@@ -87,6 +87,8 @@ typedef NS_ENUM(NSInteger, PDType) {
    subtypeSuppliers:(NSArray *)subtypeSuppliers
              fields:(NSArray *)fields;
 
+- (PDFieldDescriptor *)getFieldForName:(NSString *)name;
+
 - (PDMessageDescriptor *)findSubtypeByDiscriminatorValue:(NSInteger)discriminatorValue;
 @end
 
@@ -94,7 +96,7 @@ typedef NS_ENUM(NSInteger, PDType) {
 @interface PDFieldDescriptor : NSObject
 @property(readonly, nonatomic) NSString *name;
 @property(readonly, nonatomic) PDDataTypeDescriptor *type;
-@property(readonly, nonatomic) BOOL isDiscriminator;
+@property(readonly, nonatomic) BOOL discriminator;
 
 - (id)initWithName:(NSString *)name
               type:(PDDataTypeDescriptor *)type
@@ -102,18 +104,7 @@ typedef NS_ENUM(NSInteger, PDType) {
 
 - (id)initWithName:(NSString *)name
       typeSupplier:(PDDataTypeDescriptor *(^)())typeSupplier
-   isDiscriminator:(BOOL)isDiscriminator;
-@end
-
-
-@interface PDInterfaceDescriptor : PDDescriptor
-@property(readonly, nonatomic) Protocol *protocol;
-@property(readonly, nonatomic) PDMessageDescriptor *exc;
-@property(readonly, nonatomic) NSArray *methods;
-
-- (id)initWithProtocol:(Protocol *)protocol
-                   exc:(PDMessageDescriptor *)exc
-               methods:(NSArray *)methods;
+     discriminator:(BOOL)discriminator;
 @end
 
 
@@ -122,13 +113,14 @@ typedef NS_ENUM(NSInteger, PDType) {
 @property(readonly, nonatomic) PDDescriptor *result;
 @property(readonly, nonatomic) NSArray *args;
 @property(readonly, nonatomic) PDMessageDescriptor *exc;
-@property(readonly, nonatomic) BOOL isPost;
+@property(readonly, nonatomic) BOOL post;
+@property(readonly, nonatomic) BOOL terminal;
 
 - (id)initWithName:(NSString *)name
     resultSupplier:(PDDescriptor *(^)())resultSupplier
               args:(NSArray *)args
                exc:(PDMessageDescriptor *)exc
-            isPost:(BOOL)isPost;
+              post:(BOOL)isPost;
 @end
 
 
@@ -143,6 +135,20 @@ typedef NS_ENUM(NSInteger, PDType) {
             isPost:(BOOL)isPost
            isQuery:(BOOL)isQuery;
 @end
+
+
+@interface PDInterfaceDescriptor : PDDescriptor
+@property(readonly, nonatomic) Protocol *protocol;
+@property(readonly, nonatomic) PDMessageDescriptor *exc;
+@property(readonly, nonatomic) NSArray *methods;
+
+- (id)initWithProtocol:(Protocol *)protocol
+                   exc:(PDMessageDescriptor *)exc
+               methods:(NSArray *)methods;
+
+- (PDMethodDescriptor *)getMethodForName:(NSString *)name;
+@end
+
 
 
 @interface PDDescriptors : NSObject

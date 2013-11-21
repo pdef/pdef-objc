@@ -26,8 +26,10 @@ static PDMessageDescriptor *_TestExceptionDescriptor;
          subtypeSuppliers:@[]
                    fields:@[
                            [[PDFieldDescriptor alloc] initWithName:@"text"
-                                   typeSupplier:^PDDataTypeDescriptor *() { return [PDDescriptors string]; }
-                                isDiscriminator:NO],
+                                                      typeSupplier:^PDDataTypeDescriptor *() {
+                                                          return [PDDescriptors string];
+                                                      }
+                                                     discriminator:NO],
                            ]];
 }
 @end

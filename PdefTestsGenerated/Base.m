@@ -33,11 +33,15 @@ static PDMessageDescriptor *_BaseDescriptor;
                           ]
                    fields:@[
                            [[PDFieldDescriptor alloc] initWithName:@"type"
-                                   typeSupplier:^PDDataTypeDescriptor *() { return PolymorphicTypeDescriptor(); }
-                                isDiscriminator:YES],
+                                                      typeSupplier:^PDDataTypeDescriptor *() {
+                                                          return PolymorphicTypeDescriptor();
+                                                      }
+                                                     discriminator:YES],
                            [[PDFieldDescriptor alloc] initWithName:@"field"
-                                   typeSupplier:^PDDataTypeDescriptor *() { return [PDDescriptors string]; }
-                                isDiscriminator:NO],
+                                                      typeSupplier:^PDDataTypeDescriptor *() {
+                                                          return [PDDescriptors string];
+                                                      }
+                                                     discriminator:NO],
                            ]];
 }
 @end

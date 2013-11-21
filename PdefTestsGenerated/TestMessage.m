@@ -26,14 +26,20 @@ static PDMessageDescriptor *_TestMessageDescriptor;
          subtypeSuppliers:@[]
                    fields:@[
                            [[PDFieldDescriptor alloc] initWithName:@"string0"
-                                   typeSupplier:^PDDataTypeDescriptor *() { return [PDDescriptors string]; }
-                                isDiscriminator:NO],
+                                                      typeSupplier:^PDDataTypeDescriptor *() {
+                                                          return [PDDescriptors string];
+                                                      }
+                                                     discriminator:NO],
                            [[PDFieldDescriptor alloc] initWithName:@"bool0"
-                                   typeSupplier:^PDDataTypeDescriptor *() { return [PDDescriptors bool0]; }
-                                isDiscriminator:NO],
+                                                      typeSupplier:^PDDataTypeDescriptor *() {
+                                                          return [PDDescriptors bool0];
+                                                      }
+                                                     discriminator:NO],
                            [[PDFieldDescriptor alloc] initWithName:@"int0"
-                                   typeSupplier:^PDDataTypeDescriptor *() { return [PDDescriptors int32]; }
-                                isDiscriminator:NO],
+                                                      typeSupplier:^PDDataTypeDescriptor *() {
+                                                          return [PDDescriptors int32];
+                                                      }
+                                                     discriminator:NO],
                            ]];
 }
 @end

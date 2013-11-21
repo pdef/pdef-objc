@@ -91,7 +91,7 @@
 
 @implementation PDMessageDescriptor {
     NSArray *_subtypeSuppliers;
-    NSArray *_subtypes;
+    NSSet *_subtypes;
 }
 - (id)initWithClass:(Class)cls fields:(NSArray *)fields {
     return [self initWithClass:cls base:nil discriminatorValue:0 subtypeSuppliers:nil fields:fields];
@@ -109,7 +109,7 @@ discriminatorValue:(NSInteger)discriminatorValue
 
         _cls = cls;
         _base = base;
-        _fields = (fields) ? fields : @[];
+        _fields = [PDMessageDescriptor mergeFields:fields base:base];
         _discriminatorValue = discriminatorValue;
         _discriminator = [PDMessageDescriptor findDiscriminatorInFields:_fields];
         _subtypeSuppliers = (subtypeSuppliers) ? subtypeSuppliers : @[];
@@ -118,7 +118,7 @@ discriminatorValue:(NSInteger)discriminatorValue
     return self;
 }
 
-- (NSArray *)subtypes {
+- (NSSet *)subtypes {
     if (_subtypes != nil) {
         return _subtypes;
     }
@@ -128,8 +128,17 @@ discriminatorValue:(NSInteger)discriminatorValue
         [temp addObject:supplier()];
     }
 
-    _subtypes = [[NSArray alloc] initWithArray:temp];
+    _subtypes = [[NSSet alloc] initWithArray:temp];
     return _subtypes;
+}
+
+- (PDFieldDescriptor *)getFieldForName:(NSString *)name {
+    for (PDFieldDescriptor *field in _fields) {
+        if ([field.name isEqualToString:name]) {
+            return field;
+        }
+    }
+    return nil;
 }
 
 
@@ -142,13 +151,26 @@ discriminatorValue:(NSInteger)discriminatorValue
     return nil;
 }
 
++ (NSArray *)mergeFields:(NSArray *)declaredFields
+                    base:(PDMessageDescriptor *)base {
+    NSMutableArray *temp = [[NSMutableArray alloc] init];
+    if (base) {
+        [temp addObjectsFromArray:base.fields];
+    }
+    if (declaredFields) {
+        [temp addObjectsFromArray:declaredFields];
+    }
+    
+    return [[NSArray alloc] initWithArray:temp];
+}
+
 + (PDFieldDescriptor *)findDiscriminatorInFields:(NSArray *)fields {
     if (!fields) {
         return nil;
     }
 
     for (PDFieldDescriptor *field in fields) {
-        if (field.isDiscriminator) {
+        if (field.discriminator) {
             return field;
         }
     }
@@ -169,12 +191,14 @@ discriminatorValue:(NSInteger)discriminatorValue
         [NSException raise:NSInvalidArgumentException format:@"nil type"];
     }
     return [self initWithName:name
-                 typeSupplier:^PDDataTypeDescriptor *() { return type; }
-              isDiscriminator:isDiscriminator];
+                 typeSupplier:^PDDataTypeDescriptor *() {
+                     return type;
+                 }
+                discriminator:isDiscriminator];
 }
 
 - (id)initWithName:(NSString *)name typeSupplier:(PDDataTypeDescriptor *(^)())typeSupplier
-                                 isDiscriminator:(BOOL)isDiscriminator {
+                                   discriminator:(BOOL)discriminator {
     if (self = [super init]) {
         if (!name) {
             [NSException raise:NSInvalidArgumentException format:@"nil name"];
@@ -184,7 +208,7 @@ discriminatorValue:(NSInteger)discriminatorValue
         }
         _name = name;
         _typeSupplier = typeSupplier;
-        _isDiscriminator = isDiscriminator;
+        _discriminator = discriminator;
     }
     return self;
 }
@@ -200,12 +224,25 @@ discriminatorValue:(NSInteger)discriminatorValue
 
 
 @implementation PDInterfaceDescriptor
-- (id)initWithProtocol:(Class)cls exc:(PDMessageDescriptor *)exc methods:(NSArray *)methods {
+- (id)initWithProtocol:(Protocol *)protocol exc:(PDMessageDescriptor *)exc methods:(NSArray *)methods {
     if (self = [super initWithType:PDTypeInterface]) {
+        if (!protocol) {
+            [NSException raise:NSInvalidArgumentException format:@"nil protocol"];
+        }
+        _protocol = protocol;
         _exc = exc;
         _methods = (methods) ? [[NSArray alloc] initWithArray:methods] : @[];
     }
     return self;
+}
+
+- (PDMethodDescriptor *)getMethodForName:(NSString *)name {
+    for (PDMethodDescriptor *method in _methods) {
+        if ([method.name isEqualToString:name]) {
+            return method;
+        }
+    }
+    return nil;
 }
 @end
 
@@ -214,11 +251,12 @@ discriminatorValue:(NSInteger)discriminatorValue
     PDDescriptor *_result;
     PDDescriptor *(^_resultSupplier)();
 }
+
 - (id)initWithName:(NSString *)name
     resultSupplier:(PDDescriptor *(^)())resultSupplier
               args:(NSArray *)args
                exc:(PDMessageDescriptor *)exc
-            isPost:(BOOL)isPost {
+              post:(BOOL)isPost {
     if (self = [super init]) {
         if (!name) {
             [NSException raise:NSInvalidArgumentException format:@"nil name"];
@@ -230,7 +268,7 @@ discriminatorValue:(NSInteger)discriminatorValue
         _resultSupplier = resultSupplier;
         _args = (args) ? [[NSArray alloc] initWithArray:args] : @[];
         _exc = exc;
-        _isPost = isPost;
+        _post = isPost;
     }
     return self;
 }
@@ -240,6 +278,10 @@ discriminatorValue:(NSInteger)discriminatorValue
         _result = _resultSupplier();
     }
     return _result;
+}
+
+- (BOOL)terminal {
+    return self.result.type != PDTypeInterface;
 }
 @end
 

@@ -66,7 +66,7 @@ static PDMessageDescriptor *_{{ definition.name }}Descriptor;
                 {% for field in definition.declared_fields %}
                            [[PDFieldDescriptor alloc] initWithName:@"{{ field.name }}"
                                    typeSupplier:^PDDataTypeDescriptor *() { return {{ field.type|objc_descriptor }}; }
-                                isDiscriminator:{{ field.is_discriminator|objc_bool }}],
+                                  discriminator:{{ field.is_discriminator|objc_bool }}],
                 {% endfor %}
                            ]];
 }
@@ -97,8 +97,8 @@ PDInterfaceDescriptor *{{ definition.name }}Descriptor() {
                                                          [[PDArgumentDescriptor alloc]
                                                                  initWithName:@"{{ arg.name }}"
                                                                          type:{{ arg.type|objc_descriptor }}
-                                                                       isPost:{{ arg.is_post|objc_bool }}
-                                                                      isQuery:{{ arg.is_query|objc_bool }}],
+                                                                         post:{{ arg.is_post|objc_bool }}
+                                                                        query:{{ arg.is_query|objc_bool }}],
                                                     {% endfor %}
                                                     ]
                                                 {% else %}
