@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C0B1C99183DF3E300FE8990 /* Base.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B1C7C183DF3E300FE8990 /* Base.m */; };
+		2C0B1C9A183DF3E300FE8990 /* MultiLevelSubtype.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B1C7F183DF3E300FE8990 /* MultiLevelSubtype.m */; };
+		2C0B1C9B183DF3E300FE8990 /* PolymorphicType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B1C82183DF3E300FE8990 /* PolymorphicType.m */; };
+		2C0B1C9C183DF3E300FE8990 /* Subtype.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B1C85183DF3E300FE8990 /* Subtype.m */; };
+		2C0B1C9D183DF3E300FE8990 /* Subtype2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B1C87183DF3E300FE8990 /* Subtype2.m */; };
+		2C0B1C9E183DF3E300FE8990 /* TestComplexMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B1C8B183DF3E300FE8990 /* TestComplexMessage.m */; };
+		2C0B1C9F183DF3E300FE8990 /* TestEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B1C8E183DF3E300FE8990 /* TestEnum.m */; };
+		2C0B1CA0183DF3E300FE8990 /* TestException.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B1C91183DF3E300FE8990 /* TestException.m */; };
+		2C0B1CA1183DF3E300FE8990 /* TestInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B1C94183DF3E300FE8990 /* TestInterface.m */; };
+		2C0B1CA2183DF3E300FE8990 /* TestMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B1C97183DF3E300FE8990 /* TestMessage.m */; };
 		2C2600F2183A503100198BFF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C2600F1183A503100198BFF /* Cocoa.framework */; };
 		2C2600FC183A503100198BFF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C2600FA183A503100198BFF /* InfoPlist.strings */; };
 		2C260127183A53E400198BFF /* PDDescriptors.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C260125183A53E400198BFF /* PDDescriptors.h */; };
@@ -17,9 +27,6 @@
 		2CDC32A8183D1D0600C7CEBE /* PDDescriptors.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C260126183A53E400198BFF /* PDDescriptors.m */; };
 		2CDC32A9183D1D0E00C7CEBE /* PDMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821A999F0F543201E45CCC /* PDMessage.m */; };
 		2CDC32AB183D1D5800C7CEBE /* PDGeneratedDescriptorsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC32AA183D1D5800C7CEBE /* PDGeneratedDescriptorsTests.m */; };
-		2CDC32E7183D2E2800C7CEBE /* Inheritance.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC32DF183D2E2800C7CEBE /* Inheritance.m */; };
-		2CDC32E8183D2E2800C7CEBE /* Interfaces.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC32E2183D2E2800C7CEBE /* Interfaces.m */; };
-		2CDC32E9183D2E2800C7CEBE /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC32E5183D2E2800C7CEBE /* Messages.m */; };
 		3182184EF5B9F248362B8A53 /* PDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 31821DE02C1067510CA7C5C0 /* PDef.h */; };
 		31821D1C6EC373B95848619A /* PDMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821A999F0F543201E45CCC /* PDMessage.m */; };
 		31821DDBE78ACC5D6886D19F /* PDMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 31821DB8BF9E84D48AFE3799 /* PDMessage.h */; };
@@ -36,6 +43,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C0B1C7B183DF3E300FE8990 /* Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base.h; sourceTree = "<group>"; };
+		2C0B1C7C183DF3E300FE8990 /* Base.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base.m; sourceTree = "<group>"; };
+		2C0B1C7E183DF3E300FE8990 /* MultiLevelSubtype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiLevelSubtype.h; sourceTree = "<group>"; };
+		2C0B1C7F183DF3E300FE8990 /* MultiLevelSubtype.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiLevelSubtype.m; sourceTree = "<group>"; };
+		2C0B1C81183DF3E300FE8990 /* PolymorphicType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolymorphicType.h; sourceTree = "<group>"; };
+		2C0B1C82183DF3E300FE8990 /* PolymorphicType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PolymorphicType.m; sourceTree = "<group>"; };
+		2C0B1C84183DF3E300FE8990 /* Subtype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Subtype.h; sourceTree = "<group>"; };
+		2C0B1C85183DF3E300FE8990 /* Subtype.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Subtype.m; sourceTree = "<group>"; };
+		2C0B1C86183DF3E300FE8990 /* Subtype2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Subtype2.h; sourceTree = "<group>"; };
+		2C0B1C87183DF3E300FE8990 /* Subtype2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Subtype2.m; sourceTree = "<group>"; };
+		2C0B1C8A183DF3E300FE8990 /* TestComplexMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestComplexMessage.h; sourceTree = "<group>"; };
+		2C0B1C8B183DF3E300FE8990 /* TestComplexMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestComplexMessage.m; sourceTree = "<group>"; };
+		2C0B1C8D183DF3E300FE8990 /* TestEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestEnum.h; sourceTree = "<group>"; };
+		2C0B1C8E183DF3E300FE8990 /* TestEnum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestEnum.m; sourceTree = "<group>"; };
+		2C0B1C90183DF3E300FE8990 /* TestException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestException.h; sourceTree = "<group>"; };
+		2C0B1C91183DF3E300FE8990 /* TestException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestException.m; sourceTree = "<group>"; };
+		2C0B1C93183DF3E300FE8990 /* TestInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestInterface.h; sourceTree = "<group>"; };
+		2C0B1C94183DF3E300FE8990 /* TestInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestInterface.m; sourceTree = "<group>"; };
+		2C0B1C96183DF3E300FE8990 /* TestMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestMessage.h; sourceTree = "<group>"; };
+		2C0B1C97183DF3E300FE8990 /* TestMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestMessage.m; sourceTree = "<group>"; };
 		2C2600F1183A503100198BFF /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		2C2600F4183A503100198BFF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2C2600F5183A503100198BFF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -52,15 +79,6 @@
 		2CDC329E183D1BC000C7CEBE /* PdefObjcTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PdefObjcTests-Prefix.pch"; sourceTree = "<group>"; };
 		2CDC32A4183D1BD100C7CEBE /* PDDescriptorsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDDescriptorsTests.m; sourceTree = "<group>"; };
 		2CDC32AA183D1D5800C7CEBE /* PDGeneratedDescriptorsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDGeneratedDescriptorsTests.m; sourceTree = "<group>"; };
-		2CDC32DE183D2E2800C7CEBE /* Inheritance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Inheritance.h; sourceTree = "<group>"; };
-		2CDC32DF183D2E2800C7CEBE /* Inheritance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Inheritance.m; sourceTree = "<group>"; };
-		2CDC32E0183D2E2800C7CEBE /* InheritanceDescriptors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InheritanceDescriptors.h; sourceTree = "<group>"; };
-		2CDC32E1183D2E2800C7CEBE /* Interfaces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interfaces.h; sourceTree = "<group>"; };
-		2CDC32E2183D2E2800C7CEBE /* Interfaces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Interfaces.m; sourceTree = "<group>"; };
-		2CDC32E3183D2E2800C7CEBE /* InterfacesDescriptors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfacesDescriptors.h; sourceTree = "<group>"; };
-		2CDC32E4183D2E2800C7CEBE /* Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Messages.h; sourceTree = "<group>"; };
-		2CDC32E5183D2E2800C7CEBE /* Messages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Messages.m; sourceTree = "<group>"; };
-		2CDC32E6183D2E2800C7CEBE /* MessagesDescriptors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesDescriptors.h; sourceTree = "<group>"; };
 		31821A999F0F543201E45CCC /* PDMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDMessage.m; sourceTree = "<group>"; };
 		31821DB8BF9E84D48AFE3799 /* PDMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDMessage.h; sourceTree = "<group>"; };
 		31821DE02C1067510CA7C5C0 /* PDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDef.h; sourceTree = "<group>"; };
@@ -86,10 +104,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C0B1C7A183DF3E300FE8990 /* PdefTestsGenerated */ = {
+			isa = PBXGroup;
+			children = (
+				2C0B1C7B183DF3E300FE8990 /* Base.h */,
+				2C0B1C7C183DF3E300FE8990 /* Base.m */,
+				2C0B1C7E183DF3E300FE8990 /* MultiLevelSubtype.h */,
+				2C0B1C7F183DF3E300FE8990 /* MultiLevelSubtype.m */,
+				2C0B1C81183DF3E300FE8990 /* PolymorphicType.h */,
+				2C0B1C82183DF3E300FE8990 /* PolymorphicType.m */,
+				2C0B1C84183DF3E300FE8990 /* Subtype.h */,
+				2C0B1C85183DF3E300FE8990 /* Subtype.m */,
+				2C0B1C86183DF3E300FE8990 /* Subtype2.h */,
+				2C0B1C87183DF3E300FE8990 /* Subtype2.m */,
+				2C0B1C8A183DF3E300FE8990 /* TestComplexMessage.h */,
+				2C0B1C8B183DF3E300FE8990 /* TestComplexMessage.m */,
+				2C0B1C8D183DF3E300FE8990 /* TestEnum.h */,
+				2C0B1C8E183DF3E300FE8990 /* TestEnum.m */,
+				2C0B1C90183DF3E300FE8990 /* TestException.h */,
+				2C0B1C91183DF3E300FE8990 /* TestException.m */,
+				2C0B1C93183DF3E300FE8990 /* TestInterface.h */,
+				2C0B1C94183DF3E300FE8990 /* TestInterface.m */,
+				2C0B1C96183DF3E300FE8990 /* TestMessage.h */,
+				2C0B1C97183DF3E300FE8990 /* TestMessage.m */,
+			);
+			path = PdefTestsGenerated;
+			sourceTree = "<group>";
+		};
 		2C2600E4183A503100198BFF = {
 			isa = PBXGroup;
 			children = (
-				2CDC32DD183D2E2800C7CEBE /* PdefTestsGenerated */,
+				2C0B1C7A183DF3E300FE8990 /* PdefTestsGenerated */,
 				2C2600F7183A503100198BFF /* Pdef */,
 				2CDC3296183D1BC000C7CEBE /* PdefTests */,
 				2C2600F0183A503100198BFF /* Frameworks */,
@@ -166,22 +211,6 @@
 				2CDC329E183D1BC000C7CEBE /* PdefObjcTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		2CDC32DD183D2E2800C7CEBE /* PdefTestsGenerated */ = {
-			isa = PBXGroup;
-			children = (
-				2CDC32DE183D2E2800C7CEBE /* Inheritance.h */,
-				2CDC32DF183D2E2800C7CEBE /* Inheritance.m */,
-				2CDC32E0183D2E2800C7CEBE /* InheritanceDescriptors.h */,
-				2CDC32E1183D2E2800C7CEBE /* Interfaces.h */,
-				2CDC32E2183D2E2800C7CEBE /* Interfaces.m */,
-				2CDC32E3183D2E2800C7CEBE /* InterfacesDescriptors.h */,
-				2CDC32E4183D2E2800C7CEBE /* Messages.h */,
-				2CDC32E5183D2E2800C7CEBE /* Messages.m */,
-				2CDC32E6183D2E2800C7CEBE /* MessagesDescriptors.h */,
-			);
-			path = PdefTestsGenerated;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,13 +329,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C0B1C9C183DF3E300FE8990 /* Subtype.m in Sources */,
+				2C0B1C9D183DF3E300FE8990 /* Subtype2.m in Sources */,
+				2C0B1C99183DF3E300FE8990 /* Base.m in Sources */,
+				2C0B1C9F183DF3E300FE8990 /* TestEnum.m in Sources */,
 				2CDC32AB183D1D5800C7CEBE /* PDGeneratedDescriptorsTests.m in Sources */,
-				2CDC32E7183D2E2800C7CEBE /* Inheritance.m in Sources */,
+				2C0B1C9E183DF3E300FE8990 /* TestComplexMessage.m in Sources */,
+				2C0B1CA1183DF3E300FE8990 /* TestInterface.m in Sources */,
 				2CDC32A6183D1BD100C7CEBE /* PDDescriptorsTests.m in Sources */,
 				2CDC32A8183D1D0600C7CEBE /* PDDescriptors.m in Sources */,
-				2CDC32E9183D2E2800C7CEBE /* Messages.m in Sources */,
+				2C0B1C9B183DF3E300FE8990 /* PolymorphicType.m in Sources */,
+				2C0B1CA0183DF3E300FE8990 /* TestException.m in Sources */,
 				2CDC32A9183D1D0E00C7CEBE /* PDMessage.m in Sources */,
-				2CDC32E8183D2E2800C7CEBE /* Interfaces.m in Sources */,
+				2C0B1C9A183DF3E300FE8990 /* MultiLevelSubtype.m in Sources */,
+				2C0B1CA2183DF3E300FE8990 /* TestMessage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

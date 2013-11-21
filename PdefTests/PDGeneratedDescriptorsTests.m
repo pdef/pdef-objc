@@ -6,7 +6,7 @@
 
 #import <XCTest/XCTest.h>
 #import "PDDescriptors.h"
-#import "Messages.h"
+#import "TestMessage.h"
 
 @interface PDGeneratedMessageDescriptorTests : XCTestCase
 @end
@@ -14,7 +14,7 @@
 @implementation PDGeneratedMessageDescriptorTests
 
 - (void)test {
-    PDMessageDescriptor *descriptor = TestMessageDescriptor();
+    PDMessageDescriptor *descriptor = [TestMessage typeDescriptor];
     XCTAssert(descriptor.cls == [TestMessage class]);
     XCTAssertNil(descriptor.base);
     XCTAssertNil(descriptor.discriminator);

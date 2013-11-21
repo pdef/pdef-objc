@@ -9,28 +9,28 @@
 
 
 @implementation PDGeneratedMessage
+/** Override this method in a subclass, and return a custom descriptor. */
++ (PDMessageDescriptor *)typeDescriptor {
+    return nil;
+}
 
-/** Override this method in a subclass, and return a custom description. */
+/** Override this method in a subclass, and return the subclass typeDescriptor. */
 - (PDMessageDescriptor *)descriptor {
     return nil;
 }
 
-/** TODO: implement initWithDictionary. */
 - (id)initWithDictionary:(NSDictionary *)dictionary {
     return [self init];
 }
 
-/** TODO: implement initWithJson. */
 - (id)initWithJson:(NSString *)json {
     return [self init];
 }
 
-/** TODO: implement toDictionary. */
 - (NSDictionary *)toDictionary {
     return nil;
 }
 
-/** TODO: implement toJson. */
 - (NSString *)toJson {
     return nil;
 }

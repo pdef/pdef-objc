@@ -5,8 +5,6 @@ build/
 xcuserdata
 profile
 .idea/
-Tests/Pods
-Tests/Podfile.lock
 
 *.pyc
 *.iml

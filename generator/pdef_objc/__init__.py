@@ -8,7 +8,6 @@ from pdefc.generators import Generator, Templates, upper_first
 
 ENCODING = 'utf8'
 HEADER_TEMPLATE = 'header.jinja2'
-DESCRIPTORS_TEMPLATE = 'descriptors.jinja2'
 IMPL_TEMPLATE = 'impl.jinja2'
 
 
@@ -27,41 +26,27 @@ class ObjectiveCGenerator(Generator):
     def generate(self, package):
         '''Generate a package source code.'''
         for module in package.modules:
-            self._generate_descriptors(module)
-            self._generate_header(module)
-            self._generate_impl(module)
+            for definition in module.definitions:
+                self._generate_header(definition)
+                self._generate_impl(definition)
 
-    def _generate_descriptors(self, module):
-        '''Generate a module descriptors file.'''
-        code = self.templates.render(DESCRIPTORS_TEMPLATE, module=module)
-        filename = '%sDescriptors.h' % self._filename(module)
+    def _generate_header(self, definition):
+        '''Generate a definition header file.'''
+        code = self.templates.render(HEADER_TEMPLATE, definition=definition)
+        filename = '%s.h' % definition.name
         self.write_file(filename, code)
 
-    def _generate_header(self, module):
-        '''Generate a module header file.'''
-        code = self.templates.render(HEADER_TEMPLATE, module=module)
-        filename = '%s.h' % self._filename(module)
+    def _generate_impl(self, definition):
+        '''Generate a definition implementation file.'''
+        code = self.templates.render(IMPL_TEMPLATE, definition=definition)
+        filename = '%s.m' % definition.name
         self.write_file(filename, code)
-
-    def _generate_impl(self, module):
-        '''Generate a module implementation file.'''
-        code = self.templates.render(IMPL_TEMPLATE, module=module)
-        filename = '%s.m' % self._filename(module)
-        self.write_file(filename, code)
-
-    def _filename(self, module):
-        '''Return a module directory name from a module.name.'''
-        return self.filters.objc_filename(module)
 
 
 class ObjectiveCFilters(object):
     '''Objective-C jinja filters.'''
     def objc_bool(self, expression):
         return 'YES' if expression else 'NO'
-
-    def objc_filename(self, module):
-        name = module.relative_name.replace('_', '.')
-        return ''.join(upper_first(part) for part in name.split('.'))
 
     def objc_base(self, message):
         return message.base.name if message.base else 'NSObject'
@@ -84,6 +69,8 @@ class ObjectiveCFilters(object):
         t = type0.type
         if t in NATIVE_DESCRIPTORS:
             return NATIVE_DESCRIPTORS[t]
+        elif t == TypeEnum.ENUM:
+            return '%sDescriptor()' % type0.name
         elif t == TypeEnum.LIST:
             return '[PDDescriptors listWithElement:%s]' % self.objc_descriptor(type0.element)
         elif t == TypeEnum.SET:
@@ -92,7 +79,7 @@ class ObjectiveCFilters(object):
             return '[PDDescriptors mapWithKey:%s value:%s]' % (
                 self.objc_descriptor(type0.key),
                 self.objc_descriptor(type0.value))
-        return '%sDescriptor()' % type0.name
+        return '[%s typeDescriptor]' % type0.name
 
 
 NATIVE_TYPES = {
