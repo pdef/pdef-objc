@@ -6,6 +6,120 @@
 #import "TestMessage.h"
 
 
+#pragma mark TestInterface client
+@implementation TestInterfaceClient
+- (PDInterfaceDescriptor *)descriptor {
+    return TestInterfaceDescriptor();
+}
+- (NSOperation *) methodArg0:(NSNumber *)arg0
+        arg1:(NSNumber *)arg1
+        response:(void (^)(id result, NSError *error))response {
+    PDInvocation *_invocation = [self
+            captureNextInvocation:[[self descriptor] getMethodForName:@"method"]
+                            args:@{
+                                    @"arg0" : arg0,
+                                    @"arg1" : arg1,
+                            }];
+    return [self.handler handleInvocation:_invocation response:response];
+}
+- (NSOperation *) queryArg0:(NSNumber *)arg0
+        arg1:(NSNumber *)arg1
+        response:(void (^)(id result, NSError *error))response {
+    PDInvocation *_invocation = [self
+            captureNextInvocation:[[self descriptor] getMethodForName:@"query"]
+                            args:@{
+                                    @"arg0" : arg0,
+                                    @"arg1" : arg1,
+                            }];
+    return [self.handler handleInvocation:_invocation response:response];
+}
+- (NSOperation *) postArg0:(NSNumber *)arg0
+        arg1:(NSNumber *)arg1
+        response:(void (^)(id result, NSError *error))response {
+    PDInvocation *_invocation = [self
+            captureNextInvocation:[[self descriptor] getMethodForName:@"post"]
+                            args:@{
+                                    @"arg0" : arg0,
+                                    @"arg1" : arg1,
+                            }];
+    return [self.handler handleInvocation:_invocation response:response];
+}
+- (NSOperation *) string0Text:(NSString *)text
+        response:(void (^)(id result, NSError *error))response {
+    PDInvocation *_invocation = [self
+            captureNextInvocation:[[self descriptor] getMethodForName:@"string0"]
+                            args:@{
+                                    @"text" : text,
+                            }];
+    return [self.handler handleInvocation:_invocation response:response];
+}
+- (NSOperation *) datetime0Dt:(NSDate *)dt
+        response:(void (^)(id result, NSError *error))response {
+    PDInvocation *_invocation = [self
+            captureNextInvocation:[[self descriptor] getMethodForName:@"datetime0"]
+                            args:@{
+                                    @"dt" : dt,
+                            }];
+    return [self.handler handleInvocation:_invocation response:response];
+}
+- (NSOperation *) message0Msg:(TestMessage *)msg
+        response:(void (^)(id result, NSError *error))response {
+    PDInvocation *_invocation = [self
+            captureNextInvocation:[[self descriptor] getMethodForName:@"message0"]
+                            args:@{
+                                    @"msg" : msg,
+                            }];
+    return [self.handler handleInvocation:_invocation response:response];
+}
+- (NSOperation *) collectionsList0:(NSArray *)list0
+        set0:(NSSet *)set0
+        map0:(NSDictionary *)map0
+        response:(void (^)(id result, NSError *error))response {
+    PDInvocation *_invocation = [self
+            captureNextInvocation:[[self descriptor] getMethodForName:@"collections"]
+                            args:@{
+                                    @"list0" : list0,
+                                    @"set0" : set0,
+                                    @"map0" : map0,
+                            }];
+    return [self.handler handleInvocation:_invocation response:response];
+}
+- (id<TestInterface> ) interface0Arg0:(NSNumber *)arg0
+        arg1:(NSNumber *)arg1
+{
+    PDInvocation *_invocation = [self
+            captureNextInvocation:[[self descriptor] getMethodForName:@"interface0"]
+                            args:@{
+                                    @"arg0" : arg0,
+                                    @"arg1" : arg1,
+                            }];
+    return [[TestInterfaceClient alloc] initWithHandler: self.handler parentInvocation:_invocation];
+}
+- (NSOperation *) void0Response:(void (^)(id result, NSError *error))response {
+    PDInvocation *_invocation = [self
+            captureNextInvocation:[[self descriptor] getMethodForName:@"void0"]
+                            args:@{
+                            }];
+    return [self.handler handleInvocation:_invocation response:response];
+}
+- (NSOperation *) exc0Response:(void (^)(id result, NSError *error))response {
+    PDInvocation *_invocation = [self
+            captureNextInvocation:[[self descriptor] getMethodForName:@"exc0"]
+                            args:@{
+                            }];
+    return [self.handler handleInvocation:_invocation response:response];
+}
+- (NSOperation *) serverErrorResponse:(void (^)(id result, NSError *error))response {
+    PDInvocation *_invocation = [self
+            captureNextInvocation:[[self descriptor] getMethodForName:@"serverError"]
+                            args:@{
+                            }];
+    return [self.handler handleInvocation:_invocation response:response];
+}
+@end
+
+
+#pragma mark TestInterface descriptor
 static dispatch_once_t TestInterfaceOnce;
 static PDInterfaceDescriptor *_TestInterfaceDescriptor;
 
@@ -15,172 +129,94 @@ PDInterfaceDescriptor *TestInterfaceDescriptor() {
                 initWithProtocol:@protocol(TestInterface)
                              exc:[TestException typeDescriptor]
                          methods:@[
-                                 [[PDMethodDescriptor alloc]
-                                         initWithName:@"method"
-                                       resultSupplier:^PDDescriptor *() {
-                                           return [PDDescriptors int32];
-                                       }
-                                                 args:@[
-                                                         [[PDArgumentDescriptor alloc]
-                                                                 initWithName:@"arg0"
-                                                                         type:[PDDescriptors int32]
-                                                                       isPost:NO
-                                                                      isQuery:NO],
-                                                         [[PDArgumentDescriptor alloc]
-                                                                 initWithName:@"arg1"
-                                                                         type:[PDDescriptors int32]
-                                                                       isPost:NO
-                                                                      isQuery:NO],
-                                                 ]
-                                                  exc:[TestException typeDescriptor]
-                                                 post:NO],
-                                 [[PDMethodDescriptor alloc]
-                                         initWithName:@"query"
-                                       resultSupplier:^PDDescriptor *() {
-                                           return [PDDescriptors int32];
-                                       }
-                                                 args:@[
-                                                         [[PDArgumentDescriptor alloc]
-                                                                 initWithName:@"arg0"
-                                                                         type:[PDDescriptors int32]
-                                                                       isPost:NO
-                                                                      isQuery:YES],
-                                                         [[PDArgumentDescriptor alloc]
-                                                                 initWithName:@"arg1"
-                                                                         type:[PDDescriptors int32]
-                                                                       isPost:NO
-                                                                      isQuery:YES],
-                                                 ]
-                                                  exc:[TestException typeDescriptor]
-                                                 post:NO],
-                                 [[PDMethodDescriptor alloc]
-                                         initWithName:@"post"
-                                       resultSupplier:^PDDescriptor *() {
-                                           return [PDDescriptors int32];
-                                       }
-                                                 args:@[
-                                                         [[PDArgumentDescriptor alloc]
-                                                                 initWithName:@"arg0"
-                                                                         type:[PDDescriptors int32]
-                                                                       isPost:YES
-                                                                      isQuery:NO],
-                                                         [[PDArgumentDescriptor alloc]
-                                                                 initWithName:@"arg1"
-                                                                         type:[PDDescriptors int32]
-                                                                       isPost:YES
-                                                                      isQuery:NO],
-                                                 ]
-                                                  exc:[TestException typeDescriptor]
-                                                 post:YES],
-                                 [[PDMethodDescriptor alloc]
-                                         initWithName:@"string0"
-                                       resultSupplier:^PDDescriptor *() {
-                                           return [PDDescriptors string];
-                                       }
-                                                 args:@[
-                                                         [[PDArgumentDescriptor alloc]
-                                                                 initWithName:@"text"
-                                                                         type:[PDDescriptors string]
-                                                                       isPost:NO
-                                                                      isQuery:NO],
-                                                 ]
-                                                  exc:[TestException typeDescriptor]
-                                                 post:NO],
-                                 [[PDMethodDescriptor alloc]
-                                         initWithName:@"datetime0"
-                                       resultSupplier:^PDDescriptor *() {
-                                           return [PDDescriptors datetime];
-                                       }
-                                                 args:@[
-                                                         [[PDArgumentDescriptor alloc]
-                                                                 initWithName:@"dt"
-                                                                         type:[PDDescriptors datetime]
-                                                                       isPost:NO
-                                                                      isQuery:NO],
-                                                 ]
-                                                  exc:[TestException typeDescriptor]
-                                                 post:NO],
-                                 [[PDMethodDescriptor alloc]
-                                         initWithName:@"message0"
-                                       resultSupplier:^PDDescriptor *() {
-                                           return [TestMessage typeDescriptor];
-                                       }
-                                                 args:@[
-                                                         [[PDArgumentDescriptor alloc]
-                                                                 initWithName:@"msg"
-                                                                         type:[TestMessage typeDescriptor]
-                                                                       isPost:NO
-                                                                      isQuery:NO],
-                                                 ]
-                                                  exc:[TestException typeDescriptor]
-                                                 post:NO],
-                                 [[PDMethodDescriptor alloc]
-                                         initWithName:@"collections"
-                                       resultSupplier:^PDDescriptor *() {
-                                           return [PDDescriptors int32];
-                                       }
-                                                 args:@[
-                                                         [[PDArgumentDescriptor alloc]
-                                                                 initWithName:@"list0"
-                                                                         type:[PDDescriptors listWithElement:[PDDescriptors int32]]
-                                                                       isPost:NO
-                                                                      isQuery:YES],
-                                                         [[PDArgumentDescriptor alloc]
-                                                                 initWithName:@"set0"
-                                                                         type:[PDDescriptors setWithElement:[PDDescriptors int32]]
-                                                                       isPost:NO
-                                                                      isQuery:YES],
-                                                         [[PDArgumentDescriptor alloc]
-                                                                 initWithName:@"map0"
-                                                                         type:[PDDescriptors mapWithKey:[PDDescriptors int32] value:[PDDescriptors int32]]
-                                                                       isPost:NO
-                                                                      isQuery:YES],
-                                                 ]
-                                                  exc:[TestException typeDescriptor]
-                                                 post:NO],
-                                 [[PDMethodDescriptor alloc]
-                                         initWithName:@"interface0"
-                                       resultSupplier:^PDDescriptor *() {
-                                           return TestInterfaceDescriptor();
-                                       }
-                                                 args:@[
-                                                         [[PDArgumentDescriptor alloc]
-                                                                 initWithName:@"arg0"
-                                                                         type:[PDDescriptors int32]
-                                                                       isPost:NO
-                                                                      isQuery:NO],
-                                                         [[PDArgumentDescriptor alloc]
-                                                                 initWithName:@"arg1"
-                                                                         type:[PDDescriptors int32]
-                                                                       isPost:NO
-                                                                      isQuery:NO],
-                                                 ]
-                                                  exc:[TestException typeDescriptor]
-                                                 post:NO],
-                                 [[PDMethodDescriptor alloc]
-                                         initWithName:@"void0"
-                                       resultSupplier:^PDDescriptor *() {
-                                           return [PDDescriptors void0];
-                                       }
-                                                 args:@[]
-                                                  exc:[TestException typeDescriptor]
-                                                 post:NO],
-                                 [[PDMethodDescriptor alloc]
-                                         initWithName:@"exc0"
-                                       resultSupplier:^PDDescriptor *() {
-                                           return [PDDescriptors void0];
-                                       }
-                                                 args:@[]
-                                                  exc:[TestException typeDescriptor]
-                                                 post:NO],
-                                 [[PDMethodDescriptor alloc]
-                                         initWithName:@"serverError"
-                                       resultSupplier:^PDDescriptor *() {
-                                           return [PDDescriptors void0];
-                                       }
-                                                 args:@[]
-                                                  exc:[TestException typeDescriptor]
-                                                 post:NO],
+     [[PDMethodDescriptor alloc]
+             initWithName:@"method"
+           resultSupplier:^PDDescriptor *() { return [PDDescriptors int32]; }
+                     args:@[
+           [[PDArgumentDescriptor alloc] initWithName:@"arg0" type: [PDDescriptors int32] post:NO query:NO],
+           [[PDArgumentDescriptor alloc] initWithName:@"arg1" type: [PDDescriptors int32] post:NO query:NO],
+                        ]
+                      exc:[TestException typeDescriptor]
+                     post:NO],
+     [[PDMethodDescriptor alloc]
+             initWithName:@"query"
+           resultSupplier:^PDDescriptor *() { return [PDDescriptors int32]; }
+                     args:@[
+           [[PDArgumentDescriptor alloc] initWithName:@"arg0" type: [PDDescriptors int32] post:NO query:YES],
+           [[PDArgumentDescriptor alloc] initWithName:@"arg1" type: [PDDescriptors int32] post:NO query:YES],
+                        ]
+                      exc:[TestException typeDescriptor]
+                     post:NO],
+     [[PDMethodDescriptor alloc]
+             initWithName:@"post"
+           resultSupplier:^PDDescriptor *() { return [PDDescriptors int32]; }
+                     args:@[
+           [[PDArgumentDescriptor alloc] initWithName:@"arg0" type: [PDDescriptors int32] post:YES query:NO],
+           [[PDArgumentDescriptor alloc] initWithName:@"arg1" type: [PDDescriptors int32] post:YES query:NO],
+                        ]
+                      exc:[TestException typeDescriptor]
+                     post:YES],
+     [[PDMethodDescriptor alloc]
+             initWithName:@"string0"
+           resultSupplier:^PDDescriptor *() { return [PDDescriptors string]; }
+                     args:@[
+           [[PDArgumentDescriptor alloc] initWithName:@"text" type: [PDDescriptors string] post:NO query:NO],
+                        ]
+                      exc:[TestException typeDescriptor]
+                     post:NO],
+     [[PDMethodDescriptor alloc]
+             initWithName:@"datetime0"
+           resultSupplier:^PDDescriptor *() { return [PDDescriptors datetime]; }
+                     args:@[
+           [[PDArgumentDescriptor alloc] initWithName:@"dt" type: [PDDescriptors datetime] post:NO query:NO],
+                        ]
+                      exc:[TestException typeDescriptor]
+                     post:NO],
+     [[PDMethodDescriptor alloc]
+             initWithName:@"message0"
+           resultSupplier:^PDDescriptor *() { return [TestMessage typeDescriptor]; }
+                     args:@[
+           [[PDArgumentDescriptor alloc] initWithName:@"msg" type: [TestMessage typeDescriptor] post:NO query:NO],
+                        ]
+                      exc:[TestException typeDescriptor]
+                     post:NO],
+     [[PDMethodDescriptor alloc]
+             initWithName:@"collections"
+           resultSupplier:^PDDescriptor *() { return [PDDescriptors int32]; }
+                     args:@[
+           [[PDArgumentDescriptor alloc] initWithName:@"list0" type: [PDDescriptors listWithElement:[PDDescriptors int32]] post:NO query:YES],
+           [[PDArgumentDescriptor alloc] initWithName:@"set0" type: [PDDescriptors setWithElement:[PDDescriptors int32]] post:NO query:YES],
+           [[PDArgumentDescriptor alloc] initWithName:@"map0" type: [PDDescriptors mapWithKey:[PDDescriptors int32] value:[PDDescriptors int32]] post:NO query:YES],
+                        ]
+                      exc:[TestException typeDescriptor]
+                     post:NO],
+     [[PDMethodDescriptor alloc]
+             initWithName:@"interface0"
+           resultSupplier:^PDDescriptor *() { return TestInterfaceDescriptor(); }
+                     args:@[
+           [[PDArgumentDescriptor alloc] initWithName:@"arg0" type: [PDDescriptors int32] post:NO query:NO],
+           [[PDArgumentDescriptor alloc] initWithName:@"arg1" type: [PDDescriptors int32] post:NO query:NO],
+                        ]
+                      exc:[TestException typeDescriptor]
+                     post:NO],
+     [[PDMethodDescriptor alloc]
+             initWithName:@"void0"
+           resultSupplier:^PDDescriptor *() { return [PDDescriptors void0]; }
+                     args:@[]
+                      exc:[TestException typeDescriptor]
+                     post:NO],
+     [[PDMethodDescriptor alloc]
+             initWithName:@"exc0"
+           resultSupplier:^PDDescriptor *() { return [PDDescriptors void0]; }
+                     args:@[]
+                      exc:[TestException typeDescriptor]
+                     post:NO],
+     [[PDMethodDescriptor alloc]
+             initWithName:@"serverError"
+           resultSupplier:^PDDescriptor *() { return [PDDescriptors void0]; }
+                     args:@[]
+                      exc:[TestException typeDescriptor]
+                     post:NO],
                          ]];
     });
     return _TestInterfaceDescriptor;

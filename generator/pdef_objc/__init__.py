@@ -94,6 +94,11 @@ class ObjectiveCFilters(object):
             return '[%s typeDescriptor]' % type0.name
         raise ValueError('Unsupported type %r' % type0)
 
+    def objc_result(self, type0):
+        if type0.is_interface:
+            return 'id<%s> ' % type0.name
+        return 'NSOperation *'
+
 
 NATIVE_TYPES = {
     TypeEnum.BOOL: 'NSNumber *',

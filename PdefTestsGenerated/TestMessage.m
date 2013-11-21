@@ -25,21 +25,9 @@ static PDMessageDescriptor *_TestMessageDescriptor;
        discriminatorValue:0
          subtypeSuppliers:@[]
                    fields:@[
-                           [[PDFieldDescriptor alloc] initWithName:@"string0"
-                                                      typeSupplier:^PDDataTypeDescriptor *() {
-                                                          return [PDDescriptors string];
-                                                      }
-                                                     discriminator:NO],
-                           [[PDFieldDescriptor alloc] initWithName:@"bool0"
-                                                      typeSupplier:^PDDataTypeDescriptor *() {
-                                                          return [PDDescriptors bool0];
-                                                      }
-                                                     discriminator:NO],
-                           [[PDFieldDescriptor alloc] initWithName:@"int0"
-                                                      typeSupplier:^PDDataTypeDescriptor *() {
-                                                          return [PDDescriptors int32];
-                                                      }
-                                                     discriminator:NO],
+    [[PDFieldDescriptor alloc] initWithName:@"string0" typeSupplier:^PDDataTypeDescriptor *() { return [PDDescriptors string]; } discriminator:NO],
+    [[PDFieldDescriptor alloc] initWithName:@"bool0" typeSupplier:^PDDataTypeDescriptor *() { return [PDDescriptors bool0]; } discriminator:NO],
+    [[PDFieldDescriptor alloc] initWithName:@"int0" typeSupplier:^PDDataTypeDescriptor *() { return [PDDescriptors int32]; } discriminator:NO],
                            ]];
 }
 @end

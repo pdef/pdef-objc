@@ -64,9 +64,7 @@ static PDMessageDescriptor *_{{ definition.name }}Descriptor;
     {% endif %}
                    fields:@[
                 {% for field in definition.declared_fields %}
-                           [[PDFieldDescriptor alloc] initWithName:@"{{ field.name }}"
-                                   typeSupplier:^PDDataTypeDescriptor *() { return {{ field.type|objc_descriptor }}; }
-                                  discriminator:{{ field.is_discriminator|objc_bool }}],
+    [[PDFieldDescriptor alloc] initWithName:@"{{ field.name }}" typeSupplier:^PDDataTypeDescriptor *() { return {{ field.type|objc_descriptor }}; } discriminator:{{ field.is_discriminator|objc_bool }}],
                 {% endfor %}
                            ]];
 }
@@ -74,6 +72,49 @@ static PDMessageDescriptor *_{{ definition.name }}Descriptor;
 
 
 {% else %}
+#pragma mark {{ definition.name }} client
+@implementation {{ definition.name }}Client
+- (PDInterfaceDescriptor *)descriptor {
+    return {{ definition.name }}Descriptor();
+}
+{% for method in definition.declared_methods %}
+    {% if not method.args %}
+        {% if method.is_terminal %}
+- ({{ method.result|objc_result }}) {{ method.name }}Response:(void (^)(id result, NSError *error))response {
+        {% else %}
+- ({{ method.result|objc_result }}) {{ method.name }} {
+        {% endif %}
+    {% else %}
+        {% set first_arg = method.args[0] %}
+        {% set remaining_args = method.args[1:] %}
+- ({{ method.result|objc_result }}) {{ method.name }}{{ first_arg.name|upper_first }}:({{ first_arg.type|objc_type }}){{ first_arg.name }}
+    {% for arg in remaining_args %}
+        {{ arg.name }}:({{ arg.type|objc_type }}){{ arg.name }}
+    {% endfor %}
+        {%- if not method.is_terminal -%}
+            {
+        {% else %}
+        response:(void (^)(id result, NSError *error))response {
+        {% endif %}
+    {% endif %}
+    PDInvocation *_invocation = [self
+            captureNextInvocation:[[self descriptor] getMethodForName:@"{{ method.name }}"]
+                            args:@{
+                                {% for arg in method.args %}
+                                    @"{{ arg.name }}" : {{ arg.name }},
+                                {% endfor %}
+                            }];
+    {% if method.is_terminal %}
+    return [self.handler handleInvocation:_invocation response:response];
+    {% else %}
+    return [[{{ method.result.name }}Client alloc] initWithHandler: self.handler parentInvocation:_invocation];
+    {% endif %}
+}
+{% endfor %}
+@end
+
+
+#pragma mark {{ definition.name }} descriptor
 static dispatch_once_t {{ definition.name }}Once;
 static PDInterfaceDescriptor *_{{ definition.name }}Descriptor;
 
@@ -87,30 +128,26 @@ PDInterfaceDescriptor *{{ definition.name }}Descriptor() {
                              exc:nil
                             {% endif %}
                          methods:@[
-                            {% for method in definition.declared_methods %}
-                                 [[PDMethodDescriptor alloc]
-                                         initWithName:@"{{ method.name }}"
-                                       resultSupplier:^PDDescriptor *() { return {{ method.result|objc_descriptor }}; }
-                                                {% if method.args %}
-                                                 args:@[
-                                                    {% for arg in method.args %}
-                                                         [[PDArgumentDescriptor alloc]
-                                                                 initWithName:@"{{ arg.name }}"
-                                                                         type:{{ arg.type|objc_descriptor }}
-                                                                         post:{{ arg.is_post|objc_bool }}
-                                                                        query:{{ arg.is_query|objc_bool }}],
-                                                    {% endfor %}
-                                                    ]
-                                                {% else %}
-                                                 args:@[]
-                                                {% endif %}
-                                                {% if method.exc %}
-                                                  exc:{{ method.exc|objc_descriptor }}
-                                                {% else %}
-                                                  exc:nil
-                                                {% endif %}
-                                               isPost:{{ method.is_post|objc_bool }}],
-                            {% endfor %}
+{% for method in definition.declared_methods %}
+     [[PDMethodDescriptor alloc]
+             initWithName:@"{{ method.name }}"
+           resultSupplier:^PDDescriptor *() { return {{ method.result|objc_descriptor }}; }
+                    {% if method.args %}
+                     args:@[
+                        {% for arg in method.args %}
+           [[PDArgumentDescriptor alloc] initWithName:@"{{ arg.name }}" type: {{ arg.type|objc_descriptor }} post:{{ arg.is_post|objc_bool }} query:{{ arg.is_query|objc_bool }}],
+                        {% endfor %}
+                        ]
+                    {% else %}
+                     args:@[]
+                    {% endif %}
+                    {% if method.exc %}
+                      exc:{{ method.exc|objc_descriptor }}
+                    {% else %}
+                      exc:nil
+                    {% endif %}
+                     post:{{ method.is_post|objc_bool }}],
+{% endfor %}
                          ]];
     });
     return _{{ definition.name }}Descriptor;

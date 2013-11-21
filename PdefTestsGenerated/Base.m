@@ -32,16 +32,8 @@ static PDMessageDescriptor *_BaseDescriptor;
                            ^PDMessageDescriptor *() { return [MultiLevelSubtype typeDescriptor]; },
                           ]
                    fields:@[
-                           [[PDFieldDescriptor alloc] initWithName:@"type"
-                                                      typeSupplier:^PDDataTypeDescriptor *() {
-                                                          return PolymorphicTypeDescriptor();
-                                                      }
-                                                     discriminator:YES],
-                           [[PDFieldDescriptor alloc] initWithName:@"field"
-                                                      typeSupplier:^PDDataTypeDescriptor *() {
-                                                          return [PDDescriptors string];
-                                                      }
-                                                     discriminator:NO],
+    [[PDFieldDescriptor alloc] initWithName:@"type" typeSupplier:^PDDataTypeDescriptor *() { return PolymorphicTypeDescriptor(); } discriminator:YES],
+    [[PDFieldDescriptor alloc] initWithName:@"field" typeSupplier:^PDDataTypeDescriptor *() { return [PDDescriptors string]; } discriminator:NO],
                            ]];
 }
 @end

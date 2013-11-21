@@ -28,66 +28,18 @@ static PDMessageDescriptor *_TestComplexMessageDescriptor;
        discriminatorValue:0
          subtypeSuppliers:@[]
                    fields:@[
-                           [[PDFieldDescriptor alloc] initWithName:@"short0"
-                                                      typeSupplier:^PDDataTypeDescriptor *() {
-                                                          return [PDDescriptors int16];
-                                                      }
-                                                     discriminator:NO],
-                           [[PDFieldDescriptor alloc] initWithName:@"long0"
-                                                      typeSupplier:^PDDataTypeDescriptor *() {
-                                                          return [PDDescriptors int64];
-                                                      }
-                                                     discriminator:NO],
-                           [[PDFieldDescriptor alloc] initWithName:@"float0"
-                                                      typeSupplier:^PDDataTypeDescriptor *() {
-                                                          return [PDDescriptors float0];
-                                                      }
-                                                     discriminator:NO],
-                           [[PDFieldDescriptor alloc] initWithName:@"double0"
-                                                      typeSupplier:^PDDataTypeDescriptor *() {
-                                                          return [PDDescriptors double0];
-                                                      }
-                                                     discriminator:NO],
-                           [[PDFieldDescriptor alloc] initWithName:@"datetime0"
-                                                      typeSupplier:^PDDataTypeDescriptor *() {
-                                                          return [PDDescriptors datetime];
-                                                      }
-                                                     discriminator:NO],
-                           [[PDFieldDescriptor alloc] initWithName:@"list0"
-                                                      typeSupplier:^PDDataTypeDescriptor *() {
-                                                          return [PDDescriptors listWithElement:[PDDescriptors int32]];
-                                                      }
-                                                     discriminator:NO],
-                           [[PDFieldDescriptor alloc] initWithName:@"set0"
-                                                      typeSupplier:^PDDataTypeDescriptor *() {
-                                                          return [PDDescriptors setWithElement:[PDDescriptors int32]];
-                                                      }
-                                                     discriminator:NO],
-                           [[PDFieldDescriptor alloc] initWithName:@"map0"
-                                                      typeSupplier:^PDDataTypeDescriptor *() {
-                                                          return [PDDescriptors mapWithKey:[PDDescriptors int32] value:[PDDescriptors float0]];
-                                                      }
-                                                     discriminator:NO],
-                           [[PDFieldDescriptor alloc] initWithName:@"enum0"
-                                                      typeSupplier:^PDDataTypeDescriptor *() {
-                                                          return TestEnumDescriptor();
-                                                      }
-                                                     discriminator:NO],
-                           [[PDFieldDescriptor alloc] initWithName:@"message0"
-                                                      typeSupplier:^PDDataTypeDescriptor *() {
-                                                          return [TestMessage typeDescriptor];
-                                                      }
-                                                     discriminator:NO],
-                           [[PDFieldDescriptor alloc] initWithName:@"polymorphic"
-                                                      typeSupplier:^PDDataTypeDescriptor *() {
-                                                          return [Base typeDescriptor];
-                                                      }
-                                                     discriminator:NO],
-                           [[PDFieldDescriptor alloc] initWithName:@"datatypes"
-                                                      typeSupplier:^PDDataTypeDescriptor *() {
-                                                          return [TestComplexMessage typeDescriptor];
-                                                      }
-                                                     discriminator:NO],
+    [[PDFieldDescriptor alloc] initWithName:@"short0" typeSupplier:^PDDataTypeDescriptor *() { return [PDDescriptors int16]; } discriminator:NO],
+    [[PDFieldDescriptor alloc] initWithName:@"long0" typeSupplier:^PDDataTypeDescriptor *() { return [PDDescriptors int64]; } discriminator:NO],
+    [[PDFieldDescriptor alloc] initWithName:@"float0" typeSupplier:^PDDataTypeDescriptor *() { return [PDDescriptors float0]; } discriminator:NO],
+    [[PDFieldDescriptor alloc] initWithName:@"double0" typeSupplier:^PDDataTypeDescriptor *() { return [PDDescriptors double0]; } discriminator:NO],
+    [[PDFieldDescriptor alloc] initWithName:@"datetime0" typeSupplier:^PDDataTypeDescriptor *() { return [PDDescriptors datetime]; } discriminator:NO],
+    [[PDFieldDescriptor alloc] initWithName:@"list0" typeSupplier:^PDDataTypeDescriptor *() { return [PDDescriptors listWithElement:[PDDescriptors int32]]; } discriminator:NO],
+    [[PDFieldDescriptor alloc] initWithName:@"set0" typeSupplier:^PDDataTypeDescriptor *() { return [PDDescriptors setWithElement:[PDDescriptors int32]]; } discriminator:NO],
+    [[PDFieldDescriptor alloc] initWithName:@"map0" typeSupplier:^PDDataTypeDescriptor *() { return [PDDescriptors mapWithKey:[PDDescriptors int32] value:[PDDescriptors float0]]; } discriminator:NO],
+    [[PDFieldDescriptor alloc] initWithName:@"enum0" typeSupplier:^PDDataTypeDescriptor *() { return TestEnumDescriptor(); } discriminator:NO],
+    [[PDFieldDescriptor alloc] initWithName:@"message0" typeSupplier:^PDDataTypeDescriptor *() { return [TestMessage typeDescriptor]; } discriminator:NO],
+    [[PDFieldDescriptor alloc] initWithName:@"polymorphic" typeSupplier:^PDDataTypeDescriptor *() { return [Base typeDescriptor]; } discriminator:NO],
+    [[PDFieldDescriptor alloc] initWithName:@"datatypes" typeSupplier:^PDDataTypeDescriptor *() { return [TestComplexMessage typeDescriptor]; } discriminator:NO],
                            ]];
 }
 @end

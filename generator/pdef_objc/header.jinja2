@@ -51,19 +51,29 @@ PDEnumDescriptor *{{ definition.name }}Descriptor();
 /** {{ method.doc }} */
 {% endif %}
     {% if not method.args %}
-- (NSOperation *) {{ method.name }}Response:(void (^)(id result, NSError *error))response;
+        {% if method.is_terminal %}
+- ({{ method.result|objc_result }}) {{ method.name }}Response:(void (^)(id result, NSError *error))response;
+        {% else %}
+- ({{ method.result|objc_result }}) {{ method.name }};
+        {% endif %}
     {% else %}
         {% set first_arg = method.args[0] %}
         {% set remaining_args = method.args[1:] %}
-- (NSOperation *) {{ method.name }}{{ first_arg.name|upper_first }}:({{ first_arg.type|objc_type }}){{ first_arg.name }}
+- ({{ method.result|objc_result }}) {{ method.name }}{{ first_arg.name|upper_first }}:({{ first_arg.type|objc_type }}){{ first_arg.name }}
     {% for arg in remaining_args %}
         {{ arg.name }}:({{ arg.type|objc_type }}){{ arg.name }}
     {% endfor %}
-        response:(void (^)(id result, NSError *error))error;
+        {%- if not method.is_terminal -%}
+            ;
+        {% else %}
+            response:(void (^)(id result, NSError *error))response;
+        {% endif %}
     {% endif %}
 
     {% endfor %}
 @end
 
+@interface {{ definition.name }}Client : PDInterface <{{ definition.name }}>
+@end
 PDInterfaceDescriptor *{{ definition.name }}Descriptor();
 {% endif %}

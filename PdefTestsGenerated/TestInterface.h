@@ -16,40 +16,40 @@ Multi-line comment.
  */
 - (NSOperation *) methodArg0:(NSNumber *)arg0
         arg1:(NSNumber *)arg1
-        response:(void (^)(id result, NSError *error))error;
+            response:(void (^)(id result, NSError *error))response;
 
 /** Returns the sum of the numbers. */
 - (NSOperation *) queryArg0:(NSNumber *)arg0
         arg1:(NSNumber *)arg1
-        response:(void (^)(id result, NSError *error))error;
+            response:(void (^)(id result, NSError *error))response;
 
 /** Returns the sum of the numbers. */
 - (NSOperation *) postArg0:(NSNumber *)arg0
         arg1:(NSNumber *)arg1
-        response:(void (^)(id result, NSError *error))error;
+            response:(void (^)(id result, NSError *error))response;
 
 /** Returns the same string. */
 - (NSOperation *) string0Text:(NSString *)text
-        response:(void (^)(id result, NSError *error))error;
+            response:(void (^)(id result, NSError *error))response;
 
 /** Return the same datetime. */
 - (NSOperation *) datetime0Dt:(NSDate *)dt
-        response:(void (^)(id result, NSError *error))error;
+            response:(void (^)(id result, NSError *error))response;
 
 /** Returns the same message. */
 - (NSOperation *) message0Msg:(TestMessage *)msg
-        response:(void (^)(id result, NSError *error))error;
+            response:(void (^)(id result, NSError *error))response;
 
 /** Returns the total number of items. */
 - (NSOperation *) collectionsList0:(NSArray *)list0
         set0:(NSSet *)set0
         map0:(NSDictionary *)map0
-        response:(void (^)(id result, NSError *error))error;
+            response:(void (^)(id result, NSError *error))response;
 
 /** Returns the same interface (yes, it's endless). */
-- (NSOperation *) interface0Arg0:(NSNumber *)arg0
+- (id<TestInterface> ) interface0Arg0:(NSNumber *)arg0
         arg1:(NSNumber *)arg1
-        response:(void (^)(id result, NSError *error))error;
+;
 
 /** Void method which returns null. */
 - (NSOperation *) void0Response:(void (^)(id result, NSError *error))response;
@@ -62,4 +62,6 @@ Multi-line comment.
 
 @end
 
+@interface TestInterfaceClient : PDInterface <TestInterface>
+@end
 PDInterfaceDescriptor *TestInterfaceDescriptor();

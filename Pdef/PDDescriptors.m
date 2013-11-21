@@ -13,6 +13,10 @@
     _type = type;
     return self;
 }
+
+- (NSString *)description {
+    return [NSString stringWithFormat: @"Descriptor: type=%li", _type];
+}
 @end
 
 
@@ -30,6 +34,10 @@
     }
     return self;
 }
+
+- (NSString *)description {
+    return [NSString stringWithFormat: @"List: element=%@", _elementDescriptor];
+}
 @end
 
 
@@ -42,6 +50,10 @@
         _elementDescriptor = elementDescriptor;
     }
     return self;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat: @"Set: element=%@", _elementDescriptor];
 }
 @end
 
@@ -60,6 +72,10 @@
         _valueDescriptor = valueDescriptor;
     }
     return self;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat: @"Map: key=%@, value=%@", _keyDescriptor, _valueDescriptor];
 }
 @end
 
@@ -116,6 +132,10 @@ discriminatorValue:(NSInteger)discriminatorValue
     }
 
     return self;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat: @"Message: class=%@", _cls];
 }
 
 - (NSSet *)subtypes {
@@ -213,6 +233,10 @@ discriminatorValue:(NSInteger)discriminatorValue
     return self;
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat: @"Field: name=%@ type=%@", _name, self.type];
+}
+
 - (PDDataTypeDescriptor *)type {
     if (!_type) {
         _type = _typeSupplier();
@@ -244,6 +268,10 @@ discriminatorValue:(NSInteger)discriminatorValue
     }
     return nil;
 }
+
+- (NSString *)description {
+    return [NSString stringWithFormat: @"Interface: protocol=%@", _protocol];
+}
 @end
 
 
@@ -273,6 +301,10 @@ discriminatorValue:(NSInteger)discriminatorValue
     return self;
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat: @"Method: name=%@", _name];
+}
+
 - (PDDescriptor *)result {
     if (!_result) {
         _result = _resultSupplier();
@@ -287,7 +319,7 @@ discriminatorValue:(NSInteger)discriminatorValue
 
 
 @implementation PDArgumentDescriptor
-- (id)initWithName:(NSString *)name type:(PDDataTypeDescriptor *)type isPost:(BOOL)isPost isQuery:(BOOL)isQuery {
+- (id)initWithName:(NSString *)name type:(PDDataTypeDescriptor *)type post:(BOOL)isPost query:(BOOL)isQuery {
     if (self = [super init]) {
         if (!name) {
             [NSException raise:NSInvalidArgumentException format:@"nil name"];
@@ -297,10 +329,14 @@ discriminatorValue:(NSInteger)discriminatorValue
         }
         _name = name;
         _type = type;
-        _isPost = isPost;
-        _isQuery = isQuery;
+        _post = isPost;
+        _query = isQuery;
     }
     return self;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat: @"Argument: name=%@ type=%@", _name, _type];
 }
 @end
 

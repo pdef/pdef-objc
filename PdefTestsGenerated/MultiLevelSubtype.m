@@ -26,11 +26,7 @@ static PDMessageDescriptor *_MultiLevelSubtypeDescriptor;
        discriminatorValue:PolymorphicType_MULTILEVEL_SUBTYPE 
          subtypeSuppliers:@[]
                    fields:@[
-                           [[PDFieldDescriptor alloc] initWithName:@"mfield"
-                                                      typeSupplier:^PDDataTypeDescriptor *() {
-                                                          return [PDDescriptors string];
-                                                      }
-                                                     discriminator:NO],
+    [[PDFieldDescriptor alloc] initWithName:@"mfield" typeSupplier:^PDDataTypeDescriptor *() { return [PDDescriptors string]; } discriminator:NO],
                            ]];
 }
 @end

@@ -127,13 +127,13 @@ typedef NS_ENUM(NSInteger, PDType) {
 @interface PDArgumentDescriptor : NSObject
 @property(readonly, nonatomic) NSString *name;
 @property(readonly, nonatomic) PDDataTypeDescriptor *type;
-@property(readonly, nonatomic) BOOL isPost;
-@property(readonly, nonatomic) BOOL isQuery;
+@property(readonly, nonatomic) BOOL post;
+@property(readonly, nonatomic) BOOL query;
 
 - (id)initWithName:(NSString *)name
               type:(PDDataTypeDescriptor *)type
-            isPost:(BOOL)isPost
-           isQuery:(BOOL)isQuery;
+              post:(BOOL)isPost
+             query:(BOOL)isQuery;
 @end
 
 
