@@ -9,6 +9,7 @@ from pdefc.generators import Generator, Templates, upper_first
 ENCODING = 'utf8'
 HEADER_TEMPLATE = 'header.jinja2'
 IMPL_TEMPLATE = 'impl.jinja2'
+PACKAGE_TEMPLATE = 'package.jinja2'
 
 
 class ObjectiveCGenerator(Generator):
@@ -30,6 +31,8 @@ class ObjectiveCGenerator(Generator):
                 self._generate_header(definition)
                 self._generate_impl(definition)
 
+        self._generate_package(package)
+
     def _generate_header(self, definition):
         '''Generate a definition header file.'''
         code = self.templates.render(HEADER_TEMPLATE, definition=definition)
@@ -40,6 +43,12 @@ class ObjectiveCGenerator(Generator):
         '''Generate a definition implementation file.'''
         code = self.templates.render(IMPL_TEMPLATE, definition=definition)
         filename = '%s.m' % definition.name
+        self.write_file(filename, code)
+
+    def _generate_package(self, package):
+        '''Generate a package file which groups all headers.'''
+        code = self.templates.render(PACKAGE_TEMPLATE, package=package)
+        filename = '%s.h' % package.name
         self.write_file(filename, code)
 
 
