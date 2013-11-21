@@ -27,7 +27,11 @@
 		2CDC32A8183D1D0600C7CEBE /* PDDescriptors.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C260126183A53E400198BFF /* PDDescriptors.m */; };
 		2CDC32A9183D1D0E00C7CEBE /* PDMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821A999F0F543201E45CCC /* PDMessage.m */; };
 		2CDC32AB183D1D5800C7CEBE /* PDGeneratedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC32AA183D1D5800C7CEBE /* PDGeneratedTests.m */; };
+		3182133E3B6A2469276DD4E2 /* PDInvocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 3182140773F57D2026D2205C /* PDInvocation.h */; };
+		318213FC88C2C93D9A2E47D2 /* PDInvocationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 318213E8278002BF00C549D4 /* PDInvocationTests.m */; };
+		31821559BEE106E85D076E2E /* PDInvocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821F20AF2A3CC1668560CC /* PDInvocation.m */; };
 		3182184EF5B9F248362B8A53 /* PDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 31821DE02C1067510CA7C5C0 /* PDef.h */; };
+		31821CF3AF6001850176F47B /* PDInvocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821F20AF2A3CC1668560CC /* PDInvocation.m */; };
 		31821D1C6EC373B95848619A /* PDMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821A999F0F543201E45CCC /* PDMessage.m */; };
 		31821DDBE78ACC5D6886D19F /* PDMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 31821DB8BF9E84D48AFE3799 /* PDMessage.h */; };
 /* End PBXBuildFile section */
@@ -67,9 +71,7 @@
 		2C2600F4183A503100198BFF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2C2600F5183A503100198BFF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		2C2600F6183A503100198BFF /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		2C2600F9183A503100198BFF /* PdefObjc-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PdefObjc-Info.plist"; sourceTree = "<group>"; };
 		2C2600FB183A503100198BFF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2C2600FD183A503100198BFF /* PdefObjc-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PdefObjc-Prefix.pch"; sourceTree = "<group>"; };
 		2C260106183A503100198BFF /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		2C260125183A53E400198BFF /* PDDescriptors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDDescriptors.h; sourceTree = "<group>"; };
 		2C260126183A53E400198BFF /* PDDescriptors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDDescriptors.m; sourceTree = "<group>"; };
@@ -79,9 +81,12 @@
 		2CDC329E183D1BC000C7CEBE /* PdefObjcTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PdefObjcTests-Prefix.pch"; sourceTree = "<group>"; };
 		2CDC32A4183D1BD100C7CEBE /* PDDescriptorsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDDescriptorsTests.m; sourceTree = "<group>"; };
 		2CDC32AA183D1D5800C7CEBE /* PDGeneratedTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDGeneratedTests.m; sourceTree = "<group>"; };
+		318213E8278002BF00C549D4 /* PDInvocationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDInvocationTests.m; sourceTree = "<group>"; };
+		3182140773F57D2026D2205C /* PDInvocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDInvocation.h; sourceTree = "<group>"; };
 		31821A999F0F543201E45CCC /* PDMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDMessage.m; sourceTree = "<group>"; };
 		31821DB8BF9E84D48AFE3799 /* PDMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDMessage.h; sourceTree = "<group>"; };
 		31821DE02C1067510CA7C5C0 /* PDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDef.h; sourceTree = "<group>"; };
+		31821F20AF2A3CC1668560CC /* PDInvocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDInvocation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +176,8 @@
 				31821A999F0F543201E45CCC /* PDMessage.m */,
 				31821DB8BF9E84D48AFE3799 /* PDMessage.h */,
 				31821DE02C1067510CA7C5C0 /* PDef.h */,
+				31821F20AF2A3CC1668560CC /* PDInvocation.m */,
+				3182140773F57D2026D2205C /* PDInvocation.h */,
 			);
 			path = Pdef;
 			sourceTree = "<group>";
@@ -178,9 +185,7 @@
 		2C2600F8183A503100198BFF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				2C2600F9183A503100198BFF /* PdefObjc-Info.plist */,
 				2C2600FA183A503100198BFF /* InfoPlist.strings */,
-				2C2600FD183A503100198BFF /* PdefObjc-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -199,6 +204,7 @@
 				2CDC32AA183D1D5800C7CEBE /* PDGeneratedTests.m */,
 				2CDC32A4183D1BD100C7CEBE /* PDDescriptorsTests.m */,
 				2CDC3297183D1BC000C7CEBE /* Supporting Files */,
+				318213E8278002BF00C549D4 /* PDInvocationTests.m */,
 			);
 			path = PdefTests;
 			sourceTree = "<group>";
@@ -223,6 +229,7 @@
 				2C260127183A53E400198BFF /* PDDescriptors.h in Headers */,
 				31821DDBE78ACC5D6886D19F /* PDMessage.h in Headers */,
 				3182184EF5B9F248362B8A53 /* PDef.h in Headers */,
+				3182133E3B6A2469276DD4E2 /* PDInvocation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +329,7 @@
 			files = (
 				2C260128183A53E400198BFF /* PDDescriptors.m in Sources */,
 				31821D1C6EC373B95848619A /* PDMessage.m in Sources */,
+				31821559BEE106E85D076E2E /* PDInvocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +351,8 @@
 				2CDC32A9183D1D0E00C7CEBE /* PDMessage.m in Sources */,
 				2C0B1C9A183DF3E300FE8990 /* MultiLevelSubtype.m in Sources */,
 				2C0B1CA2183DF3E300FE8990 /* TestMessage.m in Sources */,
+				318213FC88C2C93D9A2E47D2 /* PDInvocationTests.m in Sources */,
+				31821CF3AF6001850176F47B /* PDInvocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
