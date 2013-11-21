@@ -88,7 +88,11 @@ class ObjectiveCFilters(object):
             return '[PDDescriptors mapWithKey:%s value:%s]' % (
                 self.objc_descriptor(type0.key),
                 self.objc_descriptor(type0.value))
-        return '[%s typeDescriptor]' % type0.name
+        elif t == TypeEnum.INTERFACE:
+            return '%sDescriptor()' % type0.name
+        elif t == TypeEnum.MESSAGE:
+            return '[%s typeDescriptor]' % type0.name
+        raise ValueError('Unsupported type %r' % type0)
 
 
 NATIVE_TYPES = {

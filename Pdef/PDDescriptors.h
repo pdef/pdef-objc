@@ -1,6 +1,6 @@
 //
 //  PDDescriptors.h
-//  PdefObjc
+//  Pdef
 //
 //  Created by Ivan Korobkov on 18.11.13.
 //  Copyright (c) 2013 pdef. All rights reserved.
@@ -44,18 +44,18 @@ typedef NS_ENUM(NSInteger, PDType) {
 
 
 @interface PDListDescriptor : PDDataTypeDescriptor
-@property(readonly, nonatomic) PDDataTypeDescriptor *element;
+@property(readonly, nonatomic) PDDataTypeDescriptor *elementDescriptor;
 @end
 
 
 @interface PDSetDescriptor : PDDataTypeDescriptor
-@property(readonly, nonatomic) PDDataTypeDescriptor *element;
+@property(readonly, nonatomic) PDDataTypeDescriptor *elementDescriptor;
 @end
 
 
 @interface PDMapDescriptor : PDDataTypeDescriptor
-@property(readonly, nonatomic) PDDataTypeDescriptor *key;
-@property(readonly, nonatomic) PDDataTypeDescriptor *value;
+@property(readonly, nonatomic) PDDataTypeDescriptor *keyDescriptor;
+@property(readonly, nonatomic) PDDataTypeDescriptor *valueDescriptor;
 @end
 
 
@@ -65,9 +65,9 @@ typedef NS_ENUM(NSInteger, PDType) {
 
 - (id)initWithNumbersToNames:(NSDictionary *)numbersToNames;
 
-- (NSNumber *) numberForName:(NSString *)name;
+- (NSNumber *)numberForName:(NSString *)name;
 
-- (NSString *) nameForNumber:(NSNumber *)number;
+- (NSString *)nameForNumber:(NSNumber *)number;
 @end
 
 
@@ -103,6 +103,45 @@ typedef NS_ENUM(NSInteger, PDType) {
 - (id)initWithName:(NSString *)name
       typeSupplier:(PDDataTypeDescriptor *(^)())typeSupplier
    isDiscriminator:(BOOL)isDiscriminator;
+@end
+
+
+@interface PDInterfaceDescriptor : PDDescriptor
+@property(readonly, nonatomic) Protocol *protocol;
+@property(readonly, nonatomic) PDMessageDescriptor *exc;
+@property(readonly, nonatomic) NSArray *methods;
+
+- (id)initWithProtocol:(Protocol *)protocol
+                   exc:(PDMessageDescriptor *)exc
+               methods:(NSArray *)methods;
+@end
+
+
+@interface PDMethodDescriptor : NSObject
+@property(readonly, nonatomic) NSString *name;
+@property(readonly, nonatomic) PDDescriptor *result;
+@property(readonly, nonatomic) NSArray *args;
+@property(readonly, nonatomic) PDMessageDescriptor *exc;
+@property(readonly, nonatomic) BOOL isPost;
+
+- (id)initWithName:(NSString *)name
+    resultSupplier:(PDDescriptor *(^)())resultSupplier
+              args:(NSArray *)args
+               exc:(PDMessageDescriptor *)exc
+            isPost:(BOOL)isPost;
+@end
+
+
+@interface PDArgumentDescriptor : NSObject
+@property(readonly, nonatomic) NSString *name;
+@property(readonly, nonatomic) PDDataTypeDescriptor *type;
+@property(readonly, nonatomic) BOOL isPost;
+@property(readonly, nonatomic) BOOL isQuery;
+
+- (id)initWithName:(NSString *)name
+              type:(PDDataTypeDescriptor *)type
+            isPost:(BOOL)isPost
+           isQuery:(BOOL)isQuery;
 @end
 
 

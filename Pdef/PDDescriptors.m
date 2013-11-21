@@ -1,6 +1,6 @@
 //
 //  PDDescriptors.m
-//  PdefObjc
+//  Pdef
 //
 //  Created by Ivan Korobkov on 18.11.13.
 //  Copyright (c) 2013 pdef. All rights reserved.
@@ -21,12 +21,12 @@
 
 
 @implementation PDListDescriptor
-- (id)initWithElement:(PDDataTypeDescriptor *)element {
+- (id)initWithElementDescriptor:(PDDataTypeDescriptor *)elementDescriptor {
     if (self = [super initWithType:PDTypeList]) {
-        if (!element) {
-            [NSException raise:NSInvalidArgumentException format:@"nil element"];
+        if (!elementDescriptor) {
+            [NSException raise:NSInvalidArgumentException format:@"nil elementDescriptor"];
         }
-        _element = element;
+        _elementDescriptor = elementDescriptor;
     }
     return self;
 }
@@ -34,12 +34,12 @@
 
 
 @implementation PDSetDescriptor
-- (id)initWithElement:(PDDataTypeDescriptor *)element {
+- (id)initWithElementDescriptor:(PDDataTypeDescriptor *)elementDescriptor {
     if (self = [super initWithType:PDTypeSet]) {
-        if (!element) {
-            [NSException raise:NSInvalidArgumentException format:@"nil element"];
+        if (!elementDescriptor) {
+            [NSException raise:NSInvalidArgumentException format:@"nil elementDescriptor"];
         }
-        _element = element;
+        _elementDescriptor = elementDescriptor;
     }
     return self;
 }
@@ -47,17 +47,17 @@
 
 
 @implementation PDMapDescriptor
-- (id)initWithKey:(PDDataTypeDescriptor *)key
-            value:(PDDataTypeDescriptor *)value {
+- (id)initWithKeyDescriptor:(PDDataTypeDescriptor *)keyDescriptor
+            valueDescriptor:(PDDataTypeDescriptor *)valueDescriptor {
     if (self = [super initWithType:PDTypeMap]) {
-        if (!key) {
-            [NSException raise:NSInvalidArgumentException format:@"nil key"];
+        if (!keyDescriptor) {
+            [NSException raise:NSInvalidArgumentException format:@"nil keyDescriptor"];
         }
-        if (!value) {
-            [NSException raise:NSInvalidArgumentException format:@"nil value"];
+        if (!valueDescriptor) {
+            [NSException raise:NSInvalidArgumentException format:@"nil valueDescriptor"];
         }
-        _key = key;
-        _value = value;
+        _keyDescriptor = keyDescriptor;
+        _valueDescriptor = valueDescriptor;
     }
     return self;
 }
@@ -165,17 +165,23 @@ discriminatorValue:(NSInteger)discriminatorValue
 }
 
 - (id)initWithName:(NSString *)name type:(PDDataTypeDescriptor *)type isDiscriminator:(BOOL)isDiscriminator {
-    if (self = [super init]) {
-        _name = name;
-        _type = type;
-        _isDiscriminator = isDiscriminator;
+    if (!type) {
+        [NSException raise:NSInvalidArgumentException format:@"nil type"];
     }
-    return self;
+    return [self initWithName:name
+                 typeSupplier:^PDDataTypeDescriptor *() { return type; }
+              isDiscriminator:isDiscriminator];
 }
 
 - (id)initWithName:(NSString *)name typeSupplier:(PDDataTypeDescriptor *(^)())typeSupplier
                                  isDiscriminator:(BOOL)isDiscriminator {
     if (self = [super init]) {
+        if (!name) {
+            [NSException raise:NSInvalidArgumentException format:@"nil name"];
+        }
+        if (!typeSupplier) {
+            [NSException raise:NSInvalidArgumentException format:@"nil typeSupplier"];
+        }
         _name = name;
         _typeSupplier = typeSupplier;
         _isDiscriminator = isDiscriminator;
@@ -190,7 +196,70 @@ discriminatorValue:(NSInteger)discriminatorValue
 
     return _type;
 }
+@end
 
+
+@implementation PDInterfaceDescriptor
+- (id)initWithProtocol:(Class)cls exc:(PDMessageDescriptor *)exc methods:(NSArray *)methods {
+    if (self = [super initWithType:PDTypeInterface]) {
+        _exc = exc;
+        _methods = (methods) ? [[NSArray alloc] initWithArray:methods] : @[];
+    }
+    return self;
+}
+@end
+
+
+@implementation PDMethodDescriptor {
+    PDDescriptor *_result;
+    PDDescriptor *(^_resultSupplier)();
+}
+- (id)initWithName:(NSString *)name
+    resultSupplier:(PDDescriptor *(^)())resultSupplier
+              args:(NSArray *)args
+               exc:(PDMessageDescriptor *)exc
+            isPost:(BOOL)isPost {
+    if (self = [super init]) {
+        if (!name) {
+            [NSException raise:NSInvalidArgumentException format:@"nil name"];
+        }
+        if (!resultSupplier) {
+            [NSException raise:NSInvalidArgumentException format:@"nil resultSupplier"];
+        }
+        _name = name;
+        _resultSupplier = resultSupplier;
+        _args = (args) ? [[NSArray alloc] initWithArray:args] : @[];
+        _exc = exc;
+        _isPost = isPost;
+    }
+    return self;
+}
+
+- (PDDescriptor *)result {
+    if (!_result) {
+        _result = _resultSupplier();
+    }
+    return _result;
+}
+@end
+
+
+@implementation PDArgumentDescriptor
+- (id)initWithName:(NSString *)name type:(PDDataTypeDescriptor *)type isPost:(BOOL)isPost isQuery:(BOOL)isQuery {
+    if (self = [super init]) {
+        if (!name) {
+            [NSException raise:NSInvalidArgumentException format:@"nil name"];
+        }
+        if (!type) {
+            [NSException raise:NSInvalidArgumentException format:@"nil type"];
+        }
+        _name = name;
+        _type = type;
+        _isPost = isPost;
+        _isQuery = isQuery;
+    }
+    return self;
+}
 @end
 
 
@@ -256,16 +325,16 @@ static PDDataTypeDescriptor *void0;
 }
 
 + (PDListDescriptor *)listWithElement:(PDDataTypeDescriptor *)element {
-    return [[PDListDescriptor alloc] initWithElement:element];
+    return [[PDListDescriptor alloc] initWithElementDescriptor:element];
 }
 
 + (PDSetDescriptor *)setWithElement:(PDDataTypeDescriptor *)element {
-    return [[PDSetDescriptor alloc] initWithElement:element];
+    return [[PDSetDescriptor alloc] initWithElementDescriptor:element];
 }
 
 + (PDMapDescriptor *)mapWithKey:(PDDataTypeDescriptor *)key
                           value:(PDDataTypeDescriptor *)value {
-    return [[PDMapDescriptor alloc] initWithKey:key value:value];
+    return [[PDMapDescriptor alloc] initWithKeyDescriptor:key valueDescriptor:value];
 }
 
 @end

@@ -37,20 +37,20 @@
 - (void)testList {
     PDListDescriptor *list = [PDDescriptors listWithElement:[PDDescriptors int32]];
     XCTAssert(list.type == PDTypeList);
-    XCTAssert(list.element.type == PDTypeInt32);
+    XCTAssert(list.elementDescriptor.type == PDTypeInt32);
 }
 
 - (void)testSet {
     PDSetDescriptor *set = [PDDescriptors setWithElement:[PDDescriptors int32]];
     XCTAssert(set.type == PDTypeSet);
-    XCTAssert(set.element.type == PDTypeInt32);
+    XCTAssert(set.elementDescriptor.type == PDTypeInt32);
 }
 
 - (void)testMap {
     PDMapDescriptor *map = [PDDescriptors mapWithKey:[PDDescriptors int32] value:[PDDescriptors float0]];
     XCTAssert(map.type == PDTypeMap);
-    XCTAssert(map.key.type == PDTypeInt32);
-    XCTAssert(map.value.type == PDTypeFloat);
+    XCTAssert(map.keyDescriptor.type == PDTypeInt32);
+    XCTAssert(map.valueDescriptor.type == PDTypeFloat);
 }
 
 @end

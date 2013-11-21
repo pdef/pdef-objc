@@ -72,5 +72,47 @@ static PDMessageDescriptor *_{{ definition.name }}Descriptor;
 }
 @end
 
+
 {% else %}
+static dispatch_once_t {{ definition.name }}Once;
+static PDInterfaceDescriptor *_{{ definition.name }}Descriptor;
+
+PDInterfaceDescriptor *{{ definition.name }}Descriptor() {
+    dispatch_once(&{{ definition.name }}Once, ^() {
+        _{{ definition.name }}Descriptor = [[PDInterfaceDescriptor alloc]
+                initWithProtocol:@protocol({{ definition.name }})
+                            {% if definition.exc %}
+                             exc:{{ definition.exc|objc_descriptor }}
+                            {% else %}
+                             exc:nil
+                            {% endif %}
+                         methods:@[
+                            {% for method in definition.declared_methods %}
+                                 [[PDMethodDescriptor alloc]
+                                         initWithName:@"{{ method.name }}"
+                                       resultSupplier:^PDDescriptor *() { return {{ method.result|objc_descriptor }}; }
+                                                {% if method.args %}
+                                                 args:@[
+                                                    {% for arg in method.args %}
+                                                         [[PDArgumentDescriptor alloc]
+                                                                 initWithName:@"{{ arg.name }}"
+                                                                         type:{{ arg.type|objc_descriptor }}
+                                                                       isPost:{{ arg.is_post|objc_bool }}
+                                                                      isQuery:{{ arg.is_query|objc_bool }}],
+                                                    {% endfor %}
+                                                    ]
+                                                {% else %}
+                                                 args:@[]
+                                                {% endif %}
+                                                {% if method.exc %}
+                                                  exc:{{ method.exc|objc_descriptor }}
+                                                {% else %}
+                                                  exc:nil
+                                                {% endif %}
+                                               isPost:{{ method.is_post|objc_bool }}],
+                            {% endfor %}
+                         ]];
+    });
+    return _{{ definition.name }}Descriptor;
+}
 {% endif %}

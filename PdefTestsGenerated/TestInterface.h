@@ -61,3 +61,5 @@ Multi-line comment.
 - (NSOperation *) serverErrorResponse:(void (^)(id result, NSError *error))response;
 
 @end
+
+PDInterfaceDescriptor *TestInterfaceDescriptor();

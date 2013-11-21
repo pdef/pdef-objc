@@ -10,8 +10,11 @@
 {%- for type0 in definition.referenced_types %}
     {% if type0.is_enum %}
 #import "{{ type0.name }}.h"
-    {% elif type0.is_definition and type0 != definition.base %}
+    {% elif type0.is_message and type0 != definition.base %}
 @class {{ type0.name }};
+    {% elif type0.is_interface %}
+@protocol {{ type0.name }};
+    {% else %}
     {% endif %}
 {% endfor %}
 
@@ -61,4 +64,6 @@ PDEnumDescriptor *{{ definition.name }}Descriptor();
 
     {% endfor %}
 @end
+
+PDInterfaceDescriptor *{{ definition.name }}Descriptor();
 {% endif %}
