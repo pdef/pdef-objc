@@ -46,7 +46,7 @@
 		2C260106183A503100198BFF /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		2C260125183A53E400198BFF /* PDDescriptors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDDescriptors.h; sourceTree = "<group>"; };
 		2C260126183A53E400198BFF /* PDDescriptors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDDescriptors.m; sourceTree = "<group>"; };
-		2CDC3294183D1BC000C7CEBE /* PdefObjcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PdefObjcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CDC3294183D1BC000C7CEBE /* PdefTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PdefTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CDC3298183D1BC000C7CEBE /* PdefObjcTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PdefObjcTests-Info.plist"; sourceTree = "<group>"; };
 		2CDC329A183D1BC000C7CEBE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2CDC329E183D1BC000C7CEBE /* PdefObjcTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PdefObjcTests-Prefix.pch"; sourceTree = "<group>"; };
@@ -89,9 +89,9 @@
 		2C2600E4183A503100198BFF = {
 			isa = PBXGroup;
 			children = (
-				2CDC32DD183D2E2800C7CEBE /* PdefObjcGeneratedTests */,
-				2C2600F7183A503100198BFF /* PdefObjc */,
-				2CDC3296183D1BC000C7CEBE /* PdefObjcTests */,
+				2CDC32DD183D2E2800C7CEBE /* PdefTestsGenerated */,
+				2C2600F7183A503100198BFF /* Pdef */,
+				2CDC3296183D1BC000C7CEBE /* PdefTests */,
 				2C2600F0183A503100198BFF /* Frameworks */,
 				2CDC327C183D1A6700C7CEBE /* Products */,
 			);
@@ -117,7 +117,7 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		2C2600F7183A503100198BFF /* PdefObjc */ = {
+		2C2600F7183A503100198BFF /* Pdef */ = {
 			isa = PBXGroup;
 			children = (
 				2C2600F8183A503100198BFF /* Supporting Files */,
@@ -127,7 +127,7 @@
 				31821DB8BF9E84D48AFE3799 /* PDMessage.h */,
 				31821DE02C1067510CA7C5C0 /* PDef.h */,
 			);
-			path = PdefObjc;
+			path = Pdef;
 			sourceTree = "<group>";
 		};
 		2C2600F8183A503100198BFF /* Supporting Files */ = {
@@ -143,19 +143,19 @@
 		2CDC327C183D1A6700C7CEBE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2CDC3294183D1BC000C7CEBE /* PdefObjcTests.xctest */,
+				2CDC3294183D1BC000C7CEBE /* PdefTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2CDC3296183D1BC000C7CEBE /* PdefObjcTests */ = {
+		2CDC3296183D1BC000C7CEBE /* PdefTests */ = {
 			isa = PBXGroup;
 			children = (
 				2CDC32AA183D1D5800C7CEBE /* PDGeneratedDescriptorsTests.m */,
 				2CDC32A4183D1BD100C7CEBE /* PDDescriptorsTests.m */,
 				2CDC3297183D1BC000C7CEBE /* Supporting Files */,
 			);
-			path = PdefObjcTests;
+			path = PdefTests;
 			sourceTree = "<group>";
 		};
 		2CDC3297183D1BC000C7CEBE /* Supporting Files */ = {
@@ -168,7 +168,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		2CDC32DD183D2E2800C7CEBE /* PdefObjcGeneratedTests */ = {
+		2CDC32DD183D2E2800C7CEBE /* PdefTestsGenerated */ = {
 			isa = PBXGroup;
 			children = (
 				2CDC32DE183D2E2800C7CEBE /* Inheritance.h */,
@@ -181,7 +181,7 @@
 				2CDC32E5183D2E2800C7CEBE /* Messages.m */,
 				2CDC32E6183D2E2800C7CEBE /* MessagesDescriptors.h */,
 			);
-			path = PdefObjcGeneratedTests;
+			path = PdefTestsGenerated;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,9 +200,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		2C2600ED183A503100198BFF /* PdefObjc */ = {
+		2C2600ED183A503100198BFF /* Pdef */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2C260116183A503100198BFF /* Build configuration list for PBXNativeTarget "PdefObjc" */;
+			buildConfigurationList = 2C260116183A503100198BFF /* Build configuration list for PBXNativeTarget "Pdef" */;
 			buildPhases = (
 				2C2600E9183A503100198BFF /* Sources */,
 				2C2600EA183A503100198BFF /* Frameworks */,
@@ -213,13 +213,13 @@
 			);
 			dependencies = (
 			);
-			name = PdefObjc;
+			name = Pdef;
 			productName = PdefObjc;
 			productType = "com.apple.product-type.framework";
 		};
-		2CDC3293183D1BC000C7CEBE /* PdefObjcTests */ = {
+		2CDC3293183D1BC000C7CEBE /* PdefTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2CDC32A1183D1BC000C7CEBE /* Build configuration list for PBXNativeTarget "PdefObjcTests" */;
+			buildConfigurationList = 2CDC32A1183D1BC000C7CEBE /* Build configuration list for PBXNativeTarget "PdefTests" */;
 			buildPhases = (
 				2CDC3290183D1BC000C7CEBE /* Sources */,
 				2CDC3291183D1BC000C7CEBE /* Frameworks */,
@@ -230,9 +230,9 @@
 			dependencies = (
 				2CDC32A0183D1BC000C7CEBE /* PBXTargetDependency */,
 			);
-			name = PdefObjcTests;
+			name = PdefTests;
 			productName = PdefObjcTests;
-			productReference = 2CDC3294183D1BC000C7CEBE /* PdefObjcTests.xctest */;
+			productReference = 2CDC3294183D1BC000C7CEBE /* PdefTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -249,7 +249,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2C2600E8183A503100198BFF /* Build configuration list for PBXProject "PdefObjc" */;
+			buildConfigurationList = 2C2600E8183A503100198BFF /* Build configuration list for PBXProject "Pdef" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -261,8 +261,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2C2600ED183A503100198BFF /* PdefObjc */,
-				2CDC3293183D1BC000C7CEBE /* PdefObjcTests */,
+				2C2600ED183A503100198BFF /* Pdef */,
+				2CDC3293183D1BC000C7CEBE /* PdefTests */,
 			);
 		};
 /* End PBXProject section */
@@ -315,7 +315,7 @@
 /* Begin PBXTargetDependency section */
 		2CDC32A0183D1BC000C7CEBE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2C2600ED183A503100198BFF /* PdefObjc */;
+			target = 2C2600ED183A503100198BFF /* Pdef */;
 			targetProxy = 2CDC329F183D1BC000C7CEBE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -416,9 +416,9 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PdefObjc/PdefObjc-Prefix.pch";
-				INFOPLIST_FILE = "PdefObjc/PdefObjc-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "Pdef/Pdef-Prefix.pch";
+				INFOPLIST_FILE = "Pdef/Pdef-Info.plist";
+				PRODUCT_NAME = Pdef;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -431,9 +431,9 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PdefObjc/PdefObjc-Prefix.pch";
-				INFOPLIST_FILE = "PdefObjc/PdefObjc-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "Pdef/Pdef-Prefix.pch";
+				INFOPLIST_FILE = "Pdef/Pdef-Info.plist";
+				PRODUCT_NAME = Pdef;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
@@ -446,13 +446,13 @@
 					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PdefObjcTests/PdefObjcTests-Prefix.pch";
+				GCC_PREFIX_HEADER = "PdefTests/PdefTests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "PdefObjcTests/PdefObjcTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "PdefTests/PdefTests-Info.plist";
+				PRODUCT_NAME = PdefTests;
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -465,9 +465,9 @@
 					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PdefObjcTests/PdefObjcTests-Prefix.pch";
-				INFOPLIST_FILE = "PdefObjcTests/PdefObjcTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "PdefTests/PdefTests-Prefix.pch";
+				INFOPLIST_FILE = "PdefTests/PdefTests-Info.plist";
+				PRODUCT_NAME = PdefTests;
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
@@ -475,7 +475,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2C2600E8183A503100198BFF /* Build configuration list for PBXProject "PdefObjc" */ = {
+		2C2600E8183A503100198BFF /* Build configuration list for PBXProject "Pdef" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2C260114183A503100198BFF /* Debug */,
@@ -484,7 +484,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2C260116183A503100198BFF /* Build configuration list for PBXNativeTarget "PdefObjc" */ = {
+		2C260116183A503100198BFF /* Build configuration list for PBXNativeTarget "Pdef" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2C260117183A503100198BFF /* Debug */,
@@ -493,13 +493,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2CDC32A1183D1BC000C7CEBE /* Build configuration list for PBXNativeTarget "PdefObjcTests" */ = {
+		2CDC32A1183D1BC000C7CEBE /* Build configuration list for PBXNativeTarget "PdefTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2CDC32A2183D1BC000C7CEBE /* Debug */,
 				2CDC32A3183D1BC000C7CEBE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
