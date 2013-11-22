@@ -15,6 +15,13 @@ static PDMessageDescriptor *_MultiLevelSubtypeDescriptor;
     return [MultiLevelSubtype typeDescriptor];
 }
 
+- (id) init {
+    if (self = [super init]) {
+        self.type = PolymorphicType_MULTILEVEL_SUBTYPE ;
+    }
+    return self;
+}
+
 + (void)initialize {
     if (self != [MultiLevelSubtype class]) {
         return;

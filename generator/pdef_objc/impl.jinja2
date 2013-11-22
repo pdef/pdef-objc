@@ -36,6 +36,16 @@ static PDMessageDescriptor *_{{ definition.name }}Descriptor;
     return [{{ definition.name }} typeDescriptor];
 }
 
+{% if definition.discriminator_value %}
+- (id) init {
+    if (self = [super init]) {
+        self.{{ definition.discriminator.name }} = {{ definition.discriminator_value|objc_type }};
+    }
+    return self;
+}
+
+{% endif -%}
+
 + (void)initialize {
     if (self != [{{ definition.name }} class]) {
         return;

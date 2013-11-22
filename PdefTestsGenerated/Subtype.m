@@ -16,6 +16,13 @@ static PDMessageDescriptor *_SubtypeDescriptor;
     return [Subtype typeDescriptor];
 }
 
+- (id) init {
+    if (self = [super init]) {
+        self.type = PolymorphicType_SUBTYPE ;
+    }
+    return self;
+}
+
 + (void)initialize {
     if (self != [Subtype class]) {
         return;
