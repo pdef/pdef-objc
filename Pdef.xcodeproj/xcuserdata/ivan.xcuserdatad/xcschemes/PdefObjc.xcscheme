@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2C2600ED183A503100198BFF"
-               BuildableName = "Pdef.framework"
+               BuildableName = "Pdef"
                BlueprintName = "Pdef"
                ReferencedContainer = "container:Pdef.xcodeproj">
             </BuildableReference>

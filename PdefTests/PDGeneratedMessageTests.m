@@ -23,7 +23,7 @@
     Subtype2 *subtype2 = [[Subtype2 alloc] init];
     MultiLevelSubtype *msubtype = [[MultiLevelSubtype alloc] init];
 
-    XCTAssert(base.type == nil);
+    XCTAssert(base.type == 0);
     XCTAssert(subtype.type == PolymorphicType_SUBTYPE);
     XCTAssert(subtype2.type == PolymorphicType_SUBTYPE2);
     XCTAssert(msubtype.type == PolymorphicType_MULTILEVEL_SUBTYPE);
