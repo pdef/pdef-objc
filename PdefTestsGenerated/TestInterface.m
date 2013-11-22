@@ -8,67 +8,65 @@
 
 #pragma mark TestInterface client
 @implementation TestInterfaceClient
-- (PDInterfaceDescriptor *)descriptor {
-    return TestInterfaceDescriptor();
-}
+
 - (NSOperation *) methodArg0:(NSNumber *)arg0
         arg1:(NSNumber *)arg1
         response:(void (^)(id result, NSError *error))response {
     PDInvocation *_invocation = [self
-            captureNextInvocation:[[self descriptor] getMethodForName:@"method"]
-                            args:@{
-                                    @"arg0" : arg0,
-                                    @"arg1" : arg1,
-                            }];
+            captureInvocation:[self getMethodForName:@"method"]
+                         args:@{
+                                 @"arg0" : arg0,
+                                 @"arg1" : arg1,
+                         }];
     return [self.handler handleInvocation:_invocation response:response];
 }
 - (NSOperation *) queryArg0:(NSNumber *)arg0
         arg1:(NSNumber *)arg1
         response:(void (^)(id result, NSError *error))response {
     PDInvocation *_invocation = [self
-            captureNextInvocation:[[self descriptor] getMethodForName:@"query"]
-                            args:@{
-                                    @"arg0" : arg0,
-                                    @"arg1" : arg1,
-                            }];
+            captureInvocation:[self getMethodForName:@"query"]
+                         args:@{
+                                 @"arg0" : arg0,
+                                 @"arg1" : arg1,
+                         }];
     return [self.handler handleInvocation:_invocation response:response];
 }
 - (NSOperation *) postArg0:(NSNumber *)arg0
         arg1:(NSNumber *)arg1
         response:(void (^)(id result, NSError *error))response {
     PDInvocation *_invocation = [self
-            captureNextInvocation:[[self descriptor] getMethodForName:@"post"]
-                            args:@{
-                                    @"arg0" : arg0,
-                                    @"arg1" : arg1,
-                            }];
+            captureInvocation:[self getMethodForName:@"post"]
+                         args:@{
+                                 @"arg0" : arg0,
+                                 @"arg1" : arg1,
+                         }];
     return [self.handler handleInvocation:_invocation response:response];
 }
 - (NSOperation *) string0Text:(NSString *)text
         response:(void (^)(id result, NSError *error))response {
     PDInvocation *_invocation = [self
-            captureNextInvocation:[[self descriptor] getMethodForName:@"string0"]
-                            args:@{
-                                    @"text" : text,
-                            }];
+            captureInvocation:[self getMethodForName:@"string0"]
+                         args:@{
+                                 @"text" : text,
+                         }];
     return [self.handler handleInvocation:_invocation response:response];
 }
 - (NSOperation *) datetime0Dt:(NSDate *)dt
         response:(void (^)(id result, NSError *error))response {
     PDInvocation *_invocation = [self
-            captureNextInvocation:[[self descriptor] getMethodForName:@"datetime0"]
-                            args:@{
-                                    @"dt" : dt,
-                            }];
+            captureInvocation:[self getMethodForName:@"datetime0"]
+                         args:@{
+                                 @"dt" : dt,
+                         }];
     return [self.handler handleInvocation:_invocation response:response];
 }
 - (NSOperation *) message0Msg:(TestMessage *)msg
         response:(void (^)(id result, NSError *error))response {
     PDInvocation *_invocation = [self
-            captureNextInvocation:[[self descriptor] getMethodForName:@"message0"]
-                            args:@{
-                                    @"msg" : msg,
-                            }];
+            captureInvocation:[self getMethodForName:@"message0"]
+                         args:@{
+                                 @"msg" : msg,
+                         }];
     return [self.handler handleInvocation:_invocation response:response];
 }
 - (NSOperation *) collectionsList0:(NSArray *)list0
@@ -76,45 +74,49 @@
         map0:(NSDictionary *)map0
         response:(void (^)(id result, NSError *error))response {
     PDInvocation *_invocation = [self
-            captureNextInvocation:[[self descriptor] getMethodForName:@"collections"]
-                            args:@{
-                                    @"list0" : list0,
-                                    @"set0" : set0,
-                                    @"map0" : map0,
-                            }];
+            captureInvocation:[self getMethodForName:@"collections"]
+                         args:@{
+                                 @"list0" : list0,
+                                 @"set0" : set0,
+                                 @"map0" : map0,
+                         }];
     return [self.handler handleInvocation:_invocation response:response];
 }
 - (id<TestInterface> ) interface0Arg0:(NSNumber *)arg0
         arg1:(NSNumber *)arg1
 {
     PDInvocation *_invocation = [self
-            captureNextInvocation:[[self descriptor] getMethodForName:@"interface0"]
-                            args:@{
-                                    @"arg0" : arg0,
-                                    @"arg1" : arg1,
-                            }];
+            captureInvocation:[self getMethodForName:@"interface0"]
+                         args:@{
+                                 @"arg0" : arg0,
+                                 @"arg1" : arg1,
+                         }];
     return [[TestInterfaceClient alloc] initWithHandler: self.handler parentInvocation:_invocation];
 }
 - (NSOperation *) void0Response:(void (^)(id result, NSError *error))response {
     PDInvocation *_invocation = [self
-            captureNextInvocation:[[self descriptor] getMethodForName:@"void0"]
-                            args:@{
-                            }];
+            captureInvocation:[self getMethodForName:@"void0"]
+                         args:@{
+                         }];
     return [self.handler handleInvocation:_invocation response:response];
 }
 - (NSOperation *) exc0Response:(void (^)(id result, NSError *error))response {
     PDInvocation *_invocation = [self
-            captureNextInvocation:[[self descriptor] getMethodForName:@"exc0"]
-                            args:@{
-                            }];
+            captureInvocation:[self getMethodForName:@"exc0"]
+                         args:@{
+                         }];
     return [self.handler handleInvocation:_invocation response:response];
 }
 - (NSOperation *) serverErrorResponse:(void (^)(id result, NSError *error))response {
     PDInvocation *_invocation = [self
-            captureNextInvocation:[[self descriptor] getMethodForName:@"serverError"]
-                            args:@{
-                            }];
+            captureInvocation:[self getMethodForName:@"serverError"]
+                         args:@{
+                         }];
     return [self.handler handleInvocation:_invocation response:response];
+}
+
+- (PDMethodDescriptor *)getMethodForName:(NSString *)name {
+    return [TestInterfaceDescriptor() getMethodForName:name];
 }
 @end
 

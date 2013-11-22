@@ -98,4 +98,15 @@
     MultiLevelSubtype *subtype1 = [subtype copy];
     XCTAssertEqualObjects(subtype, subtype1);
 }
+
+- (void)testCopy_deepCopy {
+    TestComplexMessage *message = [[TestComplexMessage alloc] init];
+    message.int0 = @10;
+    message.message0 = [[TestMessage alloc] init];
+    message.message0.string0 = @"hello, world";
+
+    TestComplexMessage *copy = [message copy];
+    XCTAssertEqualObjects(copy, message);
+    XCTAssert(copy.message0 != message.message0);
+}
 @end

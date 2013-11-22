@@ -29,7 +29,7 @@
     return self;
 }
 
-- (PDInvocation *)captureNextInvocation:(PDMethodDescriptor *)method args:(NSDictionary *)args {
+- (PDInvocation *)captureInvocation:(PDMethodDescriptor *)method args:(NSDictionary *)args {
     if (!_parent) {
         return [[PDInvocation alloc] initWithMethod:method args:args];
     }
@@ -37,10 +37,4 @@
     return [_parent nextWithMethod:method args:args];
 }
 
-- (NSOperation *)handleNextInvocation:(PDMethodDescriptor *)method
-                                 args:(NSDictionary *)args
-                             response:(void (^)(id result, NSError *error))response {
-    PDInvocation *invocation = [self captureNextInvocation:method args:args];
-    return [_handler handleInvocation:invocation response:response];
-}
 @end

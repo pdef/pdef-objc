@@ -16,6 +16,6 @@
 
 - (id)initWithHandler:(id<PDInvocationHandler>)handler parentInvocation:(PDInvocation *)parent;
 
-- (PDInvocation *)captureNextInvocation:(PDMethodDescriptor *)method
-                                   args:(NSDictionary *)args;
+- (PDInvocation *)captureInvocation:(PDMethodDescriptor *)method
+                               args:(NSDictionary *)args;
 @end

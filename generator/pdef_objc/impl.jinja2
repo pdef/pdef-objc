@@ -134,9 +134,7 @@ static PDMessageDescriptor *_{{ definition.name }}Descriptor;
 {% else %}
 #pragma mark {{ definition.name }} client
 @implementation {{ definition.name }}Client
-- (PDInterfaceDescriptor *)descriptor {
-    return {{ definition.name }}Descriptor();
-}
+
 {% for method in definition.declared_methods %}
     {% if not method.args %}
         {% if method.is_terminal %}
@@ -158,12 +156,12 @@ static PDMessageDescriptor *_{{ definition.name }}Descriptor;
         {% endif %}
     {% endif %}
     PDInvocation *_invocation = [self
-            captureNextInvocation:[[self descriptor] getMethodForName:@"{{ method.name }}"]
-                            args:@{
-                                {% for arg in method.args %}
-                                    @"{{ arg.name }}" : {{ arg.name }},
-                                {% endfor %}
-                            }];
+            captureInvocation:[self getMethodForName:@"{{ method.name }}"]
+                         args:@{
+                             {% for arg in method.args %}
+                                 @"{{ arg.name }}" : {{ arg.name }},
+                             {% endfor %}
+                         }];
     {% if method.is_terminal %}
     return [self.handler handleInvocation:_invocation response:response];
     {% else %}
@@ -171,6 +169,10 @@ static PDMessageDescriptor *_{{ definition.name }}Descriptor;
     {% endif %}
 }
 {% endfor %}
+
+- (PDMethodDescriptor *)getMethodForName:(NSString *)name {
+    return [{{ definition.name }}Descriptor() getMethodForName:name];
+}
 @end
 
 

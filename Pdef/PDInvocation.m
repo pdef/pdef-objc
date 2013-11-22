@@ -29,7 +29,7 @@
 
         _parent = parent;
         _method = method;
-        _args = [[NSDictionary alloc] initWithDictionary:args];
+        _args = [args copy];
 
         _result = method.result;
         _exc = (method.exc) ? method.exc : ((parent.exc) ? parent.exc : nil);
