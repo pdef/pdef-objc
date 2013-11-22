@@ -7,7 +7,7 @@
 /** Simple message.
 Multi-line comment.
  */
-@interface TestMessage : NSObject
+@interface TestMessage : PDMessage
 @property (nonatomic) NSString *string0;
 @property (nonatomic) NSNumber *bool0;
 @property (nonatomic) NSNumber *int0;

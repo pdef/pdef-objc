@@ -11,7 +11,7 @@
 /** Base polymorphic message.
 @field discriminator    Discriminator field set in all subclasses.
  */
-@interface Base : NSObject
+@interface Base : PDMessage
 @property (nonatomic) PolymorphicType type;
 @property (nonatomic) NSString *field;
 

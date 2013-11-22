@@ -10,7 +10,7 @@
 @class PDEnumDescriptor;
 
 
-@protocol PDMessage <NSObject, NSCopying>
+@interface PDMessage : NSObject<NSCopying>
 /** Returns this class descriptor. */
 + (PDMessageDescriptor *)typeDescriptor;
 
@@ -28,8 +28,10 @@
 
 /** Converts this message to a json string. */
 - (NSString *)toJson;
-@end
 
+- (BOOL)isEqual:(id)other;
 
-@interface PDGeneratedMessage : NSObject <PDMessage>
+- (BOOL)isEqualToMessage:(PDMessage *)message;
+
+- (NSUInteger)hash;
 @end

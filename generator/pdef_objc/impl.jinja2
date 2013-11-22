@@ -45,8 +45,43 @@ static PDMessageDescriptor *_{{ definition.name }}Descriptor;
 }
 
 {% endif -%}
+- (BOOL)isEqualToMessage:(PDMessage *)message {
+    if (self == message)
+        return YES;
+    if (message == nil)
+        return NO;
+    if (![[message class] isEqual:[self class]])
+        return NO;
+    if (![super isEqualToMessage:message])
+        return NO;
+
+    {{ definition.name }} *cast = ({{ definition.name }} *)message;
+    {% for field in definition.declared_fields %}
+        {% if field.type.is_enum %}
+    if (self.{{ field.name }} != cast.{{ field.name }})
+        return NO;
+        {% else %}
+    if (self.{{ field.name }} != cast.{{ field.name }} && ![self.{{ field.name }} isEqual:cast.{{ field.name }}])
+        return NO;
+        {% endif %}
+    {% endfor %}
+    return YES;
+}
+
+- (NSUInteger)hash {
+    NSUInteger hash = [super hash];
+    {% for field in definition.declared_fields %}
+        {% if field.type.is_enum %}
+    hash = hash * 31u + (NSUInteger) self.{{ field.name }};
+        {% else %}
+    hash = hash * 31u + [self.{{ field.name }} hash];
+        {% endif %}
+    {% endfor %}
+    return hash;
+}
+
 - (id)copyWithZone:(NSZone *)zone {
-    {{ definition.name }} *copy = [[[self class] allocWithZone:zone] init];
+    {{ definition.name }} *copy = ({{ definition.name }} *)[super copyWithZone:zone];
 
     if (copy != nil) {
     {% for field in definition.declared_fields %}

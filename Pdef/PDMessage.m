@@ -8,7 +8,7 @@
 #import "PDDescriptors.h"
 
 
-@implementation PDGeneratedMessage
+@implementation PDMessage
 /** Override this method in a subclass, and return a custom descriptor. */
 + (PDMessageDescriptor *)typeDescriptor {
     return nil;
@@ -38,4 +38,26 @@
 - (id)copyWithZone:(NSZone *)zone {
     return [[[super class] allocWithZone:zone] init];
 }
+
+- (BOOL)isEqual:(id)other {
+    if (other == self)
+        return YES;
+    if (!other || ![[other class] isEqual:[self class]])
+        return NO;
+
+    return [self isEqualToMessage:other];
+}
+
+- (BOOL)isEqualToMessage:(PDMessage *)message {
+    if (self == message)
+        return YES;
+    if (message == nil)
+        return NO;
+    return YES;
+}
+
+- (NSUInteger)hash {
+    return 0;
+}
+
 @end

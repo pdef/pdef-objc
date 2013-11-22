@@ -14,8 +14,30 @@ static PDMessageDescriptor *_TestExceptionDescriptor;
     return [TestException typeDescriptor];
 }
 
+- (BOOL)isEqualToMessage:(PDMessage *)message {
+    if (self == message)
+        return YES;
+    if (message == nil)
+        return NO;
+    if (![[message class] isEqual:[self class]])
+        return NO;
+    if (![super isEqualToMessage:message])
+        return NO;
+
+    TestException *cast = (TestException *)message;
+    if (self.text != cast.text && ![self.text isEqual:cast.text])
+        return NO;
+    return YES;
+}
+
+- (NSUInteger)hash {
+    NSUInteger hash = [super hash];
+    hash = hash * 31u + [self.text hash];
+    return hash;
+}
+
 - (id)copyWithZone:(NSZone *)zone {
-    TestException *copy = [[[self class] allocWithZone:zone] init];
+    TestException *copy = (TestException *)[super copyWithZone:zone];
 
     if (copy != nil) {
         copy.text = _text;

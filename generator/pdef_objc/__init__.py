@@ -58,7 +58,7 @@ class ObjectiveCFilters(object):
         return 'YES' if expression else 'NO'
 
     def objc_base(self, message):
-        return message.base.name if message.base else 'NSObject'
+        return message.base.name if message.base else 'PDMessage'
 
     def objc_type(self, type0):
         t = type0.type

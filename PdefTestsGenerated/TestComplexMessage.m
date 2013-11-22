@@ -17,8 +17,63 @@ static PDMessageDescriptor *_TestComplexMessageDescriptor;
     return [TestComplexMessage typeDescriptor];
 }
 
+- (BOOL)isEqualToMessage:(PDMessage *)message {
+    if (self == message)
+        return YES;
+    if (message == nil)
+        return NO;
+    if (![[message class] isEqual:[self class]])
+        return NO;
+    if (![super isEqualToMessage:message])
+        return NO;
+
+    TestComplexMessage *cast = (TestComplexMessage *)message;
+    if (self.short0 != cast.short0 && ![self.short0 isEqual:cast.short0])
+        return NO;
+    if (self.long0 != cast.long0 && ![self.long0 isEqual:cast.long0])
+        return NO;
+    if (self.float0 != cast.float0 && ![self.float0 isEqual:cast.float0])
+        return NO;
+    if (self.double0 != cast.double0 && ![self.double0 isEqual:cast.double0])
+        return NO;
+    if (self.datetime0 != cast.datetime0 && ![self.datetime0 isEqual:cast.datetime0])
+        return NO;
+    if (self.list0 != cast.list0 && ![self.list0 isEqual:cast.list0])
+        return NO;
+    if (self.set0 != cast.set0 && ![self.set0 isEqual:cast.set0])
+        return NO;
+    if (self.map0 != cast.map0 && ![self.map0 isEqual:cast.map0])
+        return NO;
+    if (self.enum0 != cast.enum0)
+        return NO;
+    if (self.message0 != cast.message0 && ![self.message0 isEqual:cast.message0])
+        return NO;
+    if (self.polymorphic != cast.polymorphic && ![self.polymorphic isEqual:cast.polymorphic])
+        return NO;
+    if (self.datatypes != cast.datatypes && ![self.datatypes isEqual:cast.datatypes])
+        return NO;
+    return YES;
+}
+
+- (NSUInteger)hash {
+    NSUInteger hash = [super hash];
+    hash = hash * 31u + [self.short0 hash];
+    hash = hash * 31u + [self.long0 hash];
+    hash = hash * 31u + [self.float0 hash];
+    hash = hash * 31u + [self.double0 hash];
+    hash = hash * 31u + [self.datetime0 hash];
+    hash = hash * 31u + [self.list0 hash];
+    hash = hash * 31u + [self.set0 hash];
+    hash = hash * 31u + [self.map0 hash];
+    hash = hash * 31u + (NSUInteger) self.enum0;
+    hash = hash * 31u + [self.message0 hash];
+    hash = hash * 31u + [self.polymorphic hash];
+    hash = hash * 31u + [self.datatypes hash];
+    return hash;
+}
+
 - (id)copyWithZone:(NSZone *)zone {
-    TestComplexMessage *copy = [[[self class] allocWithZone:zone] init];
+    TestComplexMessage *copy = (TestComplexMessage *)[super copyWithZone:zone];
 
     if (copy != nil) {
         copy.short0 = _short0;
