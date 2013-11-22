@@ -23,6 +23,16 @@ static PDMessageDescriptor *_SubtypeDescriptor;
     return self;
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    Subtype *copy = [[[self class] allocWithZone:zone] init];
+
+    if (copy != nil) {
+        copy.subfield = _subfield;
+    }
+
+    return copy;
+}
+
 + (void)initialize {
     if (self != [Subtype class]) {
         return;

@@ -17,6 +17,27 @@ static PDMessageDescriptor *_TestComplexMessageDescriptor;
     return [TestComplexMessage typeDescriptor];
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    TestComplexMessage *copy = [[[self class] allocWithZone:zone] init];
+
+    if (copy != nil) {
+        copy.short0 = _short0;
+        copy.long0 = _long0;
+        copy.float0 = _float0;
+        copy.double0 = _double0;
+        copy.datetime0 = _datetime0;
+        copy.list0 = (_list0) ? [_list0 copy] : nil;
+        copy.set0 = (_set0) ? [_set0 copy] : nil;
+        copy.map0 = (_map0) ? [_map0 copy] : nil;
+        copy.enum0 = _enum0;
+        copy.message0 = (_message0) ? [_message0 copy] : nil;
+        copy.polymorphic = (_polymorphic) ? [_polymorphic copy] : nil;
+        copy.datatypes = (_datatypes) ? [_datatypes copy] : nil;
+    }
+
+    return copy;
+}
+
 + (void)initialize {
     if (self != [TestComplexMessage class]) {
         return;

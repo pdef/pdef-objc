@@ -18,8 +18,18 @@ static PDMessageDescriptor *_Subtype2Descriptor;
 - (id) init {
     if (self = [super init]) {
         self.type = PolymorphicType_SUBTYPE2 ;
-}
+    }
     return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    Subtype2 *copy = [[[self class] allocWithZone:zone] init];
+
+    if (copy != nil) {
+        copy.subfield2 = _subfield2;
+    }
+
+    return copy;
 }
 
 + (void)initialize {

@@ -17,6 +17,17 @@ static PDMessageDescriptor *_BaseDescriptor;
     return [Base typeDescriptor];
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    Base *copy = [[[self class] allocWithZone:zone] init];
+
+    if (copy != nil) {
+        copy.type = _type;
+        copy.field = _field;
+    }
+
+    return copy;
+}
+
 + (void)initialize {
     if (self != [Base class]) {
         return;

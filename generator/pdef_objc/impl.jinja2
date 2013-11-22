@@ -45,6 +45,21 @@ static PDMessageDescriptor *_{{ definition.name }}Descriptor;
 }
 
 {% endif -%}
+- (id)copyWithZone:(NSZone *)zone {
+    {{ definition.name }} *copy = [[[self class] allocWithZone:zone] init];
+
+    if (copy != nil) {
+    {% for field in definition.declared_fields %}
+        {% if field.type.is_collection or field.type.is_message %}
+        copy.{{ field.name }} = (_{{ field.name }}) ? [_{{ field.name }} copy] : nil;
+        {% else %}
+        copy.{{ field.name }} = _{{ field.name }};
+        {% endif %}
+    {% endfor %}
+    }
+
+    return copy;
+}
 
 + (void)initialize {
     if (self != [{{ definition.name }} class]) {

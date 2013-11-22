@@ -35,4 +35,7 @@
     return nil;
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    return [[[super class] allocWithZone:zone] init];
+}
 @end

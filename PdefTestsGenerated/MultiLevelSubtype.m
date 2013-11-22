@@ -22,6 +22,16 @@ static PDMessageDescriptor *_MultiLevelSubtypeDescriptor;
     return self;
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    MultiLevelSubtype *copy = [[[self class] allocWithZone:zone] init];
+
+    if (copy != nil) {
+        copy.mfield = _mfield;
+    }
+
+    return copy;
+}
+
 + (void)initialize {
     if (self != [MultiLevelSubtype class]) {
         return;

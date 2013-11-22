@@ -14,6 +14,16 @@ static PDMessageDescriptor *_TestExceptionDescriptor;
     return [TestException typeDescriptor];
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    TestException *copy = [[[self class] allocWithZone:zone] init];
+
+    if (copy != nil) {
+        copy.text = _text;
+    }
+
+    return copy;
+}
+
 + (void)initialize {
     if (self != [TestException class]) {
         return;

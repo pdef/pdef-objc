@@ -14,6 +14,18 @@ static PDMessageDescriptor *_TestMessageDescriptor;
     return [TestMessage typeDescriptor];
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    TestMessage *copy = [[[self class] allocWithZone:zone] init];
+
+    if (copy != nil) {
+        copy.string0 = _string0;
+        copy.bool0 = _bool0;
+        copy.int0 = _int0;
+    }
+
+    return copy;
+}
+
 + (void)initialize {
     if (self != [TestMessage class]) {
         return;
