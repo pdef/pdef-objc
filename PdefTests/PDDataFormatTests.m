@@ -10,27 +10,20 @@
 #import "TestEnum.h"
 #import "MultiLevelSubtype.h"
 
-@interface PDObjectFormatTests : XCTestCase
+@interface PDDataFormatTests : XCTestCase
 @end
 
-@implementation PDObjectFormatTests {
-    PDObjectFormat *format;
-}
-
-- (void)setUp {
-    [super setUp];
-    format = [PDObjectFormat sharedInstance];
-}
+@implementation PDDataFormatTests
 
 - (void)testPrimitiveWithDescriptor:(PDDataTypeDescriptor *)descriptor
                              string:(NSString *)string
                            expected:(id)expected {
-    XCTAssert([format fromObject:nil descriptor:descriptor] == nil);
-    XCTAssert([[format fromObject:string descriptor:descriptor] isEqual:expected]);
-    XCTAssert([[format fromObject:expected descriptor:descriptor] isEqual:expected]);
+    XCTAssert([PDDataFormat pdefObjectFromData:nil descriptor:descriptor] == nil);
+    XCTAssert([[PDDataFormat pdefObjectFromData:string descriptor:descriptor] isEqual:expected]);
+    XCTAssert([[PDDataFormat pdefObjectFromData:expected descriptor:descriptor] isEqual:expected]);
 
-    XCTAssert([format toObject:nil descriptor:descriptor] == nil);
-    XCTAssert([[format toObject:expected descriptor:descriptor] isEqual:expected]);
+    XCTAssert([PDDataFormat dataWithPdefObject:nil descriptor:descriptor] == nil);
+    XCTAssert([[PDDataFormat dataWithPdefObject:expected descriptor:descriptor] isEqual:expected]);
 }
 
 - (void)testBool {
@@ -73,11 +66,11 @@
 - (void)testObjectWithDescriptor:(PDDataTypeDescriptor *)descriptor
                       serialized:(id)serialized
                         expected:(id)expected {
-    XCTAssert([format fromObject:nil descriptor:descriptor] == nil);
-    XCTAssert([[format fromObject:serialized descriptor:descriptor] isEqual:expected]);
+    XCTAssert([PDDataFormat pdefObjectFromData:nil descriptor:descriptor] == nil);
+    XCTAssert([[PDDataFormat pdefObjectFromData:serialized descriptor:descriptor] isEqual:expected]);
 
-    XCTAssert([format toObject:nil descriptor:descriptor] == nil);
-    XCTAssert([[format toObject:expected descriptor:descriptor] isEqual:serialized]);
+    XCTAssert([PDDataFormat dataWithPdefObject:nil descriptor:descriptor] == nil);
+    XCTAssert([[PDDataFormat dataWithPdefObject:expected descriptor:descriptor] isEqual:serialized]);
 }
 
 
@@ -110,7 +103,7 @@
     [self testObjectWithDescriptor:TestEnumDescriptor() serialized:@"two" expected:@(TestEnum_TWO)];
     [self testObjectWithDescriptor:TestEnumDescriptor() serialized:@"three" expected:@(TestEnum_THREE)];
 
-    XCTAssert([format fromObject:@"unknown enum value" descriptor:TestEnumDescriptor()] == nil);
+    XCTAssert([PDDataFormat pdefObjectFromData:@"unknown enum value" descriptor:TestEnumDescriptor()] == nil);
 }
 
 - (void)testMessage {

@@ -4,36 +4,25 @@
 //
 
 
-#import "PDObjectFormat.h"
+#import "PDDataFormat.h"
 #import "PDDescriptors.h"
 #import "PDMessage.h"
 
 
-@implementation PDObjectFormat {
-    NSDateFormatter *_formatter;
-}
-static PDObjectFormat *_sharedInstance;
-static dispatch_once_t _sharedOnce;
+@implementation PDDataFormat
+static NSDateFormatter *_formatter;
 
-- (id)init {
-    if (self = [super init]) {
-        _formatter = [[NSDateFormatter alloc] init];
-        _formatter.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
-        _formatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
-    }
-    return self;
++ (void)initialize {
+    [super initialize];
+
+    _formatter = [[NSDateFormatter alloc] init];
+    _formatter.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+    _formatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
 }
 
-+ (PDObjectFormat *)sharedInstance {
-    dispatch_once(&_sharedOnce, ^() {
-        _sharedInstance = [[PDObjectFormat alloc] init];
-    });
-
-    return _sharedInstance;
-}
 
 #pragma mark toObject
-- (id)toObject:(id)object descriptor:(PDDescriptor *)descriptor {
++ (id)dataWithPdefObject:(id)object descriptor:(PDDescriptor *)descriptor {
     if (!descriptor) {
         [NSException raise:NSInvalidArgumentException format:@"nil descriptor"];
     }
@@ -63,12 +52,12 @@ static dispatch_once_t _sharedOnce;
     return nil;
 }
 
-- (id)writeList:(NSArray *)list descriptor:(PDListDescriptor *)descriptor {
++ (id)writeList:(NSArray *)list descriptor:(PDListDescriptor *)descriptor {
     PDDataTypeDescriptor *elementd = descriptor.elementDescriptor;
 
     NSMutableArray *result = [[NSMutableArray alloc] init];
     for (id element in list) {
-        id serialized = [self toObject:element descriptor:elementd];
+        id serialized = [self dataWithPdefObject:element descriptor:elementd];
         if (!serialized) {
             continue;
         }
@@ -79,12 +68,12 @@ static dispatch_once_t _sharedOnce;
     return result;
 }
 
-- (id)writeSet:(NSSet *)set descriptor:(PDSetDescriptor *)descriptor {
++ (id)writeSet:(NSSet *)set descriptor:(PDSetDescriptor *)descriptor {
     PDDataTypeDescriptor *elementd = descriptor.elementDescriptor;
 
     NSMutableSet *result = [[NSMutableSet alloc] init];
     for (id element in set) {
-        id serialized = [self toObject:element descriptor:elementd];
+        id serialized = [self dataWithPdefObject:element descriptor:elementd];
         if (!serialized) {
             continue;
         }
@@ -95,15 +84,15 @@ static dispatch_once_t _sharedOnce;
     return result;
 }
 
-- (id)writeMap:(NSDictionary *)dict descriptor:(PDMapDescriptor *)descriptor {
++ (id)writeMap:(NSDictionary *)dict descriptor:(PDMapDescriptor *)descriptor {
     PDDataTypeDescriptor *keyd = descriptor.keyDescriptor;
     PDDataTypeDescriptor *valued = descriptor.valueDescriptor;
 
     NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
     for (id key in dict) {
         id value = [dict objectForKey:key];
-        id serializedKey = [self toObject:key descriptor:keyd];
-        id serializedValue = [self toObject:value descriptor:valued];
+        id serializedKey = [self dataWithPdefObject:key descriptor:keyd];
+        id serializedValue = [self dataWithPdefObject:value descriptor:valued];
         if (!serializedKey || !serializedValue) {
             continue;
         }
@@ -114,12 +103,12 @@ static dispatch_once_t _sharedOnce;
     return result;
 }
 
-- (id)writeEnum:(NSNumber *)number descriptor:(PDEnumDescriptor *)descriptor {
++ (id)writeEnum:(NSNumber *)number descriptor:(PDEnumDescriptor *)descriptor {
     return [[descriptor.numbersToNames objectForKey:number] lowercaseString];
 }
 
 
-- (id)messageToDict:(PDMessage *)message descriptor:(PDMessageDescriptor *)descriptor {
++ (id)messageToDict:(PDMessage *)message descriptor:(PDMessageDescriptor *)descriptor {
     NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
 
     // Mind polymorphic messages.
@@ -130,7 +119,7 @@ static dispatch_once_t _sharedOnce;
         }
 
         id value = [message valueForKey:field.name];
-        id serialized = [self toObject:value descriptor:field.type];
+        id serialized = [self dataWithPdefObject:value descriptor:field.type];
         [result setObject:serialized forKey:field.name];
     }
 
@@ -138,12 +127,12 @@ static dispatch_once_t _sharedOnce;
 }
 
 #pragma mark fromObject
-- (id)fromObject:(id)object descriptor:(PDDescriptor *)descriptor {
-    id result = [self readObject:object descriptor:descriptor];
++ (id)pdefObjectFromData:(id)data descriptor:(PDDescriptor *)descriptor {
+    id result = [self readObject:data descriptor:descriptor];
     return result;
 }
 
-- (id)readObject:(id)object descriptor:(PDDescriptor *)descriptor {
++ (id)readObject:(id)object descriptor:(PDDescriptor *)descriptor {
     if (!descriptor) {
         [NSException raise:NSInvalidArgumentException format:@"nil descriptor"];
     }
@@ -173,7 +162,7 @@ static dispatch_once_t _sharedOnce;
     return nil;
 }
 
-- (id)readNumber:(id)object type:(PDType)type {
++ (id)readNumber:(id)object type:(PDType)type {
     if ([object isKindOfClass:[NSNumber class]]) {
         return object;
     }
@@ -190,11 +179,11 @@ static dispatch_once_t _sharedOnce;
     }
 }
 
-- (id)readString:(NSString *)string {
++ (id)readString:(NSString *)string {
     return string;
 }
 
-- (id)readDatetime:(id)object {
++ (id)readDatetime:(id)object {
     if ([object isKindOfClass:[NSDate class]]) {
         return [object copy];
     }
@@ -203,47 +192,47 @@ static dispatch_once_t _sharedOnce;
     return [_formatter dateFromString:string];
 }
 
-- (id)readList:(NSArray *)list descriptor:(PDListDescriptor *)descriptor {
++ (id)readList:(NSArray *)list descriptor:(PDListDescriptor *)descriptor {
     PDDataTypeDescriptor *elementd = descriptor.elementDescriptor;
 
     NSMutableArray *result = [[NSMutableArray alloc] init];
     for (id element in list) {
-        id parsed = [self fromObject:element descriptor:elementd];
+        id parsed = [self pdefObjectFromData:element descriptor:elementd];
         [result addObject:parsed];
     }
 
     return result;
 }
 
-- (id)readSet:(id)object descriptor:(PDSetDescriptor *)descriptor {
++ (id)readSet:(id)object descriptor:(PDSetDescriptor *)descriptor {
     PDDataTypeDescriptor *elementd = descriptor.elementDescriptor;
 
 
     NSMutableSet *result = [[NSMutableSet alloc] init];
     for (id element in object) {
-        id parsed = [self fromObject:element descriptor:elementd];
+        id parsed = [self pdefObjectFromData:element descriptor:elementd];
         [result addObject:parsed];
     }
 
     return result;
 }
 
-- (id)readMap:(NSDictionary *)dict descriptor:(PDMapDescriptor *)descriptor {
++ (id)readMap:(NSDictionary *)dict descriptor:(PDMapDescriptor *)descriptor {
     PDDataTypeDescriptor *keyd = descriptor.keyDescriptor;
     PDDataTypeDescriptor *valued = descriptor.valueDescriptor;
 
     NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
     for (id key in dict) {
         id value = [dict objectForKey:key];
-        id parsedKey = [self fromObject:key descriptor:keyd];
-        id parsedValue = [self fromObject:value descriptor:valued];
+        id parsedKey = [self pdefObjectFromData:key descriptor:keyd];
+        id parsedValue = [self pdefObjectFromData:value descriptor:valued];
         [result setObject:parsedValue forKey:parsedKey];
     }
 
     return result;
 }
 
-- (id)readEnum:(id)object descriptor:(PDEnumDescriptor *)descriptor {
++ (id)readEnum:(id)object descriptor:(PDEnumDescriptor *)descriptor {
     if ([object isKindOfClass:[NSNumber class]]) {
         NSNumber *number = object;
         if ([descriptor.numbersToNames doesContain:number]) {
@@ -257,7 +246,7 @@ static dispatch_once_t _sharedOnce;
     return [descriptor.namesToNumbers objectForKey:string];
 }
 
-- (id)readMessage:(NSDictionary *)dict descriptor:(PDMessageDescriptor *)descriptor {
++ (id)readMessage:(NSDictionary *)dict descriptor:(PDMessageDescriptor *)descriptor {
     PDFieldDescriptor *discriminator = descriptor.discriminator;
 
     if (discriminator) {
@@ -265,7 +254,7 @@ static dispatch_once_t _sharedOnce;
         // Deserialize the discriminator value and get a subtype descriptor.
         id value = [dict objectForKey:discriminator.name];
         if (value) {
-            NSNumber *dvalue = [self fromObject:value descriptor:discriminator.type];
+            NSNumber *dvalue = [self pdefObjectFromData:value descriptor:discriminator.type];
             NSInteger dint = [dvalue integerValue];
 
             PDMessageDescriptor *subtype = [descriptor findSubtypeByDiscriminatorValue:dint];
@@ -280,7 +269,7 @@ static dispatch_once_t _sharedOnce;
             continue;
         }
 
-        id parsed = [self fromObject:value descriptor:field.type];
+        id parsed = [self pdefObjectFromData:value descriptor:field.type];
         [message setValue:parsed forKey:field.name];
     }
 

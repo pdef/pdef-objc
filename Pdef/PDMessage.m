@@ -6,21 +6,19 @@
 
 #import "PDMessage.h"
 #import "PDDescriptors.h"
-#import "PDObjectFormat.h"
+#import "PDDataFormat.h"
 
 
 @implementation PDMessage
 - (id)initWithDictionary:(NSDictionary *)dictionary {
     if (self = [self init]) {
-        PDObjectFormat *format = [PDObjectFormat sharedInstance];
-
         for (PDFieldDescriptor *field in self.descriptor.fields) {
             id value = [dictionary objectForKey:field.name];
             if (!value) {
                 continue;
             }
 
-            id parsed = [format fromObject:value descriptor:field.type];
+            id parsed = [PDDataFormat pdefObjectFromData:value descriptor:field.type];
             [self setValue:parsed forKey:field.name];
         }
     }
@@ -33,7 +31,7 @@
 }
 
 - (NSDictionary *)toDictionary {
-    return [[PDObjectFormat sharedInstance] toObject:self descriptor:self.descriptor];
+    return [PDDataFormat dataWithPdefObject:self descriptor:self.descriptor];
 }
 
 - (NSString *)toJson {
