@@ -112,14 +112,12 @@ typedef NS_ENUM(NSInteger, PDType) {
 @property(readonly, nonatomic) NSString *name;
 @property(readonly, nonatomic) PDDescriptor *result;
 @property(readonly, nonatomic) NSArray *args;
-@property(readonly, nonatomic) PDMessageDescriptor *exc;
 @property(readonly, nonatomic) BOOL post;
 @property(readonly, nonatomic) BOOL terminal;
 
 - (id)initWithName:(NSString *)name
     resultSupplier:(PDDescriptor *(^)())resultSupplier
               args:(NSArray *)args
-               exc:(PDMessageDescriptor *)exc
               post:(BOOL)isPost;
 @end
 

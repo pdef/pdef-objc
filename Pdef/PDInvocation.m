@@ -30,9 +30,6 @@
         _parent = parent;
         _method = method;
         _args = [args copy];
-
-        _result = method.result;
-        _exc = (method.exc) ? method.exc : ((parent.exc) ? parent.exc : nil);
     }
     return self;
 }

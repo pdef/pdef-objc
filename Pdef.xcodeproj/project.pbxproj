@@ -299,7 +299,7 @@
 				ORGANIZATIONNAME = pdef;
 				TargetAttributes = {
 					2CDC3293183D1BC000C7CEBE = {
-						TestTargetID = 2C2600ED183A503100198BFF;
+						TestTargetID = 2C2600ED183A503100198BFF /* Pdef */;
 					};
 				};
 			};

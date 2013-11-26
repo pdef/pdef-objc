@@ -283,7 +283,6 @@ discriminatorValue:(NSInteger)discriminatorValue
 - (id)initWithName:(NSString *)name
     resultSupplier:(PDDescriptor *(^)())resultSupplier
               args:(NSArray *)args
-               exc:(PDMessageDescriptor *)exc
               post:(BOOL)isPost {
     if (self = [super init]) {
         if (!name) {
@@ -295,7 +294,6 @@ discriminatorValue:(NSInteger)discriminatorValue
         _name = name;
         _resultSupplier = resultSupplier;
         _args = (args) ? [[NSArray alloc] initWithArray:args] : @[];
-        _exc = exc;
         _post = isPost;
     }
     return self;

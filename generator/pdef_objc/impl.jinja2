@@ -203,11 +203,6 @@ PDInterfaceDescriptor *{{ definition.name }}Descriptor() {
                     {% else %}
                      args:@[]
                     {% endif %}
-                    {% if method.exc %}
-                      exc:{{ method.exc|objc_descriptor }}
-                    {% else %}
-                      exc:nil
-                    {% endif %}
                      post:{{ method.is_post|objc_bool }}],
 {% endfor %}
                          ]];

@@ -15,9 +15,6 @@
 @property PDMethodDescriptor *method;
 @property NSDictionary *args;
 
-@property PDDescriptor *result;
-@property PDMessageDescriptor *exc;
-
 - (id) initWithMethod:(PDMethodDescriptor *)method
                  args:(NSDictionary *)args;
 
