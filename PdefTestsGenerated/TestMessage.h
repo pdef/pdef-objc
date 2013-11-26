@@ -9,8 +9,8 @@ Multi-line comment.
  */
 @interface TestMessage : PDMessage
 @property (nonatomic) NSString *string0;
-@property (nonatomic) NSNumber *bool0;
-@property (nonatomic) NSNumber *int0;
+@property (nonatomic) BOOL bool0;
+@property (nonatomic) int32_t int0;
 
 - (BOOL) hasString0;
 - (void) clearString0;

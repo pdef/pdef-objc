@@ -23,6 +23,7 @@ static PDMessageDescriptor *_BaseDescriptor;
 }
 
 - (void)clearType {
+    _type = 0;
     _type_isset = NO;
 }
 

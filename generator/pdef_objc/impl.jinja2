@@ -53,9 +53,7 @@ static PDMessageDescriptor *_{{ definition.name }}Descriptor;
 }
 
 - (void)clear{{ field.name|upper_first }} {
-    {% if not field.type.is_enum %}
-    _{{ field.name }} = nil;
-    {% endif %}
+    _{{ field.name }} = {{ field.type|objc_default }};
     _{{ field.name }}_isset = NO;
 }
 
@@ -132,7 +130,12 @@ static PDMessageDescriptor *_{{ definition.name }}Descriptor;
             captureInvocation:[self getMethodForName:@"{{ method.name }}"]
                          args:@{
                              {% for arg in method.args %}
-                                 @"{{ arg.name }}" : {{ arg.name }},
+                                 @"{{ arg.name }}" :
+                                 {%- if arg.type|objc_isprimitive -%}
+                                     @({{ arg.name }}),
+                                 {% else -%}
+                                     {{ arg.name }},
+                                 {% endif -%}
                              {% endfor %}
                          }];
     {% if method.is_terminal %}

@@ -9,10 +9,10 @@
 
 /** Message with fields of all data types. */
 @interface TestComplexMessage : TestMessage
-@property (nonatomic) NSNumber *short0;
-@property (nonatomic) NSNumber *long0;
-@property (nonatomic) NSNumber *float0;
-@property (nonatomic) NSNumber *double0;
+@property (nonatomic) int16_t short0;
+@property (nonatomic) int64_t long0;
+@property (nonatomic) float float0;
+@property (nonatomic) double double0;
 @property (nonatomic) NSDate *datetime0;
 @property (nonatomic) NSArray *list0;
 @property (nonatomic) NSSet *set0;

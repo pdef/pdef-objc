@@ -27,13 +27,13 @@ static PDMessageDescriptor *_TestComplexMessageDescriptor;
     return _short0_isset;
 }
 
-- (void)setShort0:(NSNumber *)short0 {
+- (void)setShort0:(int16_t )short0 {
     _short0 = short0;
     _short0_isset = YES;
 }
 
 - (void)clearShort0 {
-    _short0 = nil;
+    _short0 = 0;
     _short0_isset = NO;
 }
 
@@ -42,13 +42,13 @@ static PDMessageDescriptor *_TestComplexMessageDescriptor;
     return _long0_isset;
 }
 
-- (void)setLong0:(NSNumber *)long0 {
+- (void)setLong0:(int64_t )long0 {
     _long0 = long0;
     _long0_isset = YES;
 }
 
 - (void)clearLong0 {
-    _long0 = nil;
+    _long0 = 0L;
     _long0_isset = NO;
 }
 
@@ -57,13 +57,13 @@ static PDMessageDescriptor *_TestComplexMessageDescriptor;
     return _float0_isset;
 }
 
-- (void)setFloat0:(NSNumber *)float0 {
+- (void)setFloat0:(float )float0 {
     _float0 = float0;
     _float0_isset = YES;
 }
 
 - (void)clearFloat0 {
-    _float0 = nil;
+    _float0 = 0.0f;
     _float0_isset = NO;
 }
 
@@ -72,13 +72,13 @@ static PDMessageDescriptor *_TestComplexMessageDescriptor;
     return _double0_isset;
 }
 
-- (void)setDouble0:(NSNumber *)double0 {
+- (void)setDouble0:(double )double0 {
     _double0 = double0;
     _double0_isset = YES;
 }
 
 - (void)clearDouble0 {
-    _double0 = nil;
+    _double0 = 0.0;
     _double0_isset = NO;
 }
 
@@ -153,6 +153,7 @@ static PDMessageDescriptor *_TestComplexMessageDescriptor;
 }
 
 - (void)clearEnum0 {
+    _enum0 = 0;
     _enum0_isset = NO;
 }
 

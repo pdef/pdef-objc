@@ -9,36 +9,36 @@
 #pragma mark TestInterface client
 @implementation TestInterfaceClient
 
-- (NSOperation *) methodArg0:(NSNumber *)arg0
-        arg1:(NSNumber *)arg1
+- (NSOperation *) methodArg0:(int32_t )arg0
+        arg1:(int32_t )arg1
         response:(void (^)(id result, NSError *error))response {
     PDInvocation *_invocation = [self
             captureInvocation:[self getMethodForName:@"method"]
                          args:@{
-                                 @"arg0" : arg0,
-                                 @"arg1" : arg1,
+                                 @"arg0" :@(arg0),
+                                 @"arg1" :@(arg1),
                          }];
     return [self.handler handleInvocation:_invocation response:response];
 }
-- (NSOperation *) queryArg0:(NSNumber *)arg0
-        arg1:(NSNumber *)arg1
+- (NSOperation *) queryArg0:(int32_t )arg0
+        arg1:(int32_t )arg1
         response:(void (^)(id result, NSError *error))response {
     PDInvocation *_invocation = [self
             captureInvocation:[self getMethodForName:@"query"]
                          args:@{
-                                 @"arg0" : arg0,
-                                 @"arg1" : arg1,
+                                 @"arg0" :@(arg0),
+                                 @"arg1" :@(arg1),
                          }];
     return [self.handler handleInvocation:_invocation response:response];
 }
-- (NSOperation *) postArg0:(NSNumber *)arg0
-        arg1:(NSNumber *)arg1
+- (NSOperation *) postArg0:(int32_t )arg0
+        arg1:(int32_t )arg1
         response:(void (^)(id result, NSError *error))response {
     PDInvocation *_invocation = [self
             captureInvocation:[self getMethodForName:@"post"]
                          args:@{
-                                 @"arg0" : arg0,
-                                 @"arg1" : arg1,
+                                 @"arg0" :@(arg0),
+                                 @"arg1" :@(arg1),
                          }];
     return [self.handler handleInvocation:_invocation response:response];
 }
@@ -47,7 +47,7 @@
     PDInvocation *_invocation = [self
             captureInvocation:[self getMethodForName:@"string0"]
                          args:@{
-                                 @"text" : text,
+                                 @"text" :text,
                          }];
     return [self.handler handleInvocation:_invocation response:response];
 }
@@ -56,7 +56,7 @@
     PDInvocation *_invocation = [self
             captureInvocation:[self getMethodForName:@"datetime0"]
                          args:@{
-                                 @"dt" : dt,
+                                 @"dt" :dt,
                          }];
     return [self.handler handleInvocation:_invocation response:response];
 }
@@ -65,7 +65,7 @@
     PDInvocation *_invocation = [self
             captureInvocation:[self getMethodForName:@"message0"]
                          args:@{
-                                 @"msg" : msg,
+                                 @"msg" :msg,
                          }];
     return [self.handler handleInvocation:_invocation response:response];
 }
@@ -76,20 +76,20 @@
     PDInvocation *_invocation = [self
             captureInvocation:[self getMethodForName:@"collections"]
                          args:@{
-                                 @"list0" : list0,
-                                 @"set0" : set0,
-                                 @"map0" : map0,
+                                 @"list0" :list0,
+                                 @"set0" :set0,
+                                 @"map0" :map0,
                          }];
     return [self.handler handleInvocation:_invocation response:response];
 }
-- (id<TestInterface> ) interface0Arg0:(NSNumber *)arg0
-        arg1:(NSNumber *)arg1
+- (id<TestInterface> ) interface0Arg0:(int32_t )arg0
+        arg1:(int32_t )arg1
 {
     PDInvocation *_invocation = [self
             captureInvocation:[self getMethodForName:@"interface0"]
                          args:@{
-                                 @"arg0" : arg0,
-                                 @"arg1" : arg1,
+                                 @"arg0" :@(arg0),
+                                 @"arg1" :@(arg1),
                          }];
     return [[TestInterfaceClient alloc] initWithHandler: self.handler parentInvocation:_invocation];
 }

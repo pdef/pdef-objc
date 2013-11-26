@@ -14,18 +14,18 @@ Multi-line comment.
 /** Returns the sum of the numbers.
 Multi-line comment.
  */
-- (NSOperation *) methodArg0:(NSNumber *)arg0
-        arg1:(NSNumber *)arg1
+- (NSOperation *) methodArg0:(int32_t )arg0
+        arg1:(int32_t )arg1
             response:(void (^)(id result, NSError *error))response;
 
 /** Returns the sum of the numbers. */
-- (NSOperation *) queryArg0:(NSNumber *)arg0
-        arg1:(NSNumber *)arg1
+- (NSOperation *) queryArg0:(int32_t )arg0
+        arg1:(int32_t )arg1
             response:(void (^)(id result, NSError *error))response;
 
 /** Returns the sum of the numbers. */
-- (NSOperation *) postArg0:(NSNumber *)arg0
-        arg1:(NSNumber *)arg1
+- (NSOperation *) postArg0:(int32_t )arg0
+        arg1:(int32_t )arg1
             response:(void (^)(id result, NSError *error))response;
 
 /** Returns the same string. */
@@ -47,8 +47,8 @@ Multi-line comment.
             response:(void (^)(id result, NSError *error))response;
 
 /** Returns the same interface (yes, it's endless). */
-- (id<TestInterface> ) interface0Arg0:(NSNumber *)arg0
-        arg1:(NSNumber *)arg1
+- (id<TestInterface> ) interface0Arg0:(int32_t )arg0
+        arg1:(int32_t )arg1
 ;
 
 /** Void method which returns null. */

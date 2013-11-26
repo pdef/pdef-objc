@@ -60,6 +60,11 @@ class ObjectiveCFilters(object):
     def objc_base(self, message):
         return message.base.name if message.base else 'PDMessage'
 
+    def objc_isprimitive(self, type0):
+        pointers = TypeEnum.COLLECTION_TYPES + TypeEnum.DEFINITION_TYPES \
+                   + (TypeEnum.STRING, TypeEnum.DATETIME)
+        return type0.type not in pointers
+
     def objc_type(self, type0):
         t = type0.type
         if t in NATIVE_TYPES:
@@ -94,6 +99,17 @@ class ObjectiveCFilters(object):
             return '[%s typeDescriptor]' % type0.name
         raise ValueError('Unsupported type %r' % type0)
 
+    def objc_default(self, type0):
+        t = type0.type
+        value = NATIVE_DEFAULTS.get(t)
+        if value:
+            return value
+
+        if t == TypeEnum.ENUM:
+            return '0'
+
+        return 'nil'
+
     def objc_result(self, type0):
         if type0.is_interface:
             return 'id<%s> ' % type0.name
@@ -101,12 +117,12 @@ class ObjectiveCFilters(object):
 
 
 NATIVE_TYPES = {
-    TypeEnum.BOOL: 'NSNumber *',
-    TypeEnum.INT16: 'NSNumber *',
-    TypeEnum.INT32: 'NSNumber *',
-    TypeEnum.INT64: 'NSNumber *',
-    TypeEnum.FLOAT: 'NSNumber *',
-    TypeEnum.DOUBLE: 'NSNumber *',
+    TypeEnum.BOOL: 'BOOL ',
+    TypeEnum.INT16: 'int16_t ',
+    TypeEnum.INT32: 'int32_t ',
+    TypeEnum.INT64: 'int64_t ',
+    TypeEnum.FLOAT: 'float ',
+    TypeEnum.DOUBLE: 'double ',
 
     TypeEnum.STRING: 'NSString *',
     TypeEnum.DATETIME: 'NSDate *',
@@ -117,7 +133,6 @@ NATIVE_TYPES = {
     TypeEnum.SET: 'NSSet *',
     TypeEnum.MAP: 'NSDictionary *'
 }
-
 
 NATIVE_DESCRIPTORS = {
     TypeEnum.BOOL: '[PDDescriptors bool0]',
@@ -131,4 +146,13 @@ NATIVE_DESCRIPTORS = {
     TypeEnum.DATETIME: '[PDDescriptors datetime]',
 
     TypeEnum.VOID: '[PDDescriptors void0]',
+}
+
+NATIVE_DEFAULTS = {
+    TypeEnum.BOOL: 'NO',
+    TypeEnum.INT16: '0',
+    TypeEnum.INT32: '0',
+    TypeEnum.INT64: '0L',
+    TypeEnum.FLOAT: '0.0f',
+    TypeEnum.DOUBLE: '0.0'
 }

@@ -30,13 +30,13 @@ static PDMessageDescriptor *_TestMessageDescriptor;
     return _bool0_isset;
 }
 
-- (void)setBool0:(NSNumber *)bool0 {
+- (void)setBool0:(BOOL )bool0 {
     _bool0 = bool0;
     _bool0_isset = YES;
 }
 
 - (void)clearBool0 {
-    _bool0 = nil;
+    _bool0 = NO;
     _bool0_isset = NO;
 }
 
@@ -45,13 +45,13 @@ static PDMessageDescriptor *_TestMessageDescriptor;
     return _int0_isset;
 }
 
-- (void)setInt0:(NSNumber *)int0 {
+- (void)setInt0:(int32_t )int0 {
     _int0 = int0;
     _int0_isset = YES;
 }
 
 - (void)clearInt0 {
-    _int0 = nil;
+    _int0 = 0;
     _int0_isset = NO;
 }
 

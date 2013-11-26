@@ -30,7 +30,7 @@
     PDTestInvocationHandler *handler = [[PDTestInvocationHandler alloc] init];
     id<TestInterface> client = [[TestInterfaceClient alloc] initWithHandler:handler];
 
-    NSOperation *operation = [client methodArg0:@(1) arg1:@(2) response:nil];
+    NSOperation *operation = [client methodArg0:1 arg1:2 response:nil];
     XCTAssert(operation == handler.operation);
 }
 
@@ -38,7 +38,7 @@
     PDTestInvocationHandler *handler = [[PDTestInvocationHandler alloc] init];
     id<TestInterface> client = [[TestInterfaceClient alloc] initWithHandler:handler];
 
-    [client methodArg0:@(1) arg1:@(2) response:nil];
+    [client methodArg0:1 arg1:2 response:nil];
     PDInvocation * invocation = handler.invocation;
 
     PDMethodDescriptor *method = [TestInterfaceDescriptor() getMethodForName:@"method"];
@@ -54,7 +54,7 @@
     PDTestInvocationHandler *handler = [[PDTestInvocationHandler alloc] init];
     id<TestInterface> client = [[TestInterfaceClient alloc] initWithHandler:handler];
 
-    [[client interface0Arg0:@(1) arg1:@(2)] string0Text:@"hello" response:nil];
+    [[client interface0Arg0:1 arg1:2] string0Text:@"hello" response:nil];
     PDInvocation *invocation1 = handler.invocation;
     NSArray *chain = [invocation1 toChain];
     PDInvocation *invocation0 = [chain objectAtIndex:0];
