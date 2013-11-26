@@ -1,23 +1,22 @@
 //
-// Created by Ivan Korobkov on 22.11.13.
+// Created by Ivan Korobkov on 26.11.13.
 // Copyright (c) 2013 pdef. All rights reserved.
 //
 
 
 #import <XCTest/XCTest.h>
-#import "Base.h"
-#import "Subtype.h"
-#import "Subtype2.h"
-#import "MultiLevelSubtype.h"
 #import "TestMessage.h"
 #import "TestComplexMessage.h"
+#import "MultiLevelSubtype.h"
+#import "Subtype2.h"
 
-@interface PDGeneratedMessageTests : XCTestCase
+
+@interface PDMessageTests : XCTestCase
 @end
 
-@implementation PDGeneratedMessageTests
+@implementation PDMessageTests
 
-- (void)testDiscriminatorValue {
+- (void)testSetDiscriminatorValueInConstructor {
     Base *base = [[Base alloc] init];
     Subtype *subtype = [[Subtype alloc] init];
     Subtype2 *subtype2 = [[Subtype2 alloc] init];
@@ -29,15 +28,43 @@
     XCTAssert(msubtype.type == PolymorphicType_MULTILEVEL_SUBTYPE);
 }
 
+- (void)testInitWithDictionary {
+    TestMessage *expected = [[TestMessage alloc] init];
+    expected.bool0 = YES;
+    expected.int0 = 123;
+    expected.string0 = @"hello";
+
+    TestMessage *message = [[TestMessage alloc] initWithDictionary:@{
+            @"bool0": @YES,
+            @"int0": @"123",
+            @"string0": @"hello"}];
+
+    XCTAssert([message isEqual:expected]);
+}
+
+- (void)testToDictionary {
+    TestMessage *message = [[TestMessage alloc] init];
+    message.bool0 = YES;
+    message.int0 = 123;
+    message.string0 = @"hello";
+
+    NSDictionary *expected = @{
+            @"bool0": @YES,
+            @"int0": @123,
+            @"string0": @"hello"};
+
+    XCTAssert([[message toDictionary] isEqual:expected]);
+}
+
 - (void)testIsEqual {
     TestMessage *message0 = [[TestMessage alloc] init];
-    message0.int0 = @123;
-    message0.bool0 = [[NSNumber alloc] initWithBool:YES];
+    message0.int0 = 123;
+    message0.bool0 = YES;
     message0.string0 = @"hello, world";
 
     TestMessage *message1 = [[TestMessage alloc] init];
-    message1.int0 = @123;
-    message1.bool0 = [[NSNumber alloc] initWithBool:YES];
+    message1.int0 = 123;
+    message1.bool0 = YES;
     message1.string0 = @"hello, world";
 
     XCTAssertEqualObjects(message0, message1);
@@ -47,12 +74,12 @@
 
 - (void)testIsEqualSubclass {
     TestComplexMessage *message0 = [[TestComplexMessage alloc] init];
-    message0.int0 = @123;
+    message0.int0 = 123;
     message0.list0 = @[@1, @2, @3];
     message0.map0 = @{@1: @1.5, @2: @2.5};
 
     TestComplexMessage *message1 = [[TestComplexMessage alloc] init];
-    message1.int0 = @123;
+    message1.int0 = 123;
     message1.list0 = @[@1, @2, @3];
     message1.map0 = @{@1: @1.5, @2: @2.5};
 
@@ -75,8 +102,8 @@
 
 - (void)testCopy {
     TestMessage *message0 = [[TestMessage alloc] init];
-    message0.int0 = @123;
-    message0.bool0 = [[NSNumber alloc] initWithBool:YES];
+    message0.int0 = 123;
+    message0.bool0 = YES;
     message0.string0 = @"hello, world";
 
     TestMessage *message1 = [message0 copy];
@@ -85,7 +112,7 @@
 
 - (void)testCopySubclass {
     TestComplexMessage *message0 = [[TestComplexMessage alloc] init];
-    message0.int0 = @123;
+    message0.int0 = 123;
     message0.list0 = @[@1, @2, @3];
 
     TestComplexMessage *message1 = [message0 copy];
@@ -103,7 +130,7 @@
 
 - (void)testCopy_deepCopy {
     TestComplexMessage *message = [[TestComplexMessage alloc] init];
-    message.int0 = @10;
+    message.int0 = 10;
     message.message0 = [[TestMessage alloc] init];
     message.message0.string0 = @"hello, world";
 

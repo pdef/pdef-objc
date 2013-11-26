@@ -6,21 +6,26 @@
 
 #import "PDMessage.h"
 #import "PDDescriptors.h"
+#import "PDObjectFormat.h"
 
 
 @implementation PDMessage
-/** Override this method in a subclass, and return a custom descriptor. */
-+ (PDMessageDescriptor *)typeDescriptor {
-    return nil;
-}
-
-/** Override this method in a subclass, and return the subclass typeDescriptor. */
-- (PDMessageDescriptor *)descriptor {
-    return nil;
-}
-
 - (id)initWithDictionary:(NSDictionary *)dictionary {
-    return [self init];
+    if (self = [self init]) {
+        PDObjectFormat *format = [PDObjectFormat sharedInstance];
+
+        for (PDFieldDescriptor *field in self.descriptor.fields) {
+            id value = [dictionary objectForKey:field.name];
+            if (!value) {
+                continue;
+            }
+
+            id parsed = [format fromObject:value descriptor:field.type];
+            [self setValue:parsed forKey:field.name];
+        }
+    }
+
+    return self;
 }
 
 - (id)initWithJson:(NSString *)json {
@@ -28,7 +33,7 @@
 }
 
 - (NSDictionary *)toDictionary {
-    return nil;
+    return [[PDObjectFormat sharedInstance] toObject:self descriptor:self.descriptor];
 }
 
 - (NSString *)toJson {
@@ -110,5 +115,15 @@
     }
 
     return copy;
+}
+
+/** Override this method in a subclass, and return a custom descriptor. */
++ (PDMessageDescriptor *)typeDescriptor {
+    return nil;
+}
+
+/** Override this method in a subclass, and return the subclass typeDescriptor. */
+- (PDMessageDescriptor *)descriptor {
+    return nil;
 }
 @end
