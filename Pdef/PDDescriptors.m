@@ -7,6 +7,7 @@
 //
 
 #import "PDDescriptors.h"
+#import "PDMessage.h"
 
 @implementation PDDescriptor : NSObject
 - (id)initWithType:(PDType)type {
@@ -204,6 +205,7 @@ discriminatorValue:(NSInteger)discriminatorValue
 @implementation PDFieldDescriptor {
     PDDataTypeDescriptor *_type;
     PDDataTypeDescriptor *(^_typeSupplier)();
+    SEL _isSetSelector;
 }
 
 - (id)initWithName:(NSString *)name type:(PDDataTypeDescriptor *)type isDiscriminator:(BOOL)isDiscriminator {
@@ -232,6 +234,11 @@ discriminatorValue:(NSInteger)discriminatorValue
     }
     return self;
 }
+
+- (BOOL)isSetInMessage:(PDMessage *)message {
+    return [message isFieldSet:_name];
+}
+
 
 - (NSString *)description {
     return [NSString stringWithFormat: @"Field: name=%@ type=%@", _name, self.type];

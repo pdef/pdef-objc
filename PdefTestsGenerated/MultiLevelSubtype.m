@@ -22,38 +22,6 @@ static PDMessageDescriptor *_MultiLevelSubtypeDescriptor;
     return self;
 }
 
-- (BOOL)isEqualToMessage:(PDMessage *)message {
-    if (self == message)
-        return YES;
-    if (message == nil)
-        return NO;
-    if (![[message class] isEqual:[self class]])
-        return NO;
-    if (![super isEqualToMessage:message])
-        return NO;
-
-    MultiLevelSubtype *cast = (MultiLevelSubtype *)message;
-    if (self.mfield != cast.mfield && ![self.mfield isEqual:cast.mfield])
-        return NO;
-    return YES;
-}
-
-- (NSUInteger)hash {
-    NSUInteger hash = [super hash];
-    hash = hash * 31u + [self.mfield hash];
-    return hash;
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    MultiLevelSubtype *copy = (MultiLevelSubtype *)[super copyWithZone:zone];
-
-    if (copy != nil) {
-        copy.mfield = _mfield;
-    }
-
-    return copy;
-}
-
 + (void)initialize {
     if (self != [MultiLevelSubtype class]) {
         return;

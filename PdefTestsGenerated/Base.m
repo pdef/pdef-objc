@@ -17,42 +17,6 @@ static PDMessageDescriptor *_BaseDescriptor;
     return [Base typeDescriptor];
 }
 
-- (BOOL)isEqualToMessage:(PDMessage *)message {
-    if (self == message)
-        return YES;
-    if (message == nil)
-        return NO;
-    if (![[message class] isEqual:[self class]])
-        return NO;
-    if (![super isEqualToMessage:message])
-        return NO;
-
-    Base *cast = (Base *)message;
-    if (self.type != cast.type)
-        return NO;
-    if (self.field != cast.field && ![self.field isEqual:cast.field])
-        return NO;
-    return YES;
-}
-
-- (NSUInteger)hash {
-    NSUInteger hash = [super hash];
-    hash = hash * 31u + (NSUInteger) self.type;
-    hash = hash * 31u + [self.field hash];
-    return hash;
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    Base *copy = (Base *)[super copyWithZone:zone];
-
-    if (copy != nil) {
-        copy.type = _type;
-        copy.field = _field;
-    }
-
-    return copy;
-}
-
 + (void)initialize {
     if (self != [Base class]) {
         return;

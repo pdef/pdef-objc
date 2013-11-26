@@ -10,6 +10,7 @@
 
 @class PDFieldDescriptor;
 @class PDMessageDescriptor;
+@class PDMessage;
 
 
 typedef NS_ENUM(NSInteger, PDType) {
@@ -105,6 +106,8 @@ typedef NS_ENUM(NSInteger, PDType) {
 - (id)initWithName:(NSString *)name
       typeSupplier:(PDDataTypeDescriptor *(^)())typeSupplier
      discriminator:(BOOL)discriminator;
+
+- (BOOL) isSetInMessage:(PDMessage *)message;
 @end
 
 

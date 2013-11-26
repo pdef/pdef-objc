@@ -35,8 +35,8 @@
     return nil;
 }
 
-- (id)copyWithZone:(NSZone *)zone {
-    return [[[super class] allocWithZone:zone] init];
+- (BOOL)isFieldSet:(NSString *)name {
+    return YES;
 }
 
 - (BOOL)isEqual:(id)other {
@@ -53,11 +53,64 @@
         return YES;
     if (message == nil)
         return NO;
+    if (![[message class] isEqual:[self class]])
+        return NO;
+
+    for (PDFieldDescriptor *field in self.descriptor.fields) {
+        NSString *name = field.name;
+
+        if (![self isFieldSet:name]) {
+            if (![message isFieldSet:name]) {
+                continue;
+            } else {
+                return NO;
+            }
+        }
+
+        id value = [self valueForKey:name];
+        id otherValue = [message valueForKey:name];
+        if (!value) {
+            if (!otherValue) {
+                continue;
+            } else {
+                return NO;
+            }
+        } else if (![value isEqual:otherValue]) {
+            return NO;
+        }
+    }
+
     return YES;
 }
 
 - (NSUInteger)hash {
-    return 0;
+    NSUInteger hash = 0;
+
+    for (PDFieldDescriptor *field in self.descriptor.fields) {
+        NSString *name = field.name;
+
+        if ([self isFieldSet:name]) {
+            id value = [self valueForKey:name];
+            hash = hash * 31u + [value hash];
+        }
+    }
+
+    return hash;
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    PDMessage *copy = [[[self class] alloc] init];
+
+    for (PDFieldDescriptor *field in self.descriptor.fields) {
+        NSString *name = field.name;
+
+        if ([self isFieldSet:name]) {
+            id value = [self valueForKey:name];
+            id valueCopy = [value copyWithZone:zone];
+            [copy setValue:valueCopy forKey:name];
+        }
+    }
+
+    return copy;
+}
 @end

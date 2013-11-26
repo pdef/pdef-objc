@@ -68,6 +68,8 @@
     subtype1.field = @"hello";
     subtype1.subfield = @"world";
 
+    [subtype isEqual:subtype1];
+
     XCTAssertEqualObjects(subtype, subtype1);
 }
 

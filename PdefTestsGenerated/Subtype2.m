@@ -22,38 +22,6 @@ static PDMessageDescriptor *_Subtype2Descriptor;
     return self;
 }
 
-- (BOOL)isEqualToMessage:(PDMessage *)message {
-    if (self == message)
-        return YES;
-    if (message == nil)
-        return NO;
-    if (![[message class] isEqual:[self class]])
-        return NO;
-    if (![super isEqualToMessage:message])
-        return NO;
-
-    Subtype2 *cast = (Subtype2 *)message;
-    if (self.subfield2 != cast.subfield2 && ![self.subfield2 isEqual:cast.subfield2])
-        return NO;
-    return YES;
-}
-
-- (NSUInteger)hash {
-    NSUInteger hash = [super hash];
-    hash = hash * 31u + [self.subfield2 hash];
-    return hash;
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    Subtype2 *copy = (Subtype2 *)[super copyWithZone:zone];
-
-    if (copy != nil) {
-        copy.subfield2 = _subfield2;
-    }
-
-    return copy;
-}
-
 + (void)initialize {
     if (self != [Subtype2 class]) {
         return;

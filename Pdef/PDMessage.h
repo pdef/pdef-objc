@@ -17,17 +17,20 @@
 /** Returns this instance descriptor. */
 - (PDMessageDescriptor *)descriptor;
 
-/** Initializes this instance with a dictionary using the PDObjectFormat. */
+/** Initializes this instance from a dictionary with primitives and collections. */
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
-/** Initialized this instance with a json string using the PDJsonFormat. */
+/** Initialized this instance with a JSON string. */
 - (id)initWithJson:(NSString *)json;
 
-/** Converts this message to a dictionary using the PDObjectFormat. */
+/** Converts this message to a dictionary with primitives and collections. */
 - (NSDictionary *)toDictionary;
 
-/** Converts this message to a json string. */
+/** Converts this message to a JSON string. */
 - (NSString *)toJson;
+
+/** Returns true when a field with such a name is set in this message. */
+- (BOOL)isFieldSet:(NSString *)name;
 
 - (BOOL)isEqual:(id)other;
 
