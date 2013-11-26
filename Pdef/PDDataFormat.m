@@ -17,12 +17,12 @@ static NSDateFormatter *_formatter;
 
     _formatter = [[NSDateFormatter alloc] init];
     _formatter.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+    _formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
     _formatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
 }
 
-
-#pragma mark toObject
-+ (id)dataWithPdefObject:(id)object descriptor:(PDDescriptor *)descriptor {
+#pragma mark dataWithObject
++ (id)writeObject:(id)object descriptor:(PDDescriptor *)descriptor {
     if (!descriptor) {
         [NSException raise:NSInvalidArgumentException format:@"nil descriptor"];
     }
@@ -38,8 +38,8 @@ static NSDateFormatter *_formatter;
         case PDTypeInt64:
         case PDTypeFloat:
         case PDTypeDouble: return object;
-        case PDTypeString:
-        case PDTypeDatetime: return [object copy];
+        case PDTypeString: return [object copy];
+        case PDTypeDatetime: return [self writeDatetime:object];
         case PDTypeList: return [self writeList:object descriptor:(PDListDescriptor *) descriptor];
         case PDTypeSet: return [self writeSet:object descriptor:(PDSetDescriptor *) descriptor];
         case PDTypeMap: return [self writeMap:object descriptor:(PDMapDescriptor *) descriptor];
@@ -52,12 +52,16 @@ static NSDateFormatter *_formatter;
     return nil;
 }
 
++ (id)writeDatetime:(NSDate *)date {
+    return [_formatter stringFromDate:date];
+}
+
 + (id)writeList:(NSArray *)list descriptor:(PDListDescriptor *)descriptor {
     PDDataTypeDescriptor *elementd = descriptor.elementDescriptor;
 
     NSMutableArray *result = [[NSMutableArray alloc] init];
     for (id element in list) {
-        id serialized = [self dataWithPdefObject:element descriptor:elementd];
+        id serialized = [self writeObject:element descriptor:elementd];
         if (!serialized) {
             continue;
         }
@@ -71,9 +75,9 @@ static NSDateFormatter *_formatter;
 + (id)writeSet:(NSSet *)set descriptor:(PDSetDescriptor *)descriptor {
     PDDataTypeDescriptor *elementd = descriptor.elementDescriptor;
 
-    NSMutableSet *result = [[NSMutableSet alloc] init];
+    NSMutableArray *result = [[NSMutableArray alloc] init];
     for (id element in set) {
-        id serialized = [self dataWithPdefObject:element descriptor:elementd];
+        id serialized = [self writeObject:element descriptor:elementd];
         if (!serialized) {
             continue;
         }
@@ -91,16 +95,37 @@ static NSDateFormatter *_formatter;
     NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
     for (id key in dict) {
         id value = [dict objectForKey:key];
-        id serializedKey = [self dataWithPdefObject:key descriptor:keyd];
-        id serializedValue = [self dataWithPdefObject:value descriptor:valued];
-        if (!serializedKey || !serializedValue) {
+        if (!key || !value) {
             continue;
         }
 
-        [result setObject:serializedValue forKey:serializedKey];
+        NSString *stringKey = [self writeMapKeyToString:key descriptor:keyd];
+        if (!stringKey) {
+            continue;
+        }
+
+        id serializedValue = [self writeObject:value descriptor:valued];
+        [result setObject:serializedValue forKey:stringKey];
     }
 
     return result;
+}
+
++ (NSString *)writeMapKeyToString:(id)key descriptor:(PDDataTypeDescriptor *)descriptor {
+    PDType type = descriptor.type;
+
+    switch (type) {
+        case PDTypeBool:
+        case PDTypeInt16:
+        case PDTypeInt32:
+        case PDTypeInt64:
+        case PDTypeFloat:
+        case PDTypeDouble:return ((NSNumber *) key).stringValue;
+        case PDTypeString:return [key copy];
+        case PDTypeDatetime:return [_formatter stringFromDate:key];
+        case PDTypeEnum:return [self writeEnum:key descriptor:(PDEnumDescriptor *) descriptor];
+        default: return nil;
+    }
 }
 
 + (id)writeEnum:(NSNumber *)number descriptor:(PDEnumDescriptor *)descriptor {
@@ -119,15 +144,15 @@ static NSDateFormatter *_formatter;
         }
 
         id value = [message valueForKey:field.name];
-        id serialized = [self dataWithPdefObject:value descriptor:field.type];
+        id serialized = [self writeObject:value descriptor:field.type];
         [result setObject:serialized forKey:field.name];
     }
 
     return result;
 }
 
-#pragma mark fromObject
-+ (id)pdefObjectFromData:(id)data descriptor:(PDDescriptor *)descriptor {
+#pragma mark objectFromData
++ (id)readObjectFromData:(id)data descriptor:(PDDescriptor *)descriptor {
     id result = [self readObject:data descriptor:descriptor];
     return result;
 }
@@ -197,7 +222,7 @@ static NSDateFormatter *_formatter;
 
     NSMutableArray *result = [[NSMutableArray alloc] init];
     for (id element in list) {
-        id parsed = [self pdefObjectFromData:element descriptor:elementd];
+        id parsed = [self readObjectFromData:element descriptor:elementd];
         [result addObject:parsed];
     }
 
@@ -210,7 +235,7 @@ static NSDateFormatter *_formatter;
 
     NSMutableSet *result = [[NSMutableSet alloc] init];
     for (id element in object) {
-        id parsed = [self pdefObjectFromData:element descriptor:elementd];
+        id parsed = [self readObjectFromData:element descriptor:elementd];
         [result addObject:parsed];
     }
 
@@ -224,8 +249,8 @@ static NSDateFormatter *_formatter;
     NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
     for (id key in dict) {
         id value = [dict objectForKey:key];
-        id parsedKey = [self pdefObjectFromData:key descriptor:keyd];
-        id parsedValue = [self pdefObjectFromData:value descriptor:valued];
+        id parsedKey = [self readObjectFromData:key descriptor:keyd];
+        id parsedValue = [self readObjectFromData:value descriptor:valued];
         [result setObject:parsedValue forKey:parsedKey];
     }
 
@@ -254,7 +279,7 @@ static NSDateFormatter *_formatter;
         // Deserialize the discriminator value and get a subtype descriptor.
         id value = [dict objectForKey:discriminator.name];
         if (value) {
-            NSNumber *dvalue = [self pdefObjectFromData:value descriptor:discriminator.type];
+            NSNumber *dvalue = [self readObjectFromData:value descriptor:discriminator.type];
             NSInteger dint = [dvalue integerValue];
 
             PDMessageDescriptor *subtype = [descriptor findSubtypeByDiscriminatorValue:dint];
@@ -269,7 +294,7 @@ static NSDateFormatter *_formatter;
             continue;
         }
 
-        id parsed = [self pdefObjectFromData:value descriptor:field.type];
+        id parsed = [self readObjectFromData:value descriptor:field.type];
         [message setValue:parsed forKey:field.name];
     }
 

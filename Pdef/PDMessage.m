@@ -18,7 +18,7 @@
                 continue;
             }
 
-            id parsed = [PDDataFormat pdefObjectFromData:value descriptor:field.type];
+            id parsed = [PDDataFormat readObjectFromData:value descriptor:field.type];
             [self setValue:parsed forKey:field.name];
         }
     }
@@ -26,16 +26,31 @@
     return self;
 }
 
-- (id)initWithJson:(NSString *)json {
-    return [self init];
-}
-
 - (NSDictionary *)toDictionary {
-    return [PDDataFormat dataWithPdefObject:self descriptor:self.descriptor];
+    return [PDDataFormat writeObject:self descriptor:self.descriptor];
 }
 
-- (NSString *)toJson {
-    return nil;
+- (id)initWithJson:(NSData *)json error:(NSError **)error {
+    id object = [NSJSONSerialization JSONObjectWithData:json options:0 error:error];
+    if (!object) {
+        return nil;
+    }
+
+    return [self initWithDictionary:object];
+}
+
+- (NSData *)toJsonWithError:(NSError **)error {
+    return [self toJsonIndent:NO error:error];
+}
+
+- (NSData *)toJsonIndent:(BOOL)indent error:(NSError **)error {
+    NSDictionary *dict = [self toDictionary];
+    NSJSONWritingOptions options = 0;
+    if (indent) {
+        options = NSJSONWritingPrettyPrinted;
+    }
+
+    return [NSJSONSerialization dataWithJSONObject:dict options:options error:error];
 }
 
 - (BOOL)isEqual:(id)other {

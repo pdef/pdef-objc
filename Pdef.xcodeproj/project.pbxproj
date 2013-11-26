@@ -27,6 +27,7 @@
 		2CDC32A8183D1D0600C7CEBE /* PDDescriptors.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C260126183A53E400198BFF /* PDDescriptors.m */; };
 		2CDC32A9183D1D0E00C7CEBE /* PDMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821A999F0F543201E45CCC /* PDMessage.m */; };
 		2CDC32AB183D1D5800C7CEBE /* PDGeneratedGescriptorsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC32AA183D1D5800C7CEBE /* PDGeneratedGescriptorsTests.m */; };
+		31821018CC1797B04E53431B /* PDMessageJsonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 318218D97B7F9E650596302F /* PDMessageJsonTests.m */; };
 		318210BF423CF278DA2ADAB3 /* PDInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 3182160D52DE7B1E1B4301F7 /* PDInterface.h */; };
 		3182110DCE4AC8BAA0F449D8 /* PDDataFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = 31821B7279AC708BCC9B8CB5 /* PDDataFormat.h */; };
 		3182133E3B6A2469276DD4E2 /* PDInvocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 3182140773F57D2026D2205C /* PDInvocation.h */; };
@@ -36,13 +37,10 @@
 		318215A210A909710C6B2863 /* PDDataFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821E2ADB435B5B469BB7F7 /* PDDataFormat.m */; };
 		3182174F2C74FFB04A097F9A /* PDInvocationHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 31821E4EBECCCE6BACE51F9B /* PDInvocationHandler.h */; };
 		318217C9809D5E1DD6C662FF /* PDMessageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3182195629579D6614162999 /* PDMessageTests.m */; };
-		3182183D7B1BBFC77BA4793A /* PDJsonFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 318214294C8821FEF84401B1 /* PDJsonFormat.m */; };
 		3182184EF5B9F248362B8A53 /* PDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 31821DE02C1067510CA7C5C0 /* PDef.h */; };
 		31821A94CC9AA5A943FA7698 /* PDInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821D2F97CBB2625E2463B2 /* PDInterface.m */; };
-		31821B6DD8AEF9B792B5534F /* PDJsonFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = 3182187CC405E449A5857C31 /* PDJsonFormat.h */; };
 		31821CEE1F77C60B869A6C95 /* PDDataFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821E2ADB435B5B469BB7F7 /* PDDataFormat.m */; };
 		31821CF3AF6001850176F47B /* PDInvocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821F20AF2A3CC1668560CC /* PDInvocation.m */; };
-		31821D064671A9685A87418F /* PDJsonFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 318214294C8821FEF84401B1 /* PDJsonFormat.m */; };
 		31821D1C6EC373B95848619A /* PDMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821A999F0F543201E45CCC /* PDMessage.m */; };
 		31821DDBE78ACC5D6886D19F /* PDMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 31821DB8BF9E84D48AFE3799 /* PDMessage.h */; };
 		31821E851C3906466F8E8206 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 318218ACB0332F9CA537FFCA /* Foundation.framework */; };
@@ -96,10 +94,9 @@
 		2CDC32AA183D1D5800C7CEBE /* PDGeneratedGescriptorsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDGeneratedGescriptorsTests.m; sourceTree = "<group>"; };
 		318213E8278002BF00C549D4 /* PDInvocationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDInvocationTests.m; sourceTree = "<group>"; };
 		3182140773F57D2026D2205C /* PDInvocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDInvocation.h; sourceTree = "<group>"; };
-		318214294C8821FEF84401B1 /* PDJsonFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDJsonFormat.m; sourceTree = "<group>"; };
 		3182160D52DE7B1E1B4301F7 /* PDInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDInterface.h; sourceTree = "<group>"; };
-		3182187CC405E449A5857C31 /* PDJsonFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDJsonFormat.h; sourceTree = "<group>"; };
 		318218ACB0332F9CA537FFCA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		318218D97B7F9E650596302F /* PDMessageJsonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDMessageJsonTests.m; sourceTree = "<group>"; };
 		3182195629579D6614162999 /* PDMessageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDMessageTests.m; sourceTree = "<group>"; };
 		31821A999F0F543201E45CCC /* PDMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDMessage.m; sourceTree = "<group>"; };
 		31821B7279AC708BCC9B8CB5 /* PDDataFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDDataFormat.h; sourceTree = "<group>"; };
@@ -206,8 +203,6 @@
 				3182160D52DE7B1E1B4301F7 /* PDInterface.h */,
 				31821E2ADB435B5B469BB7F7 /* PDDataFormat.m */,
 				31821B7279AC708BCC9B8CB5 /* PDDataFormat.h */,
-				318214294C8821FEF84401B1 /* PDJsonFormat.m */,
-				3182187CC405E449A5857C31 /* PDJsonFormat.h */,
 			);
 			path = Pdef;
 			sourceTree = "<group>";
@@ -238,6 +233,7 @@
 				2C7A3711183E4B1500A79538 /* PDInterfaceTests.m */,
 				31821DF4D26BD2636293A6DE /* PDDataFormatTests.m */,
 				3182195629579D6614162999 /* PDMessageTests.m */,
+				318218D97B7F9E650596302F /* PDMessageJsonTests.m */,
 			);
 			path = PdefTests;
 			sourceTree = "<group>";
@@ -266,7 +262,6 @@
 				3182174F2C74FFB04A097F9A /* PDInvocationHandler.h in Headers */,
 				318210BF423CF278DA2ADAB3 /* PDInterface.h in Headers */,
 				3182110DCE4AC8BAA0F449D8 /* PDDataFormat.h in Headers */,
-				31821B6DD8AEF9B792B5534F /* PDJsonFormat.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,7 +364,6 @@
 				31821559BEE106E85D076E2E /* PDInvocation.m in Sources */,
 				31821412C9CCA7333247AB7D /* PDInterface.m in Sources */,
 				31821CEE1F77C60B869A6C95 /* PDDataFormat.m in Sources */,
-				3182183D7B1BBFC77BA4793A /* PDJsonFormat.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,7 +392,7 @@
 				318215A210A909710C6B2863 /* PDDataFormat.m in Sources */,
 				31821F7037871CC30E8747F6 /* PDDataFormatTests.m in Sources */,
 				318217C9809D5E1DD6C662FF /* PDMessageTests.m in Sources */,
-				31821D064671A9685A87418F /* PDJsonFormat.m in Sources */,
+				31821018CC1797B04E53431B /* PDMessageJsonTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

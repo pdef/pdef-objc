@@ -18,12 +18,12 @@
 - (void)testPrimitiveWithDescriptor:(PDDataTypeDescriptor *)descriptor
                              string:(NSString *)string
                            expected:(id)expected {
-    XCTAssert([PDDataFormat pdefObjectFromData:nil descriptor:descriptor] == nil);
-    XCTAssert([[PDDataFormat pdefObjectFromData:string descriptor:descriptor] isEqual:expected]);
-    XCTAssert([[PDDataFormat pdefObjectFromData:expected descriptor:descriptor] isEqual:expected]);
+    XCTAssert([PDDataFormat readObjectFromData:nil descriptor:descriptor] == nil);
+    XCTAssert([[PDDataFormat readObjectFromData:string descriptor:descriptor] isEqual:expected]);
+    XCTAssert([[PDDataFormat readObjectFromData:expected descriptor:descriptor] isEqual:expected]);
 
-    XCTAssert([PDDataFormat dataWithPdefObject:nil descriptor:descriptor] == nil);
-    XCTAssert([[PDDataFormat dataWithPdefObject:expected descriptor:descriptor] isEqual:expected]);
+    XCTAssert([PDDataFormat writeObject:nil descriptor:descriptor] == nil);
+    XCTAssert([[PDDataFormat writeObject:expected descriptor:descriptor] isEqual:expected]);
 }
 
 - (void)testBool {
@@ -54,11 +54,6 @@
     [self testPrimitiveWithDescriptor:[PDDescriptors double0] string:@"-2.5" expected:@-2.5];
 }
 
-- (void)testDatetime {
-    NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:0];
-    [self testPrimitiveWithDescriptor:[PDDescriptors datetime] string:@"1970-01-01T00:00:00Z" expected:date];
-}
-
 - (void)testString {
     [self testPrimitiveWithDescriptor:[PDDescriptors string] string:@"hello, world" expected:@"hello, world"];
 }
@@ -66,11 +61,16 @@
 - (void)testObjectWithDescriptor:(PDDataTypeDescriptor *)descriptor
                       serialized:(id)serialized
                         expected:(id)expected {
-    XCTAssert([PDDataFormat pdefObjectFromData:nil descriptor:descriptor] == nil);
-    XCTAssert([[PDDataFormat pdefObjectFromData:serialized descriptor:descriptor] isEqual:expected]);
+    XCTAssert([PDDataFormat readObjectFromData:nil descriptor:descriptor] == nil);
+    XCTAssert([[PDDataFormat readObjectFromData:serialized descriptor:descriptor] isEqual:expected]);
 
-    XCTAssert([PDDataFormat dataWithPdefObject:nil descriptor:descriptor] == nil);
-    XCTAssert([[PDDataFormat dataWithPdefObject:expected descriptor:descriptor] isEqual:serialized]);
+    XCTAssert([PDDataFormat writeObject:nil descriptor:descriptor] == nil);
+    XCTAssert([[PDDataFormat writeObject:expected descriptor:descriptor] isEqual:serialized]);
+}
+
+- (void)testDatetime {
+    NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:0];
+    [self testObjectWithDescriptor:[PDDescriptors datetime] serialized:@"1970-01-01T00:00:00Z" expected:date];
 }
 
 
@@ -84,18 +84,18 @@
 
 - (void)testSet {
     PDSetDescriptor *descriptor = [PDDescriptors setWithElement:[TestMessage typeDescriptor]];
-    NSSet *serialized = [NSSet setWithObject:[self fixtureMessageDict]];
-    NSSet *expected = [NSSet setWithObject:[self fixtureMessage]];
+    NSArray *serialized = [NSArray arrayWithObject:[self fixtureMessageDict]];
+    NSSet *parsed = [NSSet setWithObject:[self fixtureMessage]];
 
-    [self testObjectWithDescriptor:descriptor serialized:serialized expected:expected];
+    [self testObjectWithDescriptor:descriptor serialized:serialized expected:parsed];
 }
 
 - (void)testMap {
     PDMapDescriptor *descriptor = [PDDescriptors mapWithKey:[PDDescriptors int32] value:[TestMessage typeDescriptor]];
-    NSDictionary *serialized = @{@-32 : [self fixtureMessageDict]};
-    NSDictionary *expected = @{@-32 : [self fixtureMessage]};
+    NSDictionary *serialized = @{@"-32" : [self fixtureMessageDict]};
+    NSDictionary *parsed = @{@-32 : [self fixtureMessage]};
 
-    [self testObjectWithDescriptor:descriptor serialized:serialized expected:expected];
+    [self testObjectWithDescriptor:descriptor serialized:serialized expected:parsed];
 }
 
 - (void)testEnum {
@@ -103,7 +103,7 @@
     [self testObjectWithDescriptor:TestEnumDescriptor() serialized:@"two" expected:@(TestEnum_TWO)];
     [self testObjectWithDescriptor:TestEnumDescriptor() serialized:@"three" expected:@(TestEnum_THREE)];
 
-    XCTAssert([PDDataFormat pdefObjectFromData:@"unknown enum value" descriptor:TestEnumDescriptor()] == nil);
+    XCTAssert([PDDataFormat readObjectFromData:@"unknown enum value" descriptor:TestEnumDescriptor()] == nil);
 }
 
 - (void)testMessage {

@@ -21,13 +21,16 @@
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
 /** Initialized this instance with a JSON string. */
-- (id)initWithJson:(NSString *)json;
+- (id)initWithJson:(NSData *)json error:(NSError **)error;
 
 /** Converts this message to a dictionary with primitives and collections. */
 - (NSDictionary *)toDictionary;
 
-/** Converts this message to a JSON string. */
-- (NSString *)toJson;
+/** Converts this message to JSON data. */
+- (NSData *)toJsonWithError:(NSError **)error;
+
+/** Converts this message to JSON data, indents the JSON structures. */
+- (NSData *)toJsonIndent:(BOOL)indent error:(NSError **)error;
 
 - (BOOL)isEqual:(id)other;
 
