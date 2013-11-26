@@ -6,6 +6,7 @@
 
 /** Enum with discriminator values. */
 typedef NS_ENUM(NSInteger, PolymorphicType) {
+    PolymorphicType_UNDEFINED = 0,
     PolymorphicType_SUBTYPE = 1,
     PolymorphicType_SUBTYPE2 = 2,
     PolymorphicType_MULTILEVEL_SUBTYPE = 3,

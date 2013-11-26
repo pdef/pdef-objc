@@ -26,7 +26,8 @@
 
 {% if definition.is_enum %}
 typedef NS_ENUM(NSInteger, {{ definition.name }}) {
-    {% for value in definition.values %}
+    {{ definition.name }}_UNDEFINED = 0,
+    {% for value in definition.values if value.name != "UNDEFINED" %}
     {{ definition.name }}_{{ value.name }} = {{ loop.index }},
     {% endfor %}
 };

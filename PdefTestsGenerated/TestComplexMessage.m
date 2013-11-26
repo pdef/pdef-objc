@@ -153,7 +153,7 @@ static PDMessageDescriptor *_TestComplexMessageDescriptor;
 }
 
 - (void)clearEnum0 {
-    _enum0 = 0;
+    _enum0 = TestEnum_UNDEFINED;
     _enum0_isset = NO;
 }
 
