@@ -231,12 +231,18 @@ discriminatorValue:(NSInteger)discriminatorValue
         _name = name;
         _typeSupplier = typeSupplier;
         _discriminator = discriminator;
+
+        // Uppercase the first letter of the field name and prepent to "has" to get "hasField".
+        NSString *sel = [NSString stringWithFormat:@"has%@%@",
+                        [[name substringToIndex:1] uppercaseString],
+                        [name substringFromIndex:1] ];
+        _isSetSelector = NSSelectorFromString(sel);
     }
     return self;
 }
 
 - (BOOL)isSetInMessage:(PDMessage *)message {
-    return [message isFieldSet:_name];
+    return (BOOL) [message performSelector:_isSetSelector];
 }
 
 

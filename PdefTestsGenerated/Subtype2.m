@@ -4,22 +4,40 @@
 #import "Base.h"
 
 
-@implementation Subtype2
+@implementation Subtype2 {
+    BOOL _subfield2_isset;
+}
 static PDMessageDescriptor *_Subtype2Descriptor;
-
-+ (PDMessageDescriptor *)typeDescriptor {
-    return _Subtype2Descriptor;
-}
-
-- (PDMessageDescriptor *)descriptor {
-    return [Subtype2 typeDescriptor];
-}
 
 - (id) init {
     if (self = [super init]) {
         self.type = PolymorphicType_SUBTYPE2 ;
     }
     return self;
+}
+
+// subfield2
+- (BOOL)hasSubfield2 {
+    return _subfield2_isset;
+}
+
+- (void)setSubfield2:(NSString *)subfield2 {
+    _subfield2 = subfield2;
+    _subfield2_isset = YES;
+}
+
+- (void)clearSubfield2 {
+    _subfield2 = nil;
+    _subfield2_isset = NO;
+}
+
+
+- (PDMessageDescriptor *)descriptor {
+    return [Subtype2 typeDescriptor];
+}
+
++ (PDMessageDescriptor *)typeDescriptor {
+    return _Subtype2Descriptor;
 }
 
 + (void)initialize {

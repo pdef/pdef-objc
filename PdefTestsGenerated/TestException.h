@@ -10,6 +10,10 @@ Multi-line comment.
 @interface TestException : PDMessage
 @property (nonatomic) NSString *text;
 
+- (BOOL) hasText;
+- (void) clearText;
+
+
 + (PDMessageDescriptor *)typeDescriptor;
 @end
 

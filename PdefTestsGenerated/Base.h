@@ -15,6 +15,13 @@
 @property (nonatomic) PolymorphicType type;
 @property (nonatomic) NSString *field;
 
+- (BOOL) hasType;
+- (void) clearType;
+
+- (BOOL) hasField;
+- (void) clearField;
+
+
 + (PDMessageDescriptor *)typeDescriptor;
 @end
 

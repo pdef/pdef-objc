@@ -3,15 +3,33 @@
 #import "TestException.h"
 
 
-@implementation TestException
+@implementation TestException {
+    BOOL _text_isset;
+}
 static PDMessageDescriptor *_TestExceptionDescriptor;
 
-+ (PDMessageDescriptor *)typeDescriptor {
-    return _TestExceptionDescriptor;
+// text
+- (BOOL)hasText {
+    return _text_isset;
 }
+
+- (void)setText:(NSString *)text {
+    _text = text;
+    _text_isset = YES;
+}
+
+- (void)clearText {
+    _text = nil;
+    _text_isset = NO;
+}
+
 
 - (PDMessageDescriptor *)descriptor {
     return [TestException typeDescriptor];
+}
+
++ (PDMessageDescriptor *)typeDescriptor {
+    return _TestExceptionDescriptor;
 }
 
 + (void)initialize {

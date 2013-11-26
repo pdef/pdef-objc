@@ -10,6 +10,10 @@
 @interface Subtype : Base
 @property (nonatomic) NSString *subfield;
 
+- (BOOL) hasSubfield;
+- (void) clearSubfield;
+
+
 + (PDMessageDescriptor *)typeDescriptor;
 @end
 

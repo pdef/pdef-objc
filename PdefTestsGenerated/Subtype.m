@@ -5,22 +5,40 @@
 #import "MultiLevelSubtype.h"
 
 
-@implementation Subtype
+@implementation Subtype {
+    BOOL _subfield_isset;
+}
 static PDMessageDescriptor *_SubtypeDescriptor;
-
-+ (PDMessageDescriptor *)typeDescriptor {
-    return _SubtypeDescriptor;
-}
-
-- (PDMessageDescriptor *)descriptor {
-    return [Subtype typeDescriptor];
-}
 
 - (id) init {
     if (self = [super init]) {
         self.type = PolymorphicType_SUBTYPE ;
     }
     return self;
+}
+
+// subfield
+- (BOOL)hasSubfield {
+    return _subfield_isset;
+}
+
+- (void)setSubfield:(NSString *)subfield {
+    _subfield = subfield;
+    _subfield_isset = YES;
+}
+
+- (void)clearSubfield {
+    _subfield = nil;
+    _subfield_isset = NO;
+}
+
+
+- (PDMessageDescriptor *)descriptor {
+    return [Subtype typeDescriptor];
+}
+
++ (PDMessageDescriptor *)typeDescriptor {
+    return _SubtypeDescriptor;
 }
 
 + (void)initialize {

@@ -6,15 +6,48 @@
 #import "MultiLevelSubtype.h"
 
 
-@implementation Base
+@implementation Base {
+    BOOL _type_isset;
+    BOOL _field_isset;
+}
 static PDMessageDescriptor *_BaseDescriptor;
 
-+ (PDMessageDescriptor *)typeDescriptor {
-    return _BaseDescriptor;
+// type
+- (BOOL)hasType {
+    return _type_isset;
 }
+
+- (void)setType:(PolymorphicType )type {
+    _type = type;
+    _type_isset = YES;
+}
+
+- (void)clearType {
+    _type_isset = NO;
+}
+
+// field
+- (BOOL)hasField {
+    return _field_isset;
+}
+
+- (void)setField:(NSString *)field {
+    _field = field;
+    _field_isset = YES;
+}
+
+- (void)clearField {
+    _field = nil;
+    _field_isset = NO;
+}
+
 
 - (PDMessageDescriptor *)descriptor {
     return [Base typeDescriptor];
+}
+
++ (PDMessageDescriptor *)typeDescriptor {
+    return _BaseDescriptor;
 }
 
 + (void)initialize {

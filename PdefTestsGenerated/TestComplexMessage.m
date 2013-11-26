@@ -6,15 +6,208 @@
 #import "Base.h"
 
 
-@implementation TestComplexMessage
+@implementation TestComplexMessage {
+    BOOL _short0_isset;
+    BOOL _long0_isset;
+    BOOL _float0_isset;
+    BOOL _double0_isset;
+    BOOL _datetime0_isset;
+    BOOL _list0_isset;
+    BOOL _set0_isset;
+    BOOL _map0_isset;
+    BOOL _enum0_isset;
+    BOOL _message0_isset;
+    BOOL _polymorphic_isset;
+    BOOL _datatypes_isset;
+}
 static PDMessageDescriptor *_TestComplexMessageDescriptor;
 
-+ (PDMessageDescriptor *)typeDescriptor {
-    return _TestComplexMessageDescriptor;
+// short0
+- (BOOL)hasShort0 {
+    return _short0_isset;
 }
+
+- (void)setShort0:(NSNumber *)short0 {
+    _short0 = short0;
+    _short0_isset = YES;
+}
+
+- (void)clearShort0 {
+    _short0 = nil;
+    _short0_isset = NO;
+}
+
+// long0
+- (BOOL)hasLong0 {
+    return _long0_isset;
+}
+
+- (void)setLong0:(NSNumber *)long0 {
+    _long0 = long0;
+    _long0_isset = YES;
+}
+
+- (void)clearLong0 {
+    _long0 = nil;
+    _long0_isset = NO;
+}
+
+// float0
+- (BOOL)hasFloat0 {
+    return _float0_isset;
+}
+
+- (void)setFloat0:(NSNumber *)float0 {
+    _float0 = float0;
+    _float0_isset = YES;
+}
+
+- (void)clearFloat0 {
+    _float0 = nil;
+    _float0_isset = NO;
+}
+
+// double0
+- (BOOL)hasDouble0 {
+    return _double0_isset;
+}
+
+- (void)setDouble0:(NSNumber *)double0 {
+    _double0 = double0;
+    _double0_isset = YES;
+}
+
+- (void)clearDouble0 {
+    _double0 = nil;
+    _double0_isset = NO;
+}
+
+// datetime0
+- (BOOL)hasDatetime0 {
+    return _datetime0_isset;
+}
+
+- (void)setDatetime0:(NSDate *)datetime0 {
+    _datetime0 = datetime0;
+    _datetime0_isset = YES;
+}
+
+- (void)clearDatetime0 {
+    _datetime0 = nil;
+    _datetime0_isset = NO;
+}
+
+// list0
+- (BOOL)hasList0 {
+    return _list0_isset;
+}
+
+- (void)setList0:(NSArray *)list0 {
+    _list0 = list0;
+    _list0_isset = YES;
+}
+
+- (void)clearList0 {
+    _list0 = nil;
+    _list0_isset = NO;
+}
+
+// set0
+- (BOOL)hasSet0 {
+    return _set0_isset;
+}
+
+- (void)setSet0:(NSSet *)set0 {
+    _set0 = set0;
+    _set0_isset = YES;
+}
+
+- (void)clearSet0 {
+    _set0 = nil;
+    _set0_isset = NO;
+}
+
+// map0
+- (BOOL)hasMap0 {
+    return _map0_isset;
+}
+
+- (void)setMap0:(NSDictionary *)map0 {
+    _map0 = map0;
+    _map0_isset = YES;
+}
+
+- (void)clearMap0 {
+    _map0 = nil;
+    _map0_isset = NO;
+}
+
+// enum0
+- (BOOL)hasEnum0 {
+    return _enum0_isset;
+}
+
+- (void)setEnum0:(TestEnum )enum0 {
+    _enum0 = enum0;
+    _enum0_isset = YES;
+}
+
+- (void)clearEnum0 {
+    _enum0_isset = NO;
+}
+
+// message0
+- (BOOL)hasMessage0 {
+    return _message0_isset;
+}
+
+- (void)setMessage0:(TestMessage *)message0 {
+    _message0 = message0;
+    _message0_isset = YES;
+}
+
+- (void)clearMessage0 {
+    _message0 = nil;
+    _message0_isset = NO;
+}
+
+// polymorphic
+- (BOOL)hasPolymorphic {
+    return _polymorphic_isset;
+}
+
+- (void)setPolymorphic:(Base *)polymorphic {
+    _polymorphic = polymorphic;
+    _polymorphic_isset = YES;
+}
+
+- (void)clearPolymorphic {
+    _polymorphic = nil;
+    _polymorphic_isset = NO;
+}
+
+// datatypes
+- (BOOL)hasDatatypes {
+    return _datatypes_isset;
+}
+
+- (void)setDatatypes:(TestComplexMessage *)datatypes {
+    _datatypes = datatypes;
+    _datatypes_isset = YES;
+}
+
+- (void)clearDatatypes {
+    _datatypes = nil;
+    _datatypes_isset = NO;
+}
+
 
 - (PDMessageDescriptor *)descriptor {
     return [TestComplexMessage typeDescriptor];
+}
+
++ (PDMessageDescriptor *)typeDescriptor {
+    return _TestComplexMessageDescriptor;
 }
 
 + (void)initialize {

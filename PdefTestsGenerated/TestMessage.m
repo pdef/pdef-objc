@@ -3,15 +3,65 @@
 #import "TestMessage.h"
 
 
-@implementation TestMessage
+@implementation TestMessage {
+    BOOL _string0_isset;
+    BOOL _bool0_isset;
+    BOOL _int0_isset;
+}
 static PDMessageDescriptor *_TestMessageDescriptor;
 
-+ (PDMessageDescriptor *)typeDescriptor {
-    return _TestMessageDescriptor;
+// string0
+- (BOOL)hasString0 {
+    return _string0_isset;
 }
+
+- (void)setString0:(NSString *)string0 {
+    _string0 = string0;
+    _string0_isset = YES;
+}
+
+- (void)clearString0 {
+    _string0 = nil;
+    _string0_isset = NO;
+}
+
+// bool0
+- (BOOL)hasBool0 {
+    return _bool0_isset;
+}
+
+- (void)setBool0:(NSNumber *)bool0 {
+    _bool0 = bool0;
+    _bool0_isset = YES;
+}
+
+- (void)clearBool0 {
+    _bool0 = nil;
+    _bool0_isset = NO;
+}
+
+// int0
+- (BOOL)hasInt0 {
+    return _int0_isset;
+}
+
+- (void)setInt0:(NSNumber *)int0 {
+    _int0 = int0;
+    _int0_isset = YES;
+}
+
+- (void)clearInt0 {
+    _int0 = nil;
+    _int0_isset = NO;
+}
+
 
 - (PDMessageDescriptor *)descriptor {
     return [TestMessage typeDescriptor];
+}
+
++ (PDMessageDescriptor *)typeDescriptor {
+    return _TestMessageDescriptor;
 }
 
 + (void)initialize {

@@ -22,6 +22,43 @@
 @property (nonatomic) Base *polymorphic;
 @property (nonatomic) TestComplexMessage *datatypes;
 
+- (BOOL) hasShort0;
+- (void) clearShort0;
+
+- (BOOL) hasLong0;
+- (void) clearLong0;
+
+- (BOOL) hasFloat0;
+- (void) clearFloat0;
+
+- (BOOL) hasDouble0;
+- (void) clearDouble0;
+
+- (BOOL) hasDatetime0;
+- (void) clearDatetime0;
+
+- (BOOL) hasList0;
+- (void) clearList0;
+
+- (BOOL) hasSet0;
+- (void) clearSet0;
+
+- (BOOL) hasMap0;
+- (void) clearMap0;
+
+- (BOOL) hasEnum0;
+- (void) clearEnum0;
+
+- (BOOL) hasMessage0;
+- (void) clearMessage0;
+
+- (BOOL) hasPolymorphic;
+- (void) clearPolymorphic;
+
+- (BOOL) hasDatatypes;
+- (void) clearDatatypes;
+
+
 + (PDMessageDescriptor *)typeDescriptor;
 @end
 

@@ -9,6 +9,10 @@
 @interface MultiLevelSubtype : Subtype
 @property (nonatomic) NSString *mfield;
 
+- (BOOL) hasMfield;
+- (void) clearMfield;
+
+
 + (PDMessageDescriptor *)typeDescriptor;
 @end
 

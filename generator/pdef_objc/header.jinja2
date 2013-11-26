@@ -39,11 +39,12 @@ PDEnumDescriptor *{{ definition.name }}Descriptor();
     {% for field in definition.declared_fields %}
 @property (nonatomic) {{ field.type|objc_type }}{{ field.name }};
     {% endfor %}
-{#{% for field in definition.declared_fields %}#}
-{#- (BOOL) has{{ field.name|upper_first }};#}
-{#- (void) clear({{ field.name|upper_first }};#}
-{##}
-{#{% endfor %}#}
+
+{% for field in definition.declared_fields %}
+- (BOOL) has{{ field.name|upper_first }};
+- (void) clear{{ field.name|upper_first }};
+
+{% endfor %}
 
 + (PDMessageDescriptor *)typeDescriptor;
 @end

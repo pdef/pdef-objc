@@ -12,6 +12,16 @@ Multi-line comment.
 @property (nonatomic) NSNumber *bool0;
 @property (nonatomic) NSNumber *int0;
 
+- (BOOL) hasString0;
+- (void) clearString0;
+
+- (BOOL) hasBool0;
+- (void) clearBool0;
+
+- (BOOL) hasInt0;
+- (void) clearInt0;
+
+
 + (PDMessageDescriptor *)typeDescriptor;
 @end
 

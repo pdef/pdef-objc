@@ -25,16 +25,12 @@ PDEnumDescriptor *{{ definition.name }}Descriptor() {
 
 
 {% elif definition.is_message %}
-@implementation {{ definition.name }}
+@implementation {{ definition.name }} {
+    {% for field in definition.declared_fields %}
+    BOOL _{{ field.name }}_isset;
+    {% endfor %}
+}
 static PDMessageDescriptor *_{{ definition.name }}Descriptor;
-
-+ (PDMessageDescriptor *)typeDescriptor {
-    return _{{ definition.name }}Descriptor;
-}
-
-- (PDMessageDescriptor *)descriptor {
-    return [{{ definition.name }} typeDescriptor];
-}
 
 {% if definition.discriminator_value %}
 - (id) init {
@@ -45,6 +41,33 @@ static PDMessageDescriptor *_{{ definition.name }}Descriptor;
 }
 
 {% endif -%}
+{% for field in definition.declared_fields %}
+// {{ field.name }}
+- (BOOL)has{{ field.name|upper_first }} {
+    return _{{ field.name }}_isset;
+}
+
+- (void)set{{ field.name|upper_first }}:({{ field.type|objc_type }}){{ field.name }} {
+    _{{ field.name }} = {{ field.name }};
+    _{{ field.name }}_isset = YES;
+}
+
+- (void)clear{{ field.name|upper_first }} {
+    {% if not field.type.is_enum %}
+    _{{ field.name }} = nil;
+    {% endif %}
+    _{{ field.name }}_isset = NO;
+}
+
+{% endfor %}
+
+- (PDMessageDescriptor *)descriptor {
+    return [{{ definition.name }} typeDescriptor];
+}
+
++ (PDMessageDescriptor *)typeDescriptor {
+    return _{{ definition.name }}Descriptor;
+}
 
 + (void)initialize {
     if (self != [{{ definition.name }} class]) {

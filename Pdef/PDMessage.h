@@ -29,9 +29,6 @@
 /** Converts this message to a JSON string. */
 - (NSString *)toJson;
 
-/** Returns true when a field with such a name is set in this message. */
-- (BOOL)isFieldSet:(NSString *)name;
-
 - (BOOL)isEqual:(id)other;
 
 - (BOOL)isEqualToMessage:(PDMessage *)message;
