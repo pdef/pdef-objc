@@ -16,6 +16,21 @@
 
 @implementation PDMessageTests
 
+- (TestMessage *)fixtureMessage {
+    TestMessage *expected = [[TestMessage alloc] init];
+    expected.bool0 = YES;
+    expected.int0 = 123;
+    expected.string0 = @"hello";
+    return expected;
+}
+
+- (NSDictionary *)fixtureDictionary {
+    return @{
+            @"bool0": @YES,
+            @"int0": @"123",
+            @"string0": @"hello"};
+}
+
 - (void)testSetDiscriminatorValueInConstructor {
     Base *base = [[Base alloc] init];
     Subtype *subtype = [[Subtype alloc] init];
@@ -29,17 +44,93 @@
 }
 
 - (void)testInitWithDictionary {
-    TestMessage *expected = [[TestMessage alloc] init];
-    expected.bool0 = YES;
-    expected.int0 = 123;
-    expected.string0 = @"hello";
-
-    TestMessage *message = [[TestMessage alloc] initWithDictionary:@{
-            @"bool0": @YES,
-            @"int0": @"123",
-            @"string0": @"hello"}];
+    TestMessage *expected = [self fixtureMessage];
+    TestMessage *message = [[TestMessage alloc] initWithDictionary:[self fixtureDictionary]];
 
     XCTAssert([message isEqual:expected]);
+}
+
+- (void)testInitWithJson {
+    NSError *error = nil;
+    NSData *json = [[self fixtureMessage] toJsonWithError:&error];
+    XCTAssert(!error);
+
+    TestMessage *message = [[[TestMessage alloc] init] mergeJson:json error:&error];
+    XCTAssert(message);
+    XCTAssert(!error);
+    XCTAssert([message isEqual:[self fixtureMessage]]);
+}
+
+- (void)testInitWithJsonStream {
+    NSError *error = nil;
+    NSData *json = [[self fixtureMessage] toJsonWithError:&error];
+    NSInputStream *stream = [NSInputStream inputStreamWithData:json];
+    XCTAssert(!error);
+    [stream open];
+
+    TestMessage *message = [[[TestMessage alloc] init] mergeJsonStream:stream error:&error];
+    XCTAssert(message);
+    XCTAssert(!error);
+    XCTAssert([message isEqual:[self fixtureMessage]]);
+}
+
+- (void)testMergeMessage {
+    TestMessage *message = [[[TestMessage alloc] init] mergeMessage:[self fixtureMessage]];
+
+    XCTAssert([message isEqual:[self fixtureMessage]]);
+}
+
+- (void)testMergeMessage_mergeSuperType {
+    Base *base = [[Base alloc] init];
+    base.field = @"hello";
+
+    MultiLevelSubtype *subtype = [[[MultiLevelSubtype alloc] init] mergeMessage:base];
+    XCTAssert([subtype.field isEqualToString:@"hello"]);
+}
+
+- (void)testMergeMessage_mergeSubtype {
+    MultiLevelSubtype *subtype = [[MultiLevelSubtype alloc] init];
+    subtype.field = @"hello";
+
+    Base *base = [[[Base alloc] init] mergeMessage:subtype];
+    XCTAssert([base.field isEqualToString:@"hello"]);
+}
+
+- (void)testMergeMessage_skipDiscriminatorFields {
+    Subtype *subtype = [[Subtype alloc] init];
+    XCTAssert(subtype.type == PolymorphicType_SUBTYPE);
+
+    MultiLevelSubtype *msubtype = [[MultiLevelSubtype alloc] init];
+    XCTAssert(msubtype.type == PolymorphicType_MULTILEVEL_SUBTYPE);
+
+    [msubtype mergeMessage:subtype];
+    XCTAssert(msubtype.type == PolymorphicType_MULTILEVEL_SUBTYPE);
+}
+
+- (void)testMergeDictionary {
+    TestMessage *message = [[[TestMessage alloc] init] mergeDictionary:[self fixtureDictionary]];
+    XCTAssert([message isEqual:[self fixtureMessage]]);
+}
+
+- (void)testMergeJson {
+    NSError *error = nil;
+    NSData *json = [[self fixtureMessage] toJsonWithError:&error];
+    XCTAssert(!error);
+
+    TestMessage *message = [[[TestMessage alloc] init] mergeJson:json error:&error];
+    XCTAssert(!error);
+    XCTAssert([message isEqual:[self fixtureMessage]]);
+}
+
+- (void)testMergeJsonStream {
+    NSError *error = nil;
+    NSInputStream *stream = [NSInputStream inputStreamWithData:[[self fixtureMessage] toJsonWithError:&error]];
+    XCTAssert(!error);
+    [stream open];
+
+    TestMessage *message = [[[TestMessage alloc] init] mergeJsonStream:stream error:&error];
+    XCTAssert(!error);
+    XCTAssert([message isEqual:[self fixtureMessage]]);
 }
 
 - (void)testToDictionary {

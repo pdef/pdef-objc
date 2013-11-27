@@ -26,10 +26,6 @@
     return self;
 }
 
-- (NSDictionary *)toDictionary {
-    return [PDDataFormat writeObject:self descriptor:self.descriptor];
-}
-
 - (id)initWithJson:(NSData *)json error:(NSError **)error {
     id object = [NSJSONSerialization JSONObjectWithData:json options:0 error:error];
     if (!object) {
@@ -39,18 +35,94 @@
     return [self initWithDictionary:object];
 }
 
+- (id)initWithJsonStream:(NSInputStream *)stream error:(NSError **)error {
+    id object = [NSJSONSerialization JSONObjectWithStream:stream options:0 error:error];
+    if (!object) {
+        return nil;
+    }
+    return [self initWithDictionary:object];
+}
+
+- (id)mergeMessage:(PDMessage *)message {
+    if (!message || message == self) {
+        return self;
+    }
+
+    PDMessageDescriptor *descriptor = self.descriptor;
+    if (![message isKindOfClass:self.class]) {
+        if (![self isKindOfClass:message.class]) {
+            return self;
+        }
+        descriptor = message.descriptor;
+    }
+
+    for (PDFieldDescriptor *field in descriptor.fields) {
+        if (field.discriminator) {
+            continue;
+        }
+
+        if (![field isSetInMessage:message]) {
+            continue;
+        }
+
+        id value = [message valueForKey:field.name];
+        id valueCopy = [value copy];
+        [self setValue:valueCopy forKey:field.name];
+    }
+
+    return self;
+}
+
+- (id)mergeDictionary:(NSDictionary *)dictionary {
+    PDMessage *message = [[[self class] alloc] initWithDictionary:dictionary];
+    return [self mergeMessage:message];
+}
+
+- (id)mergeJson:(NSData *)json error:(NSError **)error {
+    PDMessage *message = [[[self class] alloc] initWithJson:json error:error];
+    if (!message) {
+        return self;
+    }
+
+    return [self mergeMessage:message];
+}
+
+- (id)mergeJsonStream:(NSInputStream *)stream error:(NSError **)error {
+    PDMessage *message = [[[self class] alloc] initWithJsonStream:stream error:error];
+    if (!message) {
+        return self;
+    }
+    return [self mergeMessage:message];
+}
+
+- (NSDictionary *)toDictionary {
+    return [PDDataFormat writeObject:self descriptor:self.descriptor];
+}
+
 - (NSData *)toJsonWithError:(NSError **)error {
     return [self toJsonIndent:NO error:error];
 }
 
 - (NSData *)toJsonIndent:(BOOL)indent error:(NSError **)error {
     NSDictionary *dict = [self toDictionary];
+    NSJSONWritingOptions options = [self getJsonWritingOptions:indent];
+
+    return [NSJSONSerialization dataWithJSONObject:dict options:options error:error];
+}
+
+- (void)writeToJsonStream:(NSOutputStream *)stream ident:(BOOL)indent error:(NSError **)error {
+    NSDictionary *dict = [self toDictionary];
+    NSJSONWritingOptions options = [self getJsonWritingOptions:indent];
+
+    [NSJSONSerialization writeJSONObject:dict toStream:stream options:options error:error];
+}
+
+- (NSJSONWritingOptions)getJsonWritingOptions:(BOOL)indent {
     NSJSONWritingOptions options = 0;
     if (indent) {
         options = NSJSONWritingPrettyPrinted;
     }
-
-    return [NSJSONSerialization dataWithJSONObject:dict options:options error:error];
+    return options;
 }
 
 - (BOOL)isEqual:(id)other {
