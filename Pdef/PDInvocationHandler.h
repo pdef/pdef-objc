@@ -9,6 +9,9 @@
 @class PDInvocation;
 
 @protocol PDInvocationHandler <NSObject>
+
+@required
 - (NSOperation *) handleInvocation:(PDInvocation *)invocation
                           response:(void (^)(id result, NSError *error))response;
+
 @end

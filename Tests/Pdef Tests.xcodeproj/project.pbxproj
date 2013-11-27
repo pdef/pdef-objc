@@ -30,8 +30,6 @@
 		2C8859B01846209100F31100 /* TestInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88599C1846209100F31100 /* TestInterface.m */; };
 		2C8859B11846209100F31100 /* TestMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88599E1846209100F31100 /* TestMessage.m */; };
 		2C8859B21846209100F31100 /* TestMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88599E1846209100F31100 /* TestMessage.m */; };
-		2C8859BB1846209D00F31100 /* PDDataFormatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859B41846209D00F31100 /* PDDataFormatTests.m */; };
-		2C8859BC1846209D00F31100 /* PDDataFormatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859B41846209D00F31100 /* PDDataFormatTests.m */; };
 		2C8859BD1846209D00F31100 /* PDDescriptorsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859B51846209D00F31100 /* PDDescriptorsTests.m */; };
 		2C8859BE1846209D00F31100 /* PDDescriptorsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859B51846209D00F31100 /* PDDescriptorsTests.m */; };
 		2C8859BF1846209D00F31100 /* PDGeneratedGescriptorsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859B61846209D00F31100 /* PDGeneratedGescriptorsTests.m */; };
@@ -47,6 +45,10 @@
 		2CDF08FF1846176200B226AB /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CDF08FE1846176200B226AB /* XCTest.framework */; };
 		2CDF09011846176200B226AB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CDF09001846176200B226AB /* Foundation.framework */; };
 		2CDF09091846176200B226AB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CDF09071846176200B226AB /* InfoPlist.strings */; };
+		318211475381FDA3D9CB8F08 /* PDJsonFormatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821139C6229E3F2FDA618D /* PDJsonFormatTests.m */; };
+		31821707A1B02186D82DD669 /* PDJsonSerializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821E4EA685D38461FC6757 /* PDJsonSerializationTests.m */; };
+		318218E1BE5D5C7E7ED5226D /* PDJsonFormatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821139C6229E3F2FDA618D /* PDJsonFormatTests.m */; };
+		31821CDB8FB1FA518FB56174 /* PDJsonSerializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821E4EA685D38461FC6757 /* PDJsonSerializationTests.m */; };
 		8439C431C7AA4D59BB14FF50 /* libPods-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0F418E67DCF4F048F29FAA7 /* libPods-osx.a */; };
 /* End PBXBuildFile section */
 
@@ -76,7 +78,6 @@
 		2C88599C1846209100F31100 /* TestInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestInterface.m; sourceTree = "<group>"; };
 		2C88599D1846209100F31100 /* TestMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestMessage.h; sourceTree = "<group>"; };
 		2C88599E1846209100F31100 /* TestMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestMessage.m; sourceTree = "<group>"; };
-		2C8859B41846209D00F31100 /* PDDataFormatTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDDataFormatTests.m; sourceTree = "<group>"; };
 		2C8859B51846209D00F31100 /* PDDescriptorsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDDescriptorsTests.m; sourceTree = "<group>"; };
 		2C8859B61846209D00F31100 /* PDGeneratedGescriptorsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDGeneratedGescriptorsTests.m; sourceTree = "<group>"; };
 		2C8859B71846209D00F31100 /* PDInterfaceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDInterfaceTests.m; sourceTree = "<group>"; };
@@ -89,6 +90,8 @@
 		2CDF09061846176200B226AB /* iOS Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iOS Tests-Info.plist"; sourceTree = "<group>"; };
 		2CDF09081846176200B226AB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2CDF090C1846176200B226AB /* iOS Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOS Tests-Prefix.pch"; sourceTree = "<group>"; };
+		31821139C6229E3F2FDA618D /* PDJsonFormatTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDJsonFormatTests.m; sourceTree = "<group>"; };
+		31821E4EA685D38461FC6757 /* PDJsonSerializationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDJsonSerializationTests.m; sourceTree = "<group>"; };
 		7DFE89E1E49243FA8DC45685 /* Pods-osx.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-osx.xcconfig"; path = "Pods/Pods-osx.xcconfig"; sourceTree = "<group>"; };
 		8C9FE9AE3CE5470FBD7377B9 /* Pods-ios.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.xcconfig"; path = "Pods/Pods-ios.xcconfig"; sourceTree = "<group>"; };
 		C4346A32D8214B0C81D9D1B2 /* libPods-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,13 +170,14 @@
 		2C8859B31846209D00F31100 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				2C8859B41846209D00F31100 /* PDDataFormatTests.m */,
 				2C8859B51846209D00F31100 /* PDDescriptorsTests.m */,
 				2C8859B61846209D00F31100 /* PDGeneratedGescriptorsTests.m */,
 				2C8859B71846209D00F31100 /* PDInterfaceTests.m */,
 				2C8859B81846209D00F31100 /* PDInvocationTests.m */,
 				2C8859B91846209D00F31100 /* PDMessageJsonTests.m */,
 				2C8859BA1846209D00F31100 /* PDMessageTests.m */,
+				31821139C6229E3F2FDA618D /* PDJsonFormatTests.m */,
+				31821E4EA685D38461FC6757 /* PDJsonSerializationTests.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -398,9 +402,10 @@
 				2C8859C81846209D00F31100 /* PDMessageTests.m in Sources */,
 				2C8859C21846209D00F31100 /* PDInterfaceTests.m in Sources */,
 				2C8859A41846209100F31100 /* PolymorphicType.m in Sources */,
-				2C8859BC1846209D00F31100 /* PDDataFormatTests.m in Sources */,
 				2C8859A21846209100F31100 /* MultiLevelSubtype.m in Sources */,
 				2C8859C01846209D00F31100 /* PDGeneratedGescriptorsTests.m in Sources */,
+				318218E1BE5D5C7E7ED5226D /* PDJsonFormatTests.m in Sources */,
+				31821CDB8FB1FA518FB56174 /* PDJsonSerializationTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,9 +427,10 @@
 				2C8859C71846209D00F31100 /* PDMessageTests.m in Sources */,
 				2C8859C11846209D00F31100 /* PDInterfaceTests.m in Sources */,
 				2C8859A31846209100F31100 /* PolymorphicType.m in Sources */,
-				2C8859BB1846209D00F31100 /* PDDataFormatTests.m in Sources */,
 				2C8859A11846209100F31100 /* MultiLevelSubtype.m in Sources */,
 				2C8859BF1846209D00F31100 /* PDGeneratedGescriptorsTests.m in Sources */,
+				318211475381FDA3D9CB8F08 /* PDJsonFormatTests.m in Sources */,
+				31821707A1B02186D82DD669 /* PDJsonSerializationTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

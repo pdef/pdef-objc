@@ -14,6 +14,6 @@ Pod::Spec.new do |s|
   s.source_files  = 'Pdef', 'Pdef/*.{h,m}'
   s.public_header_files = 'Pdef/*.h'
 
-  # s.dependency 'JSONKit', '~> 1.4'
+  s.dependency 'AFNetworking', '~> 2.0'
 end
 

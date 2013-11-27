@@ -6,19 +6,24 @@
 
 #import "PDMessage.h"
 #import "PDDescriptors.h"
-#import "PDDataFormat.h"
+#import "PDJsonFormat.h"
+#import "PDJsonSerialization.h"
 
 
 @implementation PDMessage
 - (id)initWithDictionary:(NSDictionary *)dictionary {
     if (self = [self init]) {
+        NSError *error = nil;
         for (PDFieldDescriptor *field in self.descriptor.fields) {
             id value = [dictionary objectForKey:field.name];
             if (!value) {
                 continue;
             }
 
-            id parsed = [PDDataFormat readObjectFromData:value descriptor:field.type];
+            id parsed = [PDJsonFormat readObject:value descriptor:field.type error:&error];
+            if (!parsed) {
+                return nil;
+            }
             [self setValue:parsed forKey:field.name];
         }
     }
@@ -27,19 +32,7 @@
 }
 
 - (id)initWithJson:(NSData *)json error:(NSError **)error {
-    id object = [NSJSONSerialization JSONObjectWithData:json options:0 error:error];
-    if (!object) {
-        return nil;
-    }
-
-    return [self initWithDictionary:object];
-}
-
-- (id)initWithJsonStream:(NSInputStream *)stream error:(NSError **)error {
-    id object = [NSJSONSerialization JSONObjectWithStream:stream options:0 error:error];
-    if (!object) {
-        return nil;
-    }
+    id object = [PDJsonSerialization JSONObjectWithData:json error:error];
     return [self initWithDictionary:object];
 }
 
@@ -87,16 +80,9 @@
     return [self mergeMessage:message];
 }
 
-- (id)mergeJsonStream:(NSInputStream *)stream error:(NSError **)error {
-    PDMessage *message = [[[self class] alloc] initWithJsonStream:stream error:error];
-    if (!message) {
-        return self;
-    }
-    return [self mergeMessage:message];
-}
-
 - (NSDictionary *)toDictionary {
-    return [PDDataFormat writeObject:self descriptor:self.descriptor];
+    NSError *error = nil;
+    return [PDJsonFormat writeObject:self descriptor:[self descriptor] error:&error];
 }
 
 - (NSData *)toJsonWithError:(NSError **)error {
@@ -104,17 +90,7 @@
 }
 
 - (NSData *)toJsonIndent:(BOOL)indent error:(NSError **)error {
-    NSDictionary *dict = [self toDictionary];
-    NSJSONWritingOptions options = [self getJsonWritingOptions:indent];
-
-    return [NSJSONSerialization dataWithJSONObject:dict options:options error:error];
-}
-
-- (void)writeToJsonStream:(NSOutputStream *)stream ident:(BOOL)indent error:(NSError **)error {
-    NSDictionary *dict = [self toDictionary];
-    NSJSONWritingOptions options = [self getJsonWritingOptions:indent];
-
-    [NSJSONSerialization writeJSONObject:dict toStream:stream options:options error:error];
+    return [PDJsonFormat writeData:self descriptor:[self descriptor] error:error];
 }
 
 - (NSJSONWritingOptions)getJsonWritingOptions:(BOOL)indent {

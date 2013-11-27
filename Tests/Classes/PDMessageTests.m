@@ -61,19 +61,6 @@
     XCTAssert([message isEqual:[self fixtureMessage]]);
 }
 
-- (void)testInitWithJsonStream {
-    NSError *error = nil;
-    NSData *json = [[self fixtureMessage] toJsonWithError:&error];
-    NSInputStream *stream = [NSInputStream inputStreamWithData:json];
-    XCTAssert(!error);
-    [stream open];
-
-    TestMessage *message = [[[TestMessage alloc] init] mergeJsonStream:stream error:&error];
-    XCTAssert(message);
-    XCTAssert(!error);
-    XCTAssert([message isEqual:[self fixtureMessage]]);
-}
-
 - (void)testMergeMessage {
     TestMessage *message = [[[TestMessage alloc] init] mergeMessage:[self fixtureMessage]];
 
@@ -118,17 +105,6 @@
     XCTAssert(!error);
 
     TestMessage *message = [[[TestMessage alloc] init] mergeJson:json error:&error];
-    XCTAssert(!error);
-    XCTAssert([message isEqual:[self fixtureMessage]]);
-}
-
-- (void)testMergeJsonStream {
-    NSError *error = nil;
-    NSInputStream *stream = [NSInputStream inputStreamWithData:[[self fixtureMessage] toJsonWithError:&error]];
-    XCTAssert(!error);
-    [stream open];
-
-    TestMessage *message = [[[TestMessage alloc] init] mergeJsonStream:stream error:&error];
     XCTAssert(!error);
     XCTAssert([message isEqual:[self fixtureMessage]]);
 }
