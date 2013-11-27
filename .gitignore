@@ -1,14 +1,13 @@
 .DS_Store
 build/
-*.pbxuser
-*.xcworkspace
-xcuserdata
-profile
 .idea/
+xcuserdata
+
+Tests/Pods/
+Tests/Podfile.lock
 
 *.pyc
 *.iml
-.idea
 
 generator/build/
 generator/dist/

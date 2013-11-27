@@ -260,7 +260,7 @@ static NSDateFormatter *_formatter;
 + (id)readEnum:(id)object descriptor:(PDEnumDescriptor *)descriptor {
     if ([object isKindOfClass:[NSNumber class]]) {
         NSNumber *number = object;
-        if ([descriptor.numbersToNames doesContain:number]) {
+        if ([descriptor.numbersToNames objectForKey:number]) {
             return number;
         } else {
             return @0;

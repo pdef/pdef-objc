@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E6BD4D74-6CC7-48A1-9B11-7D59AC5CEB26</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Pdef</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>30770AA8-B5E5-4367-9BBD-F64F614A3B1B</key>
+		<string>ssh://github.com/pdef/pdef-objc.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Pdef.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>30770AA8-B5E5-4367-9BBD-F64F614A3B1B</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/pdef/pdef-objc.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>30770AA8-B5E5-4367-9BBD-F64F614A3B1B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>30770AA8-B5E5-4367-9BBD-F64F614A3B1B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>objc</string>
+		</dict>
+	</array>
+</dict>
+</plist>
