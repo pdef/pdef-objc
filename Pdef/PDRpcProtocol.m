@@ -89,7 +89,7 @@
             NULL,
             (__bridge CFStringRef)value,
             NULL,
-            (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+            (CFStringRef)@"!*'();@&=+$/?%#",
             kCFStringEncodingUTF8 );
 }
 @end

@@ -16,6 +16,7 @@
 
 
 @implementation PDRpcClient
+
 - (id)initWithDescriptor:(PDInterfaceDescriptor *)descriptor baseUrl:(NSString *)baseUrl {
     return [self initWithDescriptor:descriptor baseUrl:baseUrl manager:nil];
 }
@@ -109,7 +110,9 @@
 - (NSOperation *)sendRequest:(NSURLRequest *)request
                      success:(void (^)(AFHTTPRequestOperation *, id))success
                      failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
-    return [_manager HTTPRequestOperationWithRequest:request success:success failure:failure];
+    AFHTTPRequestOperation *operation = [_manager HTTPRequestOperationWithRequest:request success:success failure:failure];
+    [_manager.operationQueue addOperation:operation];
+    return operation;
 }
 
 - (void)handleSuccess:(AFHTTPRequestOperation *)operation data:(NSData *)data

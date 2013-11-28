@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 enum {
-    PDRpcException,     // Expected RPC application exception.
+    PDRpcException = 1,           // Expected RPC application exception.
 };
 
 

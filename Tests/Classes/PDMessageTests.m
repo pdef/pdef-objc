@@ -52,7 +52,7 @@
 
 - (void)testInitWithJson {
     NSError *error = nil;
-    NSData *json = [[self fixtureMessage] toJsonWithError:&error];
+    NSData *json = [[self fixtureMessage] toJsonError:&error];
     XCTAssert(!error);
 
     TestMessage *message = [[[TestMessage alloc] init] mergeJson:json error:&error];
@@ -101,7 +101,7 @@
 
 - (void)testMergeJson {
     NSError *error = nil;
-    NSData *json = [[self fixtureMessage] toJsonWithError:&error];
+    NSData *json = [[self fixtureMessage] toJsonError:&error];
     XCTAssert(!error);
 
     TestMessage *message = [[[TestMessage alloc] init] mergeJson:json error:&error];

@@ -36,10 +36,7 @@
 - (NSDictionary *)toDictionary;
 
 /** Converts this message to JSON data. */
-- (NSData *)toJsonWithError:(NSError **)error;
-
-/** Converts this message to JSON data, indents the JSON structures. */
-- (NSData *)toJsonIndent:(BOOL)indent error:(NSError **)error;
+- (NSData *)toJsonError:(NSError **)error;
 
 - (BOOL)isEqual:(id)other;
 

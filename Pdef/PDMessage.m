@@ -13,17 +13,22 @@
 @implementation PDMessage
 - (id)initWithDictionary:(NSDictionary *)dictionary {
     if (self = [self init]) {
-        NSError *error = nil;
         for (PDFieldDescriptor *field in self.descriptor.fields) {
             id value = [dictionary objectForKey:field.name];
             if (!value) {
                 continue;
             }
 
-            id parsed = [PDJsonFormat readObject:value descriptor:field.type error:&error];
+            id parsed = [PDJsonFormat readObject:value descriptor:field.type];
             if (!parsed) {
-                return nil;
+                // Failed to parse a field value.
+                continue;
             }
+            if (parsed == [NSNull null]) {
+                // Unbox the value.
+                parsed = nil;
+            }
+
             [self setValue:parsed forKey:field.name];
         }
     }
@@ -81,24 +86,11 @@
 }
 
 - (NSDictionary *)toDictionary {
-    NSError *error = nil;
-    return [PDJsonFormat writeObject:self descriptor:[self descriptor] error:&error];
+    return [PDJsonFormat writeObject:self descriptor:[self descriptor]];
 }
 
-- (NSData *)toJsonWithError:(NSError **)error {
-    return [self toJsonIndent:NO error:error];
-}
-
-- (NSData *)toJsonIndent:(BOOL)indent error:(NSError **)error {
+- (NSData *)toJsonError:(NSError **)error {
     return [PDJsonFormat writeData:self descriptor:[self descriptor] error:error];
-}
-
-- (NSJSONWritingOptions)getJsonWritingOptions:(BOOL)indent {
-    NSJSONWritingOptions options = 0;
-    if (indent) {
-        options = NSJSONWritingPrettyPrinted;
-    }
-    return options;
 }
 
 - (BOOL)isEqual:(id)other {

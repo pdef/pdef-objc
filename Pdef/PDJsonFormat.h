@@ -25,9 +25,9 @@
 
 
 /** Converts an object into a JSON-compatible object, or a JSON-fragment object. */
-+ (id)writeObject:(id)object descriptor:(PDDataTypeDescriptor *)descriptor error:(NSError **)error;
++ (id)writeObject:(id)object descriptor:(PDDataTypeDescriptor *)descriptor;
 
 /** Reads an object from a JSON-compatible object or a JSON-fragment. */
-+ (id)readObject:(id)object descriptor:(PDDataTypeDescriptor *)descriptor error:(NSError **)error;
++ (id)readObject:(id)object descriptor:(PDDataTypeDescriptor *)descriptor;
 
 @end

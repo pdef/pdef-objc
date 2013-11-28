@@ -93,6 +93,18 @@
     [self test:descriptor object:object json:json];
 }
 
+- (void)testList_nulls {
+    NSError *error = nil;
+    NSArray *array = @[[NSNull null]];
+    PDListDescriptor *descriptor = [PDDescriptors listWithElement:[PDDescriptors int32]];
+
+    NSString *json = [PDJsonFormat writeString:array descriptor:descriptor error:&error];
+    XCTAssertEqualObjects(json, @"[null]");
+
+    NSArray *result = [PDJsonFormat readString:json descriptor:descriptor error:&error];
+    XCTAssertEqualObjects(result, array);
+}
+
 - (void)testSet {
     NSError *error = nil;
     NSSet *object = [NSSet setWithObject:[self fixtureMessage]];
@@ -102,6 +114,18 @@
     [self test:descriptor object:object json:json];
 }
 
+- (void)testSet_nulls {
+    NSError *error = nil;
+    NSSet *set = [NSSet setWithObject:[NSNull null]];
+    PDSetDescriptor *descriptor = [PDDescriptors setWithElement:[PDDescriptors int32]];
+
+    NSString *json = [PDJsonFormat writeString:set descriptor:descriptor error:&error];
+    XCTAssertEqualObjects(json, @"[null]");
+
+    NSSet *result = [PDJsonFormat readString:json descriptor:descriptor error:&error];
+    XCTAssertEqualObjects(result, set);
+}
+
 - (void)testMap {
     NSError *error = nil;
     NSDictionary *object = @{@-32 : [self fixtureMessage]};
@@ -109,6 +133,30 @@
 
     NSString *json = [PDJsonFormat writeString:object descriptor:descriptor error:&error];
     [self test:descriptor object:object json:json];
+}
+
+- (void)testMap_nulls {
+    NSError *error = nil;
+    NSDictionary *map = @{@-1: [NSNull null]};
+    PDMapDescriptor *descriptor = [PDDescriptors mapWithKey:[PDDescriptors int32] value:[PDDescriptors int32]];
+
+    NSString *json = [PDJsonFormat writeString:map descriptor:descriptor error:&error];
+    XCTAssertEqualObjects(json, @"{\"-1\":null}");
+
+    NSDictionary *result = [PDJsonFormat readString:json descriptor:descriptor error:&error];
+    XCTAssertEqualObjects(result, map);
+}
+
+- (void)testMap_stringKeys {
+    NSError *error = nil;
+    NSDictionary *map = @{@"hello": @"world"};
+    PDMapDescriptor *descriptor = [PDDescriptors mapWithKey:[PDDescriptors string] value:[PDDescriptors string]];
+
+    NSString *json = [PDJsonFormat writeString:map descriptor:descriptor error:&error];
+    XCTAssertEqualObjects(json, @"{\"hello\":\"world\"}");
+
+    NSDictionary *result = [PDJsonFormat readString:json descriptor:descriptor error:&error];
+    XCTAssertEqualObjects(result, map);
 }
 
 - (void)testMessage {

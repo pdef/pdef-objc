@@ -7,6 +7,7 @@
 #import "PDDescriptors.h"
 #import "PDMessage.h"
 #import "PDJsonSerialization.h"
+#import "PDErrors.h"
 
 
 @implementation PDJsonFormat
@@ -26,21 +27,19 @@ static NSDateFormatter *formatter;
 
 + (NSString *)writeString:(id)object descriptor:(PDDataTypeDescriptor *)descriptor error:(NSError **)error {
     NSParameterAssert(descriptor);
-    if (!object) {
+    if (!object || [object isEqual:[NSNull null]]) {
         return @"null";
     }
 
     // Convert an object into a JSON-compatible object.
-    id jsonObject = [self writeObject:object descriptor:descriptor error:error];
-    if (!jsonObject) {
-        return nil;
-    }
+    id jsonObject = [self writeObject:object descriptor:descriptor];
 
     // Serialize it into a JSON string;
     return [PDJsonSerialization stringWithJSONObject:jsonObject error:error];
 }
 
 + (id)readString:(NSString *)string descriptor:(PDDataTypeDescriptor *)descriptor error:(NSError **)error {
+    NSParameterAssert(string);
     NSParameterAssert(descriptor);
 
     id jsonObject = [PDJsonSerialization JSONObjectWithString:string error:error];
@@ -48,7 +47,7 @@ static NSDateFormatter *formatter;
         return nil;
     }
 
-    return [self readObject:jsonObject descriptor:descriptor error:error];
+    return [self readObject:jsonObject descriptor:descriptor];
 }
 
 
@@ -56,39 +55,35 @@ static NSDateFormatter *formatter;
 
 + (NSData *)writeData:(id)object descriptor:(PDDataTypeDescriptor *)descriptor error:(NSError **)error {
     NSParameterAssert(descriptor);
-    if (!object) {
-        return nil;
+    if (!object || [object isEqual:[NSNull null]]) {
+        return [@"null" dataUsingEncoding:NSUTF8StringEncoding];
     }
 
     // Convert an object into a JSON-compatible object.
-    id jsonObject = [self writeObject:object descriptor:descriptor error:error];
+    id jsonObject = [self writeObject:object descriptor:descriptor];
 
     // Serialize it into JSON-data.
     return [PDJsonSerialization dataWithJSONObject:jsonObject options:0 error:error];
 }
 
 + (id)readData:(NSData *)data descriptor:(PDDataTypeDescriptor *)descriptor error:(NSError **)error {
+    NSParameterAssert(data);
     NSParameterAssert(descriptor);
-    if (!data) {
-        return nil;
-    }
 
     id jsonObject = [PDJsonSerialization JSONObjectWithData:data error:error];
     if (!jsonObject) {
        return nil;
     }
-    return [self readObject:jsonObject descriptor:descriptor error:error];
+
+    return [self readObject:jsonObject descriptor:descriptor];
 }
 
 
 #pragma mark object
 
-+ (id)writeObject:(id)object descriptor:(PDDataTypeDescriptor *)descriptor error:(NSError **)error {
++ (id)writeObject:(id)object descriptor:(PDDataTypeDescriptor *)descriptor {
     NSParameterAssert(descriptor);
-    if (!object) {
-        return nil;
-    }
-    if ([object isEqual:[NSNull null]]) {
+    if (!object || [object isEqual:[NSNull null]]) {
         return [NSNull null];
     }
 
@@ -105,10 +100,10 @@ static NSDateFormatter *formatter;
         case PDTypeEnum: return [self writeEnum:object descriptor:(PDEnumDescriptor *) descriptor];
         case PDTypeVoid: return nil;
 
-        case PDTypeList: return [self writeList:object descriptor:(PDListDescriptor *) descriptor error:error];
-        case PDTypeSet: return [self writeSet:object descriptor:(PDSetDescriptor *) descriptor error:error];
-        case PDTypeMap: return [self writeMap:object descriptor:(PDMapDescriptor *) descriptor error:error];
-        case PDTypeMessage: return [self writeMessage:object descriptor:(PDMessageDescriptor *) descriptor error:error];
+        case PDTypeList: return [self writeList:object descriptor:(PDListDescriptor *) descriptor];
+        case PDTypeSet: return [self writeSet:object descriptor:(PDSetDescriptor *) descriptor];
+        case PDTypeMap: return [self writeMap:object descriptor:(PDMapDescriptor *) descriptor];
+        case PDTypeMessage: return [self writeMessage:object descriptor:(PDMessageDescriptor *) descriptor];
 
         case PDTypeInterface: return nil;
     }
@@ -117,8 +112,7 @@ static NSDateFormatter *formatter;
 }
 
 + (NSString *)writeDatetime:(NSDate *)date {
-    NSString *s = [formatter stringFromDate:date];
-    return s ? s : @"null";
+    return [formatter stringFromDate:date];
 }
 
 + (NSString *)writeEnum:(NSNumber *)number descriptor:(PDEnumDescriptor *)descriptor {
@@ -126,13 +120,14 @@ static NSDateFormatter *formatter;
     return s ? s : @"null";
 }
 
-+ (id)writeList:(NSArray *)list descriptor:(PDListDescriptor *)descriptor error:(NSError **)error {
++ (id)writeList:(NSArray *)list descriptor:(PDListDescriptor *)descriptor {
     PDDataTypeDescriptor *elementd = descriptor.elementDescriptor;
 
     NSMutableArray *result = [[NSMutableArray alloc] init];
     for (id element in list) {
-        id serialized = [self writeObject:element descriptor:elementd error:error];
+        id serialized = [self writeObject:element descriptor:elementd];
         if (!serialized) {
+            // Failed to serialize an element.
             return nil;
         }
 
@@ -142,13 +137,14 @@ static NSDateFormatter *formatter;
     return result;
 }
 
-+ (id)writeSet:(NSSet *)set descriptor:(PDSetDescriptor *)descriptor error:(NSError **)error {
++ (id)writeSet:(NSSet *)set descriptor:(PDSetDescriptor *)descriptor {
     PDDataTypeDescriptor *elementd = descriptor.elementDescriptor;
 
     NSMutableArray *result = [[NSMutableArray alloc] init];
     for (id element in set) {
-        id serialized = [self writeObject:element descriptor:elementd error:error];
+        id serialized = [self writeObject:element descriptor:elementd];
         if (!serialized) {
+            // Failed to serialize an element.
             return nil;
         }
 
@@ -158,31 +154,43 @@ static NSDateFormatter *formatter;
     return result;
 }
 
-+ (id)writeMap:(NSDictionary *)dict descriptor:(PDMapDescriptor *)descriptor error:(NSError **)error {
++ (id)writeMap:(NSDictionary *)dict descriptor:(PDMapDescriptor *)descriptor {
     PDDataTypeDescriptor *keyd = descriptor.keyDescriptor;
     PDDataTypeDescriptor *valued = descriptor.valueDescriptor;
+    BOOL keyIsString = keyd.type == PDTypeString;
 
     NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
     for (id key in dict) {
+        if (!key || [key isEqual:[NSNull null]]) {
+            // Ignore null keys.
+            continue;
+        }
+
+        // Use strings as is, serialize primitives to json strings.
+        NSString *skey;
+        if (keyIsString) {
+            skey = key;
+        } else {
+            NSError *error = nil;
+            skey = [self writeString:key descriptor:keyd error:&error];
+        }
+
+        // Convert a value into a json object.
         id value = [dict objectForKey:key];
+        id svalue = [self writeObject:value descriptor:valued];
 
-        NSString *skey = [self writeString:key descriptor:keyd error:error];
-        if (!skey) {
-            return nil;
+        // Ignore failed keys/values.
+        if (!skey || !svalue) {
+            continue;
         }
 
-        id svalue = [self writeObject:value descriptor:valued error:error];
-        if (!svalue) {
-            return nil;
-        }
         [result setObject:svalue forKey:skey];
     }
 
     return result;
 }
 
-
-+ (id)writeMessage:(PDMessage *)message descriptor:(PDMessageDescriptor *)descriptor error:(NSError **)error{
++ (id)writeMessage:(PDMessage *)message descriptor:(PDMessageDescriptor *)descriptor {
     NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
 
     // Mind polymorphic messages.
@@ -193,16 +201,21 @@ static NSDateFormatter *formatter;
         }
 
         id value = [message valueForKey:field.name];
-        id serialized = [self writeObject:value descriptor:field.type error:error];
+        id serialized = [self writeObject:value descriptor:field.type];
+        if (!serialized) {
+            // Failed to serialize a field value.
+            // Ignore it.
+            continue;
+        }
+
         [result setObject:serialized forKey:field.name];
     }
 
     return result;
 }
 
-
-
-+ (id)readObject:(id)object descriptor:(PDDataTypeDescriptor *)descriptor error:(NSError **)error {
++ (id)readObject:(id)object descriptor:(PDDataTypeDescriptor *)descriptor {
+    NSParameterAssert(object);
     NSParameterAssert(descriptor);
     if (!object) {
         return nil;
@@ -223,11 +236,11 @@ static NSDateFormatter *formatter;
         case PDTypeDatetime:return [self readDatetime:object];
         case PDTypeEnum:return [self readEnum:object descriptor:(PDEnumDescriptor *) descriptor];
 
-        case PDTypeList:return [self readList:object descriptor:(PDListDescriptor *) descriptor error:error];
-        case PDTypeSet:return [self readSet:object descriptor:(PDSetDescriptor *) descriptor error:error];
-        case PDTypeMap:return [self readMap:object descriptor:(PDMapDescriptor *) descriptor error:error];
+        case PDTypeList:return [self readList:object descriptor:(PDListDescriptor *) descriptor];
+        case PDTypeSet:return [self readSet:object descriptor:(PDSetDescriptor *) descriptor];
+        case PDTypeMap:return [self readMap:object descriptor:(PDMapDescriptor *) descriptor];
         case PDTypeVoid:return nil;
-        case PDTypeMessage:return [self readMessage:object descriptor:(PDMessageDescriptor *) descriptor error:error];
+        case PDTypeMessage:return [self readMessage:object descriptor:(PDMessageDescriptor *) descriptor];
         case PDTypeInterface:nil;
     }
     return nil;
@@ -259,14 +272,15 @@ static NSDateFormatter *formatter;
     return [formatter dateFromString:string];
 }
 
-+ (id)readList:(NSArray *)list descriptor:(PDListDescriptor *)descriptor error:(NSError **)error {
++ (id)readList:(NSArray *)list descriptor:(PDListDescriptor *)descriptor {
     PDDataTypeDescriptor *elementd = descriptor.elementDescriptor;
 
     NSMutableArray *result = [[NSMutableArray alloc] init];
     for (id element in list) {
-        id parsed = [self readObject:element descriptor:elementd error:error];
+        id parsed = [self readObject:element descriptor:elementd];
         if (!parsed) {
-            return nil;
+            // Failed to parse an element, ignore it.
+            continue;
         }
 
         [result addObject:parsed];
@@ -275,15 +289,16 @@ static NSDateFormatter *formatter;
     return result;
 }
 
-+ (id)readSet:(id)object descriptor:(PDSetDescriptor *)descriptor error:(NSError **)error {
++ (id)readSet:(id)object descriptor:(PDSetDescriptor *)descriptor {
     PDDataTypeDescriptor *elementd = descriptor.elementDescriptor;
 
 
     NSMutableSet *result = [[NSMutableSet alloc] init];
     for (id element in object) {
-        id parsed = [self readObject:element descriptor:elementd error:error];
+        id parsed = [self readObject:element descriptor:elementd];
         if (!parsed) {
-            return nil;
+            // Failed to parse an element, ignore it.
+            continue;
         }
 
         [result addObject:parsed];
@@ -292,15 +307,34 @@ static NSDateFormatter *formatter;
     return result;
 }
 
-+ (id)readMap:(NSDictionary *)dict descriptor:(PDMapDescriptor *)descriptor error:(NSError **)error {
++ (id)readMap:(NSDictionary *)dict descriptor:(PDMapDescriptor *)descriptor {
     PDDataTypeDescriptor *keyd = descriptor.keyDescriptor;
     PDDataTypeDescriptor *valued = descriptor.valueDescriptor;
+    BOOL keyIsString = keyd.type == PDTypeString;
 
     NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
     for (id key in dict) {
         id value = [dict objectForKey:key];
-        id parsedKey = [self readObject:key descriptor:keyd error:error];
-        id parsedValue = [self readObject:value descriptor:valued error:error];
+        if (!key || [key isEqual:[NSNull null]]) {
+            // Ignore null keys.
+            continue;
+        }
+
+        id parsedKey;
+        if (keyIsString) {
+            parsedKey = key;
+        } else {
+            NSError *error = nil;
+            parsedKey = [self readString:key descriptor:keyd error:&error];
+        }
+
+        id parsedValue = [self readObject:value descriptor:valued];
+        if (!parsedKey || !parsedValue) {
+            // Failed to parse a key or a value.
+            // Ignore them.
+            continue;
+        }
+
         [result setObject:parsedValue forKey:parsedKey];
     }
 
@@ -322,7 +356,7 @@ static NSDateFormatter *formatter;
     return value ? value : [NSNull null];
 }
 
-+ (id)readMessage:(NSDictionary *)dict descriptor:(PDMessageDescriptor *)descriptor error:(NSError **)error {
++ (id)readMessage:(NSDictionary *)dict descriptor:(PDMessageDescriptor *)descriptor {
     PDFieldDescriptor *discriminator = descriptor.discriminator;
 
     if (discriminator) {
@@ -330,7 +364,7 @@ static NSDateFormatter *formatter;
         // Deserialize the discriminator value and get a subtype descriptor.
         id value = [dict objectForKey:discriminator.name];
         if (value) {
-            NSNumber *dvalue = [self readObject:value descriptor:discriminator.type error:error];
+            NSNumber *dvalue = [self readObject:value descriptor:discriminator.type];
             NSInteger dint = [dvalue integerValue];
 
             PDMessageDescriptor *subtype = [descriptor findSubtypeByDiscriminatorValue:dint];
@@ -345,14 +379,14 @@ static NSDateFormatter *formatter;
             continue;
         }
 
-        id parsed = [self readObject:value descriptor:field.type error:error];
+        id parsed = [self readObject:value descriptor:field.type];
         if (!parsed) {
-            return nil;
+            // Failed to parse a message field.
+            continue;
         }
 
         [message setValue:parsed forKey:field.name];
     }
     return message;
 }
-
 @end

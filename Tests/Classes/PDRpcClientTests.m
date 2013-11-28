@@ -47,7 +47,7 @@
 - (void)testHandleSuccess_result {
     id operation = [self mockOperation:200];
     TestMessage *message= [self createMessage];
-    NSData *data = [message toJsonWithError:nil];
+    NSData *data = [message toJsonError:nil];
 
     __block TestMessage *result = nil;
     [client handleSuccess:operation data:data datad:[TestMessage typeDescriptor] errord:nil
@@ -60,10 +60,10 @@
 - (void)testHandleSuccess_exception {
     id operation = [self mockOperation:422];
     TestException *exc = [self createException];
-    NSData *data = [exc toJsonWithError:nil];
+    NSData *data = [exc toJsonError:nil];
 
     __block NSString *domain = nil;
-    __block int code = 0;
+    __block NSInteger code = 0;
     __block TestException *result = nil;
     [client handleSuccess:operation data:data datad:nil errord:[TestException typeDescriptor]
                  callback:^(id o, NSError *error) {
@@ -73,7 +73,7 @@
     }];
 
     XCTAssertEqualObjects(domain, PDefErrorDomain);
-    XCTAssertEqual(code, PDRpcException);
+    XCTAssert(code == PDRpcException);
     XCTAssertEqualObjects(result, exc);
 }
 

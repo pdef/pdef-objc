@@ -20,7 +20,7 @@
     NSError *error = nil;
 
     TestComplexMessage *message = [self messageFixture];
-    NSData *data = [message toJsonWithError:&error];
+    NSData *data = [message toJsonError:&error];
     XCTAssert(data != nil);
     XCTAssert(error == nil);
 
