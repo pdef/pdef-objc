@@ -16,7 +16,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat: @"Descriptor: type=%li", _type];
+    return [NSString stringWithFormat: @"Descriptor: type=%d", _type];
 }
 @end
 

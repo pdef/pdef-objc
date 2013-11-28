@@ -8,6 +8,7 @@
 #import "PDMessage.h"
 #import "PDJsonSerialization.h"
 
+
 @implementation PDJsonFormat
 static NSDateFormatter *formatter;
 
@@ -25,6 +26,9 @@ static NSDateFormatter *formatter;
 
 + (NSString *)writeString:(id)object descriptor:(PDDataTypeDescriptor *)descriptor error:(NSError **)error {
     NSParameterAssert(descriptor);
+    if (!object) {
+        return @"null";
+    }
 
     // Convert an object into a JSON-compatible object.
     id jsonObject = [self writeObject:object descriptor:descriptor error:error];
@@ -52,6 +56,9 @@ static NSDateFormatter *formatter;
 
 + (NSData *)writeData:(id)object descriptor:(PDDataTypeDescriptor *)descriptor error:(NSError **)error {
     NSParameterAssert(descriptor);
+    if (!object) {
+        return nil;
+    }
 
     // Convert an object into a JSON-compatible object.
     id jsonObject = [self writeObject:object descriptor:descriptor error:error];

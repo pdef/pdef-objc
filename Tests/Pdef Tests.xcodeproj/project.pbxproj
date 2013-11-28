@@ -46,8 +46,12 @@
 		2CDF09011846176200B226AB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CDF09001846176200B226AB /* Foundation.framework */; };
 		2CDF09091846176200B226AB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CDF09071846176200B226AB /* InfoPlist.strings */; };
 		318211475381FDA3D9CB8F08 /* PDJsonFormatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821139C6229E3F2FDA618D /* PDJsonFormatTests.m */; };
+		318213B361F8DDC8328BEF00 /* PDRpcProtocolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3182197DF226A33BF0E5E9E2 /* PDRpcProtocolTests.m */; };
+		31821526E0C8019BD54B69E4 /* PDRpcClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 318216E11A5AFC879E6AAC01 /* PDRpcClientTests.m */; };
 		31821707A1B02186D82DD669 /* PDJsonSerializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821E4EA685D38461FC6757 /* PDJsonSerializationTests.m */; };
+		31821841E123B6F2A7CC9BAE /* PDRpcProtocolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3182197DF226A33BF0E5E9E2 /* PDRpcProtocolTests.m */; };
 		318218E1BE5D5C7E7ED5226D /* PDJsonFormatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821139C6229E3F2FDA618D /* PDJsonFormatTests.m */; };
+		31821A02F0E55D465C048AF7 /* PDRpcClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 318216E11A5AFC879E6AAC01 /* PDRpcClientTests.m */; };
 		31821CDB8FB1FA518FB56174 /* PDJsonSerializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821E4EA685D38461FC6757 /* PDJsonSerializationTests.m */; };
 		8439C431C7AA4D59BB14FF50 /* libPods-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0F418E67DCF4F048F29FAA7 /* libPods-osx.a */; };
 /* End PBXBuildFile section */
@@ -91,6 +95,8 @@
 		2CDF09081846176200B226AB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2CDF090C1846176200B226AB /* iOS Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOS Tests-Prefix.pch"; sourceTree = "<group>"; };
 		31821139C6229E3F2FDA618D /* PDJsonFormatTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDJsonFormatTests.m; sourceTree = "<group>"; };
+		318216E11A5AFC879E6AAC01 /* PDRpcClientTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDRpcClientTests.m; sourceTree = "<group>"; };
+		3182197DF226A33BF0E5E9E2 /* PDRpcProtocolTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDRpcProtocolTests.m; sourceTree = "<group>"; };
 		31821E4EA685D38461FC6757 /* PDJsonSerializationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDJsonSerializationTests.m; sourceTree = "<group>"; };
 		7DFE89E1E49243FA8DC45685 /* Pods-osx.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-osx.xcconfig"; path = "Pods/Pods-osx.xcconfig"; sourceTree = "<group>"; };
 		8C9FE9AE3CE5470FBD7377B9 /* Pods-ios.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios.xcconfig"; path = "Pods/Pods-ios.xcconfig"; sourceTree = "<group>"; };
@@ -178,6 +184,8 @@
 				2C8859BA1846209D00F31100 /* PDMessageTests.m */,
 				31821139C6229E3F2FDA618D /* PDJsonFormatTests.m */,
 				31821E4EA685D38461FC6757 /* PDJsonSerializationTests.m */,
+				3182197DF226A33BF0E5E9E2 /* PDRpcProtocolTests.m */,
+				318216E11A5AFC879E6AAC01 /* PDRpcClientTests.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -406,6 +414,8 @@
 				2C8859C01846209D00F31100 /* PDGeneratedGescriptorsTests.m in Sources */,
 				318218E1BE5D5C7E7ED5226D /* PDJsonFormatTests.m in Sources */,
 				31821CDB8FB1FA518FB56174 /* PDJsonSerializationTests.m in Sources */,
+				31821841E123B6F2A7CC9BAE /* PDRpcProtocolTests.m in Sources */,
+				31821A02F0E55D465C048AF7 /* PDRpcClientTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +441,8 @@
 				2C8859BF1846209D00F31100 /* PDGeneratedGescriptorsTests.m in Sources */,
 				318211475381FDA3D9CB8F08 /* PDJsonFormatTests.m in Sources */,
 				31821707A1B02186D82DD669 /* PDJsonSerializationTests.m in Sources */,
+				318213B361F8DDC8328BEF00 /* PDRpcProtocolTests.m in Sources */,
+				31821526E0C8019BD54B69E4 /* PDRpcClientTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +511,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -540,6 +553,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;

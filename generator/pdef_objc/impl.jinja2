@@ -109,7 +109,7 @@ static PDMessageDescriptor *_{{ definition.name }}Descriptor;
 {% for method in definition.declared_methods %}
     {% if not method.args %}
         {% if method.is_terminal %}
-- ({{ method.result|objc_result }}) {{ method.name }}Response:(void (^)(id result, NSError *error))response {
+- ({{ method.result|objc_result }}) {{ method.name }}Callback:(void (^)(id result, NSError *error))callback {
         {% else %}
 - ({{ method.result|objc_result }}) {{ method.name }} {
         {% endif %}
@@ -123,7 +123,7 @@ static PDMessageDescriptor *_{{ definition.name }}Descriptor;
         {%- if not method.is_terminal -%}
             {
         {% else %}
-        response:(void (^)(id result, NSError *error))response {
+        callback:(void (^)(id result, NSError *error))callback {
         {% endif %}
     {% endif %}
     PDInvocation *_invocation = [self
@@ -139,7 +139,7 @@ static PDMessageDescriptor *_{{ definition.name }}Descriptor;
                              {% endfor %}
                          }];
     {% if method.is_terminal %}
-    return [self.handler handleInvocation:_invocation response:response];
+    return [self.handler handleInvocation:_invocation callback:callback];
     {% else %}
     return [[{{ method.result.name }}Client alloc] initWithHandler: self.handler parentInvocation:_invocation];
     {% endif %}

@@ -11,7 +11,7 @@
 @protocol PDInvocationHandler <NSObject>
 
 @required
-- (NSOperation *) handleInvocation:(PDInvocation *)invocation
-                          response:(void (^)(id result, NSError *error))response;
+- (NSOperation *)handleInvocation:(PDInvocation *)invocation
+                         callback:(void (^)(id result, NSError *error))response;
 
 @end

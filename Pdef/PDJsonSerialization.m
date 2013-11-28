@@ -47,6 +47,10 @@
 }
 
 + (NSData *)dataWithJSONObject:(id)object options:(NSJSONWritingOptions)opt error:(NSError **)error {
+    if (!object || [object isEqual:[NSNull null]]) {
+        return [@"null" dataUsingEncoding:NSUTF8StringEncoding];
+    }
+
     if (![NSJSONSerialization isValidJSONObject:object]) {
         NSString *s = [self stringWithJSONObject:object error:error];
         if (!s) {

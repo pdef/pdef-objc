@@ -11,6 +11,15 @@
 @end
 
 @implementation PDJsonSerializationTests
+- (void)testNull {
+    NSError *error = nil;
+    NSString *json = [PDJsonSerialization stringWithJSONObject:nil error:&error];
+    XCTAssert([json isEqualToString:@"null"]);
+
+    id value = [PDJsonSerialization JSONObjectWithString:json error:&error];
+    XCTAssert(value == [NSNull null]);
+}
+
 - (void)testBool {
     NSError *error = nil;
     id object = @YES;

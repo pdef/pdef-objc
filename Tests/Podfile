@@ -4,6 +4,7 @@ inhibit_all_warnings!
 
 def import_pods
   pod 'Pdef', :path => '../'
+  pod 'OCMock'
 end
 
 target :ios do

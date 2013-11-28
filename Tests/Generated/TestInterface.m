@@ -11,68 +11,68 @@
 
 - (NSOperation *) methodArg0:(int32_t )arg0
         arg1:(int32_t )arg1
-        response:(void (^)(id result, NSError *error))response {
+        callback:(void (^)(id result, NSError *error))callback {
     PDInvocation *_invocation = [self
             captureInvocation:[self getMethodForName:@"method"]
                          args:@{
                                  @"arg0" :@(arg0),
                                  @"arg1" :@(arg1),
                          }];
-    return [self.handler handleInvocation:_invocation response:response];
+    return [self.handler handleInvocation:_invocation callback:callback];
 }
 - (NSOperation *) queryArg0:(int32_t )arg0
         arg1:(int32_t )arg1
-        response:(void (^)(id result, NSError *error))response {
+        callback:(void (^)(id result, NSError *error))callback {
     PDInvocation *_invocation = [self
             captureInvocation:[self getMethodForName:@"query"]
                          args:@{
                                  @"arg0" :@(arg0),
                                  @"arg1" :@(arg1),
                          }];
-    return [self.handler handleInvocation:_invocation response:response];
+    return [self.handler handleInvocation:_invocation callback:callback];
 }
 - (NSOperation *) postArg0:(int32_t )arg0
         arg1:(int32_t )arg1
-        response:(void (^)(id result, NSError *error))response {
+        callback:(void (^)(id result, NSError *error))callback {
     PDInvocation *_invocation = [self
             captureInvocation:[self getMethodForName:@"post"]
                          args:@{
                                  @"arg0" :@(arg0),
                                  @"arg1" :@(arg1),
                          }];
-    return [self.handler handleInvocation:_invocation response:response];
+    return [self.handler handleInvocation:_invocation callback:callback];
 }
 - (NSOperation *) string0Text:(NSString *)text
-        response:(void (^)(id result, NSError *error))response {
+        callback:(void (^)(id result, NSError *error))callback {
     PDInvocation *_invocation = [self
             captureInvocation:[self getMethodForName:@"string0"]
                          args:@{
                                  @"text" :text,
                          }];
-    return [self.handler handleInvocation:_invocation response:response];
+    return [self.handler handleInvocation:_invocation callback:callback];
 }
 - (NSOperation *) datetime0Dt:(NSDate *)dt
-        response:(void (^)(id result, NSError *error))response {
+        callback:(void (^)(id result, NSError *error))callback {
     PDInvocation *_invocation = [self
             captureInvocation:[self getMethodForName:@"datetime0"]
                          args:@{
                                  @"dt" :dt,
                          }];
-    return [self.handler handleInvocation:_invocation response:response];
+    return [self.handler handleInvocation:_invocation callback:callback];
 }
 - (NSOperation *) message0Msg:(TestMessage *)msg
-        response:(void (^)(id result, NSError *error))response {
+        callback:(void (^)(id result, NSError *error))callback {
     PDInvocation *_invocation = [self
             captureInvocation:[self getMethodForName:@"message0"]
                          args:@{
                                  @"msg" :msg,
                          }];
-    return [self.handler handleInvocation:_invocation response:response];
+    return [self.handler handleInvocation:_invocation callback:callback];
 }
 - (NSOperation *) collectionsList0:(NSArray *)list0
         set0:(NSSet *)set0
         map0:(NSDictionary *)map0
-        response:(void (^)(id result, NSError *error))response {
+        callback:(void (^)(id result, NSError *error))callback {
     PDInvocation *_invocation = [self
             captureInvocation:[self getMethodForName:@"collections"]
                          args:@{
@@ -80,7 +80,7 @@
                                  @"set0" :set0,
                                  @"map0" :map0,
                          }];
-    return [self.handler handleInvocation:_invocation response:response];
+    return [self.handler handleInvocation:_invocation callback:callback];
 }
 - (id<TestInterface> ) interface0Arg0:(int32_t )arg0
         arg1:(int32_t )arg1
@@ -93,26 +93,26 @@
                          }];
     return [[TestInterfaceClient alloc] initWithHandler: self.handler parentInvocation:_invocation];
 }
-- (NSOperation *) void0Response:(void (^)(id result, NSError *error))response {
+- (NSOperation *) void0Callback:(void (^)(id result, NSError *error))callback {
     PDInvocation *_invocation = [self
             captureInvocation:[self getMethodForName:@"void0"]
                          args:@{
                          }];
-    return [self.handler handleInvocation:_invocation response:response];
+    return [self.handler handleInvocation:_invocation callback:callback];
 }
-- (NSOperation *) exc0Response:(void (^)(id result, NSError *error))response {
+- (NSOperation *) exc0Callback:(void (^)(id result, NSError *error))callback {
     PDInvocation *_invocation = [self
             captureInvocation:[self getMethodForName:@"exc0"]
                          args:@{
                          }];
-    return [self.handler handleInvocation:_invocation response:response];
+    return [self.handler handleInvocation:_invocation callback:callback];
 }
-- (NSOperation *) serverErrorResponse:(void (^)(id result, NSError *error))response {
+- (NSOperation *) serverErrorCallback:(void (^)(id result, NSError *error))callback {
     PDInvocation *_invocation = [self
             captureInvocation:[self getMethodForName:@"serverError"]
                          args:@{
                          }];
-    return [self.handler handleInvocation:_invocation response:response];
+    return [self.handler handleInvocation:_invocation callback:callback];
 }
 
 - (PDMethodDescriptor *)getMethodForName:(NSString *)name {

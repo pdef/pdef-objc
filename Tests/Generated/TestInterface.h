@@ -16,35 +16,35 @@ Multi-line comment.
  */
 - (NSOperation *) methodArg0:(int32_t )arg0
         arg1:(int32_t )arg1
-            response:(void (^)(id result, NSError *error))response;
+            callback:(void (^)(id result, NSError *error))callback;
 
 /** Returns the sum of the numbers. */
 - (NSOperation *) queryArg0:(int32_t )arg0
         arg1:(int32_t )arg1
-            response:(void (^)(id result, NSError *error))response;
+            callback:(void (^)(id result, NSError *error))callback;
 
 /** Returns the sum of the numbers. */
 - (NSOperation *) postArg0:(int32_t )arg0
         arg1:(int32_t )arg1
-            response:(void (^)(id result, NSError *error))response;
+            callback:(void (^)(id result, NSError *error))callback;
 
 /** Returns the same string. */
 - (NSOperation *) string0Text:(NSString *)text
-            response:(void (^)(id result, NSError *error))response;
+            callback:(void (^)(id result, NSError *error))callback;
 
 /** Return the same datetime. */
 - (NSOperation *) datetime0Dt:(NSDate *)dt
-            response:(void (^)(id result, NSError *error))response;
+            callback:(void (^)(id result, NSError *error))callback;
 
 /** Returns the same message. */
 - (NSOperation *) message0Msg:(TestMessage *)msg
-            response:(void (^)(id result, NSError *error))response;
+            callback:(void (^)(id result, NSError *error))callback;
 
 /** Returns the total number of items. */
 - (NSOperation *) collectionsList0:(NSArray *)list0
         set0:(NSSet *)set0
         map0:(NSDictionary *)map0
-            response:(void (^)(id result, NSError *error))response;
+            callback:(void (^)(id result, NSError *error))callback;
 
 /** Returns the same interface (yes, it's endless). */
 - (id<TestInterface> ) interface0Arg0:(int32_t )arg0
@@ -52,13 +52,13 @@ Multi-line comment.
 ;
 
 /** Void method which returns null. */
-- (NSOperation *) void0Response:(void (^)(id result, NSError *error))response;
+- (NSOperation *) void0Callback:(void (^)(id result, NSError *error))response;
 
 /** Throws a TestException. */
-- (NSOperation *) exc0Response:(void (^)(id result, NSError *error))response;
+- (NSOperation *) exc0Callback:(void (^)(id result, NSError *error))response;
 
 /** Throws any server error. */
-- (NSOperation *) serverErrorResponse:(void (^)(id result, NSError *error))response;
+- (NSOperation *) serverErrorCallback:(void (^)(id result, NSError *error))response;
 
 @end
 

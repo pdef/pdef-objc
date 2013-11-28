@@ -19,17 +19,12 @@
 - (id)initWithParent:(PDInvocation *)parent
               method:(PDMethodDescriptor *)method
                 args:(NSDictionary *)args {
-    if (self = [super init]) {
-        if (!method) {
-            [NSException raise:NSInvalidArgumentException format:@"nil method"];
-        }
-        if (!args) {
-            [NSException raise:NSInvalidArgumentException format:@"nil args"];
-        }
+    NSParameterAssert(method);
 
+    if (self = [super init]) {
         _parent = parent;
         _method = method;
-        _args = [args copy];
+        _args = args ? [args copy] : [[NSDictionary alloc] init];
     }
     return self;
 }

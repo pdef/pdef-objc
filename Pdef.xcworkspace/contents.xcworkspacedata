@@ -23,34 +23,25 @@
          location = "group:PDInvocation.h">
       </FileRef>
       <FileRef
-         location = "group:PDInvocation.m">
-      </FileRef>
-      <FileRef
-         location = "group:PDInvocationHandler.h">
-      </FileRef>
-      <FileRef
-         location = "group:PDMessage.h">
-      </FileRef>
-      <FileRef
-         location = "group:PDMessage.m">
-      </FileRef>
-      <FileRef
-         location = "group:PDRpcRequest.h">
-      </FileRef>
-      <FileRef
-         location = "group:PDRpcRequest.m">
-      </FileRef>
-      <FileRef
          location = "group:PDRpcProtocol.h">
       </FileRef>
       <FileRef
          location = "group:PDRpcProtocol.m">
       </FileRef>
       <FileRef
-         location = "group:PDRpcClient.h">
+         location = "group:PDErrors.h">
       </FileRef>
       <FileRef
-         location = "group:PDRpcClient.m">
+         location = "group:PDErrors.m">
+      </FileRef>
+      <FileRef
+         location = "group:PDInvocation.m">
+      </FileRef>
+      <FileRef
+         location = "group:PDMessage.h">
+      </FileRef>
+      <FileRef
+         location = "group:PDMessage.m">
       </FileRef>
       <FileRef
          location = "group:PDJsonFormat.h">
@@ -63,6 +54,18 @@
       </FileRef>
       <FileRef
          location = "group:PDJsonSerialization.m">
+      </FileRef>
+      <FileRef
+         location = "group:PDRpcClient.h">
+      </FileRef>
+      <FileRef
+         location = "group:PDRpcClient.m">
+      </FileRef>
+      <FileRef
+         location = "group:PDRpcRequest.h">
+      </FileRef>
+      <FileRef
+         location = "group:PDRpcRequest.m">
       </FileRef>
    </Group>
    <FileRef
