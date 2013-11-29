@@ -3,6 +3,9 @@ build/
 .idea/
 xcuserdata
 
+Example/Generated/
+Example/Pods/
+
 Tests/Pods/
 Tests/Podfile.lock
 

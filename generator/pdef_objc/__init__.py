@@ -48,7 +48,22 @@ class ObjectiveCGenerator(Generator):
     def _generate_package(self, package):
         '''Generate a package file which groups all headers.'''
         code = self.templates.render(PACKAGE_TEMPLATE, package=package)
-        filename = '%s.h' % package.name
+
+        names = set()
+        for module in package.modules:
+            for definition in module.definitions:
+                names.add(definition.name.lower())
+
+        # Generate a unique package file name.
+        name = package.name
+        while name in names:
+            name += '_package'
+
+        # Convert it into a CamelCase string.
+        name = name.title().replace('_', '')
+
+        # Write the package header file.
+        filename = '%s.h' % name
         self.write_file(filename, code)
 
 
@@ -61,8 +76,8 @@ class ObjectiveCFilters(object):
         return message.base.name if message.base else 'PDMessage'
 
     def objc_isprimitive(self, type0):
-        pointers = TypeEnum.COLLECTION_TYPES + TypeEnum.DEFINITION_TYPES \
-                   + (TypeEnum.STRING, TypeEnum.DATETIME)
+        pointers = TypeEnum.COLLECTION_TYPES \
+                + (TypeEnum.MESSAGE, TypeEnum.INTERFACE, TypeEnum.STRING, TypeEnum.DATETIME)
         return type0.type not in pointers
 
     def objc_type(self, type0):
