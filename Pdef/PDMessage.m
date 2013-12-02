@@ -36,9 +36,61 @@
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)coder {
+    if (self = [self init]) {
+        for (PDFieldDescriptor *field in self.descriptor.fields) {
+            NSString *name = field.name;
+            PDDataTypeDescriptor *type = field.type;
+            if (![coder containsValueForKey:name]) {
+                continue;
+            }
+
+            id object = nil;
+            switch(type.type) {
+                case PDTypeBool: object = @([coder decodeBoolForKey:name]); break;
+                case PDTypeInt16: object = @([coder decodeInt32ForKey:name]); break;
+                case PDTypeInt32: object = @([coder decodeInt32ForKey:name]); break;
+                case PDTypeInt64: object = @([coder decodeInt64ForKey:name]); break;
+                case PDTypeFloat: object = @([coder decodeFloatForKey:name]); break;
+                case PDTypeDouble: object = @([coder decodeDoubleForKey:name]); break;
+                case PDTypeEnum: object = @([coder decodeInt64ForKey:name]); break;
+                case PDTypeVoid:break;
+                case PDTypeInterface:break;
+                default: object = [coder decodeObjectForKey:name]; break;
+            }
+
+            if (object) {
+                [self setValue:object forKey:name];
+            }
+        }
+    }
+    return self;
+}
+
 - (id)initWithJson:(NSData *)json error:(NSError **)error {
     id object = [PDJsonSerialization JSONObjectWithData:json error:error];
     return [self initWithDictionary:object];
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    for (PDFieldDescriptor *field in self.descriptor.fields) {
+        NSString *name = field.name;
+        PDDataTypeDescriptor *type = field.type;
+        id object = [self valueForKey:name];
+
+        switch(type.type) {
+            case PDTypeBool: [coder encodeBool:[((NSNumber *)object) boolValue] forKey:name];break;
+            case PDTypeInt16: [coder encodeInt32:[((NSNumber *)object) shortValue] forKey:name];break;
+            case PDTypeInt32: [coder encodeInt32:[((NSNumber *)object) integerValue] forKey:name];break;
+            case PDTypeInt64: [coder encodeInt64:[((NSNumber *)object) longLongValue] forKey:name];break;
+            case PDTypeFloat: [coder encodeFloat:[((NSNumber *)object) floatValue] forKey:name];break;;
+            case PDTypeDouble: [coder encodeDouble:[((NSNumber *)object) doubleValue] forKey:name];break;
+            case PDTypeEnum: [coder encodeInt64:[((NSNumber *)object) longLongValue] forKey:name];break;
+            case PDTypeVoid:break;
+            case PDTypeInterface:break;
+            default: [coder encodeObject:object forKey:name];
+        }
+    }
 }
 
 - (id)mergeMessage:(PDMessage *)message {

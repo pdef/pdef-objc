@@ -10,7 +10,7 @@
 @class PDEnumDescriptor;
 
 
-@interface PDMessage : NSObject<NSCopying>
+@interface PDMessage : NSObject<NSCopying, NSCoding>
 /** Returns this class descriptor. */
 + (PDMessageDescriptor *)typeDescriptor;
 

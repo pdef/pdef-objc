@@ -15,22 +15,6 @@
 @end
 
 @implementation PDMessageTests
-
-- (TestMessage *)fixtureMessage {
-    TestMessage *expected = [[TestMessage alloc] init];
-    expected.bool0 = YES;
-    expected.int0 = 123;
-    expected.string0 = @"hello";
-    return expected;
-}
-
-- (NSDictionary *)fixtureDictionary {
-    return @{
-            @"bool0": @YES,
-            @"int0": @"123",
-            @"string0": @"hello"};
-}
-
 - (void)testSetDiscriminatorValueInConstructor {
     Base *base = [[Base alloc] init];
     Subtype *subtype = [[Subtype alloc] init];
@@ -52,19 +36,27 @@
 
 - (void)testInitWithJson {
     NSError *error = nil;
-    NSData *json = [[self fixtureMessage] toJsonError:&error];
+    NSData *json = [[self fixtureComplexMessage] toJsonError:&error];
     XCTAssert(!error);
 
-    TestMessage *message = [[[TestMessage alloc] init] mergeJson:json error:&error];
+    TestComplexMessage *message = [[[TestComplexMessage alloc] init] mergeJson:json error:&error];
     XCTAssert(message);
     XCTAssert(!error);
-    XCTAssert([message isEqual:[self fixtureMessage]]);
+    XCTAssert([message isEqual:[self fixtureComplexMessage]]);
+}
+
+- (void)testNSCoding {
+    TestComplexMessage *message = [self fixtureComplexMessage];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:message];
+    TestComplexMessage *message1 = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+
+    XCTAssertEqualObjects(message, message1);
 }
 
 - (void)testMergeMessage {
-    TestMessage *message = [[[TestMessage alloc] init] mergeMessage:[self fixtureMessage]];
+    TestComplexMessage *message = [[[TestComplexMessage alloc] init] mergeMessage:[self fixtureComplexMessage]];
 
-    XCTAssert([message isEqual:[self fixtureMessage]]);
+    XCTAssert([message isEqual:[self fixtureComplexMessage]]);
 }
 
 - (void)testMergeMessage_mergeSuperType {
@@ -101,12 +93,12 @@
 
 - (void)testMergeJson {
     NSError *error = nil;
-    NSData *json = [[self fixtureMessage] toJsonError:&error];
+    NSData *json = [[self fixtureComplexMessage] toJsonError:&error];
     XCTAssert(!error);
 
-    TestMessage *message = [[[TestMessage alloc] init] mergeJson:json error:&error];
+    TestComplexMessage *message = [[[TestComplexMessage alloc] init] mergeJson:json error:&error];
     XCTAssert(!error);
-    XCTAssert([message isEqual:[self fixtureMessage]]);
+    XCTAssert([message isEqual:[self fixtureComplexMessage]]);
 }
 
 - (void)testToDictionary {
@@ -140,15 +132,8 @@
 }
 
 - (void)testIsEqualSubclass {
-    TestComplexMessage *message0 = [[TestComplexMessage alloc] init];
-    message0.int0 = 123;
-    message0.list0 = @[@1, @2, @3];
-    message0.map0 = @{@1: @1.5, @2: @2.5};
-
-    TestComplexMessage *message1 = [[TestComplexMessage alloc] init];
-    message1.int0 = 123;
-    message1.list0 = @[@1, @2, @3];
-    message1.map0 = @{@1: @1.5, @2: @2.5};
+    TestComplexMessage *message0 = [self fixtureComplexMessage];
+    TestComplexMessage *message1 = [self fixtureComplexMessage];
 
     XCTAssertEqualObjects(message0, message1);
 }
@@ -178,7 +163,7 @@
 }
 
 - (void)testCopySubclass {
-    TestComplexMessage *message0 = [[TestComplexMessage alloc] init];
+    TestComplexMessage *message0 = [self fixtureComplexMessage];
     message0.int0 = 123;
     message0.list0 = @[@1, @2, @3];
 
@@ -204,5 +189,38 @@
     TestComplexMessage *copy = [message copy];
     XCTAssertEqualObjects(copy, message);
     XCTAssert(copy.message0 != message.message0);
+}
+
+- (NSDictionary *)fixtureDictionary {
+    return @{
+            @"bool0": @YES,
+            @"int0": @"123",
+            @"string0": @"hello"};
+}
+
+- (TestMessage *)fixtureMessage {
+    TestMessage *expected = [[TestMessage alloc] init];
+    expected.bool0 = YES;
+    expected.int0 = 123;
+    expected.string0 = @"hello";
+    return expected;
+}
+
+- (TestComplexMessage *)fixtureComplexMessage {
+    TestComplexMessage *m = [[TestComplexMessage alloc] init];
+    m.string0 = @"hello";
+    m.enum0 = TestEnum_THREE;
+    m.bool0 = YES;
+    m.short0 = INT16_MIN;
+    m.int0 = INT32_MIN;
+    m.long0 = INT64_MIN;
+    m.float0 = -1.5;
+    m.double0 = -2.5;
+    m.datetime0 = [[NSDate alloc] initWithTimeIntervalSince1970:0];
+    m.list0 = @[@-1, @0, @1, @2];
+    m.set0 = [[NSSet alloc] initWithObjects:@-1, @0, @1, nil];
+    m.map0 = @{@1: @-1.5, @2: @-2.5};
+    m.message0 = [self fixtureMessage];
+    return m;
 }
 @end
