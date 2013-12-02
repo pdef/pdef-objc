@@ -31,7 +31,7 @@
     human.name = @"John";
     human.sex = Sex_MALE;
     human.continent = ContinentName_EUROPE;
-    
+
     // Serialize a human to a JSON string.
     NSError *error = nil;
     NSData *humanData = [human toJsonError:&error];

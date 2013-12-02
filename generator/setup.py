@@ -13,7 +13,8 @@ setup(
     version='1.0',
     license='Apache License 2.0',
     description='Pdef Objective-C generator',
-    url='',
+    url='http://github.com/pdef/pdef-objc',
+    long_description=open('README.md', 'r').read(),
 
     author='Ivan Korobkov',
     author_email='ivan.korobkov@gmail.com',

@@ -258,7 +258,7 @@
 				ORGANIZATIONNAME = Pdef;
 				TargetAttributes = {
 					2CA8113A1848DAC6001E3612 = {
-						TestTargetID = 2CA811191848DAC6001E3612;
+						TestTargetID = 2CA811191848DAC6001E3612 /* Pdef Example */;
 					};
 				};
 			};

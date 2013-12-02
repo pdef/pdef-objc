@@ -1,9 +1,6 @@
 # encoding: utf-8
-import io
-import logging
-import os
 from pdefc.lang import TypeEnum
-from pdefc.generators import Generator, Templates, upper_first
+from pdefc.generators import Generator, Templates
 
 
 ENCODING = 'utf8'

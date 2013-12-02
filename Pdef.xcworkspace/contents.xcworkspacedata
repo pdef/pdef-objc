@@ -1,1 +1,89 @@
-<?xml version='1.0' encoding='UTF-8'?><Workspace version='1.0'><FileRef location='group:Tests/Pdef Tests.xcodeproj'/><FileRef location='group:Pdef Tests/Pods/Pods.xcodeproj'/><FileRef location='group:Tests/Pods/Pods.xcodeproj'/><FileRef location='group:Example/Pdef Example.xcodeproj'/><FileRef location='group:Example/Pods/Pods.xcodeproj'/></Workspace>
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:Tests/Pdef Tests.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pdef Tests/Pods/Pods.xcodeproj">
+   </FileRef>
+   <Group
+      location = "group:Pdef"
+      name = "Pdef">
+      <FileRef
+         location = "group:PDDescriptors.h">
+      </FileRef>
+      <FileRef
+         location = "group:PDDescriptors.m">
+      </FileRef>
+      <FileRef
+         location = "group:PDef.h">
+      </FileRef>
+      <FileRef
+         location = "group:PDErrors.h">
+      </FileRef>
+      <FileRef
+         location = "group:PDErrors.m">
+      </FileRef>
+      <FileRef
+         location = "group:PDInterface.h">
+      </FileRef>
+      <FileRef
+         location = "group:PDInterface.m">
+      </FileRef>
+      <FileRef
+         location = "group:PDInvocation.h">
+      </FileRef>
+      <FileRef
+         location = "group:PDInvocation.m">
+      </FileRef>
+      <FileRef
+         location = "group:PDInvocationHandler.h">
+      </FileRef>
+      <FileRef
+         location = "group:PDJsonFormat.h">
+      </FileRef>
+      <FileRef
+         location = "group:PDJsonFormat.m">
+      </FileRef>
+      <FileRef
+         location = "group:PDJsonSerialization.h">
+      </FileRef>
+      <FileRef
+         location = "group:PDJsonSerialization.m">
+      </FileRef>
+      <FileRef
+         location = "group:PDMessage.h">
+      </FileRef>
+      <FileRef
+         location = "group:PDMessage.m">
+      </FileRef>
+      <FileRef
+         location = "group:PDRpcClient.h">
+      </FileRef>
+      <FileRef
+         location = "group:PDRpcClient.m">
+      </FileRef>
+      <FileRef
+         location = "group:PDRpcProtocol.h">
+      </FileRef>
+      <FileRef
+         location = "group:PDRpcProtocol.m">
+      </FileRef>
+      <FileRef
+         location = "group:PDRpcRequest.h">
+      </FileRef>
+      <FileRef
+         location = "group:PDRpcRequest.m">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:Tests/Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Example/Pdef Example.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Example/Pods/Pods.xcodeproj">
+   </FileRef>
+</Workspace>

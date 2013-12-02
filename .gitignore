@@ -5,6 +5,7 @@ xcuserdata
 
 Example/Generated/
 Example/Pods/
+Example/Podfile.lock
 
 Tests/Pods/
 Tests/Podfile.lock
