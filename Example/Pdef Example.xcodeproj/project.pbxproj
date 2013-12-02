@@ -10,9 +10,6 @@
 		2CA8111E1848DAC6001E3612 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA8111D1848DAC6001E3612 /* Foundation.framework */; };
 		2CA811201848DAC6001E3612 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA8111F1848DAC6001E3612 /* CoreGraphics.framework */; };
 		2CA811221848DAC6001E3612 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA811211848DAC6001E3612 /* UIKit.framework */; };
-		2CA8113D1848DAC6001E3612 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA8113C1848DAC6001E3612 /* XCTest.framework */; };
-		2CA8113E1848DAC6001E3612 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA8111D1848DAC6001E3612 /* Foundation.framework */; };
-		2CA8113F1848DAC6001E3612 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA811211848DAC6001E3612 /* UIKit.framework */; };
 		2CA8115F1848DB87001E3612 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CA811531848DB87001E3612 /* Main.storyboard */; };
 		2CA811601848DB87001E3612 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CA811551848DB87001E3612 /* InfoPlist.strings */; };
 		2CA811611848DB87001E3612 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CA811571848DB87001E3612 /* Images.xcassets */; };
@@ -37,22 +34,11 @@
 		4D62DED61FA14AC09F89CA92 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F9CEFDE94DC413C925847AE /* libPods.a */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		2CA811401848DAC6001E3612 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2CA811121848DAC6001E3612 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2CA811191848DAC6001E3612;
-			remoteInfo = "Pdef Example";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		2CA8111A1848DAC6001E3612 /* Pdef Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pdef Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CA8111D1848DAC6001E3612 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2CA8111F1848DAC6001E3612 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2CA811211848DAC6001E3612 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		2CA8113B1848DAC6001E3612 /* Pdef ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pdef ExampleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CA8113C1848DAC6001E3612 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		2CA811541848DB87001E3612 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2CA811561848DB87001E3612 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -109,16 +95,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2CA811381848DAC6001E3612 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2CA8113D1848DAC6001E3612 /* XCTest.framework in Frameworks */,
-				2CA8113F1848DAC6001E3612 /* UIKit.framework in Frameworks */,
-				2CA8113E1848DAC6001E3612 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -137,7 +113,6 @@
 			isa = PBXGroup;
 			children = (
 				2CA8111A1848DAC6001E3612 /* Pdef Example.app */,
-				2CA8113B1848DAC6001E3612 /* Pdef ExampleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -229,24 +204,6 @@
 			productReference = 2CA8111A1848DAC6001E3612 /* Pdef Example.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2CA8113A1848DAC6001E3612 /* Pdef ExampleTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2CA8114F1848DAC6001E3612 /* Build configuration list for PBXNativeTarget "Pdef ExampleTests" */;
-			buildPhases = (
-				2CA811371848DAC6001E3612 /* Sources */,
-				2CA811381848DAC6001E3612 /* Frameworks */,
-				2CA811391848DAC6001E3612 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2CA811411848DAC6001E3612 /* PBXTargetDependency */,
-			);
-			name = "Pdef ExampleTests";
-			productName = "Pdef ExampleTests";
-			productReference = 2CA8113B1848DAC6001E3612 /* Pdef ExampleTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -256,11 +213,6 @@
 				CLASSPREFIX = PD;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Pdef;
-				TargetAttributes = {
-					2CA8113A1848DAC6001E3612 = {
-						TestTargetID = 2CA811191848DAC6001E3612 /* Pdef Example */;
-					};
-				};
 			};
 			buildConfigurationList = 2CA811151848DAC6001E3612 /* Build configuration list for PBXProject "Pdef Example" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -276,7 +228,6 @@
 			projectRoot = "";
 			targets = (
 				2CA811191848DAC6001E3612 /* Pdef Example */,
-				2CA8113A1848DAC6001E3612 /* Pdef ExampleTests */,
 			);
 		};
 /* End PBXProject section */
@@ -290,13 +241,6 @@
 				2CA811641848DB87001E3612 /* Pdef Example-Info.plist in Resources */,
 				2CA8115F1848DB87001E3612 /* Main.storyboard in Resources */,
 				2CA811601848DB87001E3612 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2CA811391848DAC6001E3612 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,22 +304,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2CA811371848DAC6001E3612 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		2CA811411848DAC6001E3612 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2CA811191848DAC6001E3612 /* Pdef Example */;
-			targetProxy = 2CA811401848DAC6001E3612 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		2CA811531848DB87001E3612 /* Main.storyboard */ = {
@@ -497,48 +426,6 @@
 			};
 			name = Release;
 		};
-		2CA811501848DAC6001E3612 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Pdef Example.app/Pdef Example";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Pdef Example/Pdef Example-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Pdef ExampleTests/Pdef ExampleTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		2CA811511848DAC6001E3612 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Pdef Example.app/Pdef Example";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Pdef Example/Pdef Example-Prefix.pch";
-				INFOPLIST_FILE = "Pdef ExampleTests/Pdef ExampleTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -556,15 +443,6 @@
 			buildConfigurations = (
 				2CA8114D1848DAC6001E3612 /* Debug */,
 				2CA8114E1848DAC6001E3612 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2CA8114F1848DAC6001E3612 /* Build configuration list for PBXNativeTarget "Pdef ExampleTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2CA811501848DAC6001E3612 /* Debug */,
-				2CA811511848DAC6001E3612 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -2,6 +2,6 @@
 
 {% for module in package.modules %}
     {% for definition in module.definitions %}
-#import "{{ definition.name }}.h"
+#import "{{ definition|objc_name }}.h"
     {% endfor %}
 {% endfor %}

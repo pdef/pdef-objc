@@ -4,16 +4,16 @@
 #import "PDef.h"
 {# Import the base header if it is a message and it has a base #}
 {% if definition.is_message and definition.base %}
-#import "{{ definition.base.name }}.h"
+#import "{{ definition.base|objc_name }}.h"
 {% endif %}
 {# Import enum headers, forward reference other referenced types. #}
 {%- for type0 in definition.referenced_types %}
     {% if type0.is_enum %}
-#import "{{ type0.name }}.h"
+#import "{{ type0|objc_name }}.h"
     {% elif type0.is_message and type0 != definition.base %}
-@class {{ type0.name }};
+@class {{ type0|objc_name }};
     {% elif type0.is_interface %}
-@protocol {{ type0.name }};
+@protocol {{ type0|objc_name }};
     {% else %}
     {% endif %}
 {% endfor %}
@@ -25,18 +25,18 @@
 
 
 {% if definition.is_enum %}
-typedef NS_ENUM(NSInteger, {{ definition.name }}) {
-    {{ definition.name }}_UNDEFINED = 0,
+typedef NS_ENUM(NSInteger, {{ definition|objc_name }}) {
+    {{ definition|objc_name }}_UNDEFINED = 0,
     {% for value in definition.values if value.name != "UNDEFINED" %}
-    {{ definition.name }}_{{ value.name }} = {{ loop.index }},
+    {{ definition|objc_name }}_{{ value.name }} = {{ loop.index }},
     {% endfor %}
 };
 
-PDEnumDescriptor *{{ definition.name }}Descriptor();
+PDEnumDescriptor *{{ definition|objc_name }}Descriptor();
 
 
 {% elif definition.is_message %}
-@interface {{ definition.name }} : {{ definition|objc_base }}
+@interface {{ definition|objc_name }} : {{ definition|objc_base }}
     {% for field in definition.declared_fields %}
 @property (nonatomic) {{ field.type|objc_type }}{{ field.name }};
     {% endfor %}
@@ -52,7 +52,7 @@ PDEnumDescriptor *{{ definition.name }}Descriptor();
 
 
 {% else %}
-@protocol {{ definition.name }}
+@protocol {{ definition|objc_name }}
     {% for method in definition.declared_methods %}
 {% if method.doc %}
 /** {{ method.doc }} */
@@ -80,7 +80,7 @@ PDEnumDescriptor *{{ definition.name }}Descriptor();
     {% endfor %}
 @end
 
-@interface {{ definition.name }}Client : PDInterface <{{ definition.name }}>
+@interface {{ definition|objc_name }}Client : PDInterface <{{ definition|objc_name }}>
 @end
-PDInterfaceDescriptor *{{ definition.name }}Descriptor();
+PDInterfaceDescriptor *{{ definition|objc_name }}Descriptor();
 {% endif %}

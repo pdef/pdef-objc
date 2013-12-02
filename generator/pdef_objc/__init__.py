@@ -10,15 +10,15 @@ PACKAGE_TEMPLATE = 'package.jinja2'
 
 
 class ObjectiveCGenerator(Generator):
-    '''Objective-C generator, does not support namespaces, ignores package/module names.'''
-    def __init__(self, out, namespace=None, **kwargs):
+    '''Objective-C generator, ignores module names, supports prefixes.'''
+    def __init__(self, out, prefixes=None, **kwargs):
         '''Create a new generator.
 
         @param out          Destination directory
         '''
-        super(ObjectiveCGenerator, self).__init__(out, **kwargs)
+        super(ObjectiveCGenerator, self).__init__(out, prefixes=prefixes, **kwargs)
 
-        self.filters = ObjectiveCFilters()
+        self.filters = ObjectiveCFilters(self.prefix_mapper)
         self.templates = Templates(__file__, filters=self.filters)
 
     def generate(self, package):
@@ -33,13 +33,13 @@ class ObjectiveCGenerator(Generator):
     def _generate_header(self, definition):
         '''Generate a definition header file.'''
         code = self.templates.render(HEADER_TEMPLATE, definition=definition)
-        filename = '%s.h' % definition.name
+        filename = '%s.h' % self.filters.objc_name(definition)
         self.write_file(filename, code)
 
     def _generate_impl(self, definition):
         '''Generate a definition implementation file.'''
         code = self.templates.render(IMPL_TEMPLATE, definition=definition)
-        filename = '%s.m' % definition.name
+        filename = '%s.m' % self.filters.objc_name(definition)
         self.write_file(filename, code)
 
     def _generate_package(self, package):
@@ -49,7 +49,7 @@ class ObjectiveCGenerator(Generator):
         names = set()
         for module in package.modules:
             for definition in module.definitions:
-                names.add(definition.name.lower())
+                names.add(self.filters.objc_name(definition).lower())
 
         # Generate a unique package file name.
         name = package.name
@@ -66,11 +66,19 @@ class ObjectiveCGenerator(Generator):
 
 class ObjectiveCFilters(object):
     '''Objective-C jinja filters.'''
+    def __init__(self, prefix_mapper):
+        self.prefix_mapper = prefix_mapper
+
+    def objc_name(self, def0):
+        abs_name = '%s.%s' % (def0.module.name if def0.module else '', def0.name)
+        prefix = self.prefix_mapper.get_prefix(abs_name)
+        return prefix + def0.name if prefix else def0.name
+
     def objc_bool(self, expression):
         return 'YES' if expression else 'NO'
 
     def objc_base(self, message):
-        return message.base.name if message.base else 'PDMessage'
+        return self.objc_name(message.base) if message.base else 'PDMessage'
 
     def objc_isprimitive(self, type0):
         pointers = TypeEnum.COLLECTION_TYPES \
@@ -82,13 +90,13 @@ class ObjectiveCFilters(object):
         if t in NATIVE_TYPES:
             return NATIVE_TYPES[t]
         elif t == TypeEnum.ENUM_VALUE:
-            return '%s_%s ' % (type0.enum.name, type0.name)
+            return '%s_%s ' % (self.objc_name(type0.enum), type0.name)
         elif t == TypeEnum.ENUM:
-            return '%s ' % type0.name
+            return '%s ' % self.objc_name(type0)
         elif t == TypeEnum.INTERFACE:
-            return 'id<%s> ' % type0.name
+            return 'id<%s> ' % self.objc_name(type0)
         elif t == TypeEnum.MESSAGE:
-            return '%s *' % type0.name
+            return '%s *' % self.objc_name(type0)
         raise ValueError('Unsupported type %r' % type0)
 
     def objc_descriptor(self, type0):
@@ -96,7 +104,7 @@ class ObjectiveCFilters(object):
         if t in NATIVE_DESCRIPTORS:
             return NATIVE_DESCRIPTORS[t]
         elif t == TypeEnum.ENUM:
-            return '%sDescriptor()' % type0.name
+            return '%sDescriptor()' % self.objc_name(type0)
         elif t == TypeEnum.LIST:
             return '[PDDescriptors listWithElement:%s]' % self.objc_descriptor(type0.element)
         elif t == TypeEnum.SET:
@@ -106,9 +114,9 @@ class ObjectiveCFilters(object):
                 self.objc_descriptor(type0.key),
                 self.objc_descriptor(type0.value))
         elif t == TypeEnum.INTERFACE:
-            return '%sDescriptor()' % type0.name
+            return '%sDescriptor()' % self.objc_name(type0)
         elif t == TypeEnum.MESSAGE:
-            return '[%s typeDescriptor]' % type0.name
+            return '[%s typeDescriptor]' % self.objc_name(type0)
         raise ValueError('Unsupported type %r' % type0)
 
     def objc_default(self, type0):
@@ -124,7 +132,7 @@ class ObjectiveCFilters(object):
 
     def objc_result(self, type0):
         if type0.is_interface:
-            return 'id<%s> ' % type0.name
+            return 'id<%s> ' % self.objc_name(type0)
         return 'NSOperation *'
 
 
