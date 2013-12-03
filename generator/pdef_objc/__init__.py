@@ -18,7 +18,7 @@ class ObjectiveCGenerator(Generator):
         '''
         super(ObjectiveCGenerator, self).__init__(out, prefixes=prefixes, **kwargs)
 
-        self.filters = ObjectiveCFilters(self.prefix_mapper)
+        self.filters = _ObjectiveCFilters(self.prefix_mapper)
         self.templates = Templates(__file__, filters=self.filters)
 
     def generate(self, package):
@@ -67,7 +67,7 @@ class ObjectiveCGenerator(Generator):
         return code
 
 
-class ObjectiveCFilters(object):
+class _ObjectiveCFilters(object):
     '''Objective-C jinja filters.'''
     def __init__(self, prefix_mapper):
         self.prefix_mapper = prefix_mapper

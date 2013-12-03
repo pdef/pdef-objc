@@ -4,7 +4,7 @@ import tempfile
 
 import unittest
 from pdefc.lang.packages import Package
-from pdef_objc import ObjectiveCGenerator, ObjectiveCFilters
+from pdef_objc import ObjectiveCGenerator, _ObjectiveCFilters
 from pdefc.generators import PrefixMapper
 from pdefc.lang import *
 
@@ -81,7 +81,7 @@ class TestObjectiveCGenerator(unittest.TestCase):
 
 class TestObjectiveCFilters(unittest.TestCase):
     def setUp(self):
-        self.filters = ObjectiveCFilters(PrefixMapper())
+        self.filters = _ObjectiveCFilters(PrefixMapper())
 
     def test_list(self):
         list0 = List(NativeType.INT32)
