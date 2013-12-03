@@ -35,11 +35,9 @@ Installation
     The Objective-C generator will appear in the installed generators:
     ```bash
     $ pdefc generate -h
-    usage: pdefc generate [-h] --generator {java} --out OUT [--ns NAMESPACE]
-                          [--include PATHS] [--allow-duplicate-definitions]
-                          package
+    usage: pdefc generate [...]
     available generators:
-      - objc: Objective-C generator, supports namespaces which map module names to class prefixes.
+      - objc: Objective-C generator, ignores module names, supports prefixes.
     ```
 
 - Objective-C package via CocoaPods:
@@ -56,12 +54,12 @@ $ pdefc generate https://github.com/pdef/pdef/blob/master/example/world.yaml \
     --out Generated
 ```
 
-The generator supports namespaces which map pdef module names to class prefixes.
+The generator supports prefixes specified by for modules and submodules:
 ```bash
 $ pdefc generate https://github.com/pdef/pdef/blob/master/example/world.yaml \
     --generator objc
-    --ns world:WL
-    --ns world.space:WT
+    --prefix world.space:SP
+    --prefix world:WL
     --out target/generated-sources
 ```
 
