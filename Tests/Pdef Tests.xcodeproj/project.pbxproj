@@ -47,12 +47,14 @@
 		2CDF09091846176200B226AB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2CDF09071846176200B226AB /* InfoPlist.strings */; };
 		318211475381FDA3D9CB8F08 /* PDJsonFormatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821139C6229E3F2FDA618D /* PDJsonFormatTests.m */; };
 		318213B361F8DDC8328BEF00 /* PDRpcProtocolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3182197DF226A33BF0E5E9E2 /* PDRpcProtocolTests.m */; };
+		31821507ADD1DEFDA438B4C5 /* PDDeepCopyingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 318212902B5A6D626575B183 /* PDDeepCopyingTests.m */; };
 		31821526E0C8019BD54B69E4 /* PDRpcClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 318216E11A5AFC879E6AAC01 /* PDRpcClientTests.m */; };
 		31821707A1B02186D82DD669 /* PDJsonSerializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821E4EA685D38461FC6757 /* PDJsonSerializationTests.m */; };
 		31821841E123B6F2A7CC9BAE /* PDRpcProtocolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3182197DF226A33BF0E5E9E2 /* PDRpcProtocolTests.m */; };
 		318218E1BE5D5C7E7ED5226D /* PDJsonFormatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821139C6229E3F2FDA618D /* PDJsonFormatTests.m */; };
 		31821A02F0E55D465C048AF7 /* PDRpcClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 318216E11A5AFC879E6AAC01 /* PDRpcClientTests.m */; };
 		31821CDB8FB1FA518FB56174 /* PDJsonSerializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 31821E4EA685D38461FC6757 /* PDJsonSerializationTests.m */; };
+		31821FC33DCA562C2F1758BE /* PDDeepCopyingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 318212902B5A6D626575B183 /* PDDeepCopyingTests.m */; };
 		8439C431C7AA4D59BB14FF50 /* libPods-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0F418E67DCF4F048F29FAA7 /* libPods-osx.a */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +97,7 @@
 		2CDF09081846176200B226AB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2CDF090C1846176200B226AB /* iOS Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOS Tests-Prefix.pch"; sourceTree = "<group>"; };
 		31821139C6229E3F2FDA618D /* PDJsonFormatTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDJsonFormatTests.m; sourceTree = "<group>"; };
+		318212902B5A6D626575B183 /* PDDeepCopyingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDDeepCopyingTests.m; sourceTree = "<group>"; };
 		318216E11A5AFC879E6AAC01 /* PDRpcClientTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDRpcClientTests.m; sourceTree = "<group>"; };
 		3182197DF226A33BF0E5E9E2 /* PDRpcProtocolTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDRpcProtocolTests.m; sourceTree = "<group>"; };
 		31821E4EA685D38461FC6757 /* PDJsonSerializationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDJsonSerializationTests.m; sourceTree = "<group>"; };
@@ -186,6 +189,7 @@
 				31821E4EA685D38461FC6757 /* PDJsonSerializationTests.m */,
 				3182197DF226A33BF0E5E9E2 /* PDRpcProtocolTests.m */,
 				318216E11A5AFC879E6AAC01 /* PDRpcClientTests.m */,
+				318212902B5A6D626575B183 /* PDDeepCopyingTests.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -416,6 +420,7 @@
 				31821CDB8FB1FA518FB56174 /* PDJsonSerializationTests.m in Sources */,
 				31821841E123B6F2A7CC9BAE /* PDRpcProtocolTests.m in Sources */,
 				31821A02F0E55D465C048AF7 /* PDRpcClientTests.m in Sources */,
+				31821FC33DCA562C2F1758BE /* PDDeepCopyingTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +448,7 @@
 				31821707A1B02186D82DD669 /* PDJsonSerializationTests.m in Sources */,
 				318213B361F8DDC8328BEF00 /* PDRpcProtocolTests.m in Sources */,
 				31821526E0C8019BD54B69E4 /* PDRpcClientTests.m in Sources */,
+				31821507ADD1DEFDA438B4C5 /* PDDeepCopyingTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

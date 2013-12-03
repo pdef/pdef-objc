@@ -8,6 +8,7 @@
 #import "PDDescriptors.h"
 #import "PDJsonFormat.h"
 #import "PDJsonSerialization.h"
+#import "PDDeepCopying.h"
 
 
 @implementation PDMessage
@@ -207,19 +208,7 @@
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-    PDMessage *copy = [[[self class] alloc] init];
-
-    for (PDFieldDescriptor *field in self.descriptor.fields) {
-        NSString *name = field.name;
-
-        if ([field isSetInMessage:self]) {
-            id value = [self valueForKey:name];
-            id valueCopy = [value copyWithZone:zone];
-            [copy setValue:valueCopy forKey:name];
-        }
-    }
-
-    return copy;
+    return [PDDeepCopying copyMessage:self descriptor:[self descriptor]];
 }
 
 /** Override this method in a subclass, and return a custom descriptor. */

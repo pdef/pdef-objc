@@ -76,6 +76,12 @@
       <FileRef
          location = "group:PDRpcRequest.m">
       </FileRef>
+      <FileRef
+         location = "group:PDDeepCopying.h">
+      </FileRef>
+      <FileRef
+         location = "group:PDDeepCopying.m">
+      </FileRef>
    </Group>
    <FileRef
       location = "group:Tests/Pods/Pods.xcodeproj">
