@@ -35,12 +35,14 @@ class ObjectiveCGenerator(Generator):
         code = self.templates.render(HEADER_TEMPLATE, definition=definition)
         filename = '%s.h' % self.filters.objc_name(definition)
         self.write_file(filename, code)
+        return code
 
     def _generate_impl(self, definition):
         '''Generate a definition implementation file.'''
         code = self.templates.render(IMPL_TEMPLATE, definition=definition)
         filename = '%s.m' % self.filters.objc_name(definition)
         self.write_file(filename, code)
+        return code
 
     def _generate_package(self, package):
         '''Generate a package file which groups all headers.'''
@@ -62,6 +64,7 @@ class ObjectiveCGenerator(Generator):
         # Write the package header file.
         filename = '%s.h' % name
         self.write_file(filename, code)
+        return code
 
 
 class ObjectiveCFilters(object):
