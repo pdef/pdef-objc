@@ -5,6 +5,7 @@ before_install:
   - sh -c 'cd generator && sudo python setup.py install'
 install:
   - sh -c 'cd Tests && pod install'
+  - sh -c 'cd Tests && ./generate-test-files.sh'
 script:
   - sh -c 'cd generator && nosetests'
   - xctool test -workspace Pdef.xcworkspace/ -scheme "iOS Tests" -sdk iphonesimulator

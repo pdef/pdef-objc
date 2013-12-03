@@ -9,6 +9,7 @@ Example/Podfile.lock
 
 Tests/Pods/
 Tests/Podfile.lock
+Tests/Generated/
 
 *.pyc
 *.iml
