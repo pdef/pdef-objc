@@ -294,6 +294,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Pdef <http://pdef.io/>";
 			};
 			buildConfigurationList = 2CDF08F41846173300B226AB /* Build configuration list for PBXProject "Pdef Tests" */;
 			compatibilityVersion = "Xcode 3.2";

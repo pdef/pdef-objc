@@ -1,7 +1,7 @@
 //
-// Created by Ivan Korobkov on 03.12.13.
+// Copyright: 2013 Pdef <http://pdef.io/>
+// Licensed under the Apache License, Version 2.0.
 //
-
 
 #import <XCTest/XCTest.h>
 #import "PDTestComplexMessage.h"

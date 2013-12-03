@@ -1,10 +1,8 @@
 //
-//  PDDescriptors.m
-//  Pdef
+// Copyright: 2013 Pdef <http://pdef.io/>
+// Licensed under the Apache License, Version 2.0.
 //
-//  Created by Ivan Korobkov on 18.11.13.
-//  Copyright (c) 2013 pdef. All rights reserved.
-//
+
 
 #import "PDDescriptors.h"
 #import "PDMessage.h"

@@ -1,9 +1,6 @@
 //
-//  PDRpcClient.m
-//  
-//
-//  Created by Ivan Korobkov on 28.11.13.
-//
+// Copyright: 2013 Pdef <http://pdef.io/>
+// Licensed under the Apache License, Version 2.0.
 //
 
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
