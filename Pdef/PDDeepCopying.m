@@ -4,8 +4,8 @@
 //
 
 
-#import <Pdef/PDDescriptors.h>
-#import <Pdef/PDMessage.h>
+#import "PDDescriptors.h"
+#import "PDMessage.h"
 #import "PDDeepCopying.h"
 
 @implementation PDDeepCopying
