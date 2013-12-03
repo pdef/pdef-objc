@@ -4,7 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PDInvocation.h"
+#import "PDInvocationHandler.h"
 
 @class PDInterfaceDescriptor;
 @class PDRpcRequest;
@@ -16,6 +16,7 @@
 @class AFHTTPRequestOperation;
 
 @class AFHTTPResponseSerializer;
+@class PDMessageDescriptor;
 
 @interface PDRpcClient : NSObject <PDInvocationHandler>
 @property (nonatomic, readonly) NSString *baseUrl;

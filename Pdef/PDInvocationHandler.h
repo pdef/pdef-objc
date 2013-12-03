@@ -12,6 +12,6 @@
 
 @required
 - (NSOperation *)handleInvocation:(PDInvocation *)invocation
-                         callback:(void (^)(id result, NSError *error))response;
+                         callback:(void (^)(id result, NSError *error))callback;
 
 @end

@@ -23,12 +23,3 @@
 - (PDInvocation *)nextWithMethod:(PDMethodDescriptor *)method
                             args:(NSDictionary *)args;
 @end
-
-
-@protocol PDInvocationHandler <NSObject>
-
-@required
-- (NSOperation *)handleInvocation:(PDInvocation *)invocation
-                         callback:(void (^)(id result, NSError *error))response;
-
-@end
