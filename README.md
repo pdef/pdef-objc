@@ -12,34 +12,40 @@ Structure
 
 Requirements
 ------------
-- Objective-C: iOS 7.0, Mac OSX 10.9.
+- Objective-C: iOS 6.0, Mac OSX 10.8, AFNetworking 2.0.
 - Code generator: [Pdef compiler 1.0+](https://github.com/pdef/pdef),
   Python 2.6 or Python 3.3+.
 
 Installation
 ------------
-Install the code generator as a python package:
-```bash
-$ [sudo] pip install pdef-objc
-# or
-$ [sudo] easy_install pdef-objc
-```
+- Code generator:
+    Install the code generator as a python package:
+    ```bash
+    $ [sudo] pip install pdef-objc
+    # or
+    $ [sudo] easy_install pdef-objc
+    ```
 
-Or [download](https://github.com/pdef/pdef-objc/releases) the release,
-unzip it and in the `generator` directory run:
-```bash
-$ [sudo] python setup.py install
-```
+    Or [download](https://github.com/pdef/pdef-objc/releases) the release,
+    unzip it and in the `generator` directory run:
+    ```bash
+    $ [sudo] python setup.py install
+    ```
 
-The Objective-C generator will appear in the installed generators:
-```bash
-$ pdefc generate -h
-usage: pdefc generate [-h] --generator {java} --out OUT [--ns NAMESPACE]
-                      [--include PATHS] [--allow-duplicate-definitions]
-                      package
-available generators:
-  - objc: Objective-C generator, supports namespaces which map module names to class prefixes.
-```
+    The Objective-C generator will appear in the installed generators:
+    ```bash
+    $ pdefc generate -h
+    usage: pdefc generate [-h] --generator {java} --out OUT [--ns NAMESPACE]
+                          [--include PATHS] [--allow-duplicate-definitions]
+                          package
+    available generators:
+      - objc: Objective-C generator, supports namespaces which map module names to class prefixes.
+    ```
+
+- Objective-C package via CocoaPods:
+    ```ruby
+    pod "Pdef", "~> 1.0"
+    ```
 
 Code generation
 ---------------

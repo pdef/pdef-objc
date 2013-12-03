@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Pdef"
-  s.version      = "0.3.0"
+  s.version      = "1.0.0"
   s.summary      = "Pdef descriptors and http rpc."
   s.homepage     = "https://github.com/pdef/pdef-objc"
   s.license      = 'Apache License 2.0'
