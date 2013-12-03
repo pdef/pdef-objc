@@ -1,0 +1,12 @@
+language: objective-c
+before_install:
+  - sudo easy_install nose
+  - sudo gem install cocoapods
+  - sh -c 'cd generator && sudo python setup.py install'
+install:
+  - sh -c 'cd Tests && pod install'
+script:
+  - sh -c 'cd generator && nosetests'
+  - xctool test -workspace Pdef.xcworkspace/ -scheme "iOS Tests" -sdk iphonesimulator
+  - xctool test -workspace Pdef.xcworkspace/ -scheme "OSX Tests"
+

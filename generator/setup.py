@@ -13,8 +13,8 @@ setup(
     version='1.0',
     license='Apache License 2.0',
     description='Pdef Objective-C generator',
-    url='http://github.com/pdef/pdef-objc',
     long_description=open('README.md', 'r').read(),
+    url='http://github.com/pdef/pdef-objc',
 
     author='Ivan Korobkov',
     author_email='ivan.korobkov@gmail.com',
@@ -34,7 +34,7 @@ setup(
     },
 
     classifiers=[
-        'Development Status :: 4 - Alpha',
+        'Development Status :: 4 - Beta',
         'Environment :: Console',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Apache Software License',
