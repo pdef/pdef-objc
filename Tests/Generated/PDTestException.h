@@ -7,7 +7,7 @@
 /** Test exception.
 Multi-line comment.
  */
-@interface TestException : PDMessage
+@interface PDTestException : PDMessage
 @property (nonatomic) NSString *text;
 
 - (BOOL) hasText;

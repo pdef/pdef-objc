@@ -2,17 +2,17 @@
 
 #import <Foundation/Foundation.h>
 #import "PDef.h"
-@class Subtype;
-@class Subtype2;
-@class MultiLevelSubtype;
-#import "PolymorphicType.h"
+@class PDSubtype;
+@class PDSubtype2;
+@class PDMultiLevelSubtype;
+#import "PDPolymorphicType.h"
 
 
 /** Base polymorphic message.
 @field discriminator    Discriminator field set in all subclasses.
  */
-@interface Base : PDMessage
-@property (nonatomic) PolymorphicType type;
+@interface PDBase : PDMessage
+@property (nonatomic) PDPolymorphicType type;
 @property (nonatomic) NSString *field;
 
 - (BOOL) hasType;

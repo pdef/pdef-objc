@@ -6,9 +6,9 @@
 
 #import <XCTest/XCTest.h>
 #import "PDef.h"
-#import "TestMessage.h"
-#import "TestEnum.h"
-#import "MultiLevelSubtype.h"
+#import "PDTestMessage.h"
+#import "PDTestEnum.h"
+#import "PDMultiLevelSubtype.h"
 
 @interface PDJsonFormatTests : XCTestCase
 @end
@@ -76,18 +76,18 @@
 }
 
 - (void)testEnum {
-    [self test:TestEnumDescriptor() object:@(TestEnum_ONE) json:@"\"one\""];
-    [self test:TestEnumDescriptor() object:@(TestEnum_TWO) json:@"\"two\""];
-    [self test:TestEnumDescriptor() object:@(TestEnum_THREE) json:@"\"three\""];
+    [self test:PDTestEnumDescriptor() object:@(PDTestEnum_ONE) json:@"\"one\""];
+    [self test:PDTestEnumDescriptor() object:@(PDTestEnum_TWO) json:@"\"two\""];
+    [self test:PDTestEnumDescriptor() object:@(PDTestEnum_THREE) json:@"\"three\""];
 
     NSError *error = nil;
-    XCTAssert([PDJsonFormat readString:@"\"unknown\"" descriptor:TestEnumDescriptor() error:&error] == [NSNull null]);
+    XCTAssert([PDJsonFormat readString:@"\"unknown\"" descriptor:PDTestEnumDescriptor() error:&error] == [NSNull null]);
 }
 
 - (void)testList {
     NSError *error = nil;
     NSArray *object = @[[self fixtureMessage]];
-    PDListDescriptor *descriptor = [PDDescriptors listWithElement:[TestMessage typeDescriptor]];
+    PDListDescriptor *descriptor = [PDDescriptors listWithElement:[PDTestMessage typeDescriptor]];
 
     NSString *json = [PDJsonFormat writeString:object descriptor:descriptor error:&error];
     [self test:descriptor object:object json:json];
@@ -108,7 +108,7 @@
 - (void)testSet {
     NSError *error = nil;
     NSSet *object = [NSSet setWithObject:[self fixtureMessage]];
-    PDSetDescriptor *descriptor = [PDDescriptors setWithElement:[TestMessage typeDescriptor]];
+    PDSetDescriptor *descriptor = [PDDescriptors setWithElement:[PDTestMessage typeDescriptor]];
 
     NSString *json = [PDJsonFormat writeString:object descriptor:descriptor error:&error];
     [self test:descriptor object:object json:json];
@@ -129,7 +129,7 @@
 - (void)testMap {
     NSError *error = nil;
     NSDictionary *object = @{@-32 : [self fixtureMessage]};
-    PDMapDescriptor *descriptor = [PDDescriptors mapWithKey:[PDDescriptors int32] value:[TestMessage typeDescriptor]];
+    PDMapDescriptor *descriptor = [PDDescriptors mapWithKey:[PDDescriptors int32] value:[PDTestMessage typeDescriptor]];
 
     NSString *json = [PDJsonFormat writeString:object descriptor:descriptor error:&error];
     [self test:descriptor object:object json:json];
@@ -161,27 +161,27 @@
 
 - (void)testMessage {
     NSError *error = nil;
-    TestMessage *object = [self fixtureMessage];
+    PDTestMessage *object = [self fixtureMessage];
 
-    NSString *json = [PDJsonFormat writeString:object descriptor:[TestMessage typeDescriptor] error:&error];
-    [self test:[TestMessage typeDescriptor] object:object json:json];
+    NSString *json = [PDJsonFormat writeString:object descriptor:[PDTestMessage typeDescriptor] error:&error];
+    [self test:[PDTestMessage typeDescriptor] object:object json:json];
 }
 
 - (void)testPolymorphicMessage {
     NSError *error = nil;
-    MultiLevelSubtype *object = [[MultiLevelSubtype alloc] init];
+    PDMultiLevelSubtype *object = [[PDMultiLevelSubtype alloc] init];
     object.field = @"field";
     object.subfield = @"subfield";
     object.mfield = @"mfield";
 
-    NSString *json = [PDJsonFormat writeString:object descriptor:[MultiLevelSubtype typeDescriptor] error:&error];
-    [self test:[Base typeDescriptor] object:object json:json];
-    [self test:[Subtype typeDescriptor] object:object json:json];
-    [self test:[MultiLevelSubtype typeDescriptor] object:object json:json];
+    NSString *json = [PDJsonFormat writeString:object descriptor:[PDMultiLevelSubtype typeDescriptor] error:&error];
+    [self test:[PDBase typeDescriptor] object:object json:json];
+    [self test:[PDSubtype typeDescriptor] object:object json:json];
+    [self test:[PDMultiLevelSubtype typeDescriptor] object:object json:json];
 }
 
-- (TestMessage *)fixtureMessage {
-    TestMessage *message = [[TestMessage alloc] init];
+- (PDTestMessage *)fixtureMessage {
+    PDTestMessage *message = [[PDTestMessage alloc] init];
     message.bool0 = YES;
     message.int0 = 123;
     message.string0 = @"hello, world";

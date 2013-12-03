@@ -5,12 +5,12 @@
 
 #import <XCTest/XCTest.h>
 #import <Pdef/PDRpcClient.h>
-#import "TestInterface.h"
+#import "PDTestInterface.h"
 #import "AFHTTPRequestOperation.h"
-#import "TestMessage.h"
+#import "PDTestMessage.h"
 #import "OCMockObject.h"
 #import "OCMockRecorder.h"
-#import "TestException.h"
+#import "PDTestException.h"
 
 @interface PDRpcClientTests : XCTestCase
 @end
@@ -19,7 +19,7 @@
     PDRpcClient *client;
 }
 - (void)setUp {
-    client = [[PDRpcClient alloc] initWithDescriptor:TestInterfaceDescriptor() baseUrl:@"http://localhost:8080/app/"];
+    client = [[PDRpcClient alloc] initWithDescriptor:PDTestInterfaceDescriptor() baseUrl:@"http://localhost:8080/app/"];
 }
 
 - (void)testBuildUrlRequest {
@@ -46,11 +46,11 @@
 
 - (void)testHandleSuccess_result {
     id operation = [self mockOperation:200];
-    TestMessage *message= [self createMessage];
+    PDTestMessage *message= [self createMessage];
     NSData *data = [message toJsonError:nil];
 
-    __block TestMessage *result = nil;
-    [client handleSuccess:operation data:data datad:[TestMessage typeDescriptor] errord:nil
+    __block PDTestMessage *result = nil;
+    [client handleSuccess:operation data:data datad:[PDTestMessage typeDescriptor] errord:nil
                  callback:^(id o, NSError *error) {
         result = o;
     }];
@@ -59,13 +59,13 @@
 
 - (void)testHandleSuccess_exception {
     id operation = [self mockOperation:422];
-    TestException *exc = [self createException];
+    PDTestException *exc = [self createException];
     NSData *data = [exc toJsonError:nil];
 
     __block NSString *domain = nil;
     __block NSInteger code = 0;
-    __block TestException *result = nil;
-    [client handleSuccess:operation data:data datad:nil errord:[TestException typeDescriptor]
+    __block PDTestException *result = nil;
+    [client handleSuccess:operation data:data datad:nil errord:[PDTestException typeDescriptor]
                  callback:^(id o, NSError *error) {
         domain = error.domain;
         code = error.code;
@@ -85,16 +85,16 @@
     return operation;
 }
 
-- (TestMessage *)createMessage {
-    TestMessage *message = [[TestMessage alloc] init];
+- (PDTestMessage *)createMessage {
+    PDTestMessage *message = [[PDTestMessage alloc] init];
     message.string0 = @"hello";
     message.int0 = 123;
     message.bool0 = YES;
     return message;
 }
 
-- (TestException *)createException {
-    TestException *exc = [[TestException alloc] init];
+- (PDTestException *)createException {
+    PDTestException *exc = [[PDTestException alloc] init];
     exc.text = @"hello, world";
     return exc;
 }

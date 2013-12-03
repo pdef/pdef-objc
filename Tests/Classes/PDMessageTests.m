@@ -5,10 +5,10 @@
 
 
 #import <XCTest/XCTest.h>
-#import "TestMessage.h"
-#import "TestComplexMessage.h"
-#import "MultiLevelSubtype.h"
-#import "Subtype2.h"
+#import "PDTestMessage.h"
+#import "PDTestComplexMessage.h"
+#import "PDMultiLevelSubtype.h"
+#import "PDSubtype2.h"
 
 
 @interface PDMessageTests : XCTestCase
@@ -16,20 +16,20 @@
 
 @implementation PDMessageTests
 - (void)testSetDiscriminatorValueInConstructor {
-    Base *base = [[Base alloc] init];
-    Subtype *subtype = [[Subtype alloc] init];
-    Subtype2 *subtype2 = [[Subtype2 alloc] init];
-    MultiLevelSubtype *msubtype = [[MultiLevelSubtype alloc] init];
+    PDBase *base = [[PDBase alloc] init];
+    PDSubtype *subtype = [[PDSubtype alloc] init];
+    PDSubtype2 *subtype2 = [[PDSubtype2 alloc] init];
+    PDMultiLevelSubtype *msubtype = [[PDMultiLevelSubtype alloc] init];
 
     XCTAssert(base.type == 0);
-    XCTAssert(subtype.type == PolymorphicType_SUBTYPE);
-    XCTAssert(subtype2.type == PolymorphicType_SUBTYPE2);
-    XCTAssert(msubtype.type == PolymorphicType_MULTILEVEL_SUBTYPE);
+    XCTAssert(subtype.type == PDPolymorphicType_SUBTYPE);
+    XCTAssert(subtype2.type == PDPolymorphicType_SUBTYPE2);
+    XCTAssert(msubtype.type == PDPolymorphicType_MULTILEVEL_SUBTYPE);
 }
 
 - (void)testInitWithDictionary {
-    TestMessage *expected = [self fixtureMessage];
-    TestMessage *message = [[TestMessage alloc] initWithDictionary:[self fixtureDictionary]];
+    PDTestMessage *expected = [self fixtureMessage];
+    PDTestMessage *message = [[PDTestMessage alloc] initWithDictionary:[self fixtureDictionary]];
 
     XCTAssert([message isEqual:expected]);
 }
@@ -39,55 +39,55 @@
     NSData *json = [[self fixtureComplexMessage] toJsonError:&error];
     XCTAssert(!error);
 
-    TestComplexMessage *message = [[[TestComplexMessage alloc] init] mergeJson:json error:&error];
+    PDTestComplexMessage *message = [[[PDTestComplexMessage alloc] init] mergeJson:json error:&error];
     XCTAssert(message);
     XCTAssert(!error);
     XCTAssert([message isEqual:[self fixtureComplexMessage]]);
 }
 
 - (void)testNSCoding {
-    TestComplexMessage *message = [self fixtureComplexMessage];
+    PDTestComplexMessage *message = [self fixtureComplexMessage];
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:message];
-    TestComplexMessage *message1 = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    PDTestComplexMessage *message1 = [NSKeyedUnarchiver unarchiveObjectWithData:data];
 
     XCTAssertEqualObjects(message, message1);
 }
 
 - (void)testMergeMessage {
-    TestComplexMessage *message = [[[TestComplexMessage alloc] init] mergeMessage:[self fixtureComplexMessage]];
+    PDTestComplexMessage *message = [[[PDTestComplexMessage alloc] init] mergeMessage:[self fixtureComplexMessage]];
 
     XCTAssert([message isEqual:[self fixtureComplexMessage]]);
 }
 
 - (void)testMergeMessage_mergeSuperType {
-    Base *base = [[Base alloc] init];
+    PDBase *base = [[PDBase alloc] init];
     base.field = @"hello";
 
-    MultiLevelSubtype *subtype = [[[MultiLevelSubtype alloc] init] mergeMessage:base];
+    PDMultiLevelSubtype *subtype = [[[PDMultiLevelSubtype alloc] init] mergeMessage:base];
     XCTAssert([subtype.field isEqualToString:@"hello"]);
 }
 
 - (void)testMergeMessage_mergeSubtype {
-    MultiLevelSubtype *subtype = [[MultiLevelSubtype alloc] init];
+    PDMultiLevelSubtype *subtype = [[PDMultiLevelSubtype alloc] init];
     subtype.field = @"hello";
 
-    Base *base = [[[Base alloc] init] mergeMessage:subtype];
+    PDBase *base = [[[PDBase alloc] init] mergeMessage:subtype];
     XCTAssert([base.field isEqualToString:@"hello"]);
 }
 
 - (void)testMergeMessage_skipDiscriminatorFields {
-    Subtype *subtype = [[Subtype alloc] init];
-    XCTAssert(subtype.type == PolymorphicType_SUBTYPE);
+    PDSubtype *subtype = [[PDSubtype alloc] init];
+    XCTAssert(subtype.type == PDPolymorphicType_SUBTYPE);
 
-    MultiLevelSubtype *msubtype = [[MultiLevelSubtype alloc] init];
-    XCTAssert(msubtype.type == PolymorphicType_MULTILEVEL_SUBTYPE);
+    PDMultiLevelSubtype *msubtype = [[PDMultiLevelSubtype alloc] init];
+    XCTAssert(msubtype.type == PDPolymorphicType_MULTILEVEL_SUBTYPE);
 
     [msubtype mergeMessage:subtype];
-    XCTAssert(msubtype.type == PolymorphicType_MULTILEVEL_SUBTYPE);
+    XCTAssert(msubtype.type == PDPolymorphicType_MULTILEVEL_SUBTYPE);
 }
 
 - (void)testMergeDictionary {
-    TestMessage *message = [[[TestMessage alloc] init] mergeDictionary:[self fixtureDictionary]];
+    PDTestMessage *message = [[[PDTestMessage alloc] init] mergeDictionary:[self fixtureDictionary]];
     XCTAssert([message isEqual:[self fixtureMessage]]);
 }
 
@@ -96,13 +96,13 @@
     NSData *json = [[self fixtureComplexMessage] toJsonError:&error];
     XCTAssert(!error);
 
-    TestComplexMessage *message = [[[TestComplexMessage alloc] init] mergeJson:json error:&error];
+    PDTestComplexMessage *message = [[[PDTestComplexMessage alloc] init] mergeJson:json error:&error];
     XCTAssert(!error);
     XCTAssert([message isEqual:[self fixtureComplexMessage]]);
 }
 
 - (void)testToDictionary {
-    TestMessage *message = [[TestMessage alloc] init];
+    PDTestMessage *message = [[PDTestMessage alloc] init];
     message.bool0 = YES;
     message.int0 = 123;
     message.string0 = @"hello";
@@ -116,12 +116,12 @@
 }
 
 - (void)testIsEqual {
-    TestMessage *message0 = [[TestMessage alloc] init];
+    PDTestMessage *message0 = [[PDTestMessage alloc] init];
     message0.int0 = 123;
     message0.bool0 = YES;
     message0.string0 = @"hello, world";
 
-    TestMessage *message1 = [[TestMessage alloc] init];
+    PDTestMessage *message1 = [[PDTestMessage alloc] init];
     message1.int0 = 123;
     message1.bool0 = YES;
     message1.string0 = @"hello, world";
@@ -132,18 +132,18 @@
 }
 
 - (void)testIsEqualSubclass {
-    TestComplexMessage *message0 = [self fixtureComplexMessage];
-    TestComplexMessage *message1 = [self fixtureComplexMessage];
+    PDTestComplexMessage *message0 = [self fixtureComplexMessage];
+    PDTestComplexMessage *message1 = [self fixtureComplexMessage];
 
     XCTAssertEqualObjects(message0, message1);
 }
 
 - (void)testIsEqualPolymorphic {
-    MultiLevelSubtype *subtype = [[MultiLevelSubtype alloc] init];
+    PDMultiLevelSubtype *subtype = [[PDMultiLevelSubtype alloc] init];
     subtype.field = @"hello";
     subtype.subfield = @"world";
 
-    MultiLevelSubtype *subtype1 = [[MultiLevelSubtype alloc] init];
+    PDMultiLevelSubtype *subtype1 = [[PDMultiLevelSubtype alloc] init];
     subtype1.field = @"hello";
     subtype1.subfield = @"world";
 
@@ -153,40 +153,40 @@
 }
 
 - (void)testCopy {
-    TestMessage *message0 = [[TestMessage alloc] init];
+    PDTestMessage *message0 = [[PDTestMessage alloc] init];
     message0.int0 = 123;
     message0.bool0 = YES;
     message0.string0 = @"hello, world";
 
-    TestMessage *message1 = [message0 copy];
+    PDTestMessage *message1 = [message0 copy];
     XCTAssertEqualObjects(message0, message1);
 }
 
 - (void)testCopySubclass {
-    TestComplexMessage *message0 = [self fixtureComplexMessage];
+    PDTestComplexMessage *message0 = [self fixtureComplexMessage];
     message0.int0 = 123;
     message0.list0 = @[@1, @2, @3];
 
-    TestComplexMessage *message1 = [message0 copy];
+    PDTestComplexMessage *message1 = [message0 copy];
     XCTAssertEqualObjects(message0, message1);
 }
 
 - (void)testCopyPolymorphic {
-    MultiLevelSubtype *subtype = [[MultiLevelSubtype alloc] init];
+    PDMultiLevelSubtype *subtype = [[PDMultiLevelSubtype alloc] init];
     subtype.field = @"hello";
     subtype.subfield = @"world";
 
-    MultiLevelSubtype *subtype1 = [subtype copy];
+    PDMultiLevelSubtype *subtype1 = [subtype copy];
     XCTAssertEqualObjects(subtype, subtype1);
 }
 
 - (void)testCopy_deepCopy {
-    TestComplexMessage *message = [[TestComplexMessage alloc] init];
+    PDTestComplexMessage *message = [[PDTestComplexMessage alloc] init];
     message.int0 = 10;
-    message.message0 = [[TestMessage alloc] init];
+    message.message0 = [[PDTestMessage alloc] init];
     message.message0.string0 = @"hello, world";
 
-    TestComplexMessage *copy = [message copy];
+    PDTestComplexMessage *copy = [message copy];
     XCTAssertEqualObjects(copy, message);
     XCTAssert(copy.message0 != message.message0);
 }
@@ -198,18 +198,18 @@
             @"string0": @"hello"};
 }
 
-- (TestMessage *)fixtureMessage {
-    TestMessage *expected = [[TestMessage alloc] init];
+- (PDTestMessage *)fixtureMessage {
+    PDTestMessage *expected = [[PDTestMessage alloc] init];
     expected.bool0 = YES;
     expected.int0 = 123;
     expected.string0 = @"hello";
     return expected;
 }
 
-- (TestComplexMessage *)fixtureComplexMessage {
-    TestComplexMessage *m = [[TestComplexMessage alloc] init];
+- (PDTestComplexMessage *)fixtureComplexMessage {
+    PDTestComplexMessage *m = [[PDTestComplexMessage alloc] init];
     m.string0 = @"hello";
-    m.enum0 = TestEnum_THREE;
+    m.enum0 = PDTestEnum_THREE;
     m.bool0 = YES;
     m.short0 = INT16_MIN;
     m.int0 = INT32_MIN;

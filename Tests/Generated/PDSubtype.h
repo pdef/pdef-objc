@@ -2,12 +2,12 @@
 
 #import <Foundation/Foundation.h>
 #import "PDef.h"
-#import "Base.h"
-@class MultiLevelSubtype;
-#import "PolymorphicType.h"
+#import "PDBase.h"
+@class PDMultiLevelSubtype;
+#import "PDPolymorphicType.h"
 
 
-@interface Subtype : Base
+@interface PDSubtype : PDBase
 @property (nonatomic) NSString *subfield;
 
 - (BOOL) hasSubfield;

@@ -7,9 +7,9 @@
 
 #import <XCTest/XCTest.h>
 #import "PDef.h"
-#import "TestMessage.h"
-#import "TestComplexMessage.h"
-#import "MultiLevelSubtype.h"
+#import "PDTestMessage.h"
+#import "PDTestComplexMessage.h"
+#import "PDMultiLevelSubtype.h"
 
 
 @interface PDMessageJsonTests : XCTestCase
@@ -19,20 +19,20 @@
 - (void)testMessage {
     NSError *error = nil;
 
-    TestComplexMessage *message = [self messageFixture];
+    PDTestComplexMessage *message = [self messageFixture];
     NSData *data = [message toJsonError:&error];
     XCTAssert(data != nil);
     XCTAssert(error == nil);
 
-    TestComplexMessage *parsed = [[TestComplexMessage alloc] initWithJson:data error:&error];
+    PDTestComplexMessage *parsed = [[PDTestComplexMessage alloc] initWithJson:data error:&error];
     XCTAssert(parsed != nil);
     XCTAssert(error == nil);
 
     XCTAssert([parsed isEqual:message]);
 }
 
-- (TestComplexMessage *)messageFixture {
-    TestComplexMessage *message = [[TestComplexMessage alloc] init];
+- (PDTestComplexMessage *)messageFixture {
+    PDTestComplexMessage *message = [[PDTestComplexMessage alloc] init];
     message.bool0 = YES;
     message.short0 = 16;
     message.int0 = 32;
@@ -45,13 +45,13 @@
     message.map0 = @{@1: @1.5};
     message.datetime0 = [NSDate dateWithTimeIntervalSince1970:0];
 
-    TestMessage *submessage = [[TestMessage alloc] init];
+    PDTestMessage *submessage = [[PDTestMessage alloc] init];
     submessage.bool0 = YES;
     submessage.int0 = -32;
     submessage.string0 = @"hello";
     message.message0 = submessage;
 
-    MultiLevelSubtype *polymorphic = [[MultiLevelSubtype alloc] init];
+    PDMultiLevelSubtype *polymorphic = [[PDMultiLevelSubtype alloc] init];
     polymorphic.field = @"field";
     polymorphic.subfield = @"subfield";
     polymorphic.mfield = @"mfield";

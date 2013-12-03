@@ -10,26 +10,26 @@
 		2A876F2E337F4853875BFDD1 /* libPods-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4346A32D8214B0C81D9D1B2 /* libPods-ios.a */; };
 		2C5148FC18461CB7009020D9 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CDF08FE1846176200B226AB /* XCTest.framework */; };
 		2C51490218461CB7009020D9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C51490018461CB7009020D9 /* InfoPlist.strings */; };
-		2C88599F1846209100F31100 /* Base.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88598B1846209100F31100 /* Base.m */; };
-		2C8859A01846209100F31100 /* Base.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88598B1846209100F31100 /* Base.m */; };
-		2C8859A11846209100F31100 /* MultiLevelSubtype.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88598D1846209100F31100 /* MultiLevelSubtype.m */; };
-		2C8859A21846209100F31100 /* MultiLevelSubtype.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88598D1846209100F31100 /* MultiLevelSubtype.m */; };
-		2C8859A31846209100F31100 /* PolymorphicType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859901846209100F31100 /* PolymorphicType.m */; };
-		2C8859A41846209100F31100 /* PolymorphicType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859901846209100F31100 /* PolymorphicType.m */; };
-		2C8859A51846209100F31100 /* Subtype.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859921846209100F31100 /* Subtype.m */; };
-		2C8859A61846209100F31100 /* Subtype.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859921846209100F31100 /* Subtype.m */; };
-		2C8859A71846209100F31100 /* Subtype2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859941846209100F31100 /* Subtype2.m */; };
-		2C8859A81846209100F31100 /* Subtype2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859941846209100F31100 /* Subtype2.m */; };
-		2C8859A91846209100F31100 /* TestComplexMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859961846209100F31100 /* TestComplexMessage.m */; };
-		2C8859AA1846209100F31100 /* TestComplexMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859961846209100F31100 /* TestComplexMessage.m */; };
-		2C8859AB1846209100F31100 /* TestEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859981846209100F31100 /* TestEnum.m */; };
-		2C8859AC1846209100F31100 /* TestEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859981846209100F31100 /* TestEnum.m */; };
-		2C8859AD1846209100F31100 /* TestException.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88599A1846209100F31100 /* TestException.m */; };
-		2C8859AE1846209100F31100 /* TestException.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88599A1846209100F31100 /* TestException.m */; };
-		2C8859AF1846209100F31100 /* TestInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88599C1846209100F31100 /* TestInterface.m */; };
-		2C8859B01846209100F31100 /* TestInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88599C1846209100F31100 /* TestInterface.m */; };
-		2C8859B11846209100F31100 /* TestMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88599E1846209100F31100 /* TestMessage.m */; };
-		2C8859B21846209100F31100 /* TestMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88599E1846209100F31100 /* TestMessage.m */; };
+		2C88599F1846209100F31100 /* PDBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88598B1846209100F31100 /* PDBase.m */; };
+		2C8859A01846209100F31100 /* PDBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88598B1846209100F31100 /* PDBase.m */; };
+		2C8859A11846209100F31100 /* PDMultiLevelSubtype.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88598D1846209100F31100 /* PDMultiLevelSubtype.m */; };
+		2C8859A21846209100F31100 /* PDMultiLevelSubtype.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88598D1846209100F31100 /* PDMultiLevelSubtype.m */; };
+		2C8859A31846209100F31100 /* PDPolymorphicType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859901846209100F31100 /* PDPolymorphicType.m */; };
+		2C8859A41846209100F31100 /* PDPolymorphicType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859901846209100F31100 /* PDPolymorphicType.m */; };
+		2C8859A51846209100F31100 /* PDSubtype.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859921846209100F31100 /* PDSubtype.m */; };
+		2C8859A61846209100F31100 /* PDSubtype.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859921846209100F31100 /* PDSubtype.m */; };
+		2C8859A71846209100F31100 /* PDSubtype2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859941846209100F31100 /* PDSubtype2.m */; };
+		2C8859A81846209100F31100 /* PDSubtype2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859941846209100F31100 /* PDSubtype2.m */; };
+		2C8859A91846209100F31100 /* PDTestComplexMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859961846209100F31100 /* PDTestComplexMessage.m */; };
+		2C8859AA1846209100F31100 /* PDTestComplexMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859961846209100F31100 /* PDTestComplexMessage.m */; };
+		2C8859AB1846209100F31100 /* PDTestEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859981846209100F31100 /* PDTestEnum.m */; };
+		2C8859AC1846209100F31100 /* PDTestEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859981846209100F31100 /* PDTestEnum.m */; };
+		2C8859AD1846209100F31100 /* PDTestException.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88599A1846209100F31100 /* PDTestException.m */; };
+		2C8859AE1846209100F31100 /* PDTestException.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88599A1846209100F31100 /* PDTestException.m */; };
+		2C8859AF1846209100F31100 /* PDTestInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88599C1846209100F31100 /* PDTestInterface.m */; };
+		2C8859B01846209100F31100 /* PDTestInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88599C1846209100F31100 /* PDTestInterface.m */; };
+		2C8859B11846209100F31100 /* PDTestMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88599E1846209100F31100 /* PDTestMessage.m */; };
+		2C8859B21846209100F31100 /* PDTestMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C88599E1846209100F31100 /* PDTestMessage.m */; };
 		2C8859BD1846209D00F31100 /* PDDescriptorsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859B51846209D00F31100 /* PDDescriptorsTests.m */; };
 		2C8859BE1846209D00F31100 /* PDDescriptorsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859B51846209D00F31100 /* PDDescriptorsTests.m */; };
 		2C8859BF1846209D00F31100 /* PDGeneratedGescriptorsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8859B61846209D00F31100 /* PDGeneratedGescriptorsTests.m */; };
@@ -61,27 +61,27 @@
 		2C5148FF18461CB7009020D9 /* OSX Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OSX Tests-Info.plist"; sourceTree = "<group>"; };
 		2C51490118461CB7009020D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2C51490518461CB7009020D9 /* OSX Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OSX Tests-Prefix.pch"; sourceTree = "<group>"; };
-		2C88598A1846209100F31100 /* Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base.h; sourceTree = "<group>"; };
-		2C88598B1846209100F31100 /* Base.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base.m; sourceTree = "<group>"; };
-		2C88598C1846209100F31100 /* MultiLevelSubtype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiLevelSubtype.h; sourceTree = "<group>"; };
-		2C88598D1846209100F31100 /* MultiLevelSubtype.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiLevelSubtype.m; sourceTree = "<group>"; };
-		2C88598E1846209100F31100 /* pdef_test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pdef_test.h; sourceTree = "<group>"; };
-		2C88598F1846209100F31100 /* PolymorphicType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolymorphicType.h; sourceTree = "<group>"; };
-		2C8859901846209100F31100 /* PolymorphicType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PolymorphicType.m; sourceTree = "<group>"; };
-		2C8859911846209100F31100 /* Subtype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Subtype.h; sourceTree = "<group>"; };
-		2C8859921846209100F31100 /* Subtype.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Subtype.m; sourceTree = "<group>"; };
-		2C8859931846209100F31100 /* Subtype2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Subtype2.h; sourceTree = "<group>"; };
-		2C8859941846209100F31100 /* Subtype2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Subtype2.m; sourceTree = "<group>"; };
-		2C8859951846209100F31100 /* TestComplexMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestComplexMessage.h; sourceTree = "<group>"; };
-		2C8859961846209100F31100 /* TestComplexMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestComplexMessage.m; sourceTree = "<group>"; };
-		2C8859971846209100F31100 /* TestEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestEnum.h; sourceTree = "<group>"; };
-		2C8859981846209100F31100 /* TestEnum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestEnum.m; sourceTree = "<group>"; };
-		2C8859991846209100F31100 /* TestException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestException.h; sourceTree = "<group>"; };
-		2C88599A1846209100F31100 /* TestException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestException.m; sourceTree = "<group>"; };
-		2C88599B1846209100F31100 /* TestInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestInterface.h; sourceTree = "<group>"; };
-		2C88599C1846209100F31100 /* TestInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestInterface.m; sourceTree = "<group>"; };
-		2C88599D1846209100F31100 /* TestMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestMessage.h; sourceTree = "<group>"; };
-		2C88599E1846209100F31100 /* TestMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestMessage.m; sourceTree = "<group>"; };
+		2C88598A1846209100F31100 /* PDBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDBase.h; sourceTree = "<group>"; };
+		2C88598B1846209100F31100 /* PDBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDBase.m; sourceTree = "<group>"; };
+		2C88598C1846209100F31100 /* PDMultiLevelSubtype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDMultiLevelSubtype.h; sourceTree = "<group>"; };
+		2C88598D1846209100F31100 /* PDMultiLevelSubtype.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDMultiLevelSubtype.m; sourceTree = "<group>"; };
+		2C88598E1846209100F31100 /* PdefTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PdefTest.h; sourceTree = "<group>"; };
+		2C88598F1846209100F31100 /* PDPolymorphicType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDPolymorphicType.h; sourceTree = "<group>"; };
+		2C8859901846209100F31100 /* PDPolymorphicType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDPolymorphicType.m; sourceTree = "<group>"; };
+		2C8859911846209100F31100 /* PDSubtype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDSubtype.h; sourceTree = "<group>"; };
+		2C8859921846209100F31100 /* PDSubtype.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDSubtype.m; sourceTree = "<group>"; };
+		2C8859931846209100F31100 /* PDSubtype2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDSubtype2.h; sourceTree = "<group>"; };
+		2C8859941846209100F31100 /* PDSubtype2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDSubtype2.m; sourceTree = "<group>"; };
+		2C8859951846209100F31100 /* PDTestComplexMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDTestComplexMessage.h; sourceTree = "<group>"; };
+		2C8859961846209100F31100 /* PDTestComplexMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDTestComplexMessage.m; sourceTree = "<group>"; };
+		2C8859971846209100F31100 /* PDTestEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDTestEnum.h; sourceTree = "<group>"; };
+		2C8859981846209100F31100 /* PDTestEnum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDTestEnum.m; sourceTree = "<group>"; };
+		2C8859991846209100F31100 /* PDTestException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDTestException.h; sourceTree = "<group>"; };
+		2C88599A1846209100F31100 /* PDTestException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDTestException.m; sourceTree = "<group>"; };
+		2C88599B1846209100F31100 /* PDTestInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDTestInterface.h; sourceTree = "<group>"; };
+		2C88599C1846209100F31100 /* PDTestInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDTestInterface.m; sourceTree = "<group>"; };
+		2C88599D1846209100F31100 /* PDTestMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDTestMessage.h; sourceTree = "<group>"; };
+		2C88599E1846209100F31100 /* PDTestMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDTestMessage.m; sourceTree = "<group>"; };
 		2C8859B51846209D00F31100 /* PDDescriptorsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDDescriptorsTests.m; sourceTree = "<group>"; };
 		2C8859B61846209D00F31100 /* PDGeneratedGescriptorsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDGeneratedGescriptorsTests.m; sourceTree = "<group>"; };
 		2C8859B71846209D00F31100 /* PDInterfaceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDInterfaceTests.m; sourceTree = "<group>"; };
@@ -148,27 +148,27 @@
 		2C8859891846209100F31100 /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				2C88598A1846209100F31100 /* Base.h */,
-				2C88598B1846209100F31100 /* Base.m */,
-				2C88598C1846209100F31100 /* MultiLevelSubtype.h */,
-				2C88598D1846209100F31100 /* MultiLevelSubtype.m */,
-				2C88598E1846209100F31100 /* pdef_test.h */,
-				2C88598F1846209100F31100 /* PolymorphicType.h */,
-				2C8859901846209100F31100 /* PolymorphicType.m */,
-				2C8859911846209100F31100 /* Subtype.h */,
-				2C8859921846209100F31100 /* Subtype.m */,
-				2C8859931846209100F31100 /* Subtype2.h */,
-				2C8859941846209100F31100 /* Subtype2.m */,
-				2C8859951846209100F31100 /* TestComplexMessage.h */,
-				2C8859961846209100F31100 /* TestComplexMessage.m */,
-				2C8859971846209100F31100 /* TestEnum.h */,
-				2C8859981846209100F31100 /* TestEnum.m */,
-				2C8859991846209100F31100 /* TestException.h */,
-				2C88599A1846209100F31100 /* TestException.m */,
-				2C88599B1846209100F31100 /* TestInterface.h */,
-				2C88599C1846209100F31100 /* TestInterface.m */,
-				2C88599D1846209100F31100 /* TestMessage.h */,
-				2C88599E1846209100F31100 /* TestMessage.m */,
+				2C88598A1846209100F31100 /* PDBase.h */,
+				2C88598B1846209100F31100 /* PDBase.m */,
+				2C88598C1846209100F31100 /* PDMultiLevelSubtype.h */,
+				2C88598D1846209100F31100 /* PDMultiLevelSubtype.m */,
+				2C88598E1846209100F31100 /* PdefTest.h */,
+				2C88598F1846209100F31100 /* PDPolymorphicType.h */,
+				2C8859901846209100F31100 /* PDPolymorphicType.m */,
+				2C8859911846209100F31100 /* PDSubtype.h */,
+				2C8859921846209100F31100 /* PDSubtype.m */,
+				2C8859931846209100F31100 /* PDSubtype2.h */,
+				2C8859941846209100F31100 /* PDSubtype2.m */,
+				2C8859951846209100F31100 /* PDTestComplexMessage.h */,
+				2C8859961846209100F31100 /* PDTestComplexMessage.m */,
+				2C8859971846209100F31100 /* PDTestEnum.h */,
+				2C8859981846209100F31100 /* PDTestEnum.m */,
+				2C8859991846209100F31100 /* PDTestException.h */,
+				2C88599A1846209100F31100 /* PDTestException.m */,
+				2C88599B1846209100F31100 /* PDTestInterface.h */,
+				2C88599C1846209100F31100 /* PDTestInterface.m */,
+				2C88599D1846209100F31100 /* PDTestMessage.h */,
+				2C88599E1846209100F31100 /* PDTestMessage.m */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -396,21 +396,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C8859AA1846209100F31100 /* TestComplexMessage.m in Sources */,
-				2C8859B21846209100F31100 /* TestMessage.m in Sources */,
-				2C8859B01846209100F31100 /* TestInterface.m in Sources */,
-				2C8859AE1846209100F31100 /* TestException.m in Sources */,
-				2C8859A61846209100F31100 /* Subtype.m in Sources */,
+				2C8859AA1846209100F31100 /* PDTestComplexMessage.m in Sources */,
+				2C8859B21846209100F31100 /* PDTestMessage.m in Sources */,
+				2C8859B01846209100F31100 /* PDTestInterface.m in Sources */,
+				2C8859AE1846209100F31100 /* PDTestException.m in Sources */,
+				2C8859A61846209100F31100 /* PDSubtype.m in Sources */,
 				2C8859C61846209D00F31100 /* PDMessageJsonTests.m in Sources */,
 				2C8859C41846209D00F31100 /* PDInvocationTests.m in Sources */,
-				2C8859A81846209100F31100 /* Subtype2.m in Sources */,
-				2C8859AC1846209100F31100 /* TestEnum.m in Sources */,
-				2C8859A01846209100F31100 /* Base.m in Sources */,
+				2C8859A81846209100F31100 /* PDSubtype2.m in Sources */,
+				2C8859AC1846209100F31100 /* PDTestEnum.m in Sources */,
+				2C8859A01846209100F31100 /* PDBase.m in Sources */,
 				2C8859BE1846209D00F31100 /* PDDescriptorsTests.m in Sources */,
 				2C8859C81846209D00F31100 /* PDMessageTests.m in Sources */,
 				2C8859C21846209D00F31100 /* PDInterfaceTests.m in Sources */,
-				2C8859A41846209100F31100 /* PolymorphicType.m in Sources */,
-				2C8859A21846209100F31100 /* MultiLevelSubtype.m in Sources */,
+				2C8859A41846209100F31100 /* PDPolymorphicType.m in Sources */,
+				2C8859A21846209100F31100 /* PDMultiLevelSubtype.m in Sources */,
 				2C8859C01846209D00F31100 /* PDGeneratedGescriptorsTests.m in Sources */,
 				318218E1BE5D5C7E7ED5226D /* PDJsonFormatTests.m in Sources */,
 				31821CDB8FB1FA518FB56174 /* PDJsonSerializationTests.m in Sources */,
@@ -423,21 +423,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C8859A91846209100F31100 /* TestComplexMessage.m in Sources */,
-				2C8859B11846209100F31100 /* TestMessage.m in Sources */,
-				2C8859AF1846209100F31100 /* TestInterface.m in Sources */,
-				2C8859AD1846209100F31100 /* TestException.m in Sources */,
-				2C8859A51846209100F31100 /* Subtype.m in Sources */,
+				2C8859A91846209100F31100 /* PDTestComplexMessage.m in Sources */,
+				2C8859B11846209100F31100 /* PDTestMessage.m in Sources */,
+				2C8859AF1846209100F31100 /* PDTestInterface.m in Sources */,
+				2C8859AD1846209100F31100 /* PDTestException.m in Sources */,
+				2C8859A51846209100F31100 /* PDSubtype.m in Sources */,
 				2C8859C51846209D00F31100 /* PDMessageJsonTests.m in Sources */,
 				2C8859C31846209D00F31100 /* PDInvocationTests.m in Sources */,
-				2C8859A71846209100F31100 /* Subtype2.m in Sources */,
-				2C8859AB1846209100F31100 /* TestEnum.m in Sources */,
-				2C88599F1846209100F31100 /* Base.m in Sources */,
+				2C8859A71846209100F31100 /* PDSubtype2.m in Sources */,
+				2C8859AB1846209100F31100 /* PDTestEnum.m in Sources */,
+				2C88599F1846209100F31100 /* PDBase.m in Sources */,
 				2C8859BD1846209D00F31100 /* PDDescriptorsTests.m in Sources */,
 				2C8859C71846209D00F31100 /* PDMessageTests.m in Sources */,
 				2C8859C11846209D00F31100 /* PDInterfaceTests.m in Sources */,
-				2C8859A31846209100F31100 /* PolymorphicType.m in Sources */,
-				2C8859A11846209100F31100 /* MultiLevelSubtype.m in Sources */,
+				2C8859A31846209100F31100 /* PDPolymorphicType.m in Sources */,
+				2C8859A11846209100F31100 /* PDMultiLevelSubtype.m in Sources */,
 				2C8859BF1846209D00F31100 /* PDGeneratedGescriptorsTests.m in Sources */,
 				318211475381FDA3D9CB8F08 /* PDJsonFormatTests.m in Sources */,
 				31821707A1B02186D82DD669 /* PDJsonSerializationTests.m in Sources */,

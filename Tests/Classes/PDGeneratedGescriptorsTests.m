@@ -6,14 +6,14 @@
 
 #import <XCTest/XCTest.h>
 #import "PDDescriptors.h"
-#import "TestMessage.h"
-#import "TestComplexMessage.h"
-#import "Base.h"
-#import "Subtype.h"
-#import "Subtype2.h"
-#import "MultiLevelSubtype.h"
-#import "TestInterface.h"
-#import "TestException.h"
+#import "PDTestMessage.h"
+#import "PDTestComplexMessage.h"
+#import "PDBase.h"
+#import "PDSubtype.h"
+#import "PDSubtype2.h"
+#import "PDMultiLevelSubtype.h"
+#import "PDTestInterface.h"
+#import "PDTestException.h"
 
 @interface PDGeneratedMessageDescriptorTests : XCTestCase
 @end
@@ -21,8 +21,8 @@
 @implementation PDGeneratedMessageDescriptorTests
 
 - (void)test {
-    PDMessageDescriptor *descriptor = [TestMessage typeDescriptor];
-    XCTAssert(descriptor.cls == [TestMessage class]);
+    PDMessageDescriptor *descriptor = [PDTestMessage typeDescriptor];
+    XCTAssert(descriptor.cls == [PDTestMessage class]);
     XCTAssertNil(descriptor.base);
     XCTAssertNil(descriptor.discriminator);
     XCTAssert(descriptor.discriminatorValue == 0);
@@ -31,8 +31,8 @@
 }
 
 - (void)testNonpolymorphicInheritance {
-    PDMessageDescriptor *base = [TestMessage typeDescriptor];
-    PDMessageDescriptor *message = [TestComplexMessage typeDescriptor];
+    PDMessageDescriptor *base = [PDTestMessage typeDescriptor];
+    PDMessageDescriptor *message = [PDTestComplexMessage typeDescriptor];
 
     XCTAssertNil(base.base);
     XCTAssert(message.base == base);
@@ -40,10 +40,10 @@
 }
 
 - (void)testPolymorphicInheritance {
-    PDMessageDescriptor *base = [Base typeDescriptor];
-    PDMessageDescriptor *subtype = [Subtype typeDescriptor];
-    PDMessageDescriptor *subtype2 = [Subtype2 typeDescriptor];
-    PDMessageDescriptor *msubtype = [MultiLevelSubtype typeDescriptor];
+    PDMessageDescriptor *base = [PDBase typeDescriptor];
+    PDMessageDescriptor *subtype = [PDSubtype typeDescriptor];
+    PDMessageDescriptor *subtype2 = [PDSubtype2 typeDescriptor];
+    PDMessageDescriptor *msubtype = [PDMultiLevelSubtype typeDescriptor];
     PDFieldDescriptor *discriminator = base.discriminator;
 
     XCTAssertNil(base.base);
@@ -57,9 +57,9 @@
     XCTAssert(msubtype.discriminator == discriminator);
 
     XCTAssert(base.discriminatorValue == 0);
-    XCTAssert(subtype.discriminatorValue == PolymorphicType_SUBTYPE);
-    XCTAssert(subtype2.discriminatorValue == PolymorphicType_SUBTYPE2);
-    XCTAssert(msubtype.discriminatorValue == PolymorphicType_MULTILEVEL_SUBTYPE);
+    XCTAssert(subtype.discriminatorValue == PDPolymorphicType_SUBTYPE);
+    XCTAssert(subtype2.discriminatorValue == PDPolymorphicType_SUBTYPE2);
+    XCTAssert(msubtype.discriminatorValue == PDPolymorphicType_MULTILEVEL_SUBTYPE);
 
     NSSet *expected = [[NSSet alloc] initWithArray:@[subtype, subtype2, msubtype]];
     XCTAssert([base.subtypes isEqualToSet:expected]);
@@ -69,10 +69,10 @@
     XCTAssert(msubtype.subtypes.count == 0);
 
     XCTAssertNil([base findSubtypeByDiscriminatorValue:0]);
-    XCTAssert([base findSubtypeByDiscriminatorValue:PolymorphicType_SUBTYPE] == subtype);
-    XCTAssert([base findSubtypeByDiscriminatorValue:PolymorphicType_SUBTYPE2] == subtype2);
-    XCTAssert([base findSubtypeByDiscriminatorValue:PolymorphicType_MULTILEVEL_SUBTYPE] == msubtype);
-    XCTAssert([subtype findSubtypeByDiscriminatorValue:PolymorphicType_MULTILEVEL_SUBTYPE] == msubtype);
+    XCTAssert([base findSubtypeByDiscriminatorValue:PDPolymorphicType_SUBTYPE] == subtype);
+    XCTAssert([base findSubtypeByDiscriminatorValue:PDPolymorphicType_SUBTYPE2] == subtype2);
+    XCTAssert([base findSubtypeByDiscriminatorValue:PDPolymorphicType_MULTILEVEL_SUBTYPE] == msubtype);
+    XCTAssert([subtype findSubtypeByDiscriminatorValue:PDPolymorphicType_MULTILEVEL_SUBTYPE] == msubtype);
 }
 
 @end
@@ -84,8 +84,8 @@
 @implementation PDGeneratedFieldDescriptorTests
 
 - (void)test {
-    PDFieldDescriptor *string0 = [[TestMessage typeDescriptor] getFieldForName:@"string0"];
-    PDFieldDescriptor *bool0 = [[TestMessage typeDescriptor] getFieldForName:@"bool0"];
+    PDFieldDescriptor *string0 = [[PDTestMessage typeDescriptor] getFieldForName:@"string0"];
+    PDFieldDescriptor *bool0 = [[PDTestMessage typeDescriptor] getFieldForName:@"bool0"];
 
     XCTAssertEqual(string0.name, @"string0");
     XCTAssertEqual(bool0.name, @"bool0");
@@ -95,10 +95,10 @@
 }
 
 - (void)testDiscriminator {
-    PDFieldDescriptor *type = [[Base typeDescriptor] getFieldForName:@"type"];
+    PDFieldDescriptor *type = [[PDBase typeDescriptor] getFieldForName:@"type"];
 
     XCTAssertEqual(type.name, @"type");
-    XCTAssertEqual(type.type, PolymorphicTypeDescriptor());
+    XCTAssertEqual(type.type, PDPolymorphicTypeDescriptor());
     XCTAssertTrue(type.discriminator);
 }
 @end
@@ -110,10 +110,10 @@
 @implementation PDGeneratedInterfaceDescriptorTests
 
 - (void)test {
-    PDInterfaceDescriptor *descriptor = TestInterfaceDescriptor();
+    PDInterfaceDescriptor *descriptor = PDTestInterfaceDescriptor();
     PDMethodDescriptor *method = [descriptor getMethodForName:@"method"];
-    XCTAssertEqual(descriptor.protocol, @protocol(TestInterface));
-    XCTAssertEqual(descriptor.exc, [TestException typeDescriptor]);
+    XCTAssertEqual(descriptor.protocol, @protocol(PDTestInterface));
+    XCTAssertEqual(descriptor.exc, [PDTestException typeDescriptor]);
     XCTAssert(descriptor.methods.count == 11);
     XCTAssertNotNil(method);
 }
@@ -126,19 +126,19 @@
 @implementation PDGeneratedMethodDescriptorTests
 
 - (void) test {
-    PDMethodDescriptor *method = [TestInterfaceDescriptor() getMethodForName:@"message0"];
+    PDMethodDescriptor *method = [PDTestInterfaceDescriptor() getMethodForName:@"message0"];
 
     XCTAssertEqual(method.name, @"message0");
-    XCTAssertEqual(method.result, [TestMessage typeDescriptor]);
+    XCTAssertEqual(method.result, [PDTestMessage typeDescriptor]);
     XCTAssert(method.args.count == 1);
 
     PDArgumentDescriptor *arg = [method.args objectAtIndex:0];
-    XCTAssertEqual(arg.type, [TestMessage typeDescriptor]);
+    XCTAssertEqual(arg.type, [PDTestMessage typeDescriptor]);
     XCTAssertEqual(arg.name, @"msg");
 }
 
 - (void) testPostTerminal {
-    PDInterfaceDescriptor *descriptor = TestInterfaceDescriptor();
+    PDInterfaceDescriptor *descriptor = PDTestInterfaceDescriptor();
     PDMethodDescriptor *method = [descriptor getMethodForName:@"method"];
     PDMethodDescriptor *post = [descriptor getMethodForName:@"post"];
     PDMethodDescriptor *iface = [descriptor getMethodForName:@"interface0"];
@@ -161,7 +161,7 @@
 @implementation PDGeneratedEnumDescriptorTests
 
 - (void) test {
-    PDEnumDescriptor *descriptor = TestEnumDescriptor();
+    PDEnumDescriptor *descriptor = PDTestEnumDescriptor();
     NSDictionary *expected = @{
             @(1): @"ONE",
             @(2): @"TWO",
@@ -179,8 +179,8 @@
 @implementation PDGeneratedListDescriptor
 
 -(void) test {
-    PDListDescriptor *list = [PDDescriptors listWithElement:[TestMessage typeDescriptor]];
-    XCTAssertEqual(list.elementDescriptor, [TestMessage typeDescriptor]);
+    PDListDescriptor *list = [PDDescriptors listWithElement:[PDTestMessage typeDescriptor]];
+    XCTAssertEqual(list.elementDescriptor, [PDTestMessage typeDescriptor]);
 }
 @end
 
@@ -191,8 +191,8 @@
 @implementation PDGeneratedSetDescriptor
 
 -(void) test {
-    PDSetDescriptor *set = [PDDescriptors setWithElement:[TestMessage typeDescriptor]];
-    XCTAssertEqual(set.elementDescriptor, [TestMessage typeDescriptor]);
+    PDSetDescriptor *set = [PDDescriptors setWithElement:[PDTestMessage typeDescriptor]];
+    XCTAssertEqual(set.elementDescriptor, [PDTestMessage typeDescriptor]);
 }
 @end
 
@@ -203,8 +203,8 @@
 @implementation PDGeneratedMapDescriptor
 
 - (void) test {
-    PDMapDescriptor *map = [PDDescriptors mapWithKey:[PDDescriptors int32] value:[TestMessage typeDescriptor]];
+    PDMapDescriptor *map = [PDDescriptors mapWithKey:[PDDescriptors int32] value:[PDTestMessage typeDescriptor]];
     XCTAssertEqual(map.keyDescriptor, [PDDescriptors int32]);
-    XCTAssertEqual(map.valueDescriptor, [TestMessage typeDescriptor]);
+    XCTAssertEqual(map.valueDescriptor, [PDTestMessage typeDescriptor]);
 }
 @end

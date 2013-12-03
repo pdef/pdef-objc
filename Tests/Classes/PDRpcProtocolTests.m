@@ -6,7 +6,7 @@
 #import <XCTest/XCTest.h>
 #import "PDInvocation.h"
 #import "PDDescriptors.h"
-#import "TestInterface.h"
+#import "PDTestInterface.h"
 #import "PDRpcRequest.h"
 #import "PDRpcProtocol.h"
 
@@ -18,7 +18,7 @@
 }
 
 - (void)setUp {
-    interface = TestInterfaceDescriptor();
+    interface = PDTestInterfaceDescriptor();
 }
 
 - (void)testRequestGet {

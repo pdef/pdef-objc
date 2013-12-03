@@ -141,7 +141,7 @@ static PDMessageDescriptor *_{{ definition|objc_name }}Descriptor;
     {% if method.is_terminal %}
     return [self.handler handleInvocation:_invocation callback:callback];
     {% else %}
-    return [[{{ method.result.name }}Client alloc] initWithHandler: self.handler parentInvocation:_invocation];
+    return [[{{ method.result|objc_name }}Client alloc] initWithHandler: self.handler parentInvocation:_invocation];
     {% endif %}
 }
 {% endfor %}
@@ -183,6 +183,6 @@ PDInterfaceDescriptor *{{ definition|objc_name }}Descriptor() {
 {% endfor %}
                          ]];
     });
-    return _{{ definition.name }}Descriptor;
+    return _{{ definition|objc_name }}Descriptor;
 }
 {% endif %}

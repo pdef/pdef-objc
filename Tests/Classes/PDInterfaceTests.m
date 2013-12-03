@@ -4,7 +4,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "TestInterface.h"
+#import "PDTestInterface.h"
 
 
 @interface PDTestInvocationHandler : NSObject<PDInvocationHandler>
@@ -28,7 +28,7 @@
 
 - (void) testHandleInvocation {
     PDTestInvocationHandler *handler = [[PDTestInvocationHandler alloc] init];
-    id<TestInterface> client = [[TestInterfaceClient alloc] initWithHandler:handler];
+    id<PDTestInterface> client = [[PDTestInterfaceClient alloc] initWithHandler:handler];
 
     NSOperation *operation = [client methodArg0:1 arg1:2 callback:nil];
     XCTAssert(operation == handler.operation);
@@ -36,12 +36,12 @@
 
 - (void) testCaptureInvocation {
     PDTestInvocationHandler *handler = [[PDTestInvocationHandler alloc] init];
-    id<TestInterface> client = [[TestInterfaceClient alloc] initWithHandler:handler];
+    id<PDTestInterface> client = [[PDTestInterfaceClient alloc] initWithHandler:handler];
 
     [client methodArg0:1 arg1:2 callback:nil];
     PDInvocation * invocation = handler.invocation;
 
-    PDMethodDescriptor *method = [TestInterfaceDescriptor() getMethodForName:@"method"];
+    PDMethodDescriptor *method = [PDTestInterfaceDescriptor() getMethodForName:@"method"];
     NSDictionary *expected = @{
             @"arg0": @(1),
             @"arg1": @(2)
@@ -52,15 +52,15 @@
 
 - (void) testInvocationChain {
     PDTestInvocationHandler *handler = [[PDTestInvocationHandler alloc] init];
-    id<TestInterface> client = [[TestInterfaceClient alloc] initWithHandler:handler];
+    id<PDTestInterface> client = [[PDTestInterfaceClient alloc] initWithHandler:handler];
 
     [[client interface0Arg0:1 arg1:2] string0Text:@"hello" callback:nil];
     PDInvocation *invocation1 = handler.invocation;
     NSArray *chain = [invocation1 toChain];
     PDInvocation *invocation0 = [chain objectAtIndex:0];
 
-    PDMethodDescriptor *method0 = [TestInterfaceDescriptor() getMethodForName:@"interface0"];
-    PDMethodDescriptor *method1 = [TestInterfaceDescriptor() getMethodForName:@"string0"];
+    PDMethodDescriptor *method0 = [PDTestInterfaceDescriptor() getMethodForName:@"interface0"];
+    PDMethodDescriptor *method1 = [PDTestInterfaceDescriptor() getMethodForName:@"string0"];
     XCTAssert(chain.count == 2);
     XCTAssert(invocation0.method == method0);
     XCTAssert(invocation1.method == method1);

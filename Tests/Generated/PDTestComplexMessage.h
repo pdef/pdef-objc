@@ -2,13 +2,13 @@
 
 #import <Foundation/Foundation.h>
 #import "PDef.h"
-#import "TestMessage.h"
-#import "TestEnum.h"
-@class Base;
+#import "PDTestMessage.h"
+#import "PDTestEnum.h"
+@class PDBase;
 
 
 /** Message with fields of all data types. */
-@interface TestComplexMessage : TestMessage
+@interface PDTestComplexMessage : PDTestMessage
 @property (nonatomic) int16_t short0;
 @property (nonatomic) int64_t long0;
 @property (nonatomic) float float0;
@@ -17,10 +17,10 @@
 @property (nonatomic) NSArray *list0;
 @property (nonatomic) NSSet *set0;
 @property (nonatomic) NSDictionary *map0;
-@property (nonatomic) TestEnum enum0;
-@property (nonatomic) TestMessage *message0;
-@property (nonatomic) Base *polymorphic;
-@property (nonatomic) TestComplexMessage *datatypes;
+@property (nonatomic) PDTestEnum enum0;
+@property (nonatomic) PDTestMessage *message0;
+@property (nonatomic) PDBase *polymorphic;
+@property (nonatomic) PDTestComplexMessage *datatypes;
 
 - (BOOL) hasShort0;
 - (void) clearShort0;

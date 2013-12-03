@@ -26,7 +26,10 @@
 }
 
 + (NSString *)stringWithNumber:(NSNumber *)number {
-    if (strcmp([number objCType], @encode(BOOL)) == 0) {
+    char const *type = [number objCType];
+    char const *boolType = @encode(BOOL);
+    // There must be only two boxed boolean instances.
+    if (strcmp(type, boolType) == 0 || number == [NSNumber numberWithBool:YES] || number == [NSNumber numberWithBool:NO]) {
         return [number boolValue] ? @"true" : @"false";
     }
 

@@ -2,15 +2,15 @@
 
 #import <Foundation/Foundation.h>
 #import "PDef.h"
-@class TestException;
-@class TestMessage;
-@class TestMessage;
+@class PDTestException;
+@class PDTestMessage;
+@class PDTestMessage;
 
 
 /** Test interface with method of all types.
 Multi-line comment.
  */
-@protocol TestInterface
+@protocol PDTestInterface
 /** Returns the sum of the numbers.
 Multi-line comment.
  */
@@ -37,7 +37,7 @@ Multi-line comment.
             callback:(void (^)(id result, NSError *error))callback;
 
 /** Returns the same message. */
-- (NSOperation *) message0Msg:(TestMessage *)msg
+- (NSOperation *) message0Msg:(PDTestMessage *)msg
             callback:(void (^)(id result, NSError *error))callback;
 
 /** Returns the total number of items. */
@@ -47,7 +47,7 @@ Multi-line comment.
             callback:(void (^)(id result, NSError *error))callback;
 
 /** Returns the same interface (yes, it's endless). */
-- (id<TestInterface> ) interface0Arg0:(int32_t )arg0
+- (id<PDTestInterface> ) interface0Arg0:(int32_t )arg0
         arg1:(int32_t )arg1
 ;
 
@@ -62,6 +62,6 @@ Multi-line comment.
 
 @end
 
-@interface TestInterfaceClient : PDInterface <TestInterface>
+@interface PDTestInterfaceClient : PDInterface <PDTestInterface>
 @end
-PDInterfaceDescriptor *TestInterfaceDescriptor();
+PDInterfaceDescriptor *PDTestInterfaceDescriptor();

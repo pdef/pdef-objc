@@ -5,7 +5,7 @@
 
 
 #import <XCTest/XCTest.h>
-#import "TestInterface.h"
+#import "PDTestInterface.h"
 #import "PDInvocation.h"
 
 @interface PDInvocationTests : XCTestCase
@@ -13,7 +13,7 @@
 
 @implementation PDInvocationTests
 - (void)testToChain {
-    PDInterfaceDescriptor *iface = TestInterfaceDescriptor();
+    PDInterfaceDescriptor *iface = PDTestInterfaceDescriptor();
     PDMethodDescriptor *method0 = [iface getMethodForName:@"interface0"];
     PDMethodDescriptor *method1 = [iface getMethodForName:@"method"];
 
