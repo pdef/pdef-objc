@@ -4,8 +4,9 @@ Pod::Spec.new do |s|
   s.summary      = "Pdef Objective-C descriptors, formats and rpc."
   s.homepage     = "https://github.com/pdef/pdef-objc"
   s.license      = 'Apache License 2.0'
+
   s.author       = { "Ivan Korobkov" => "ivan.korobkov@gmail.com" }
-  s.source       = { :git => "https://github.com/pdef/pdef-objc.git", :tag => "1.0.0" }
+  s.source       = { :git => "https://github.com/pdef/pdef-objc.git", :tag => "v1.0.0" }
   s.requires_arc = true
 
   s.ios.deployment_target = '6.0'
