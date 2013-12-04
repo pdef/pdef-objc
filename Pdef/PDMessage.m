@@ -125,12 +125,12 @@
 }
 
 - (id)mergeDictionary:(NSDictionary *)dictionary {
-    PDMessage *message = [[[self class] alloc] initWithDictionary:dictionary];
+    PDMessage *message = [PDJsonFormat readObject:dictionary descriptor:self.descriptor];
     return [self mergeMessage:message];
 }
 
 - (id)mergeJson:(NSData *)json error:(NSError **)error {
-    PDMessage *message = [[[self class] alloc] initWithJson:json error:error];
+    PDMessage *message = [PDJsonFormat readData:json descriptor:self.descriptor error:error];
     if (!message) {
         return self;
     }

@@ -11,6 +11,12 @@
       location = "group:Pdef"
       name = "Pdef">
       <FileRef
+         location = "group:PDRpcResult.h">
+      </FileRef>
+      <FileRef
+         location = "group:PDRpcResult.m">
+      </FileRef>
+      <FileRef
          location = "group:PDDescriptors.h">
       </FileRef>
       <FileRef

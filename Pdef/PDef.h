@@ -16,3 +16,4 @@
 #import "PDRpcClient.h"
 #import "PDRpcProtocol.h"
 #import "PDRpcRequest.h"
+#import "PDRpcResult.h"

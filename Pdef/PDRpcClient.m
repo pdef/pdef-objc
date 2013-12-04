@@ -10,6 +10,7 @@
 #import "PDErrors.h"
 #import "PDRpcRequest.h"
 #import "PDRpcProtocol.h"
+#import "PDRpcResult.h"
 
 
 @implementation PDRpcClient
@@ -118,13 +119,19 @@
     NSError *error = nil;
     id result = nil;
 
-    if (operation.response.statusCode == 422) {
-        // It's an expected application exception.
+    // Read the rpc result.
+    PDRpcResult *rpcResult = [[PDRpcResult alloc] initWithDataDescriptor:datad errorDescriptor:errord];
+    [rpcResult mergeJson:data error:&error];
 
-        id exc = nil;
-        if (errord) {
-            exc = [PDJsonFormat readData:data descriptor:errord error:&error];
-        }
+    NSInteger statusCode = operation.response.statusCode;
+    if ((statusCode / 100) == 2) {
+        // It is a successful result.
+        result = rpcResult.data;
+
+    } else if (statusCode == 422) {
+        // It is an expected application exception.
+
+        id exc = rpcResult.error;
         if (!exc) {
             exc = [NSNull null];
         }
@@ -134,8 +141,11 @@
         error = [NSError errorWithDomain:PDefErrorDomain code:PDRpcException userInfo:userInfo];
 
     } else {
-        // It's a successful result.
-        result = [PDJsonFormat readData:data descriptor:datad error:&error];
+        // It is an unknown status code.
+
+        NSString *reason = NSLocalizedStringFromTable(@"Unkown RPC status code", @"PDef", nil);
+        NSDictionary *userInfo = @{NSLocalizedFailureReasonErrorKey : reason};
+        error = [NSError errorWithDomain:PDefErrorDomain code:PDRpcException userInfo:userInfo];
     }
 
     [self executeCallback:result error:error callback:callback];

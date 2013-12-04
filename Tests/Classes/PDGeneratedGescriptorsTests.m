@@ -114,7 +114,7 @@
     PDMethodDescriptor *method = [descriptor getMethodForName:@"method"];
     XCTAssertEqual(descriptor.protocol, @protocol(PDTestInterface));
     XCTAssertEqual(descriptor.exc, [PDTestException typeDescriptor]);
-    XCTAssert(descriptor.methods.count == 11);
+    XCTAssert(descriptor.methods.count == 12);
     XCTAssertNotNil(method);
 }
 @end

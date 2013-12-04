@@ -45,9 +45,8 @@
 - (void)accessTheWorld {
     // Create a world HTTP RPC client.
     if (!world) {
-        PDRpcClient *client = [[PDRpcClient alloc]
-            initWithDescriptor:WorldDescriptor()
-                               baseUrl:@"http://example.com/world"];
+        PDRpcClient *client = [[PDRpcClient alloc] initWithDescriptor:WorldDescriptor()
+                                                              baseUrl:@"http://localhost:8080/example"];
         world = [[WorldClient alloc] initWithHandler:client];
     }
     

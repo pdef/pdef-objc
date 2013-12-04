@@ -48,8 +48,10 @@
 - (void)testHandleSuccess_result {
     id operation = [self mockOperation:200];
     PDTestMessage *message= [self createMessage];
-    NSData *data = [message toJsonError:nil];
+    PDRpcResult *rpcResult = [self createResultWithDatad:[message descriptor] errord:nil];
+    rpcResult.data = message;
 
+    NSData *data = [rpcResult toJsonError:nil];
     __block PDTestMessage *result = nil;
     [client handleSuccess:operation data:data datad:[PDTestMessage typeDescriptor] errord:nil
                  callback:^(id o, NSError *error) {
@@ -61,12 +63,14 @@
 - (void)testHandleSuccess_exception {
     id operation = [self mockOperation:422];
     PDTestException *exc = [self createException];
-    NSData *data = [exc toJsonError:nil];
+    PDRpcResult *rpcResult = [self createResultWithDatad:[PDDescriptors void0] errord:[exc descriptor]];
+    rpcResult.error = exc;
+    NSData *data = [rpcResult toJsonError:nil];
 
     __block NSString *domain = nil;
     __block NSInteger code = 0;
     __block PDTestException *result = nil;
-    [client handleSuccess:operation data:data datad:nil errord:[PDTestException typeDescriptor]
+    [client handleSuccess:operation data:data datad:[PDDescriptors void0] errord:[PDTestException typeDescriptor]
                  callback:^(id o, NSError *error) {
         domain = error.domain;
         code = error.code;
@@ -98,5 +102,9 @@
     PDTestException *exc = [[PDTestException alloc] init];
     exc.text = @"hello, world";
     return exc;
+}
+
+- (PDRpcResult *)createResultWithDatad:(PDDataTypeDescriptor *)datad errord:(PDDataTypeDescriptor *)errord {
+    return [[PDRpcResult alloc] initWithDataDescriptor:datad errorDescriptor:errord];
 }
 @end
