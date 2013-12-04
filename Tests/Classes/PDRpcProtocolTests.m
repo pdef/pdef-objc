@@ -10,6 +10,12 @@
 #import "PDTestInterface.h"
 #import "PDRpcRequest.h"
 #import "PDRpcProtocol.h"
+#import "PDTestEnum.h"
+
+@interface PDRpcProtocol (Test)
++ (NSString *)toJson:(id)arg descriptor:(PDDataTypeDescriptor *)descriptor error:(NSError **)error;
+@end
+
 
 @interface PDRpcProtocolTests : XCTestCase
 @end
@@ -86,5 +92,24 @@
 
     PDRpcRequest *request = [PDRpcProtocol requestWithInvocation:invocation error:nil ];
     XCTAssert([request.path isEqualToString:@"/string0/%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82%5C%2F%D0%BC%D0%B8%D1%80"]);
+}
+
+- (void)testToJson_stringNoQuotes {
+    NSError *error = nil;
+    NSString *s = [PDRpcProtocol toJson:@"hello" descriptor:[PDDescriptors string] error:&error];
+    XCTAssertEqualObjects(@"hello", s);
+}
+
+- (void)testToJson_datetimeNoQuotes {
+    NSError *error = nil;
+    NSString *s = [PDRpcProtocol toJson:[[NSDate alloc] initWithTimeIntervalSince1970:0] descriptor:[PDDescriptors datetime]
+                                  error:&error];
+    XCTAssertEqualObjects(@"1970-01-01T00:00:00Z", s);
+}
+
+- (void)testToJson_enumNoQuotes {
+    NSError *error = nil;
+    NSString *s = [PDRpcProtocol toJson:@(PDTestEnum_ONE) descriptor:PDTestEnumDescriptor() error:&error];
+    XCTAssertEqualObjects(@"one", s);
 }
 @end

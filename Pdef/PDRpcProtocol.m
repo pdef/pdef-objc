@@ -68,17 +68,19 @@
     return YES;
 }
 
-+ (NSString *)toJson:(id)arg descriptor:(PDDataTypeDescriptor *)descriptor error:(NSError **)error{
++ (NSString *)toJson:(id)arg descriptor:(PDDataTypeDescriptor *)descriptor error:(NSError **)error {
     NSString *value = [PDJsonFormat writeString:arg descriptor:descriptor error:error];
     if (!value) {
         return nil;
     }
-    if (descriptor.type != PDTypeString) {
-        return value;
-    }
 
-    // Remove the quotes.
-    return [value substringWithRange:(NSRange){1, value.length -2}];
+
+    PDType type = descriptor.type;
+    if (type == PDTypeString || type == PDTypeDatetime || type == PDTypeEnum) {
+        // Remove the quotes.
+        value = [value substringWithRange:(NSRange){1, value.length -2}];
+    }
+    return value;
 }
 
 + (NSString *)urlencode:(NSString *)value {
