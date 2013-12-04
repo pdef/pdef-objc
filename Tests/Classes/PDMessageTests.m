@@ -29,7 +29,7 @@
 
 - (void)testInitWithDictionary {
     PDTestMessage *expected = [self fixtureMessage];
-    PDTestMessage *message = [[PDTestMessage alloc] initWithDictionary:[self fixtureDictionary]];
+    PDTestMessage *message = [PDTestMessage messageWithDictionary:[self fixtureDictionary]];
 
     XCTAssert([message isEqual:expected]);
 }

@@ -15,7 +15,7 @@
 @end
 
 @implementation PDMessageJsonTests
-- (void)testMessage {
+- (void)testMessageWithJson {
     NSError *error = nil;
 
     PDTestComplexMessage *message = [self messageFixture];
@@ -23,11 +23,23 @@
     XCTAssert(data != nil);
     XCTAssert(error == nil);
 
-    PDTestComplexMessage *parsed = [[PDTestComplexMessage alloc] initWithJson:data error:&error];
+    PDTestComplexMessage *parsed = [PDTestComplexMessage messageWithJson:data error:&error];
     XCTAssert(parsed != nil);
     XCTAssert(error == nil);
 
     XCTAssert([parsed isEqual:message]);
+}
+
+- (void)testMessageWithJson_polymorphic {
+    NSError *error = nil;
+
+    PDMultiLevelSubtype *subtype = [[PDMultiLevelSubtype alloc] init];
+    subtype.mfield = @"hello";
+    NSData *json = [subtype toJsonError:&error];
+
+    PDBase *base = [PDBase messageWithJson:json error:&error];
+    XCTAssertEqualObjects(base, subtype);
+    XCTAssert([base isKindOfClass:[PDMultiLevelSubtype class]]);
 }
 
 - (PDTestComplexMessage *)messageFixture {

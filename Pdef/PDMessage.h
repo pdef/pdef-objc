@@ -17,11 +17,11 @@
 /** Returns this message descriptor. */
 - (PDMessageDescriptor *)descriptor;
 
-/** Initializes this message with a JSON dictionary. */
-- (id)initWithDictionary:(NSDictionary *)dictionary;
+/** Creates a polymorphic message with a JSON dictionary. */
++ (id)messageWithDictionary:(NSDictionary *)dictionary;
 
-/** Initializes this message with a JSON string. */
-- (id)initWithJson:(NSData *)json error:(NSError **)error;
+/** Creates a polymorphic message with a JSON string. */
++ (id)messageWithJson:(NSData *)json error:(NSError **)error;
 
 /** Deeply copies present fields from another message into this message. */
 - (id)mergeMessage:(PDMessage *)message;

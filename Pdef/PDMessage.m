@@ -12,29 +12,12 @@
 
 
 @implementation PDMessage
-- (id)initWithDictionary:(NSDictionary *)dictionary {
-    if (self = [self init]) {
-        for (PDFieldDescriptor *field in self.descriptor.fields) {
-            id value = [dictionary objectForKey:field.name];
-            if (!value) {
-                continue;
-            }
++ (id)messageWithDictionary:(NSDictionary *)dictionary {
+    return [PDJsonFormat readObject:dictionary descriptor:[self typeDescriptor]];
+}
 
-            id parsed = [PDJsonFormat readObject:value descriptor:field.type];
-            if (!parsed) {
-                // Failed to parse a field value.
-                continue;
-            }
-            if (parsed == [NSNull null]) {
-                // Unbox the value.
-                parsed = nil;
-            }
-
-            [self setValue:parsed forKey:field.name];
-        }
-    }
-
-    return self;
++ (id)messageWithJson:(NSData *)json error:(NSError **)error {
+    return [PDJsonFormat readData:json descriptor:[self typeDescriptor] error:error];
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
@@ -66,11 +49,6 @@
         }
     }
     return self;
-}
-
-- (id)initWithJson:(NSData *)json error:(NSError **)error {
-    id object = [PDJsonSerialization JSONObjectWithData:json error:error];
-    return [self initWithDictionary:object];
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {

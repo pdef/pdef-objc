@@ -125,12 +125,12 @@ NSData *data = [human toJsonError:&error];
 
 Parsing:
 ```objectivec
-// From a JSON-compatible dictionary.
+// From a JSON-compatible dictionary, supports polymorphic messages.
 NSDictionary *dict = getJsonDictionary();
-Human *human = [[Human alloc]initWithDictionary:dict];
+Human *human = [Human messageWithDictionary:dict];
 
-// From JSON data.
-Human *human1 = [[Human alloc]initWithData:data error:&error];
+// From JSON data, supports polymorphic messages.
+Human *human1 = [Human messageWithData:data error:&error];
 ```
 
 User `PDJsonFormat` to read/write other pdef data types:
