@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.license      = 'Apache License 2.0'
 
   s.author       = { "Ivan Korobkov" => "ivan.korobkov@gmail.com" }
-  s.source       = { :git => "https://github.com/pdef/pdef-objc.git", :tag => "v1.0.0" }
+  s.source       = { :git => "https://github.com/pdef/pdef-objc.git", :tag => "v1.0.1" }
   s.requires_arc = true
 
   s.ios.deployment_target = '6.0'
