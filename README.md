@@ -3,13 +3,6 @@ Pdef Objective-C
 Objective-C code generator for [Pdef compiler](https://github.com/pdef/pdef)
 and Objective-C implementation of descriptors, JSON format and HTTP RPC.
 
-Structure
----------
-- **generator**: Pdef code generator for Objective-C.
-- **Pdef**: Objective-C descriptors, JSON and HTTP RPC implementations.
-- **Tests**: Unit tests.
-- **Example**: Example java project.
-
 Requirements
 ------------
 - Objective-C: iOS 6.0, Mac OSX 10.8, AFNetworking 2.0.

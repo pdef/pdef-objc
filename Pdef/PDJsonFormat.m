@@ -220,10 +220,8 @@ static NSDateFormatter *formatter;
     if (!object) {
         return nil;
     }
-    if ([object isEqual:[NSNull null]]) {
-        return [NSNull null];
-    }
 
+    // Object can be NSNull.
     PDType type = descriptor.type;
     switch (type) {
         case PDTypeBool:
@@ -250,6 +248,9 @@ static NSDateFormatter *formatter;
     if ([object isKindOfClass:[NSNumber class]]) {
         return object;
     }
+    if ([object isEqual:[NSNull null]]) {
+        return @0;
+    }
 
     NSString *string = object;
     switch(type) {
@@ -264,6 +265,9 @@ static NSDateFormatter *formatter;
 }
 
 + (id)readDatetime:(id)object {
+    if ([object isEqual:[NSNull null]]) {
+        return [NSNull null];
+    }
     if ([object isKindOfClass:[NSDate class]]) {
         return [object copy];
     }
@@ -273,8 +277,11 @@ static NSDateFormatter *formatter;
 }
 
 + (id)readList:(NSArray *)list descriptor:(PDListDescriptor *)descriptor {
-    PDDataTypeDescriptor *elementd = descriptor.elementDescriptor;
+    if ([list isEqual:[NSNull null]]) {
+        return [NSNull null];
+    }
 
+    PDDataTypeDescriptor *elementd = descriptor.elementDescriptor;
     NSMutableArray *result = [[NSMutableArray alloc] init];
     for (id element in list) {
         id parsed = [self readObject:element descriptor:elementd];
@@ -290,9 +297,11 @@ static NSDateFormatter *formatter;
 }
 
 + (id)readSet:(id)object descriptor:(PDSetDescriptor *)descriptor {
+    if ([object isEqual:[NSNull null]]) {
+        return [NSNull null];
+    }
+
     PDDataTypeDescriptor *elementd = descriptor.elementDescriptor;
-
-
     NSMutableSet *result = [[NSMutableSet alloc] init];
     for (id element in object) {
         id parsed = [self readObject:element descriptor:elementd];
@@ -308,6 +317,10 @@ static NSDateFormatter *formatter;
 }
 
 + (id)readMap:(NSDictionary *)dict descriptor:(PDMapDescriptor *)descriptor {
+    if ([dict isEqual:[NSNull null]]) {
+        return [NSNull null];
+    }
+
     PDDataTypeDescriptor *keyd = descriptor.keyDescriptor;
     PDDataTypeDescriptor *valued = descriptor.valueDescriptor;
     BOOL keyIsString = keyd.type == PDTypeString;
@@ -342,6 +355,10 @@ static NSDateFormatter *formatter;
 }
 
 + (id)readEnum:(id)object descriptor:(PDEnumDescriptor *)descriptor {
+    if ([object isEqual:[NSNull null]]) {
+        return @0;
+    }
+
     if ([object isKindOfClass:[NSNumber class]]) {
         NSNumber *number = object;
         if ([descriptor.numbersToNames objectForKey:number]) {
@@ -357,8 +374,11 @@ static NSDateFormatter *formatter;
 }
 
 + (id)readMessage:(NSDictionary *)dict descriptor:(PDMessageDescriptor *)descriptor {
-    PDFieldDescriptor *discriminator = descriptor.discriminator;
+    if ([dict isEqual:[NSNull null]]) {
+        return [NSNull null];
+    }
 
+    PDFieldDescriptor *discriminator = descriptor.discriminator;
     if (discriminator) {
         // Mind polymorphic messages.
         // Deserialize the discriminator value and get a subtype descriptor.

@@ -5,6 +5,7 @@
 
 #import <XCTest/XCTest.h>
 #import "PDTestInterface.h"
+#import "PDTestMessage.h"
 
 
 @interface PDTestInvocationHandler : NSObject<PDInvocationHandler>
