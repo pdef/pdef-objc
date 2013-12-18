@@ -8,6 +8,7 @@
 #import "PDRpcProtocol.h"
 #import "PDInvocation.h"
 #import "PDRpcRequest.h"
+#import "PDErrors.h"
 
 
 @implementation PDRpcProtocol
@@ -49,6 +50,17 @@
         NSString *name = argd.name;
 
         id arg = [args objectForKey:name];
+        if (!arg || arg == [NSNull null]) {
+            if (argd.post || argd.query) {
+                continue;
+            }
+
+            NSString *reason = NSLocalizedStringFromTable(@"Method path argument cannot be nil/NSNull", @"PDef", nil);
+            NSDictionary *userInfo = @{NSLocalizedFailureReasonErrorKey : reason};
+            *error = [NSError errorWithDomain:PDefErrorDomain code:PDRpcNillPathArg userInfo:userInfo];
+            return NO;
+        }
+
         NSString *value = [self toJson:arg descriptor:argd.type error:error];
         if (!value) {
             return NO;

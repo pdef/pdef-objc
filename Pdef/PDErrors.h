@@ -7,7 +7,8 @@
 @class PDMessage;
 
 enum {
-    PDRpcException = 1,           // Expected RPC application exception.
+    PDRpcException = 1,         // Expected RPC application exception.
+    PDRpcNillPathArg = 2,       // Nill method path arguments are forbidden.
 };
 
 
