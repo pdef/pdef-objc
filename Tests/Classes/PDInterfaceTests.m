@@ -39,7 +39,7 @@
     id<PDTestInterface> client = [[PDTestInterfaceClient alloc] initWithHandler:handler];
 
     [client methodArg0:1 arg1:2 callback:nil];
-    PDInvocation * invocation = handler.invocation;
+    PDInvocation *invocation = handler.invocation;
 
     PDMethodDescriptor *method = [PDTestInterfaceDescriptor() getMethodForName:@"method"];
     NSDictionary *expected = @{
@@ -48,6 +48,17 @@
     };
     XCTAssert(invocation.method == method);
     XCTAssertTrue([invocation.args isEqualToDictionary: expected]);
+}
+
+- (void) testCaptureInvocationWithNulls {
+    PDTestInvocationHandler *handler = [[PDTestInvocationHandler alloc] init];
+    id<PDTestInterface> client = [[PDTestInterfaceClient alloc] initWithHandler:handler];
+
+    [client message0Msg:nil callback:nil];
+    PDInvocation *invocation = handler.invocation;
+
+    NSDictionary *expected = @{@"msg" : [NSNull null]};
+    XCTAssertEqualObjects(invocation.args, expected);
 }
 
 - (void) testInvocationChain {

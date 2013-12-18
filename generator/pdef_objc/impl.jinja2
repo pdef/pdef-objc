@@ -134,7 +134,7 @@ static PDMessageDescriptor *_{{ definition|objc_name }}Descriptor;
                                  {%- if arg.type|objc_isprimitive -%}
                                      @({{ arg.name }}),
                                  {% else -%}
-                                     {{ arg.name }},
+                                     {{ arg.name }} ? {{ arg.name }} : [NSNull null],
                                  {% endif -%}
                              {% endfor %}
                          }];
@@ -144,6 +144,7 @@ static PDMessageDescriptor *_{{ definition|objc_name }}Descriptor;
     return [[{{ method.result|objc_name }}Client alloc] initWithHandler: self.handler parentInvocation:_invocation];
     {% endif %}
 }
+
 {% endfor %}
 
 - (PDMethodDescriptor *)getMethodForName:(NSString *)name {

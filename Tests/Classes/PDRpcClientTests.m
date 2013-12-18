@@ -20,7 +20,8 @@
     PDRpcClient *client;
 }
 - (void)setUp {
-    client = [[PDRpcClient alloc] initWithDescriptor:PDTestInterfaceDescriptor() baseUrl:@"http://localhost:8080/app/"];
+    NSString *url = @"http://localhost:8080/app/";
+    client = [[PDRpcClient alloc] initWithDescriptor:PDTestInterfaceDescriptor() baseUrl:url];
 }
 
 - (void)testBuildUrlRequest {
@@ -36,13 +37,12 @@
 - (void)testBuildUrlRequest_post {
     PDRpcRequest *rpcRequest = [[PDRpcRequest alloc] initWithMethod:@"POST"];
     rpcRequest.path = @"/method";
-    rpcRequest.query = @{@"a": @"1"};
-    rpcRequest.post = @{@"b": @"2"};
+    rpcRequest.post = @{@"a": @"1"};
 
     NSURLRequest *request = [client buildUrlRequest:rpcRequest];
     XCTAssertEqualObjects(request.HTTPMethod, @"POST");
-    XCTAssertEqualObjects(request.URL.absoluteString, @"http://localhost:8080/app/method?a=1");
-    XCTAssertEqualObjects(request.HTTPBody, [@"b=2" dataUsingEncoding:NSUTF8StringEncoding]);
+    XCTAssertEqualObjects(request.URL.absoluteString, @"http://localhost:8080/app/method");
+    XCTAssertEqualObjects(request.HTTPBody, [@"a=1" dataUsingEncoding:NSUTF8StringEncoding]);
 }
 
 - (void)testHandleSuccess_result {

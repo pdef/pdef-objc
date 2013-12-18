@@ -47,7 +47,7 @@
 
 - (void)executeCallback:(id)result error:(NSError *)error callback:(void (^)(id, NSError *))callback;
 
-+ (AFHTTPRequestOperationManager *)httpManager;
++ (AFHTTPRequestOperationManager *)httpManagerWithBaseUrl:(NSURL *)baseUrl;
 
 + (AFHTTPResponseSerializer *) responseSerializer;
 @end

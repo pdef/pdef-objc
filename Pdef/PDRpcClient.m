@@ -16,36 +16,45 @@
 @implementation PDRpcClient
 
 - (id)initWithDescriptor:(PDInterfaceDescriptor *)descriptor baseUrl:(NSString *)baseUrl {
-    return [self initWithDescriptor:descriptor baseUrl:baseUrl manager:nil];
+    NSURL *url = [NSURL URLWithString:baseUrl];
+    return [self initWithDescriptor:descriptor baseUrl:baseUrl manager:[PDRpcClient httpManagerWithBaseUrl:url]];
 }
 
 - (id)initWithDescriptor:(PDInterfaceDescriptor *)descriptor baseUrl:(NSString *)baseUrl
                  manager:(AFHTTPRequestOperationManager *)manager {
-    NSParameterAssert(descriptor);
     NSParameterAssert(baseUrl);
+    NSParameterAssert(descriptor);
+    NSParameterAssert(manager);
 
     if (self = [super init]) {
-        _descriptor = descriptor;
         _baseUrl = baseUrl;
-        _manager = manager ? manager : [PDRpcClient httpManager];
+        _descriptor = descriptor;
+        _manager = manager;
     }
     return self;
 }
 
-+ (AFHTTPRequestOperationManager *)httpManager {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
++ (AFHTTPRequestOperationManager *)httpManagerWithBaseUrl:(NSURL *)baseUrl {
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseUrl];
     manager.responseSerializer = [self responseSerializer];
     return manager;
 }
 
-+ (AFHTTPResponseSerializer *) responseSerializer {
-    NSMutableIndexSet *statucCodes = [[NSMutableIndexSet alloc] initWithIndexesInRange:NSMakeRange(200, 100)];
-    [statucCodes addIndex:422]; // Unprocessable entity.
-
++ (AFHTTPResponseSerializer *)responseSerializer {
     AFHTTPResponseSerializer *serializer = [AFHTTPResponseSerializer serializer];
-    serializer.acceptableStatusCodes = statucCodes;
-    serializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", nil];
+    serializer.acceptableStatusCodes = [self responseStatusCodes];
+    serializer.acceptableContentTypes = [self responseContentTypes];
     return serializer;
+}
+
++ (NSIndexSet *)responseStatusCodes {
+    NSMutableIndexSet *set = [[NSMutableIndexSet alloc] initWithIndexesInRange:NSMakeRange(200, 100)];
+    [set addIndex:422]; // Unprocessable entity.
+    return set;
+}
+
++ (NSSet *)responseContentTypes {
+    return [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", nil];
 }
 
 - (NSOperation *)handleInvocation:(PDInvocation *)invocation callback:(void (^)(id result, NSError *error))callback {
@@ -57,7 +66,6 @@
     PDMethodDescriptor *method = invocation.method;
     PDDataTypeDescriptor *datad = (PDDataTypeDescriptor *) method.result;
     PDMessageDescriptor *errord = _descriptor.exc;
-
 
     // Build and rpc request.
     NSError *error = nil;
@@ -83,14 +91,14 @@
 }
 
 - (NSURLRequest *)buildUrlRequest:(PDRpcRequest *)rpcRequest {
-    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer]
-            requestWithMethod:@"GET" URLString:[self buildUrl:rpcRequest] parameters:rpcRequest.query];
-    if (!rpcRequest.isPost) {
-        return request;
-    }
+    NSString *url = [self buildUrl:rpcRequest];
+    AFHTTPRequestSerializer *serializer = self.manager.requestSerializer;
 
-    NSString *url = [[request URL] absoluteString];
-    return [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:url parameters:rpcRequest.post];
+    if (rpcRequest.isPost) {
+        return [serializer requestWithMethod:@"POST" URLString:url parameters:rpcRequest.post];
+    } else {
+        return [serializer requestWithMethod:@"GET" URLString:url parameters:rpcRequest.query];
+    }
 }
 
 - (NSString *)buildUrl:(PDRpcRequest *)request {
@@ -108,8 +116,9 @@
 - (NSOperation *)sendRequest:(NSURLRequest *)request
                      success:(void (^)(AFHTTPRequestOperation *, id))success
                      failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
-    AFHTTPRequestOperation *operation = [_manager HTTPRequestOperationWithRequest:request success:success failure:failure];
-    [_manager.operationQueue addOperation:operation];
+    AFHTTPRequestOperation *operation = [self.manager HTTPRequestOperationWithRequest:request
+                                                                              success:success failure:failure];
+    [self.manager.operationQueue addOperation:operation];
     return operation;
 }
 
