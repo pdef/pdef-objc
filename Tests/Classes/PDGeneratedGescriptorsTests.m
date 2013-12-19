@@ -13,7 +13,9 @@
 #import "PDSubtype2.h"
 #import "PDMultiLevelSubtype.h"
 #import "PDTestInterface.h"
+#import "PDTestSubInterface.h"
 #import "PDTestException.h"
+#import "PDTestSubException.h"
 
 @interface PDGeneratedMessageDescriptorTests : XCTestCase
 @end
@@ -116,6 +118,17 @@
     XCTAssertEqual(descriptor.exc, [PDTestException typeDescriptor]);
     XCTAssert(descriptor.methods.count == 12);
     XCTAssertNotNil(method);
+}
+
+- (void)testInheritance {
+    PDInterfaceDescriptor *descriptor = PDTestSubInterfaceDescriptor();
+    PDMethodDescriptor *subMethod = [descriptor getMethodForName:@"subMethod"];
+
+    XCTAssertEqual(descriptor.protocol, @protocol(PDTestSubInterface));
+    XCTAssertEqual(descriptor.exc, [PDTestSubException typeDescriptor]);
+    XCTAssert(descriptor.declaredMethods.count == 1);
+    XCTAssert(descriptor.methods.count == 13);
+    XCTAssertNotNil(subMethod);
 }
 @end
 
