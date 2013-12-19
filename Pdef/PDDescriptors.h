@@ -138,10 +138,17 @@ typedef NS_ENUM(NSInteger, PDType) {
 
 @interface PDInterfaceDescriptor : PDDescriptor
 @property(readonly, nonatomic) Protocol *protocol;
+@property(readonly, nonatomic) PDInterfaceDescriptor *base;
 @property(readonly, nonatomic) PDMessageDescriptor *exc;
+@property(readonly, nonatomic) NSArray *declaredMethods;
 @property(readonly, nonatomic) NSArray *methods;
 
 - (id)initWithProtocol:(Protocol *)protocol
+                   exc:(PDMessageDescriptor *)exc
+               methods:(NSArray *)methods;
+
+- (id)initWithProtocol:(Protocol *)protocol
+                  base:(PDInterfaceDescriptor *)base
                    exc:(PDMessageDescriptor *)exc
                methods:(NSArray *)methods;
 

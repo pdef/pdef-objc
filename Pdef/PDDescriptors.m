@@ -258,17 +258,32 @@ discriminatorValue:(NSInteger)discriminatorValue
 @end
 
 
-@implementation PDInterfaceDescriptor
+@implementation PDInterfaceDescriptor {
+    PDMessageDescriptor *_exc;
+}
+
 - (id)initWithProtocol:(Protocol *)protocol exc:(PDMessageDescriptor *)exc methods:(NSArray *)methods {
+    return [self initWithProtocol:protocol base:nil exc:exc methods:methods];
+}
+
+- (id)initWithProtocol:(Protocol *)protocol
+                  base:(PDInterfaceDescriptor *)base
+                   exc:(PDMessageDescriptor *)exc
+               methods:(NSArray *)methods {
+    NSParameterAssert(protocol);
+
     if (self = [super initWithType:PDTypeInterface]) {
-        if (!protocol) {
-            [NSException raise:NSInvalidArgumentException format:@"nil protocol"];
-        }
         _protocol = protocol;
+        _base = base;
         _exc = exc;
-        _methods = (methods) ? [[NSArray alloc] initWithArray:methods] : @[];
+        _declaredMethods = (methods) ? [[NSArray alloc] initWithArray:methods] : @[];
+        _methods = [self joinMethodsFromBase:base withDeclaredMethods:methods];
     }
     return self;
+}
+
+- (PDMessageDescriptor *)exc {
+    return _exc ? _exc : (_base ? _base.exc : nil);
 }
 
 - (PDMethodDescriptor *)getMethodForName:(NSString *)name {
@@ -282,6 +297,18 @@ discriminatorValue:(NSInteger)discriminatorValue
 
 - (NSString *)description {
     return [NSString stringWithFormat: @"Interface: protocol=%@", _protocol];
+}
+
+- (NSArray *)joinMethodsFromBase:(PDInterfaceDescriptor *)base withDeclaredMethods:(NSArray *)declaredMethods {
+    if (!base) {
+        return declaredMethods;
+    }
+
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    [result addObjectsFromArray:base.methods];
+    [result addObjectsFromArray:declaredMethods];
+
+    return [[NSArray alloc] initWithArray:result];
 }
 @end
 

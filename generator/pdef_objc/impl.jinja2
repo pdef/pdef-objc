@@ -161,6 +161,11 @@ PDInterfaceDescriptor *{{ definition|objc_name }}Descriptor() {
     dispatch_once(&{{ definition|objc_name }}Once, ^() {
         _{{ definition|objc_name }}Descriptor = [[PDInterfaceDescriptor alloc]
                 initWithProtocol:@protocol({{ definition|objc_name }})
+                            {% if definition.base %}
+                            base:{{ definition.base|objc_descriptor }}
+                            {% else %}
+                            base:nil
+                            {% endif %}
                             {% if definition.exc %}
                              exc:{{ definition.exc|objc_descriptor }}
                             {% else %}
