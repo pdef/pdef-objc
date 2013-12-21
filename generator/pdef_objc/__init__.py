@@ -1,6 +1,6 @@
 # encoding: utf-8
 from pdefc.lang import TypeEnum
-from pdefc.generators import Generator, Templates
+from pdefc.generators import Generator, Templates, GeneratorCli, PrefixMapper
 
 
 ENCODING = 'utf8'
@@ -9,15 +9,27 @@ IMPL_TEMPLATE = 'impl.jinja2'
 PACKAGE_TEMPLATE = 'package.jinja2'
 
 
+class ObjectiveCGeneratorCli(GeneratorCli):
+    def build_parser(self, parser):
+        self._add_prefix_args(parser)
+
+    def create_generator(self, out, args):
+        prefixes = self._parse_prefix_args(args)
+        return ObjectiveCGenerator(out, prefixes)
+
+
 class ObjectiveCGenerator(Generator):
-    '''Objective-C generator, ignores module names, supports prefixes.'''
-    def __init__(self, out, prefixes=None, **kwargs):
-        '''Create a new generator.
+    '''Objective-C code generator.'''
 
-        @param out          Destination directory
-        '''
-        super(ObjectiveCGenerator, self).__init__(out, prefixes=prefixes, **kwargs)
+    @classmethod
+    def create_cli(cls):
+        return ObjectiveCGeneratorCli()
 
+    def __init__(self, out, prefixes=None):
+        '''Create a new generator.'''
+        super(ObjectiveCGenerator, self).__init__(out)
+
+        self.prefix_mapper = PrefixMapper(prefixes)
         self.filters = _ObjectiveCFilters(self.prefix_mapper)
         self.templates = Templates(__file__, filters=self.filters)
 
@@ -73,9 +85,9 @@ class _ObjectiveCFilters(object):
         self.prefix_mapper = prefix_mapper
 
     def objc_name(self, def0):
-        abs_name = '%s.%s' % (def0.module.name if def0.module else '', def0.name)
-        prefix = self.prefix_mapper.get_prefix(abs_name)
-        return prefix + def0.name if prefix else def0.name
+        name = def0.name
+        prefix = self.prefix_mapper.get_prefix(def0.namespace) or ''
+        return prefix + name
 
     def objc_bool(self, expression):
         return 'YES' if expression else 'NO'
