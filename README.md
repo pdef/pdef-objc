@@ -14,23 +14,13 @@ Installation
 - Code generator:
     Install the code generator as a python package:
     ```bash
-    $ [sudo] pip install pdef-objc
-    # or
-    $ [sudo] easy_install pdef-objc
+    $ pip install pdef-objc
     ```
 
     Or [download](https://github.com/pdef/pdef-objc/releases) the release,
     unzip it and in the `generator` directory run:
     ```bash
-    $ [sudo] python setup.py install
-    ```
-
-    The Objective-C generator will appear in the installed generators:
-    ```bash
-    $ pdefc generate -h
-    usage: pdefc generate [...]
-    available generators:
-      - objc: Objective-C generator, ignores module names, supports prefixes.
+    $ python setup.py install
     ```
 
 - Objective-C package via CocoaPods:
@@ -42,18 +32,16 @@ Code generation
 ---------------
 Pass a pdef package path or a url to the compiler:
 ```bash
-$ pdefc generate https://github.com/pdef/pdef/blob/master/example/world.yaml \
-    --generator objc
+$ pdefc generate-objc https://raw.github.com/pdef/pdef/1.1/example/world.yaml \
     --out Generated
 ```
 
-The generator supports prefixes specified by for modules and submodules:
+Map namespaces to class prefixes with the `--prefix` argument:
 ```bash
-$ pdefc generate https://github.com/pdef/pdef/blob/master/example/world.yaml \
-    --generator objc
+$ pdefc generate-objc https://raw.github.com/pdef/pdef/1.1/example/world.yaml \
     --prefix world.space:SP
     --prefix world:WL
-    --out target/generated-sources
+    --out Generated
 ```
 
 Messages
