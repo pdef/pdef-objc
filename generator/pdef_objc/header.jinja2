@@ -73,7 +73,7 @@ PDEnumDescriptor *{{ definition|objc_name }}Descriptor();
         {%- if not method.is_terminal -%}
             ;
         {% else %}
-            callback:(void (^)(id result, NSError *error))callback;
+        callback:(PDRpcCallback)callback;
         {% endif %}
     {% endif %}
 

@@ -1,4 +1,3 @@
-pdefc -v generate https://raw.github.com/pdef/pdef/1.0/example/world.yaml \
-    --generator objc \
+pdefc -v generate-objc https://raw.github.com/pdef/pdef/1.1/example/world.yaml \
     --out Generated
 

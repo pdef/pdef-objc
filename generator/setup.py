@@ -10,7 +10,7 @@ except ImportError:
 
 setup(
     name='pdef-objc',
-    version='1.1.0',
+    version='1.1.1',
     license='Apache License 2.0',
     description='Pdef Objective-C generator',
     long_description=open('README.md', 'r').read(),

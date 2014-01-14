@@ -13,6 +13,7 @@
 #import "PDJsonFormat.h"
 #import "PDJsonSerialization.h"
 #import "PDMessage.h"
+#import "PDRpcCallback.h"
 #import "PDRpcClient.h"
 #import "PDRpcProtocol.h"
 #import "PDRpcRequest.h"
