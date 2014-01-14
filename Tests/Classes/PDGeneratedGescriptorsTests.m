@@ -116,7 +116,7 @@
     PDMethodDescriptor *method = [descriptor getMethodForName:@"method"];
     XCTAssertEqual(descriptor.protocol, @protocol(PDTestInterface));
     XCTAssertEqual(descriptor.exc, [PDTestException typeDescriptor]);
-    XCTAssert(descriptor.methods.count == 12);
+    XCTAssert(descriptor.methods.count == 13);
     XCTAssertNotNil(method);
 }
 
@@ -125,9 +125,9 @@
     PDMethodDescriptor *subMethod = [descriptor getMethodForName:@"subMethod"];
 
     XCTAssertEqual(descriptor.protocol, @protocol(PDTestSubInterface));
-    XCTAssertEqual(descriptor.exc, [PDTestSubException typeDescriptor]);
+    XCTAssertEqual(descriptor.exc, [PDTestException typeDescriptor]);
     XCTAssert(descriptor.declaredMethods.count == 1);
-    XCTAssert(descriptor.methods.count == 13);
+    XCTAssert(descriptor.methods.count == 14);
     XCTAssertNotNil(subMethod);
 }
 @end
