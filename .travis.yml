@@ -2,7 +2,7 @@ language: objective-c
 before_install:
   - sudo gem install cocoapods
   - sudo easy_install pip
-  - sudo pip install nose
+  - sudo pip install nose --no-use-wheel
   - sudo pip install -e git+https://github.com/pdef/pdef.git@1.1#egg=pdef-compiler==1.1
   - sh -c 'cd generator && sudo python setup.py install'
 install:
