@@ -1,6 +1,10 @@
 Pdef Objective-C Releases
 =========================
 
+### 1.1.1 (2014-01-14)
+- PDInvocationCallback typedef, #50.
+- Polymorphic message method in test interfaces, #52.
+
 ### 1.1.0 (2013-12-22)
 - Interface inheritance.
 
