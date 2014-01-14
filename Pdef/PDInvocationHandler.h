@@ -5,6 +5,7 @@
 
 
 #import <Foundation/Foundation.h>
+#import <Pdef/PDInvocationCallback.h>
 
 @class PDInvocation;
 
@@ -12,6 +13,6 @@
 
 @required
 - (NSOperation *)handleInvocation:(PDInvocation *)invocation
-                         callback:(void (^)(id result, NSError *error))callback;
+                         callback:(PDInvocationCallback)callback;
 
 @end

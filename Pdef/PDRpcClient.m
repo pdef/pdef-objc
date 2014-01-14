@@ -57,7 +57,7 @@
     return [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", nil];
 }
 
-- (NSOperation *)handleInvocation:(PDInvocation *)invocation callback:(void (^)(id result, NSError *error))callback {
+- (NSOperation *)handleInvocation:(PDInvocation *)invocation callback:(PDInvocationCallback)callback {
     NSParameterAssert(invocation);
     NSParameterAssert(invocation.method.terminal);
     NSParameterAssert(callback);

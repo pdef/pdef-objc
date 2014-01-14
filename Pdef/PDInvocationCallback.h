@@ -4,4 +4,4 @@
 //
 
 
-typedef void (^PDRpcCallback)(id result, NSError *error);
+typedef void (^PDInvocationCallback)(id result, NSError *error);
