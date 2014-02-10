@@ -348,21 +348,34 @@ discriminatorValue:(NSInteger)discriminatorValue
     return _result;
 }
 
-- (BOOL)terminal {
+- (BOOL)isTerminal {
     return self.result.type != PDTypeInterface;
+}
+
+- (BOOL)isInterface {
+    return !self.isTerminal;
 }
 @end
 
 
 @implementation PDArgumentDescriptor
+- (id)initWithName:(NSString *)name type:(PDDataTypeDescriptor *)type {
+    if (self = [super init]) {
+        NSParameterAssert(name);
+        NSParameterAssert(type);
+
+        _name = name;
+        _type = type;
+    }
+
+    return self;
+}
+
 - (id)initWithName:(NSString *)name type:(PDDataTypeDescriptor *)type post:(BOOL)isPost query:(BOOL)isQuery {
     if (self = [super init]) {
-        if (!name) {
-            [NSException raise:NSInvalidArgumentException format:@"nil name"];
-        }
-        if (!type) {
-            [NSException raise:NSInvalidArgumentException format:@"nil type"];
-        }
+        NSParameterAssert(name != nil);
+        NSParameterAssert(type != nil);
+
         _name = name;
         _type = type;
         _post = isPost;

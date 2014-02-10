@@ -113,8 +113,9 @@ typedef NS_ENUM(NSInteger, PDType) {
 @property(readonly, nonatomic) NSString *name;
 @property(readonly, nonatomic) PDDescriptor *result;
 @property(readonly, nonatomic) NSArray *args;
-@property(readonly, nonatomic) BOOL post;
-@property(readonly, nonatomic) BOOL terminal;
+@property(readonly, nonatomic, getter=isPost) BOOL post;
+@property(readonly, nonatomic, getter=isTerminal) BOOL terminal;
+@property(readonly, nonatomic, getter=isInterface) BOOL interface;
 
 - (id)initWithName:(NSString *)name
     resultSupplier:(PDDescriptor *(^)())resultSupplier
@@ -126,13 +127,16 @@ typedef NS_ENUM(NSInteger, PDType) {
 @interface PDArgumentDescriptor : NSObject
 @property(readonly, nonatomic) NSString *name;
 @property(readonly, nonatomic) PDDataTypeDescriptor *type;
-@property(readonly, nonatomic) BOOL post;
-@property(readonly, nonatomic) BOOL query;
+@property(readonly, nonatomic) BOOL post __deprecated;
+@property(readonly, nonatomic) BOOL query __deprecated;
+
+- (id)initWithName:(NSString *)name
+              type:(PDDataTypeDescriptor *)type;
 
 - (id)initWithName:(NSString *)name
               type:(PDDataTypeDescriptor *)type
               post:(BOOL)isPost
-             query:(BOOL)isQuery;
+             query:(BOOL)isQuery __deprecated;
 @end
 
 

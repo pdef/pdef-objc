@@ -51,7 +51,7 @@
 
         id arg = [args objectForKey:name];
         if (!arg || arg == [NSNull null]) {
-            if (argd.post || argd.query) {
+            if (method.post) {
                 continue;
             }
 
@@ -66,14 +66,14 @@
             return NO;
         }
 
-        if (argd.post) {
-            [post setObject:value forKey:name];
-        } else if (argd.query){
-            [query setObject:value forKey:name];
-        } else {
+        if (method.isInterface) {
             NSString *encoded = [self urlencode:value];
             [path appendString:@"/"];
             [path appendString:encoded];
+        } else if (method.isPost) {
+            [post setObject:value forKey:name];
+        } else {
+            [query setObject:value forKey:name];
         }
     }
 

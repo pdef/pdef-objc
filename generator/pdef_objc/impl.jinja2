@@ -179,7 +179,7 @@ PDInterfaceDescriptor *{{ definition|objc_name }}Descriptor() {
                     {% if method.args %}
                      args:@[
                         {% for arg in method.args %}
-           [[PDArgumentDescriptor alloc] initWithName:@"{{ arg.name }}" type: {{ arg.type|objc_descriptor }} post:{{ arg.is_post|objc_bool }} query:{{ arg.is_query|objc_bool }}],
+           [[PDArgumentDescriptor alloc] initWithName:@"{{ arg.name }}" type: {{ arg.type|objc_descriptor }}],
                         {% endfor %}
                         ]
                     {% else %}
