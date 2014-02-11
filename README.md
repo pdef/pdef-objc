@@ -6,7 +6,7 @@ and Objective-C implementation of descriptors, JSON format and HTTP RPC.
 Requirements
 ------------
 - Objective-C: iOS 6.0, Mac OSX 10.8, AFNetworking 2.0.
-- Code generator: [Pdef compiler 1.0+](https://github.com/pdef/pdef),
+- Code generator: [Pdef compiler 1.2+](https://github.com/pdef/pdef),
   Python 2.6 or Python 3.3+.
 
 Installation
@@ -25,20 +25,20 @@ Installation
 
 - Objective-C package via CocoaPods:
     ```ruby
-    pod "Pdef", "~> 1.0"
+    pod "Pdef"
     ```
 
 Code generation
 ---------------
 Pass a pdef package path or a url to the compiler:
 ```bash
-$ pdefc generate-objc https://raw.github.com/pdef/pdef/1.1/example/world.yaml \
+$ pdefc generate-objc https://raw.github.com/pdef/pdef/1.2/example/world.yaml \
     --out Generated
 ```
 
 Map namespaces to class prefixes with the `--prefix` argument:
 ```bash
-$ pdefc generate-objc https://raw.github.com/pdef/pdef/1.1/example/world.yaml \
+$ pdefc generate-objc https://raw.github.com/pdef/pdef/1.2/example/world.yaml \
     --prefix world.space:SP
     --prefix world:WL
     --out Generated
