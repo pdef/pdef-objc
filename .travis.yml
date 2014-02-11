@@ -3,7 +3,7 @@ before_install:
   - sudo gem install cocoapods
   - sudo easy_install pip==1.4
   - sudo pip install nose
-  - sudo pip install -e git+https://github.com/pdef/pdef.git@1.1#egg=pdef-compiler==1.1
+  - sudo pip install -e git+https://github.com/pdef/pdef.git@1.2#egg=pdef-compiler==1.2
   - sh -c 'cd generator && sudo python setup.py install'
 install:
   - sh -c 'cd Tests && pod install'
