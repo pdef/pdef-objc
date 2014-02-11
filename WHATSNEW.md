@@ -1,6 +1,9 @@
 Pdef Objective-C Releases
 =========================
 
+### 1.2.0 (2014-02-11)
+- Simpler RPC, #56.
+
 ### 1.1.1 (2014-01-14)
 - PDInvocationCallback typedef, #50.
 - Polymorphic message method in test interfaces, #52.
