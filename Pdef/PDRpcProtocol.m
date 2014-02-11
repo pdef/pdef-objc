@@ -17,7 +17,7 @@
     NSParameterAssert(invocation);
 
     PDMethodDescriptor *method = invocation.method;
-    NSParameterAssert(method.terminal);
+    NSParameterAssert(method.isTerminal);
 
     NSMutableString *path = [[NSMutableString alloc] init];
     NSMutableDictionary *query = [[NSMutableDictionary alloc] init];
@@ -51,10 +51,11 @@
 
         id arg = [args objectForKey:name];
         if (!arg || arg == [NSNull null]) {
-            if (method.post) {
+            if (method.isTerminal) {
                 continue;
             }
 
+            // Interface method do not support nil arguments.
             NSString *reason = NSLocalizedStringFromTable(@"Method path argument cannot be nil/NSNull", @"PDef", nil);
             NSDictionary *userInfo = @{NSLocalizedFailureReasonErrorKey : reason};
             *error = [NSError errorWithDomain:PDefErrorDomain code:PDRpcNillPathArg userInfo:userInfo];

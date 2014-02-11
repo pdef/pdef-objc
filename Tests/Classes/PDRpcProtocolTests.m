@@ -31,7 +31,7 @@
             initWithMethod:method args:@{@"arg0" : @1, @"arg1" : @2}];
 
     PDRpcRequest *request = [PDRpcProtocol requestWithInvocation:invocation error:nil];
-    NSDictionary *expectedQuery = @{@"arg0": @"1", @"arg1": @"2"};
+    NSDictionary *expectedQuery = @{@"arg0" : @"1", @"arg1" : @"2"};
     XCTAssert([request.method isEqualToString:@"GET"]);
     XCTAssert([request.path isEqualToString:@"/method"]);
     XCTAssert([request.query isEqualToDictionary:expectedQuery]);
@@ -44,7 +44,7 @@
             initWithMethod:method args:@{@"arg0" : @1, @"arg1" : [NSNull null]}];
 
     PDRpcRequest *request = [PDRpcProtocol requestWithInvocation:invocation error:nil];
-    NSDictionary *query = @{@"arg0": @"1"};
+    NSDictionary *query = @{@"arg0" : @"1"};
     XCTAssert([request.method isEqualToString:@"GET"]);
     XCTAssert([request.path isEqualToString:@"/query"]);
     XCTAssert([request.query isEqualToDictionary:query]);
@@ -57,7 +57,7 @@
             initWithMethod:method args:@{@"arg0" : @1, @"arg1" : [NSNull null]}];
 
     PDRpcRequest *request = [PDRpcProtocol requestWithInvocation:invocation error:nil];
-    NSDictionary *post = @{@"arg0": @"1"};
+    NSDictionary *post = @{@"arg0" : @"1"};
     XCTAssert([request.method isEqualToString:@"POST"]);
     XCTAssert([request.path isEqualToString:@"/post"]);
     XCTAssert(request.query.count == 0);
@@ -65,12 +65,15 @@
 }
 
 - (void)testRequest_forbidNilPathArgs {
-    PDMethodDescriptor *method = [interface getMethodForName:@"string0"];
+    PDMethodDescriptor *interface0 = [interface getMethodForName:@"interface0"];
+    PDMethodDescriptor *string0 = [interface getMethodForName:@"string0"];
+
     PDInvocation *invocation = [[PDInvocation alloc]
-            initWithMethod:method args:@{@"text" : [NSNull null]}];
+            initWithMethod:interface0 args:@{@"arg0" : @0, @"arg1" : [NSNull null]}];
+    PDInvocation *next = [invocation nextWithMethod:string0 args:@{}];
 
     NSError *error = nil;
-    PDRpcRequest *request = [PDRpcProtocol requestWithInvocation:invocation error:&error];
+    PDRpcRequest *request = [PDRpcProtocol requestWithInvocation:next error:&error];
 
     XCTAssert(!request);
     XCTAssertEqualObjects(error.domain, PDefErrorDomain);
@@ -86,7 +89,7 @@
             nextWithMethod:method1 args:@{@"arg0" : @3, @"arg1" : @4}];
 
     PDRpcRequest *request = [PDRpcProtocol requestWithInvocation:invocation error:nil];
-    NSDictionary *expectedQuery = @{@"arg0": @"3", @"arg1": @"4"};
+    NSDictionary *expectedQuery = @{@"arg0" : @"3", @"arg1" : @"4"};
     XCTAssert([request.method isEqualToString:@"GET"]);
     XCTAssert([request.path isEqualToString:@"/interface0/1/2/method"]);
     XCTAssert([request.query isEqualToDictionary:expectedQuery]);
